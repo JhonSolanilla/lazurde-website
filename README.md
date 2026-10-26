@@ -25,7 +25,7 @@ No hay que instalar nada ni hacer pasos manuales.
 - Noche entre semana (sábado a miércoles): 220 OMR.
 - Noche de jueves y viernes: 260 OMR. Feriado: 260 OMR.
 - Cada 2 personas extra se abre 1 habitación extra: 15 OMR por noche. Máximo 14 personas y 7 habitaciones.
-- Impuesto de turismo 4 % e IVA 5 %.
+- Impuesto de turismo 4 % e IVA 5 %. En la web los precios se muestran con impuestos incluidos (220 → 239.8, 260 → 283.4, habitación extra 15 → 16.35).
 - Depósito de garantía: 100 OMR al llegar, se devuelve dentro de 24 horas.
 
 ## Pendiente

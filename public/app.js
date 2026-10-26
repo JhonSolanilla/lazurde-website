@@ -43,7 +43,7 @@
       resortName: 'Lazurde Resort', badge: 'Resort privado', location: '[Ubicación], Omán',
       specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', '1 sala de estar', 'Parqueadero'],
       license: 'Licencia de turismo N.º [pendiente]', whatsapp: 'WhatsApp', call: 'Llamar',
-      availability: 'Disponibilidad', availSub: 'Precio por noche para 6 personas, antes de impuestos.',
+      availability: 'Disponibilidad', availSub: 'Precio por noche para 6 personas, impuestos incluidos.',
       prevMonth: 'Mes anterior', nextMonth: 'Mes siguiente',
       lgWeekday: 'Entre semana', lgWeekend: 'Jue y vie', lgHoliday: 'Feriado', lgBooked: 'Ocupado',
       toChoose: 'Para elegir tus fechas toca «Reservar».',
@@ -83,7 +83,7 @@
       stayLine: function (n) { return 'Alojamiento (' + n + (n === 1 ? ' noche)' : ' noches)'); },
       extraLine: function (e, n) { return e + (e === 1 ? ' habitación extra' : ' habitaciones extra') + ' × ' + n + (n === 1 ? ' noche' : ' noches'); },
       taxLine: function (p) { return 'Impuesto de turismo (' + p + '%)'; }, vatLine: function (p) { return 'IVA (' + p + '%)'; },
-      totalLabel: 'Total (OMR)', inclTaxes: 'Incluye impuesto de turismo e IVA.', pickToSee: 'Elige tus fechas para ver el precio.',
+      totalLabel: 'Total (OMR)', inclTaxes: 'Ya incluido en el precio:', pickToSee: 'Elige tus fechas para ver el precio.',
       depositBook: function (d) { return 'Depósito de garantía de ' + d + ': se paga al llegar y se devuelve dentro de 24 horas después de la salida. No está incluido en el total.'; },
       accept: 'He leído y acepto los términos y condiciones de Lazurde Resort.',
       missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono', mTerms: 'aceptar los términos',
@@ -108,7 +108,7 @@
       resortName: 'Lazurde Resort', badge: 'Private resort', location: '[Location], Oman',
       specs: ['7 bedrooms', '14 beds', '10 bathrooms', 'Pool', '1 living room', 'Parking'],
       license: 'Tourism license No. [pending]', whatsapp: 'WhatsApp', call: 'Call',
-      availability: 'Availability', availSub: 'Nightly price for 6 guests, before taxes.',
+      availability: 'Availability', availSub: 'Nightly price for 6 guests, taxes included.',
       prevMonth: 'Previous month', nextMonth: 'Next month',
       lgWeekday: 'Weekday', lgWeekend: 'Thu & Fri', lgHoliday: 'Public holiday', lgBooked: 'Booked',
       toChoose: 'To choose your dates, tap “Book now”.',
@@ -148,7 +148,7 @@
       stayLine: function (n) { return 'Stay (' + n + (n === 1 ? ' night)' : ' nights)'); },
       extraLine: function (e, n) { return e + (e === 1 ? ' extra bedroom' : ' extra bedrooms') + ' × ' + n + (n === 1 ? ' night' : ' nights'); },
       taxLine: function (p) { return 'Tourism tax (' + p + '%)'; }, vatLine: function (p) { return 'VAT (' + p + '%)'; },
-      totalLabel: 'Total (OMR)', inclTaxes: 'Includes tourism tax and VAT.', pickToSee: 'Choose your dates to see the price.',
+      totalLabel: 'Total (OMR)', inclTaxes: 'Already included in the price:', pickToSee: 'Choose your dates to see the price.',
       depositBook: function (d) { return 'Security deposit of ' + d + ': paid on arrival and refunded within 24 hours after check-out. Not included in the total.'; },
       accept: 'I have read and accept the Lazurde Resort terms & conditions.',
       missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'phone', mTerms: 'accept the terms',
@@ -173,7 +173,7 @@
       resortName: 'منتجع لازورد', badge: 'منتجع خاص', location: '[الموقع]، عُمان',
       specs: ['7 غرف نوم', '14 سريرًا', '10 حمامات', 'مسبح', 'صالة جلوس', 'موقف سيارات'],
       license: 'رقم الترخيص السياحي [قيد الإضافة]', whatsapp: 'واتساب', call: 'اتصال',
-      availability: 'التوفر', availSub: 'سعر الليلة لـ 6 ضيوف قبل الضرائب.',
+      availability: 'التوفر', availSub: 'سعر الليلة لـ 6 ضيوف شامل الضرائب.',
       prevMonth: 'الشهر السابق', nextMonth: 'الشهر التالي',
       lgWeekday: 'أيام الأسبوع', lgWeekend: 'الخميس والجمعة', lgHoliday: 'عطلة رسمية', lgBooked: 'محجوز',
       toChoose: 'لاختيار التواريخ اضغط «احجز الآن».',
@@ -213,7 +213,7 @@
       stayLine: function (n) { return 'الإقامة (' + arNights(n) + ')'; },
       extraLine: function (e, n) { return 'غرف إضافية (' + e + ') × ' + arNights(n); },
       taxLine: function (p) { return 'ضريبة السياحة (' + p + '%)'; }, vatLine: function (p) { return 'ضريبة القيمة المضافة (' + p + '%)'; },
-      totalLabel: 'الإجمالي (ر.ع.)', inclTaxes: 'يشمل ضريبة السياحة وضريبة القيمة المضافة.', pickToSee: 'اختر التواريخ لعرض السعر.',
+      totalLabel: 'الإجمالي (ر.ع.)', inclTaxes: 'مشمول في السعر:', pickToSee: 'اختر التواريخ لعرض السعر.',
       depositBook: function (d) { return 'مبلغ تأمين ' + d + ': يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، وهو غير مشمول في الإجمالي.'; },
       accept: 'قرأت الشروط والأحكام الخاصة بمنتجع لازورد وأوافق عليها.',
       missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'الهاتف', mTerms: 'الموافقة على الشروط',
@@ -292,6 +292,8 @@
     if (isHoliday(k)) return CONFIG.holidayPrice;
     return isWeekendNight(k) ? CONFIG.weekendPrice : CONFIG.weekdayPrice;
   }
+  // Precio final que ve el cliente: ya incluye impuesto de turismo e IVA
+  function incl(n) { return Math.round(n * (100 + CONFIG.tourismTax + CONFIG.vat) * 10) / 1000; }
   function rangeOk(a, b) {
     for (var k = a; k < b; k = addDays(k, 1)) { if (isBooked(k)) return false; }
     return true;
@@ -326,23 +328,24 @@
     var nightRows = [], roomTotal = 0;
     if (state.checkin && state.checkout) {
       for (var k = state.checkin; k < state.checkout; k = addDays(k, 1)) {
-        var p = nightPrice(k);
+        var p = incl(nightPrice(k));
         roomTotal += p;
         nightRows.push({ label: fmt(k) + (isHoliday(k) ? T.holidayTag : (isWeekendNight(k) ? T.weekendTag : '')), amount: money(p) });
       }
     }
     var nights = nightRows.length, hasNights = nights > 0;
     var rooms = roomsFor(state.guests), extra = rooms - CONFIG.baseRooms;
-    var extraTotal = extra * CONFIG.extraRoomPrice * nights;
+    var extraTotal = extra * incl(CONFIG.extraRoomPrice) * nights;
     var subtotal = roomTotal + extraTotal;
-    var taxAmt = subtotal * CONFIG.tourismTax / 100, vatAmt = subtotal * CONFIG.vat / 100;
-    var total = subtotal + taxAmt + vatAmt;
+    var total = subtotal, net = total * 100 / (100 + CONFIG.tourismTax + CONFIG.vat);
+    var taxAmt = net * CONFIG.tourismTax / 100, vatAmt = net * CONFIG.vat / 100;
+    var taxLines = [];
     var priceLines = [];
     if (hasNights) {
       priceLines.push({ label: T.stayLine(nights), amount: money(roomTotal) });
       if (extra > 0) priceLines.push({ label: T.extraLine(extra, nights), amount: money(extraTotal) });
-      priceLines.push({ label: T.taxLine(CONFIG.tourismTax), amount: money(taxAmt) });
-      priceLines.push({ label: T.vatLine(CONFIG.vat), amount: money(vatAmt) });
+      taxLines.push({ label: T.taxLine(CONFIG.tourismTax), amount: money(taxAmt) });
+      taxLines.push({ label: T.vatLine(CONFIG.vat), amount: money(vatAmt) });
     }
     // Camas: siempre suman exactamente el número de habitaciones asignadas
     var kMin = Math.max(0, rooms - CONFIG.maxTwin), kMax = Math.min(CONFIG.maxKing, rooms);
@@ -359,7 +362,7 @@
       L: L, T: T, rtl: rtl, money: money, whole: whole, fmt: fmt, todayKey: todayKey,
       y: y, m: m, first: first, dim: dim,
       nightRows: nightRows, nights: nights, hasNights: hasNights, rooms: rooms, extra: extra,
-      priceLines: priceLines, total: total, kMin: kMin, kMax: kMax, kings: kings, twins: twins,
+      priceLines: priceLines, taxLines: taxLines, total: total, kMin: kMin, kMax: kMax, kings: kings, twins: twins,
       missing: missing, canSubmit: missing.length === 0 && !state.submitting
     };
   }
@@ -367,8 +370,8 @@
   // ===================== PLANTILLAS =====================
   function tplLang() {
     var langs = [['es', 'Español'], ['en', 'English'], ['ar', 'العربية']];
-    return '<div dir="ltr" style="position:fixed;inset:0;background:linear-gradient(165deg,#0B2E4F 0%,#0F4C81 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px;z-index:40">' +
-      '<img src="img/stone.svg" alt="Lazurde" style="width:96px;height:auto">' +
+    return '<div dir="ltr" style="position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px;z-index:40">' +
+      '<img class="lz-up" src="img/stone.svg" alt="Lazurde" style="width:96px;height:auto">' +
       '<h1 style="margin-top:10px;font-family:Manrope,sans-serif;font-weight:700;font-size:26px;text-align:center">Select your language</h1>' +
       '<div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px">' +
       langs.map(function (l) {
@@ -390,8 +393,8 @@
     for (var i = 0; i < c.first; i++) out += '<span class="cell blank"></span>';
     for (var d = 1; d <= c.dim; d++) {
       var k = keyOf(c.y, c.m, d), price = nightPrice(k), past = k < c.todayKey, booked = isBooked(k), hol = isHoliday(k), we = isWeekendNight(k);
-      var pc = hol ? '#7A5A12' : (we ? '#0F4C81' : '#5A6573');
-      var cls = 'cell', label = String(price), dis = false, labelColor = pc;
+      var pc = '#A57F12';
+      var cls = 'cell', label = String(incl(price)), dis = false, labelColor = pc;
       if (!interactive) {
         if (hol) cls += ' hol';
         if (booked) { cls += ' booked'; label = T.booked; }
@@ -412,13 +415,11 @@
       if (isIn || isOut) { cls += ' sel'; label = isIn ? T.cin : T.cout; labelColor = ''; }
       if (past) { cls = 'cell past'; label = ''; }
       out += '<button type="button" class="' + cls + '" data-act="pick" data-arg="' + k + '"' + (dis ? ' disabled' : '') +
-        ' aria-label="' + esc(T.ariaCell(d, T.months[c.m], booked, price, isIn, isOut)) + '"><span>' + d + '</span><small' + (labelColor ? ' style="color:' + labelColor + '"' : '') + '>' + label + '</small></button>';
+        ' aria-label="' + esc(T.ariaCell(d, T.months[c.m], booked, incl(price), isIn, isOut)) + '"><span>' + d + '</span><small' + (labelColor ? ' style="color:' + labelColor + '"' : '') + '>' + label + '</small></button>';
     }
-    return '<div class="cal"><img class="wm" src="img/stone_blue.svg" alt="">' + tplMonthNav(c) + '<div class="cal-grid">' + out + '</div>' +
+    return '<div class="cal"><img class="wm" src="img/stone.svg" alt="">' + tplMonthNav(c) + '<div class="cal-grid">' + out + '</div>' +
       (interactive ? '' : '<div style="position:relative;display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12px;color:#5A6573">' +
-        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#5A6573"></span>' + T.lgWeekday + '</span>' +
-        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#0F4C81"></span>' + T.lgWeekend + '</span>' +
-        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;border:1.5px solid #D3AE2A"></span>' + T.lgHoliday + '</span>' +
+        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;border:1.5px solid #D3AE2A;background:#FFF6DF"></span>' + T.lgHoliday + '</span>' +
         '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#E9EDF2"></span>' + T.lgBooked + '</span></div>') +
       '</div>';
   }
@@ -473,7 +474,7 @@
     // Habitaciones
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.rooms + '</h2>' +
       roomCard(ICON.king, T.kingRooms, T.kingRoomsSub) + roomCard(ICON.twin, T.twinRooms, T.twinRoomsSub) +
-      '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFF6DF;border-radius:12px;padding:12px 14px"><span style="font-size:14px;font-weight:600;color:#5C4510">' + T.extraRoom + '</span><strong style="font-size:15px;color:#5C4510;white-space:nowrap">' + c.whole(CONFIG.extraRoomPrice) + T.perNightShort + '</strong></div></section>';
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFF6DF;border-radius:12px;padding:12px 14px"><span style="font-size:14px;font-weight:600;color:#5C4510">' + T.extraRoom + '</span><strong style="font-size:15px;color:#5C4510;white-space:nowrap">' + c.whole(incl(CONFIG.extraRoomPrice)) + T.perNightShort + '</strong></div></section>';
     // Instalaciones
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:6px"><h2 class="h2" style="margin-bottom:6px">' + T.facilities + '</h2>' +
       facShown.map(function (f) { return '<div style="display:flex;align-items:center;gap:14px;min-height:44px">' + svg(f.d, { w: 24, stroke: '#0F4C81', sw: 1.6 }) + '<span style="font-size:15px">' + f.label + '</span></div>'; }).join('') +
@@ -498,7 +499,7 @@
     // Barra de reservar + navegación
     h += '<div class="fixed-bottom" style="padding:0 12px 14px">' +
       '<div style="background:#fff;border:1px solid #E3E8EE;border-radius:18px;padding:10px;padding-inline-start:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(11,46,79,.14);margin-bottom:10px">' +
-      '<div style="display:flex;flex-direction:column;gap:1px"><span class="muted" style="font-size:12px">' + T.from + '</span><span style="font-size:18px;font-weight:800">' + c.whole(CONFIG.weekdayPrice) + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.perNight + '</span></span><span class="muted" style="font-size:11px">' + T.baseInfo + '</span></div>' +
+      '<div style="display:flex;flex-direction:column;gap:1px"><span class="muted" style="font-size:12px">' + T.from + '</span><span style="font-size:18px;font-weight:800">' + c.whole(incl(CONFIG.weekdayPrice)) + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.perNight + '</span></span><span class="muted" style="font-size:11px">' + T.baseInfo + '</span></div>' +
       '<button type="button" class="btn-primary" data-act="goBook" style="height:50px;padding:0 26px">' + T.bookNow + '</button></div>' +
       '<nav aria-label="' + T.navAria + '" style="height:68px;background:#fff;border-radius:999px;box-shadow:0 10px 30px rgba(11,46,79,.14);display:flex;align-items:center;justify-content:space-around;padding:0 8px">' +
       navItem('#lz-top', ICON.home, T.navHome, true) + navItem('#lz-cal', ICON.cal, T.navCal) + navItem('#lz-top', ICON.list, T.navMine) + navItem('#lz-contact', ICON.chat, T.navContact) +
@@ -547,9 +548,9 @@
       '<div style="display:flex;flex-direction:column"><strong style="font-size:15px">' + T.rooms + '</strong><span class="muted" style="font-size:12px">' + T.autoRooms + '</span></div></div>' +
       '<span style="min-width:44px;text-align:center;font-size:20px;font-weight:800">' + c.rooms + '</span></div>' +
       '<div style="display:flex;gap:10px;align-items:flex-start;background:#FFF6DF;border-radius:12px;padding:12px">' + svg(ICON.info, { w: 20, stroke: '#7A5A12', style: 'flex:none;margin-top:1px' }) +
-      '<strong style="font-size:13px;color:#5C4510;line-height:1.5">' + T.extraNotice(c.whole(CONFIG.extraRoomPrice)) + '</strong></div>' +
+      '<strong style="font-size:13px;color:#5C4510;line-height:1.5">' + T.extraNotice(c.whole(incl(CONFIG.extraRoomPrice))) + '</strong></div>' +
       (on ? '<div style="display:flex;align-items:center;gap:10px;background:#E7F5EC;color:#14532D;border-radius:12px;padding:12px;font-size:14px;font-weight:700">' + svg(ICON.check, { w: 20, sw: 2.2, style: 'flex:none' }) + T.confirmedTxt(state.guests, c.rooms) + '</div>'
-        : '<button type="button" class="btn-primary" data-act="confirmGuests" style="background:#0B2E4F;height:50px">' + T.confirmBtn(state.guests) + '</button>') +
+        : '<button type="button" class="btn-primary" data-act="confirmGuests" style="height:50px">' + T.confirmBtn(state.guests) + '</button>') +
       '</div></section>';
     // Camas
     var kMinus = !on || c.kings <= c.kMin, kPlus = !on || c.kings >= c.kMax;
@@ -577,7 +578,8 @@
         c.nightRows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid #EEF2F6;font-size:14px"><span>' + r.label + '</span><span style="font-weight:700;white-space:nowrap">' + r.amount + '</span></div>'; }).join('') + '</div>' +
         c.priceLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#3D4A58"><span>' + p.label + '</span><span style="color:#0B2E4F;font-weight:700;white-space:nowrap">' + p.amount + '</span></div>'; }).join('') +
         '<div style="height:1px;background:#E3E8EE;margin:4px 0"></div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><strong style="font-size:16px">' + T.totalLabel + '</strong><strong style="font-size:22px;white-space:nowrap">' + c.money(c.total) + '</strong></div>' +
-        '<span class="muted" style="font-size:12px">' + T.inclTaxes + '</span>';
+        '<div style="background:#F5F7FA;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span class="muted" style="font-size:12px;font-weight:700">' + T.inclTaxes + '</span>' +
+        c.taxLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#5A6573"><span>' + p.label + '</span><span style="white-space:nowrap">' + p.amount + '</span></div>'; }).join('') + '</div>';
     } else {
       h += '<span class="muted" style="font-size:14px">' + T.pickToSee + '</span>';
     }
@@ -603,7 +605,7 @@
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : '—' + T.unit) + '</strong>' +
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="height:52px;min-width:150px;padding:0 22px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;' +
-      (ok ? 'background:#0F4C81;color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
+      (ok ? 'background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
       (state.submitting ? '<img class="lz-spin" src="img/stone.svg" alt="" style="width:22px;height:auto">' : '') + '<span>' + (state.submitting ? T.sending : T.bookNow) + '</span></button></div>';
   }
 
