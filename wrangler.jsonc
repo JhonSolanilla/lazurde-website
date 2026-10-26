@@ -3,6 +3,9 @@
   // Cloudflare publica automáticamente todo lo que está en /public cada vez que se sube un cambio a GitHub.
   "name": "lazurde-website",
   "compatibility_date": "2026-10-01",
+  // Dirección pública gratuita: lazurde-website.<cuenta>.workers.dev
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "directory": "./public",
     "not_found_handling": "single-page-application"
