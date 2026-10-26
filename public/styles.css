@@ -35,10 +35,17 @@ section,[id]{scroll-margin-top:72px}
 .splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer;transition:opacity .4s ease}
 .splash.hide{opacity:0;pointer-events:none}
 .splash svg{width:150px;height:auto}
-/* Se arma la piedra pieza por pieza y se repite durante los 5 segundos */
-@keyframes lzIn{0%{opacity:0;transform:translateY(-60px)}36%{opacity:1;transform:none}88%{opacity:1;transform:none}100%{opacity:0;transform:none}}
-.lz-a1,.lz-a2,.lz-a3,.lz-a4,.lz-a5,.lz-a6{opacity:0;animation:lzIn 2.5s cubic-bezier(.2,.8,.2,1) infinite}
-.lz-a2{animation-delay:.18s}.lz-a3{animation-delay:.36s}.lz-a4{animation-delay:.54s}.lz-a5{animation-delay:.72s}.lz-a6{animation-delay:.9s}
+/* La piedra se arma de arriba hacia abajo, se queda completa, se desvanece entera
+   y se vuelve a armar. Al terminar los 5 segundos queda armada. */
+.lz-a1,.lz-a2,.lz-a3,.lz-a4,.lz-a5,.lz-a6{opacity:0;animation-duration:2.6s;animation-iteration-count:1.82;animation-fill-mode:forwards}
+.lz-a1{animation-name:lzG1}.lz-a2{animation-name:lzG2}.lz-a3{animation-name:lzG3}
+.lz-a4{animation-name:lzG4}.lz-a5{animation-name:lzG5}.lz-a6{animation-name:lzG6}
+@keyframes lzG1{0%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}24%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes lzG2{0%,7%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}31%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes lzG3{0%,14%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}38%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes lzG4{0%,21%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}45%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes lzG5{0%,28%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}52%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes lzG6{0%,35%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}59%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
 @keyframes lzFade{0%,30%{opacity:0}50%,85%{opacity:1}100%{opacity:0}}
 .lz-word{animation:lzFade 3s ease-in-out infinite}
 @keyframes lzSpin{to{transform:rotate(360deg)}}
@@ -79,10 +86,11 @@ button.cell{cursor:pointer}
 .cell.blank{visibility:hidden}
 .cell.past{background:transparent;border-color:transparent;color:#6B7684;font-weight:500}
 .cell.hol{border-color:var(--gold)}
-.cell.booked{color:#8A94A1;text-decoration:line-through}
-.cell.booked small{text-decoration:none}
+.cell.booked{color:#8A94A1}
+.cell.booked span{text-decoration:line-through}
 .cell.booked small{font-size:9px;color:#4F5B69}
 .cell.can-out{border:1px dashed #4F5B69}
+.cell.can-out small{font-size:8.5px;line-height:1.05;text-align:center;white-space:normal}
 .cell.range{background:rgba(15,76,129,.12)}
 .cell.sel{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:800}
 .cell.sel small{color:var(--gold-light)}

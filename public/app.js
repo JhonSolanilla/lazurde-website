@@ -48,7 +48,7 @@
       prevMonth: 'Mes anterior', nextMonth: 'Mes siguiente',
       lgWeekday: 'Entre semana', lgWeekend: 'Jue y vie', lgHoliday: 'Feriado', lgBooked: 'Ocupado',
       toChoose: 'Para elegir tus fechas toca «Reservar».',
-      booked: 'Ocupado', cin: 'Llega', cout: 'Sale',
+      booked: 'Ocupado', cin: 'Llega', cout: 'Sale', outOnly: 'Solo salida',
       times: 'Horarios', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: 'Desde las 2:00 pm', checkOutTime: 'Hasta las 11:00 am', inShort: 'Desde 2:00 pm', outShort: 'Hasta 11:00 am',
       rooms: 'Habitaciones', kingRooms: '3 habitaciones · 1 cama king', kingRoomsSub: 'Cama matrimonial grande', twinRooms: '4 habitaciones · 2 camas individuales', twinRoomsSub: 'Dos camas separadas',
       extraRoom: 'Habitación extra', perNightShort: ' / noche',
@@ -113,7 +113,7 @@
       prevMonth: 'Previous month', nextMonth: 'Next month',
       lgWeekday: 'Weekday', lgWeekend: 'Thu & Fri', lgHoliday: 'Public holiday', lgBooked: 'Booked',
       toChoose: 'To choose your dates, tap “Book now”.',
-      booked: 'Booked', cin: 'In', cout: 'Out',
+      booked: 'Booked', cin: 'In', cout: 'Out', outOnly: 'Check-out only',
       times: 'Check-in & check-out', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: 'From 2:00 pm', checkOutTime: 'Until 11:00 am', inShort: 'From 2:00 pm', outShort: 'Until 11:00 am',
       rooms: 'Bedrooms', kingRooms: '3 bedrooms · 1 king bed', kingRoomsSub: 'Large double bed', twinRooms: '4 bedrooms · 2 twin beds', twinRoomsSub: 'Two separate beds',
       extraRoom: 'Extra bedroom', perNightShort: ' / night',
@@ -178,7 +178,7 @@
       prevMonth: 'الشهر السابق', nextMonth: 'الشهر التالي',
       lgWeekday: 'أيام الأسبوع', lgWeekend: 'الخميس والجمعة', lgHoliday: 'عطلة رسمية', lgBooked: 'محجوز',
       toChoose: 'لاختيار التواريخ اضغط «احجز الآن».',
-      booked: 'محجوز', cin: 'وصول', cout: 'مغادرة',
+      booked: 'محجوز', cin: 'وصول', cout: 'مغادرة', outOnly: 'مغادرة فقط',
       times: 'مواعيد الوصول والمغادرة', checkIn: 'الوصول', checkOut: 'المغادرة', checkInTime: 'من الساعة 2:00 مساءً', checkOutTime: 'حتى الساعة 11:00 صباحًا', inShort: 'من 2:00 م', outShort: 'حتى 11:00 ص',
       rooms: 'الغرف', kingRooms: '3 غرف · سرير كينغ', kingRoomsSub: 'سرير مزدوج كبير', twinRooms: '4 غرف · سريران منفردان', twinRoomsSub: 'سريران منفصلان',
       extraRoom: 'غرفة إضافية', perNightShort: ' / الليلة',
@@ -409,7 +409,7 @@
       dis = past || (booked && !canEnd && !isOut);
       if (hol) cls += ' hol';
       if (booked && !isIn && !isOut) {
-        if (canEnd) { cls += ' can-out'; label = T.cout; labelColor = '#4F5B69'; }
+        if (canEnd) { cls += ' can-out'; label = T.outOnly; labelColor = '#4F5B69'; }
         else { cls += ' booked'; label = T.booked; labelColor = '#4F5B69'; }
       }
       if (inRange) { cls += ' range'; labelColor = '#0B2E4F'; }
