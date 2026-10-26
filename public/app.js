@@ -42,7 +42,7 @@
       gal: ['Video · Vista general', 'Piscina', 'Habitación con cama king', 'Habitación con 2 camas', 'Zona de parrilla'],
       of: function (i, n) { return i + ' de ' + n; },
       resortName: 'Lazurde Resort', badge: 'Resort privado', location: '[Ubicación], Omán',
-      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', '1 sala de estar', 'Parqueadero'],
+      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', 'Parqueadero'],
       license: 'Licencia de turismo N.º [pendiente]', whatsapp: 'WhatsApp', call: 'Llamar',
       availability: 'Disponibilidad', availSub: 'Precio por noche para 6 personas, impuestos incluidos.',
       prevMonth: 'Mes anterior', nextMonth: 'Mes siguiente',
@@ -53,11 +53,11 @@
       rooms: 'Habitaciones', kingRooms: '3 habitaciones · 1 cama king', kingRoomsSub: 'Cama matrimonial grande', twinRooms: '4 habitaciones · 2 camas individuales', twinRoomsSub: 'Dos camas separadas',
       extraRoom: 'Habitación extra', perNightShort: ' / noche',
       facilities: 'Instalaciones',
-      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Sala de estar', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Casas de animales', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
+      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Mini zoo: pavos reales, aves, conejos y cabras', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
       showAll: function (n) { return 'Ver todas (' + n + ')'; }, showLess: 'Ver menos',
       where: 'Dónde estarás', whereNote: 'La ubicación exacta se envía cuando se confirma la reserva.',
       deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
-      allowedEvents: 'Eventos permitidos',
+      allowedEvents: 'Eventos permitidos', eventsNote: 'Todo evento necesita autorización previa de Lazurde. Después de reservar, coordínalo con nosotros por WhatsApp.',
       events: ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de trabajo', 'Otro'],
       policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', tbd: '[Por definir con Salim]',
       terms: 'Términos y condiciones', termLine: function (i) { return i + '. [Término ' + i + ' — texto pendiente. Aquí van los términos y condiciones oficiales de Lazurde Resort.]'; },
@@ -107,7 +107,7 @@
       gal: ['Video · Overview', 'Swimming pool', 'King bed bedroom', 'Twin bedroom', 'BBQ area'],
       of: function (i, n) { return i + ' of ' + n; },
       resortName: 'Lazurde Resort', badge: 'Private resort', location: '[Location], Oman',
-      specs: ['7 bedrooms', '14 beds', '10 bathrooms', 'Pool', '1 living room', 'Parking'],
+      specs: ['7 bedrooms', '14 beds', '10 bathrooms', 'Pool', 'Parking'],
       license: 'Tourism license No. [pending]', whatsapp: 'WhatsApp', call: 'Call',
       availability: 'Availability', availSub: 'Nightly price for 6 guests, taxes included.',
       prevMonth: 'Previous month', nextMonth: 'Next month',
@@ -118,11 +118,11 @@
       rooms: 'Bedrooms', kingRooms: '3 bedrooms · 1 king bed', kingRoomsSub: 'Large double bed', twinRooms: '4 bedrooms · 2 twin beds', twinRoomsSub: 'Two separate beds',
       extraRoom: 'Extra bedroom', perNightShort: ' / night',
       facilities: 'Facilities',
-      fac: ['Swimming pool', 'Football field', 'Billiards area', 'Living room', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Animal houses', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
+      fac: ['Swimming pool', 'Football field', 'Billiards area', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Mini zoo: peacocks, birds, rabbits & goats', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
       showAll: function (n) { return 'Show all (' + n + ')'; }, showLess: 'Show less',
       where: 'Where you’ll be', whereNote: 'The exact location is shared once your booking is confirmed.',
       deposit: 'Security deposit', depositAmount: 'Deposit amount', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
-      allowedEvents: 'Allowed events',
+      allowedEvents: 'Allowed events', eventsNote: 'All events need prior approval from Lazurde. After booking, please arrange it with us on WhatsApp.',
       events: ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'],
       policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', tbd: '[To be confirmed]',
       terms: 'Terms & conditions', termLine: function (i) { return i + '. [Term ' + i + ' — pending text. The official Lazurde Resort terms & conditions go here.]'; },
@@ -172,7 +172,7 @@
       gal: ['فيديو · نظرة عامة', 'المسبح', 'غرفة بسرير كينغ', 'غرفة بسريرين', 'منطقة الشواء'],
       of: function (i, n) { return i + ' من ' + n; },
       resortName: 'منتجع لازورد', badge: 'منتجع خاص', location: '[الموقع]، عُمان',
-      specs: ['7 غرف نوم', '14 سريرًا', '10 حمامات', 'مسبح', 'صالة جلوس', 'موقف سيارات'],
+      specs: ['7 غرف نوم', '14 سريرًا', '10 حمامات', 'مسبح', 'موقف سيارات'],
       license: 'رقم الترخيص السياحي [قيد الإضافة]', whatsapp: 'واتساب', call: 'اتصال',
       availability: 'التوفر', availSub: 'سعر الليلة لـ 6 ضيوف شامل الضرائب.',
       prevMonth: 'الشهر السابق', nextMonth: 'الشهر التالي',
@@ -183,12 +183,12 @@
       rooms: 'الغرف', kingRooms: '3 غرف · سرير كينغ', kingRoomsSub: 'سرير مزدوج كبير', twinRooms: '4 غرف · سريران منفردان', twinRoomsSub: 'سريران منفصلان',
       extraRoom: 'غرفة إضافية', perNightShort: ' / الليلة',
       facilities: 'المرافق',
-      fac: ['مسبح', 'ملعب كرة قدم', 'منطقة البلياردو', 'صالة جلوس', 'موقف سيارات', 'منطقة شواء', 'منطقة أطفال', 'ملعب أطفال', 'بيوت الحيوانات', 'البيت الخشبي (منطقة استرخاء)', 'نوافير', 'جلسات خارجية', 'حدائق'],
+      fac: ['مسبح', 'ملعب كرة قدم', 'منطقة البلياردو', 'موقف سيارات', 'منطقة شواء', 'منطقة أطفال', 'ملعب أطفال', 'حديقة حيوانات صغيرة: طواويس وطيور وأرانب وماعز', 'البيت الخشبي (منطقة استرخاء)', 'نوافير', 'جلسات خارجية', 'حدائق'],
       showAll: function (n) { return 'عرض الكل (' + n + ')'; }, showLess: 'عرض أقل',
       where: 'أين ستقيم', whereNote: 'نرسل الموقع الدقيق بعد تأكيد الحجز.',
       deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
       allowedEvents: 'المناسبات المسموح بها',
-      events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
+      eventsNote: 'جميع المناسبات تحتاج إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.', events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
       policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', tbd: '[سيتم تأكيده]',
       terms: 'الشروط والأحكام', termLine: function (i) { return i + '. [البند ' + i + ' — نص قيد الإعداد. هنا تُضاف الشروط والأحكام الرسمية لمنتجع لازورد.]'; },
       showMore: 'عرض المزيد', footer: 'منتجع لازورد · عُمان',
@@ -254,7 +254,6 @@
     'M2 18c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0 M2 14c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0 M8 12V5a2 2 0 0 1 4 0 M16 12V5a2 2 0 0 0-4 0 M8 8h8',
     'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18 M12 7l3.5 2.5-1.3 4h-4.4l-1.3-4z M12 7V3.5 M15.5 9.5l3.8-1.2 M14.2 13.5l2.3 3.2 M9.8 13.5l-2.3 3.2 M8.5 9.5L4.7 8.3',
     'M12 4a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M12 8.5a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M12 12.5a1.8 1.8 0 1 0 0 3.6a1.8 1.8 0 1 0 0-3.6',
-    'M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3 M2 12a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2z M5 17v2 M19 17v2',
     'M4 3h16v18H4z M9 17V7h4a3 3 0 0 1 0 6H9',
     'M4 10h16 M5 10a7 7 0 0 0 14 0 M8 17l-2 4 M16 17l2 4 M12 17v4 M9 3c0 1 1 1 1 2s-1 1-1 2 M13 3c0 1 1 1 1 2s-1 1-1 2',
     'M14 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0 M12 8v6 M8 10l4 2 4-2 M9 21l3-7 3 7',
@@ -366,6 +365,33 @@
       priceLines: priceLines, taxLines: taxLines, total: total, kMin: kMin, kMax: kMax, kings: kings, twins: twins,
       missing: missing, canSubmit: missing.length === 0 && !state.submitting
     };
+  }
+
+  // ===================== ANIMACIÓN DE LA PIEDRA =====================
+  // Las piezas aparecen suavemente de arriba hacia abajo, la piedra completa se
+  // desvanece y se vuelve a armar. Con loop=false se arma 2 veces y queda armada.
+  var STONE_SVG = document.querySelector('#splash svg').outerHTML.replace(/lzg/g, 'lzg2').replace(/ class="[^"]*"/, '');
+  function stoneLoop(svg, loop) {
+    var paths = svg.querySelectorAll('path'), timers = [], H = 1374;
+    svg.classList.add('lz-stone');
+    for (var i = 0; i < paths.length; i++) {
+      var y = 0;
+      try { var b = paths[i].getBBox(); y = b.y + b.height / 2; } catch (e) { y = i / paths.length * H; }
+      paths[i].style.setProperty('--d', (y / H * 1.0).toFixed(2) + 's');
+    }
+    var count = 0;
+    function cycle() {
+      svg.classList.remove('run', 'out');
+      void svg.getBoundingClientRect();
+      svg.classList.add('run');
+      count++;
+      if (loop || count < 2) {
+        timers.push(setTimeout(function () { svg.classList.add('out'); }, 2050));
+        timers.push(setTimeout(cycle, 2600));
+      }
+    }
+    cycle();
+    return function () { timers.forEach(clearTimeout); };
   }
 
   // ===================== PLANTILLAS =====================
@@ -490,7 +516,9 @@
       '<p class="muted" style="font-size:14px;line-height:1.6">' + T.depositNote + '</p></section>';
     // Eventos permitidos
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.allowedEvents + '</h2><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">' +
-      T.events.slice(0, 8).map(function (e) { return '<span style="display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none"></span>' + e + '</span>'; }).join('') + '</div></section>';
+      T.events.slice(0, 8).map(function (e) { return '<span style="display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none"></span>' + e + '</span>'; }).join('') + '</div>' +
+      '<div style="display:flex;gap:10px;align-items:flex-start;background:#FFF6DF;border-radius:12px;padding:12px 14px">' + svg(ICON.info, { w: 20, stroke: '#5C4510', style: 'flex:none;margin-top:1px' }) +
+      '<span style="font-size:13px;color:#5C4510;line-height:1.5;font-weight:600">' + T.eventsNote + '</span></div></section>';
     // Políticas
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.policies + '</h2>' +
       '<div style="border:1px solid #F3C9C9;background:#FDF2F2;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#8B1D1D">' + T.cancellation + '</strong><span style="font-size:14px;color:#6E1A1A;line-height:1.6">' + T.tbd + '</span></div>' +
@@ -503,7 +531,7 @@
       '<div style="display:flex;flex-direction:column;gap:1px"><span class="muted" style="font-size:12px">' + T.from + '</span><span style="font-size:18px;font-weight:800">' + c.whole(incl(CONFIG.weekdayPrice)) + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.perNight + '</span></span><span class="muted" style="font-size:11px">' + T.baseInfo + '</span></div>' +
       '<button type="button" class="btn-primary" data-act="goBook" style="height:50px;padding:0 26px">' + T.bookNow + '</button></div>' +
       '<nav aria-label="' + T.navAria + '" style="height:68px;background:#fff;border-radius:999px;box-shadow:0 10px 30px rgba(11,46,79,.14);display:flex;align-items:center;justify-content:space-around;padding:0 8px">' +
-      navItem('#lz-top', ICON.home, T.navHome, true) + navItem('#lz-cal', ICON.cal, T.navCal) + navItem('#lz-top', ICON.list, T.navMine) + navItem('#lz-contact', ICON.chat, T.navContact) +
+      navItem('#lz-top', ICON.home, T.navHome, true) + navItem('#lz-cal', ICON.cal, T.navCal) + navItem('#lz-contact', ICON.chat, T.navContact) +
       '</nav></div>';
     return h;
   }
@@ -607,7 +635,7 @@
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="height:52px;min-width:150px;padding:0 22px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;' +
       (ok ? 'background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
-      (state.submitting ? '<img class="lz-spin" src="img/stone.svg" alt="" style="width:22px;height:auto">' : '') + '<span>' + (state.submitting ? T.sending : T.bookNow) + '</span></button></div>';
+      (state.submitting ? STONE_SVG.replace('<svg ', '<svg class="lz-stone" role="img" aria-label="' + T.sending + '" style="width:30px;height:40px" ') : '<span>' + T.bookNow + '</span>') + '</button></div>';
   }
 
   function tplDone(c) {
@@ -676,7 +704,9 @@
     submit: function () {
       if (!calc().canSubmit) return;
       set({ submitting: true });
-      submitTimer = setTimeout(function () { set({ submitting: false, screen: 'done' }); }, 1800);
+      var sv = document.querySelector('#lz-bar .lz-stone');
+      var stop = sv ? stoneLoop(sv, true) : function () {};
+      submitTimer = setTimeout(function () { stop(); set({ submitting: false, screen: 'done' }); }, 2600);
     },
     restart: function () {
       set({ screen: 'home', checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing, event: null, termsOk: false, termsOpen: false });
@@ -705,6 +735,7 @@
 
   // ===================== PANTALLA DE CARGA =====================
   var splash = document.getElementById('splash');
+  var splashSvg = splash.querySelector('svg');
   function endSplash() {
     if (state.screen !== 'splash') return;
     splash.classList.add('hide');
@@ -713,5 +744,6 @@
   }
   splash.addEventListener('click', endSplash);
   splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endSplash(); } });
+  stoneLoop(splashSvg, false);
   setTimeout(endSplash, 5000);
 })();

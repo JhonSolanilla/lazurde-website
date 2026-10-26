@@ -37,17 +37,12 @@ section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 .splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer;transition:opacity .4s ease}
 .splash.hide{opacity:0;pointer-events:none}
 .splash svg{width:150px;height:auto}
-/* La piedra se arma de arriba hacia abajo, se queda completa, se desvanece entera
-   y se vuelve a armar. Al terminar los 5 segundos queda armada. */
-.lz-a1,.lz-a2,.lz-a3,.lz-a4,.lz-a5,.lz-a6{opacity:0;animation-duration:2.6s;animation-iteration-count:1.82;animation-fill-mode:forwards}
-.lz-a1{animation-name:lzG1}.lz-a2{animation-name:lzG2}.lz-a3{animation-name:lzG3}
-.lz-a4{animation-name:lzG4}.lz-a5{animation-name:lzG5}.lz-a6{animation-name:lzG6}
-@keyframes lzG1{0%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}24%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lzG2{0%,7%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}31%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lzG3{0%,14%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}38%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lzG4{0%,21%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}45%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lzG5{0%,28%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}52%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lzG6{0%,35%{opacity:0;transform:translateY(-60px);animation-timing-function:cubic-bezier(.2,.8,.2,1)}59%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+/* Piedra: las piezas aparecen suavemente de arriba hacia abajo (el ritmo lo controla app.js) */
+.lz-stone path{opacity:0}
+.lz-stone.run path{animation:lzPiece .85s cubic-bezier(.22,1,.36,1) both;animation-delay:var(--d,0s)}
+@keyframes lzPiece{from{opacity:0;transform:translateY(-90px)}to{opacity:1;transform:none}}
+.lz-stone{transition:opacity .45s ease}
+.lz-stone.out{opacity:0}
 @keyframes lzFade{0%,30%{opacity:0}50%,85%{opacity:1}100%{opacity:0}}
 .lz-word{animation:lzFade 3s ease-in-out infinite}
 @keyframes lzSpin{to{transform:rotate(360deg)}}
@@ -59,7 +54,8 @@ section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 @keyframes lzUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .lz-up{animation:lzUp .5s .2s ease-out both}
 @media (prefers-reduced-motion:reduce){
-  .lz-a1,.lz-a2,.lz-a3,.lz-a4,.lz-a5,.lz-a6{animation:none;opacity:1}
+  .lz-stone path,.lz-stone.run path{animation:none;opacity:1}
+  .lz-stone.out{opacity:1}
   .lz-word,.lz-pop,.lz-up,.lz-check{animation:none}
   html{scroll-behavior:auto}
 }
