@@ -7,10 +7,11 @@
 
   // ===================== CONFIG =====================
   var CONFIG = {
-    weekdayPrice: 220,   // sábado a miércoles
-    weekendPrice: 260,   // noches de jueves y viernes
-    holidayPrice: 260,   // feriados
-    extraRoomPrice: 15,  // por habitación extra y por noche
+    // Precios FINALES que ve el cliente, con impuesto de turismo e IVA ya incluidos
+    weekdayPrice: 240,   // sábado a miércoles (antes 220 + impuestos)
+    weekendPrice: 285,   // noches de jueves y viernes (antes 260 + impuestos)
+    holidayPrice: 285,   // feriados
+    extraRoomPrice: 15,  // por habitación extra y por noche, impuestos incluidos
     tourismTax: 4,       // %
     vat: 5,              // %
     deposit: 100,        // depósito de garantía, se paga al llegar
@@ -292,8 +293,8 @@
     if (isHoliday(k)) return CONFIG.holidayPrice;
     return isWeekendNight(k) ? CONFIG.weekendPrice : CONFIG.weekdayPrice;
   }
-  // Precio final que ve el cliente: ya incluye impuesto de turismo e IVA
-  function incl(n) { return Math.round(n * (100 + CONFIG.tourismTax + CONFIG.vat) * 10) / 1000; }
+  // Los precios de CONFIG ya son finales (impuestos incluidos); los impuestos se calculan por dentro
+  function incl(n) { return n; }
   function rangeOk(a, b) {
     for (var k = a; k < b; k = addDays(k, 1)) { if (isBooked(k)) return false; }
     return true;
@@ -316,7 +317,7 @@
   // ===================== CÁLCULOS =====================
   function calc() {
     var L = state.lang, T = DICT[L], rtl = L === 'ar';
-    var money = function (n) { return (Math.round(n * 100) / 100).toFixed(2) + T.unit; };
+    var money = function (n) { var r = Math.round(n * 100) / 100; return (r % 1 ? r.toFixed(2) : String(r)) + T.unit; };
     var whole = function (n) { return n + T.unit; };
     var fmt = function (k) { if (!k) return T.choose; var p = k.split('-').map(Number); return T.fmt(dow(k), p[2], p[1] - 1); };
     var t0 = new Date();
@@ -419,8 +420,8 @@
     }
     return '<div class="cal"><img class="wm" src="img/stone.svg" alt="">' + tplMonthNav(c) + '<div class="cal-grid">' + out + '</div>' +
       (interactive ? '' : '<div style="position:relative;display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12px;color:#5A6573">' +
-        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;border:1.5px solid #D3AE2A;background:#FFF6DF"></span>' + T.lgHoliday + '</span>' +
-        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#E9EDF2"></span>' + T.lgBooked + '</span></div>') +
+        '<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;border:1.5px solid #D3AE2A"></span>' + T.lgHoliday + '</span>' +
+        '<span style="display:flex;align-items:center;gap:6px"><s style="color:#8A94A1;font-weight:700">8</s>' + T.lgBooked + '</span></div>') +
       '</div>';
   }
 

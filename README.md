@@ -22,10 +22,10 @@ No hay que instalar nada ni hacer pasos manuales.
 ## Precios y reglas (en `public/app.js`, bloque `CONFIG`)
 
 - Base: 3 habitaciones y 6 personas.
-- Noche entre semana (sábado a miércoles): 220 OMR.
-- Noche de jueves y viernes: 260 OMR. Feriado: 260 OMR.
+- Noche entre semana (sábado a miércoles): 240 OMR.
+- Noche de jueves y viernes: 285 OMR. Feriado: 285 OMR.
 - Cada 2 personas extra se abre 1 habitación extra: 15 OMR por noche. Máximo 14 personas y 7 habitaciones.
-- Impuesto de turismo 4 % e IVA 5 %. En la web los precios se muestran con impuestos incluidos (220 → 239.8, 260 → 283.4, habitación extra 15 → 16.35).
+- Impuesto de turismo 4 % e IVA 5 %. Todos los precios de la web ya incluyen los impuestos (también los 15 OMR de la habitación extra).
 - Depósito de garantía: 100 OMR al llegar, se devuelve dentro de 24 horas.
 
 ## Pendiente
