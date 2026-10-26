@@ -28,8 +28,10 @@ h1,h2,h3,p{margin:0}
 .shell{max-width:520px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;box-shadow:0 0 40px rgba(11,46,79,.08)}
 .fixed-top,.fixed-bottom{position:fixed;left:50%;transform:translateX(-50%);width:min(100%,520px);z-index:20}
 .fixed-top{top:0}
+/* iPhone con isla o notch: el menú baja para quedar debajo de la hora y la batería */
+.fixed-top{height:calc(60px + env(safe-area-inset-top)) !important;padding-top:env(safe-area-inset-top) !important}
 .fixed-bottom{bottom:0}
-section,[id]{scroll-margin-top:72px}
+section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 
 /* Pantalla de carga */
 .splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer;transition:opacity .4s ease}

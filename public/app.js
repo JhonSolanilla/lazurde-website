@@ -442,7 +442,7 @@
       '<button type="button" class="icon-btn" data-act="openLang" aria-label="' + T.changeLang + '">' + svg(ICON.globe, { sw: 1.7 }) + '</button>' +
       '<img src="img/wordmark.svg" alt="Lazurde" style="height:26px;width:auto">' +
       '<button type="button" class="icon-btn" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</button></header>';
-    h += '<main style="padding-top:60px;padding-bottom:190px">';
+    h += '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(190px + env(safe-area-inset-bottom))">';
     // Galería
     h += '<div id="lz-top" style="position:relative;height:280px;background:' + GAL_BG[gi] + ';display:flex;align-items:center;justify-content:center">' +
       '<span style="position:absolute;inset-inline-start:16px;top:14px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff">' + T.gal[gi] + '</span>' +
@@ -498,7 +498,7 @@
       '<h3 style="margin-top:8px;font-size:16px;font-weight:800">' + T.terms + '</h3>' + tplTerms(T) + '</section>';
     h += '<div class="muted" style="padding:22px 18px;text-align:center;font-size:12px">' + T.footer + '</div></main>';
     // Barra de reservar + navegación
-    h += '<div class="fixed-bottom" style="padding:0 12px 14px">' +
+    h += '<div class="fixed-bottom" style="padding:0 12px calc(14px + env(safe-area-inset-bottom))">' +
       '<div style="background:#fff;border:1px solid #E3E8EE;border-radius:18px;padding:10px;padding-inline-start:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(11,46,79,.14);margin-bottom:10px">' +
       '<div style="display:flex;flex-direction:column;gap:1px"><span class="muted" style="font-size:12px">' + T.from + '</span><span style="font-size:18px;font-weight:800">' + c.whole(incl(CONFIG.weekdayPrice)) + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.perNight + '</span></span><span class="muted" style="font-size:11px">' + T.baseInfo + '</span></div>' +
       '<button type="button" class="btn-primary" data-act="goBook" style="height:50px;padding:0 26px">' + T.bookNow + '</button></div>' +
@@ -524,7 +524,7 @@
     h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;gap:8px;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="goHome" aria-label="' + T.back + '" style="border:0">' + svg(c.rtl ? ICON.backR : ICON.backL, { sw: 2 }) + '</button>' +
       '<span style="font-size:17px;font-weight:800">' + T.confirmTitle + '</span></header>';
-    h += '<main style="padding-top:60px;padding-bottom:140px">';
+    h += '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(140px + env(safe-area-inset-bottom))">';
     h += '<div style="background:#fff;padding:14px 18px;display:flex;align-items:center;gap:14px"><span style="width:64px;height:64px;border-radius:14px;background:linear-gradient(160deg,#0B2E4F,#1F6FB2);flex:none;display:flex;align-items:center;justify-content:center"><img src="img/stone.svg" alt="" style="width:30px;height:auto"></span>' +
       '<div style="display:flex;flex-direction:column;gap:2px"><strong style="font-size:17px">' + T.resortName + '</strong><span class="muted" style="font-size:13px">' + T.summarySub + '</span></div></div>';
     // Fechas
@@ -590,7 +590,7 @@
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
       '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label></section></main>';
-    h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px 18px">' + tplBar(c) + '</div>';
+    h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px calc(18px + env(safe-area-inset-bottom))">' + tplBar(c) + '</div>';
     return h;
   }
   function bedRow(icon, title, sub, actMinus, actPlus, ariaMinus, ariaPlus, disMinus, disPlus, val) {
