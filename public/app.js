@@ -41,7 +41,7 @@
       gal: ['Video · Vista general', 'Piscina', 'Habitación con cama king', 'Habitación con 2 camas', 'Zona de parrilla'],
       of: function (i, n) { return i + ' de ' + n; },
       resortName: 'Lazurde Resort', badge: 'Resort privado', location: '[Ubicación], Omán',
-      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', '1 sala de estar', '2 salas de reuniones', 'Parqueadero'],
+      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', '1 sala de estar', 'Parqueadero'],
       license: 'Licencia de turismo N.º [pendiente]', whatsapp: 'WhatsApp', call: 'Llamar',
       availability: 'Disponibilidad', availSub: 'Precio por noche para 6 personas, antes de impuestos.',
       prevMonth: 'Mes anterior', nextMonth: 'Mes siguiente',
@@ -52,7 +52,7 @@
       rooms: 'Habitaciones', kingRooms: '3 habitaciones · 1 cama king', kingRoomsSub: 'Cama matrimonial grande', twinRooms: '4 habitaciones · 2 camas individuales', twinRoomsSub: 'Dos camas separadas',
       extraRoom: 'Habitación extra', perNightShort: ' / noche',
       facilities: 'Instalaciones',
-      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Sala de estar', 'Salas de reuniones (2)', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Casas de animales', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
+      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Sala de estar', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Casas de animales', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
       showAll: function (n) { return 'Ver todas (' + n + ')'; }, showLess: 'Ver menos',
       where: 'Dónde estarás', whereNote: 'La ubicación exacta se envía cuando se confirma la reserva.',
       deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
@@ -106,7 +106,7 @@
       gal: ['Video · Overview', 'Swimming pool', 'King bed bedroom', 'Twin bedroom', 'BBQ area'],
       of: function (i, n) { return i + ' of ' + n; },
       resortName: 'Lazurde Resort', badge: 'Private resort', location: '[Location], Oman',
-      specs: ['7 bedrooms', '14 beds', '10 bathrooms', 'Pool', '1 living room', '2 meeting rooms', 'Parking'],
+      specs: ['7 bedrooms', '14 beds', '10 bathrooms', 'Pool', '1 living room', 'Parking'],
       license: 'Tourism license No. [pending]', whatsapp: 'WhatsApp', call: 'Call',
       availability: 'Availability', availSub: 'Nightly price for 6 guests, before taxes.',
       prevMonth: 'Previous month', nextMonth: 'Next month',
@@ -117,7 +117,7 @@
       rooms: 'Bedrooms', kingRooms: '3 bedrooms · 1 king bed', kingRoomsSub: 'Large double bed', twinRooms: '4 bedrooms · 2 twin beds', twinRoomsSub: 'Two separate beds',
       extraRoom: 'Extra bedroom', perNightShort: ' / night',
       facilities: 'Facilities',
-      fac: ['Swimming pool', 'Football field', 'Billiards area', 'Living room', 'Meeting rooms (2)', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Animal houses', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
+      fac: ['Swimming pool', 'Football field', 'Billiards area', 'Living room', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Animal houses', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
       showAll: function (n) { return 'Show all (' + n + ')'; }, showLess: 'Show less',
       where: 'Where you’ll be', whereNote: 'The exact location is shared once your booking is confirmed.',
       deposit: 'Security deposit', depositAmount: 'Deposit amount', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
@@ -171,7 +171,7 @@
       gal: ['فيديو · نظرة عامة', 'المسبح', 'غرفة بسرير كينغ', 'غرفة بسريرين', 'منطقة الشواء'],
       of: function (i, n) { return i + ' من ' + n; },
       resortName: 'منتجع لازورد', badge: 'منتجع خاص', location: '[الموقع]، عُمان',
-      specs: ['7 غرف نوم', '14 سريرًا', '10 حمامات', 'مسبح', 'صالة جلوس', 'قاعتا اجتماعات', 'موقف سيارات'],
+      specs: ['7 غرف نوم', '14 سريرًا', '10 حمامات', 'مسبح', 'صالة جلوس', 'موقف سيارات'],
       license: 'رقم الترخيص السياحي [قيد الإضافة]', whatsapp: 'واتساب', call: 'اتصال',
       availability: 'التوفر', availSub: 'سعر الليلة لـ 6 ضيوف قبل الضرائب.',
       prevMonth: 'الشهر السابق', nextMonth: 'الشهر التالي',
@@ -182,7 +182,7 @@
       rooms: 'الغرف', kingRooms: '3 غرف · سرير كينغ', kingRoomsSub: 'سرير مزدوج كبير', twinRooms: '4 غرف · سريران منفردان', twinRoomsSub: 'سريران منفصلان',
       extraRoom: 'غرفة إضافية', perNightShort: ' / الليلة',
       facilities: 'المرافق',
-      fac: ['مسبح', 'ملعب كرة قدم', 'منطقة البلياردو', 'صالة جلوس', 'قاعتا اجتماعات', 'موقف سيارات', 'منطقة شواء', 'منطقة أطفال', 'ملعب أطفال', 'بيوت الحيوانات', 'البيت الخشبي (منطقة استرخاء)', 'نوافير', 'جلسات خارجية', 'حدائق'],
+      fac: ['مسبح', 'ملعب كرة قدم', 'منطقة البلياردو', 'صالة جلوس', 'موقف سيارات', 'منطقة شواء', 'منطقة أطفال', 'ملعب أطفال', 'بيوت الحيوانات', 'البيت الخشبي (منطقة استرخاء)', 'نوافير', 'جلسات خارجية', 'حدائق'],
       showAll: function (n) { return 'عرض الكل (' + n + ')'; }, showLess: 'عرض أقل',
       where: 'أين ستقيم', whereNote: 'نرسل الموقع الدقيق بعد تأكيد الحجز.',
       deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
@@ -254,7 +254,6 @@
     'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18 M12 7l3.5 2.5-1.3 4h-4.4l-1.3-4z M12 7V3.5 M15.5 9.5l3.8-1.2 M14.2 13.5l2.3 3.2 M9.8 13.5l-2.3 3.2 M8.5 9.5L4.7 8.3',
     'M12 4a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M12 8.5a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M12 12.5a1.8 1.8 0 1 0 0 3.6a1.8 1.8 0 1 0 0-3.6',
     'M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3 M2 12a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2z M5 17v2 M19 17v2',
-    'M3 11h18 M6 11v8 M18 11v8 M8 7a1.5 1.5 0 1 0 0-.01 M12 7a1.5 1.5 0 1 0 0-.01 M16 7a1.5 1.5 0 1 0 0-.01 M9 15h6',
     'M4 3h16v18H4z M9 17V7h4a3 3 0 0 1 0 6H9',
     'M4 10h16 M5 10a7 7 0 0 0 14 0 M8 17l-2 4 M16 17l2 4 M12 17v4 M9 3c0 1 1 1 1 2s-1 1-1 2 M13 3c0 1 1 1 1 2s-1 1-1 2',
     'M14 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0 M12 8v6 M8 10l4 2 4-2 M9 21l3-7 3 7',
@@ -711,5 +710,5 @@
   }
   splash.addEventListener('click', endSplash);
   splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endSplash(); } });
-  setTimeout(endSplash, 3600);
+  setTimeout(endSplash, 5000);
 })();
