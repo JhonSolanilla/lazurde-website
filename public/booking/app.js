@@ -486,7 +486,8 @@
     }).catch(function () {});
   }
   var PINNED = ['OM', 'AE', 'SA', 'QA', 'KW', 'BH'];
-  function flag(iso) { return iso.replace(/./g, function (ch) { return String.fromCodePoint(127397 + ch.charCodeAt(0)); }); }
+  // Banderas como imagen: en Windows los emojis de banderas salen como letras (OM, CO…)
+  function flag(iso) { return '<img class="lzflag" src="/booking/img/flags/' + iso.toLowerCase() + '.webp" alt="" width="24" height="18" loading="lazy">'; }
   var nameCache = {};
   function countryName(iso) {
     var k = state.lang + iso;

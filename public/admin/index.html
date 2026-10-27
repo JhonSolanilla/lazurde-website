@@ -303,6 +303,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
 .taxbox>div{display:flex;justify-content:space-between}
 .cpok{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700}
 .cpok button{color:var(--bad);font-weight:800;font-size:13.5px}
+.lzflag{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(11,46,79,.12);display:inline-block;vertical-align:middle;flex:none}
 .noanim{animation:none!important}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @keyframes drop{from{transform:translate(-50%,-16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
@@ -1235,7 +1236,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
     fetch('/booking/phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (S.nb) renderNew(false); }).catch(function () { phonesLoaded = false; });
   }
   var PINNED = ['OM', 'AE', 'SA', 'QA', 'KW', 'BH'];
-  function flag(iso) { return iso.replace(/./g, function (ch) { return String.fromCodePoint(127397 + ch.charCodeAt(0)); }); }
+  // Banderas como imagen: en Windows los emojis de banderas salen como letras (OM, CO…)
+  function flag(iso) { return '<img class="lzflag" src="/booking/img/flags/' + iso.toLowerCase() + '.webp" alt="" width="24" height="18" loading="lazy">'; }
   var nameCache = {};
   function countryName(iso) {
     var k = L + iso;
