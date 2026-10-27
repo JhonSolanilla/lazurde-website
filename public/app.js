@@ -49,7 +49,7 @@
       lgWeekday: 'Entre semana', lgWeekend: 'Jue y vie', lgHoliday: 'Feriado', lgBooked: 'Ocupado',
       toChoose: 'Para elegir tus fechas toca «Reservar».',
       booked: 'Ocupado', cin: 'Llega', cout: 'Sale', outOnly: 'Solo salida',
-      times: 'Horarios', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: 'Desde las 2:00 pm', checkOutTime: 'Hasta las 11:00 am', inShort: 'Desde 2:00 pm', outShort: 'Hasta 11:00 am',
+      times: 'Horarios', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: '2:00 pm', checkOutTime: '11:00 am', inShort: '2:00 pm', outShort: '11:00 am',
       rooms: 'Habitaciones', kingRooms: '3 habitaciones · 1 cama king', kingRoomsSub: 'Cama matrimonial grande', twinRooms: '4 habitaciones · 2 camas individuales', twinRoomsSub: 'Dos camas separadas',
       extraRoom: 'Habitación extra', perNightShort: ' / noche',
       facilities: 'Instalaciones',
@@ -114,7 +114,7 @@
       lgWeekday: 'Weekday', lgWeekend: 'Thu & Fri', lgHoliday: 'Public holiday', lgBooked: 'Booked',
       toChoose: 'To choose your dates, tap “Book now”.',
       booked: 'Booked', cin: 'In', cout: 'Out', outOnly: 'Check-out only',
-      times: 'Check-in & check-out', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: 'From 2:00 pm', checkOutTime: 'Until 11:00 am', inShort: 'From 2:00 pm', outShort: 'Until 11:00 am',
+      times: 'Check-in & check-out', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: '2:00 pm', checkOutTime: '11:00 am', inShort: '2:00 pm', outShort: '11:00 am',
       rooms: 'Bedrooms', kingRooms: '3 bedrooms · 1 king bed', kingRoomsSub: 'Large double bed', twinRooms: '4 bedrooms · 2 twin beds', twinRoomsSub: 'Two separate beds',
       extraRoom: 'Extra bedroom', perNightShort: ' / night',
       facilities: 'Facilities',
@@ -179,7 +179,7 @@
       lgWeekday: 'أيام الأسبوع', lgWeekend: 'الخميس والجمعة', lgHoliday: 'عطلة رسمية', lgBooked: 'محجوز',
       toChoose: 'لاختيار التواريخ اضغط «احجز الآن».',
       booked: 'محجوز', cin: 'وصول', cout: 'مغادرة', outOnly: 'مغادرة فقط',
-      times: 'مواعيد الوصول والمغادرة', checkIn: 'الوصول', checkOut: 'المغادرة', checkInTime: 'من الساعة 2:00 مساءً', checkOutTime: 'حتى الساعة 11:00 صباحًا', inShort: 'من 2:00 م', outShort: 'حتى 11:00 ص',
+      times: 'مواعيد الوصول والمغادرة', checkIn: 'الوصول', checkOut: 'المغادرة', checkInTime: '2:00 مساءً', checkOutTime: '11:00 صباحًا', inShort: '2:00 م', outShort: '11:00 ص',
       rooms: 'الغرف', kingRooms: '3 غرف · سرير كينغ', kingRoomsSub: 'سرير مزدوج كبير', twinRooms: '4 غرف · سريران منفردان', twinRoomsSub: 'سريران منفصلان',
       extraRoom: 'غرفة إضافية', perNightShort: ' / الليلة',
       facilities: 'المرافق',
@@ -304,7 +304,7 @@
 
   // ===================== ESTADO =====================
   var state = {
-    screen: 'splash', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
+    screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
     event: null, name: '', phone: '', email: '', termsOk: false, submitting: false
   };
@@ -398,14 +398,25 @@
 
   // ===================== PLANTILLAS =====================
   function tplLang() {
-    var langs = [['es', 'Español'], ['en', 'English'], ['ar', 'العربية']];
-    return '<div dir="ltr" style="position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px;z-index:40">' +
-      '<img class="lz-up" src="img/stone.svg" alt="Lazurde" style="width:96px;height:auto">' +
-      '<h1 style="margin-top:10px;font-family:Manrope,sans-serif;font-weight:700;font-size:26px;text-align:center">Select your language</h1>' +
-      '<div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px">' +
-      langs.map(function (l) {
-        return '<button type="button" data-act="lang" data-arg="' + l[0] + '" style="height:58px;border-radius:999px;border:1px solid rgba(250,210,109,.75);background:rgba(255,255,255,.08);color:#fff;font-size:19px;font-weight:700;font-family:Manrope,Cairo,system-ui,sans-serif;cursor:pointer">' + l[1] + '</button>';
-      }).join('') + '</div></div>';
+    var langs = [
+      ['es', 'ES', 'Español', 'Continuar en español', 'ltr'],
+      ['en', 'EN', 'English', 'Continue in English', 'ltr'],
+      ['ar', 'ع', 'العربية', 'المتابعة باللغة العربية', 'rtl']
+    ];
+    return '<div class="lz-lang" dir="ltr">' +
+      '<img class="lz-lang-wm" src="img/stone.svg" alt="" aria-hidden="true">' +
+      '<div class="lz-lang-box">' +
+      '<img class="lz-lang-stone" src="img/stone.svg" alt="Lazurde">' +
+      '<p class="lz-lang-hello">Welcome · Bienvenido · <span lang="ar">أهلاً بك</span></p>' +
+      '<h1 class="lz-lang-title">Select your language</h1>' +
+      '<div class="lz-lang-rule" aria-hidden="true"><span></span><i></i><span></span></div>' +
+      '<div class="lz-lang-list">' +
+      langs.map(function (l, i) {
+        return '<button type="button" class="lz-lang-btn" data-act="lang" data-arg="' + l[0] + '" dir="' + l[4] + '" lang="' + l[0] + '" style="animation-delay:' + (0.25 + i * 0.12) + 's">' +
+          '<span class="lz-lang-code">' + l[1] + '</span>' +
+          '<span class="lz-lang-txt"><strong>' + l[2] + '</strong><small>' + l[3] + '</small></span>' +
+          svg(l[4] === 'rtl' ? ICON.left : ICON.right, { w: 20, sw: 2, stroke: '#FAD26D', style: 'flex:none' }) + '</button>';
+      }).join('') + '</div></div></div>';
   }
 
   function tplMonthNav(c) {
@@ -698,7 +709,7 @@
   // ===================== ACCIONES =====================
   var submitTimer = null;
   var actions = {
-    lang: function (code) { set({ lang: code, screen: 'home' }); },
+    lang: function (code) { var first = !introShown; set({ lang: code, screen: 'home' }); if (first) playIntro(); },
     openLang: function () { set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
@@ -776,17 +787,26 @@
     if (Math.abs(dx) > 40) galGo((dx < 0) !== (state.lang === 'ar') ? 1 : -1, true);
   }, { passive: true });
 
-  // ===================== PANTALLA DE CARGA =====================
+  // ===================== ANIMACIÓN DE ENTRADA =====================
+  // Se muestra después de escoger el idioma: la piedra se arma sobre el fondo azul,
+  // el fondo pasa suavemente al blanco de la página, la piedra se vuelve a armar y entra la página.
   var splash = document.getElementById('splash');
   var splashSvg = splash.querySelector('svg');
-  function endSplash() {
-    if (state.screen !== 'splash') return;
+  var introShown = false, introTimers = [];
+  function endIntro() {
+    introTimers.forEach(clearTimeout);
     splash.classList.add('hide');
     setTimeout(function () { splash.style.display = 'none'; }, 450);
-    set({ screen: 'lang' });
   }
-  splash.addEventListener('click', endSplash);
-  splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endSplash(); } });
-  stoneLoop(splashSvg, false);
-  setTimeout(endSplash, 5000);
+  function playIntro() {
+    introShown = true;
+    splash.classList.remove('hide', 'light');
+    splash.style.display = 'flex';
+    stoneLoop(splashSvg, false);
+    introTimers.push(setTimeout(function () { splash.classList.add('light'); }, 2150));
+    introTimers.push(setTimeout(endIntro, 5000));
+  }
+  splash.addEventListener('click', endIntro);
+  splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endIntro(); } });
+  set({ screen: 'lang' });
 })();

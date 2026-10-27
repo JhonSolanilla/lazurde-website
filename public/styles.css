@@ -36,6 +36,10 @@ section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 /* Pantalla de carga */
 .splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer;transition:opacity .4s ease}
 .splash.hide{opacity:0;pointer-events:none}
+/* El fondo azul pasa al blanco de la página */
+.splash::before{content:"";position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .9s ease}
+.splash.light::before{opacity:1}
+.splash svg{position:relative}
 .splash svg{width:150px;height:auto}
 /* Piedra: las piezas aparecen suavemente de arriba hacia abajo (el ritmo lo controla app.js) */
 .lz-stone path{opacity:0}
@@ -107,3 +111,30 @@ button.cell:disabled{cursor:not-allowed}
 .lz-area-n{font-size:12px;font-weight:800;letter-spacing:.12em;color:#FAD26D;display:flex;align-items:center;gap:8px}
 .lz-area-n::after{content:"";width:28px;height:1.5px;background:#FAD26D}
 .lz-area-name{font-size:20px;font-weight:800;line-height:1.2}
+
+/* Pantalla de idiomas */
+.lz-lang{position:fixed;inset:0;z-index:40;overflow:hidden;color:#fff;display:flex;align-items:center;justify-content:center;padding:32px 22px;
+  background:radial-gradient(120% 80% at 50% 0%,#185A78 0%,rgba(16,72,98,0) 60%),radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%)}
+.lz-lang-wm{position:absolute;width:560px;max-width:none;left:50%;bottom:-210px;transform:translateX(-50%) rotate(-14deg);opacity:.07;pointer-events:none}
+.lz-lang-box{position:relative;width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.lz-lang-stone{width:78px;height:auto;filter:drop-shadow(0 8px 26px rgba(250,210,109,.35));animation:lzUp .6s ease-out both}
+.lz-lang-hello{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FAD26D;animation:lzUp .6s .08s ease-out both}
+.lz-lang-hello span{letter-spacing:0;font-family:Cairo,sans-serif}
+.lz-lang-title{margin-top:10px;font-size:27px;font-weight:700;letter-spacing:-.01em;animation:lzUp .6s .14s ease-out both}
+.lz-lang-rule{display:flex;align-items:center;gap:10px;margin:18px 0 26px;animation:lzUp .6s .18s ease-out both}
+.lz-lang-rule span{width:54px;height:1px;background:linear-gradient(90deg,transparent,#D3AE2A)}
+.lz-lang-rule span:last-child{background:linear-gradient(270deg,transparent,#D3AE2A)}
+.lz-lang-rule i{width:7px;height:7px;background:#FAD26D;transform:rotate(45deg)}
+.lz-lang-list{width:100%;display:flex;flex-direction:column;gap:12px}
+.lz-lang-btn{width:100%;min-height:74px;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 14px;border-radius:20px;cursor:pointer;color:#fff;text-align:start;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(250,210,109,.38);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .2s,background .2s,transform .15s;animation:lzUp .55s ease-out both}
+.lz-lang-btn:hover,.lz-lang-btn:focus-visible{border-color:#FAD26D;background:linear-gradient(135deg,rgba(250,210,109,.16),rgba(255,255,255,.04))}
+.lz-lang-btn:active{transform:scale(.98)}
+.lz-lang-btn[dir=rtl]{padding:12px 14px 12px 18px}
+.lz-lang-code{width:46px;height:46px;flex:none;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#003047;background:linear-gradient(160deg,#FAD26D,#D3AE2A);box-shadow:0 4px 14px rgba(211,174,42,.3)}
+.lz-lang-btn[lang=ar] .lz-lang-code{font-family:Cairo,sans-serif;font-size:20px}
+.lz-lang-txt{flex:1;display:flex;flex-direction:column;gap:2px}
+.lz-lang-txt strong{font-size:19px;font-weight:700}
+.lz-lang-txt small{font-size:13px;color:rgba(255,255,255,.68)}
+.lz-lang-btn[lang=ar] .lz-lang-txt{font-family:Cairo,sans-serif}
