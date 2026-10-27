@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Lazurde Admin</title>
+<meta name="theme-color" content="#003047">
+<link rel="icon" href="/booking/img/stone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/booking/img/apple-touch-icon-v2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap">
+<style>
+  :root{--navy:#0B2E4F;--blue:#0F4C81;--gold:#D3AE2A;--gold-l:#FAD26D;--bg:#F5F7FA;--line:#E3E8EE;--muted:#5A6573;--ink2:#3D4A58;
+    --pending:#B7791F;--pending-bg:#FFF6DF;--ok:#15803D;--ok-bg:#ECFDF3;--bad:#B42318;--bad-bg:#FEF3F2;--grey:#5A6573;--grey-bg:#EEF1F5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--navy);font-family:'Manrope',system-ui,sans-serif}
+  button,input,textarea{font-family:inherit;font-size:15px}
+  button{cursor:pointer}
+  .top{position:sticky;top:0;z-index:5;background:radial-gradient(circle at 50% 0%,#104862,#003047);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:12px}
+  .top img{width:28px}
+  .top h1{flex:1;margin:0;font-size:18px}
+  .pill{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid rgba(250,210,109,.6);background:rgba(255,255,255,.08);color:#fff;font-weight:700;font-size:13px}
+  main{max-width:820px;margin:0 auto;padding:14px 14px 60px}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+  .tab{flex:none;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--navy);font-weight:700}
+  .tab[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .tab b{display:inline-block;min-width:20px;padding:0 6px;margin-inline-start:6px;border-radius:999px;background:var(--gold-l);color:#003047;font-size:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+  .row{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;width:100%;border:0;background:none;text-align:start;color:inherit}
+  .row .main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .code{font-weight:800;letter-spacing:.04em;color:var(--blue)}
+  .name{font-weight:700;font-size:16px}
+  .sub{color:var(--muted);font-size:13px}
+  .total{font-weight:800;font-size:17px;white-space:nowrap}
+  .chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+  .s-pending{background:var(--pending-bg);color:var(--pending)}.s-confirmed{background:var(--ok-bg);color:var(--ok)}
+  .s-rejected{background:var(--bad-bg);color:var(--bad)}.s-cancelled{background:var(--grey-bg);color:var(--grey)}
+  .det{border-top:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:10px;background:#FBFCFD}
+  .kv{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;font-size:14px}
+  .kv span{color:var(--muted)} .kv strong{word-break:break-word}
+  .actions{display:flex;flex-wrap:wrap;gap:8px}
+  .btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--navy);font-weight:800}
+  .btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+  .btn.bad{color:var(--bad);border-color:#F3C9C9}
+  .btn.wa{background:#25D366;border-color:#25D366;color:#fff;text-decoration:none;display:inline-flex;align-items:center}
+  .btn.primary{background:radial-gradient(circle at 50% 50%,#104862,#003047);color:#fff;border:0}
+  textarea,input[type=text],input[type=password],input[type=date]{width:100%;min-height:46px;border:1px solid #C9D2DC;border-radius:12px;padding:10px 12px;color:var(--navy);background:#fff}
+  textarea{min-height:70px;resize:vertical}
+  .empty{text-align:center;color:var(--muted);padding:40px 10px}
+  .login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 40%,#104862,#003047)}
+  .login form{width:100%;max-width:360px;background:#fff;border-radius:22px;padding:28px 22px;display:flex;flex-direction:column;gap:14px;text-align:center}
+  .login img{width:60px;margin:0 auto}
+  .err{color:var(--bad);font-size:13px;font-weight:700;min-height:18px}
+  .note{background:var(--pending-bg);color:#5C4510;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 18px);transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;z-index:20}
+  @media (max-width:480px){.kv{grid-template-columns:110px 1fr}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function () {
+  'use strict';
+  var T = {
+    en: { title: 'Lazurde Admin', signIn: 'Sign in', password: 'Password', wrong: 'Wrong password.', notConfigured: 'The admin password has not been set up yet in Cloudflare.',
+      bookings: 'Bookings', pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled', all: 'All', blocks: 'Blocked dates',
+      logout: 'Log out', empty: 'No bookings here yet.', nights: function (n) { return n === 1 ? '1 night' : n + ' nights'; }, guests: function (n) { return n + ' guests'; },
+      checkin: 'Check-in', checkout: 'Check-out', guestsL: 'Guests', rooms: 'Bedrooms', beds: function (k, t) { return k + ' king · ' + t + ' twin'; }, purpose: 'Purpose', phone: 'Phone', email: 'Email',
+      language: 'Language', coupon: 'Coupon', subtotal: 'Subtotal', discount: 'Discount', total: 'Total', created: 'Received', notes: 'Internal notes', saveNotes: 'Save notes',
+      confirm: 'Confirm', reject: 'Reject', cancel: 'Cancel booking', reopen: 'Set as pending', waConfirm: 'Send confirmation on WhatsApp', waReject: 'Tell guest on WhatsApp', call: 'Call',
+      sure: { confirmed: 'Confirm this booking?', rejected: 'Reject this booking? The dates will be released.', cancelled: 'Cancel this booking? The dates will be released.', pending: 'Set this booking back to pending?' },
+      taken: 'Those dates are already taken by another booking.', saved: 'Saved', error: 'Something went wrong. Please try again.', noDb: 'The database is not connected yet. Follow the setup guide to create it in Cloudflare.',
+      blockTitle: 'Block dates', from: 'From', to: 'To', noteL: 'Reason (optional)', add: 'Block', unblock: 'Unblock', noBlocks: 'No blocked dates.', blockHelp: 'Blocked dates cannot be booked on the website (maintenance, private use, etc.).' },
+    es: { title: 'Panel Lazurde', signIn: 'Entrar', password: 'Clave', wrong: 'Clave incorrecta.', notConfigured: 'Todavía no se ha creado la clave del panel en Cloudflare.',
+      bookings: 'Reservas', pending: 'Pendientes', confirmed: 'Confirmadas', rejected: 'Rechazadas', cancelled: 'Canceladas', all: 'Todas', blocks: 'Fechas bloqueadas',
+      logout: 'Salir', empty: 'Todavía no hay reservas aquí.', nights: function (n) { return n === 1 ? '1 noche' : n + ' noches'; }, guests: function (n) { return n + ' personas'; },
+      checkin: 'Llegada', checkout: 'Salida', guestsL: 'Personas', rooms: 'Habitaciones', beds: function (k, t) { return k + ' king · ' + t + ' de 2 camas'; }, purpose: 'Motivo', phone: 'Teléfono', email: 'Correo',
+      language: 'Idioma', coupon: 'Cupón', subtotal: 'Subtotal', discount: 'Descuento', total: 'Total', created: 'Recibida', notes: 'Notas internas', saveNotes: 'Guardar notas',
+      confirm: 'Confirmar', reject: 'Rechazar', cancel: 'Cancelar reserva', reopen: 'Volver a pendiente', waConfirm: 'Enviar confirmación por WhatsApp', waReject: 'Avisar al cliente por WhatsApp', call: 'Llamar',
+      sure: { confirmed: '¿Confirmar esta reserva?', rejected: '¿Rechazar esta reserva? Las fechas quedarán libres.', cancelled: '¿Cancelar esta reserva? Las fechas quedarán libres.', pending: '¿Volver esta reserva a pendiente?' },
+      taken: 'Esas fechas ya las tiene otra reserva.', saved: 'Guardado', error: 'Algo salió mal. Inténtalo de nuevo.', noDb: 'La base de datos todavía no está conectada. Sigue la guía para crearla en Cloudflare.',
+      blockTitle: 'Bloquear fechas', from: 'Desde', to: 'Hasta', noteL: 'Motivo (opcional)', add: 'Bloquear', unblock: 'Desbloquear', noBlocks: 'No hay fechas bloqueadas.', blockHelp: 'Las fechas bloqueadas no se pueden reservar en la web (mantenimiento, uso privado, etc.).' }
+  };
+  // Mensajes para el cliente, en su idioma
+  var MSG = {
+    confirmed: {
+      en: function (b) { return 'Hello ' + b.name + ', your booking ' + b.code + ' at Lazurde Resort is confirmed ✅\n\nCheck-in: ' + d(b.checkin, 'en') + ' from 2:00 pm\nCheck-out: ' + d(b.checkout, 'en') + ' by 11:00 am\nGuests: ' + b.guests + '\nTotal: ' + omr(b.total) + ' OMR\nSecurity deposit: 100 OMR on arrival (refundable).\n\nWe look forward to welcoming you!'; },
+      ar: function (b) { return 'مرحبًا ' + b.name + '، تم تأكيد حجزك ' + b.code + ' في منتجع لازورد ✅\n\nالوصول: ' + d(b.checkin, 'ar') + ' من الساعة 2:00 مساءً\nالمغادرة: ' + d(b.checkout, 'ar') + ' حتى الساعة 11:00 صباحًا\nعدد الضيوف: ' + b.guests + '\nالإجمالي: ' + omr(b.total) + ' ر.ع.\nمبلغ التأمين: 100 ر.ع. يُدفع عند الوصول (مسترد).\n\nنتطلع لاستقبالكم!'; },
+      es: function (b) { return 'Hola ' + b.name + ', tu reserva ' + b.code + ' en Lazurde Resort está confirmada ✅\n\nLlegada: ' + d(b.checkin, 'es') + ' desde las 2:00 pm\nSalida: ' + d(b.checkout, 'es') + ' hasta las 11:00 am\nPersonas: ' + b.guests + '\nTotal: ' + omr(b.total) + ' OMR\nDepósito de garantía: 100 OMR al llegar (reembolsable).\n\n¡Te esperamos!'; }
+    },
+    rejected: {
+      en: function (b) { return 'Hello ' + b.name + ', we are sorry: we could not confirm your booking request ' + b.code + ' at Lazurde Resort for ' + d(b.checkin, 'en') + '. Please contact us to find other dates.'; },
+      ar: function (b) { return 'مرحبًا ' + b.name + '، نعتذر، لم نتمكن من تأكيد طلب الحجز ' + b.code + ' في منتجع لازورد بتاريخ ' + d(b.checkin, 'ar') + '. يرجى التواصل معنا لاختيار تواريخ أخرى.'; },
+      es: function (b) { return 'Hola ' + b.name + ', lo sentimos: no pudimos confirmar tu solicitud ' + b.code + ' en Lazurde Resort para el ' + d(b.checkin, 'es') + '. Escríbenos para buscar otras fechas.'; }
+    }
+  };
+  var L = 'en';
+  try { L = localStorage.getItem('lz-admin-lang') || (navigator.language || '').slice(0, 2) === 'es' && 'es' || 'en'; } catch (e) {}
+  if (!T[L]) L = 'en';
+  var S = { logged: false, tab: 'pending', list: [], counts: {}, open: null, blocks: [], err: '', noDb: false, busy: false };
+  var app = document.getElementById('app');
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function d(k, lang) { var p = k.split('-').map(Number); return new Date(Date.UTC(p[0], p[1] - 1, p[2])).toLocaleDateString(lang === 'ar' ? 'ar-OM' : lang, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }); }
+  function omr(n) { var r = Math.round(n * 100) / 100; return r % 1 ? r.toFixed(2) : String(r); }
+  function ago(iso) { var t = new Date(iso); return t.toLocaleString(L, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function toast(msg) { var t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
+  function api(path, opts) {
+    opts = opts || {};
+    var h = { 'content-type': 'application/json' }; if (opts.method && opts.method !== 'GET') h['x-lz'] = '1';
+    return fetch('/api/admin' + path, { method: opts.method || 'GET', headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined, credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
+  }
+
+  function render() {
+    var t = T[L];
+    document.documentElement.lang = L; document.title = t.title;
+    if (!S.logged) {
+      app.innerHTML = '<div class="login"><form id="lf"><img src="/booking/img/stone.svg" alt=""><h1 style="margin:0;font-size:22px">' + t.title + '</h1>' +
+        '<input type="password" id="pw" placeholder="' + t.password + '" autocomplete="current-password" required>' +
+        '<div class="err">' + esc(S.err) + '</div><button class="btn primary" type="submit">' + t.signIn + '</button>' +
+        '<button type="button" class="btn" data-lang style="min-height:36px">' + (L === 'en' ? 'Español' : 'English') + '</button></form></div>';
+      return;
+    }
+    var tabs = [['pending', t.pending], ['confirmed', t.confirmed], ['all', t.all], ['rejected', t.rejected], ['cancelled', t.cancelled], ['blocks', t.blocks]];
+    var h = '<div class="top"><img src="/booking/img/stone.svg" alt=""><h1>' + t.bookings + '</h1><button class="pill" data-lang>' + (L === 'en' ? 'ES' : 'EN') + '</button><button class="pill" data-act="logout">' + t.logout + '</button></div><main>';
+    h += '<div class="tabs">' + tabs.map(function (x) { var n = S.counts[x[0]]; return '<button class="tab" data-tab="' + x[0] + '" aria-pressed="' + (S.tab === x[0]) + '">' + x[1] + (n ? '<b>' + n + '</b>' : '') + '</button>'; }).join('') + '</div>';
+    if (S.noDb) h += '<div class="note">' + t.noDb + '</div>';
+    else if (S.tab === 'blocks') h += blocksView(t);
+    else h += S.list.length ? S.list.map(function (b) { return cardView(b, t); }).join('') : '<div class="empty">' + t.empty + '</div>';
+    app.innerHTML = h + '</main>';
+  }
+  function cardView(b, t) {
+    var open = S.open === b.code;
+    var h = '<div class="card"><button class="row" data-open="' + b.code + '"><div class="main"><span><span class="code">' + b.code + '</span> &nbsp;<span class="chip s-' + b.status + '">' + t[b.status] + '</span></span>' +
+      '<span class="name">' + esc(b.name) + '</span><span class="sub">' + d(b.checkin, L) + ' → ' + d(b.checkout, L) + ' · ' + t.nights(b.nights) + ' · ' + t.guests(b.guests) + '</span></div>' +
+      '<span class="total">' + omr(b.total) + ' OMR</span></button>';
+    if (open) {
+      var wa = b.phone.replace(/[^\d]/g, ''), msgLang = MSG.confirmed[b.lang] ? b.lang : 'en';
+      h += '<div class="det"><div class="kv">' +
+        kv(t.checkin, d(b.checkin, L) + ' · 2:00 pm') + kv(t.checkout, d(b.checkout, L) + ' · 11:00 am') + kv(t.guestsL, b.guests) +
+        kv(t.rooms, b.rooms + ' (' + t.beds(b.kings, b.twins) + ')') + kv(t.purpose, b.event || '—') +
+        kv(t.phone, '<a href="tel:' + esc(b.phone) + '" dir="ltr">' + esc(b.phone) + '</a>', true) + kv(t.email, b.email ? '<a href="mailto:' + esc(b.email) + '">' + esc(b.email) + '</a>' : '—', true) +
+        kv(t.language, { ar: 'العربية', en: 'English', es: 'Español' }[b.lang] || b.lang) + kv(t.subtotal, omr(b.subtotal) + ' OMR') +
+        (b.discount ? kv(t.discount, '−' + omr(b.discount) + ' OMR (' + esc(b.coupon) + ', ' + b.pct + '%)') : '') +
+        kv(t.total, '<strong>' + omr(b.total) + ' OMR</strong>', true) + kv(t.created, ago(b.created_at)) + '</div>' +
+        '<div class="actions">' +
+        (b.status === 'pending' ? '<button class="btn ok" data-status="confirmed" data-code="' + b.code + '">' + t.confirm + '</button><button class="btn bad" data-status="rejected" data-code="' + b.code + '">' + t.reject + '</button>' : '') +
+        (b.status === 'confirmed' ? '<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(MSG.confirmed[msgLang](b)) + '">' + t.waConfirm + '</a><button class="btn bad" data-status="cancelled" data-code="' + b.code + '">' + t.cancel + '</button>' : '') +
+        (b.status === 'rejected' ? '<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(MSG.rejected[msgLang](b)) + '">' + t.waReject + '</a>' : '') +
+        (b.status === 'rejected' || b.status === 'cancelled' ? '<button class="btn" data-status="pending" data-code="' + b.code + '">' + t.reopen + '</button>' : '') +
+        '<a class="btn" href="tel:' + esc(b.phone) + '" style="display:inline-flex;align-items:center;text-decoration:none">' + t.call + '</a></div>' +
+        '<label class="sub" for="n-' + b.code + '">' + t.notes + '</label><textarea id="n-' + b.code + '">' + esc(b.notes || '') + '</textarea>' +
+        '<div><button class="btn" data-notes="' + b.code + '">' + t.saveNotes + '</button></div></div>';
+    }
+    return h + '</div>';
+  }
+  function kv(k, v, raw) { return '<span>' + k + '</span><strong>' + (raw ? v : esc(v)) + '</strong>'; }
+  function blocksView(t) {
+    var today = new Date(Date.now() + 4 * 3600e3).toISOString().slice(0, 10);
+    var h = '<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:10px"><strong>' + t.blockTitle + '</strong><span class="sub">' + t.blockHelp + '</span>' +
+      '<div class="grid2"><label class="sub">' + t.from + '<input type="date" id="bf" min="' + today + '"></label><label class="sub">' + t.to + '<input type="date" id="bt" min="' + today + '"></label></div>' +
+      '<input type="text" id="bn" placeholder="' + t.noteL + '"><div><button class="btn primary" data-act="block">' + t.add + '</button></div></div>';
+    h += S.blocks.length ? S.blocks.map(function (b) { return '<div class="card"><div class="row"><div class="main"><span class="name">' + d(b.date, L) + '</span>' + (b.note ? '<span class="sub">' + esc(b.note) + '</span>' : '') + '</div><button class="btn bad" data-unblock="' + b.date + '">' + t.unblock + '</button></div></div>'; }).join('')
+      : '<div class="empty">' + t.noBlocks + '</div>';
+    return h;
+  }
+
+  function load() {
+    var t = S.tab;
+    if (t === 'blocks') return api('/blocks').then(function (j) { if (j._status === 401) return logout(true); S.noDb = j.error === 'db_not_configured'; S.blocks = j.blocks || []; refreshCounts(); render(); });
+    return api('/bookings' + (t === 'all' ? '' : '?status=' + t)).then(function (j) {
+      if (j._status === 401) return logout(true);
+      S.noDb = j.error === 'db_not_configured'; S.list = j.bookings || []; S.counts = j.counts || {}; render();
+    }).catch(function () { toast(T[L].error); });
+  }
+  function refreshCounts() { api('/bookings?status=pending').then(function (j) { if (j.counts) { S.counts = j.counts; render(); } }); }
+  function logout(silent) { S.logged = false; S.list = []; if (!silent) api('/logout', { method: 'POST' }); render(); }
+
+  app.addEventListener('submit', function (e) {
+    e.preventDefault();
+    api('/login', { method: 'POST', body: { password: document.getElementById('pw').value } }).then(function (j) {
+      if (j.ok) { S.logged = true; S.err = ''; load(); }
+      else { S.err = j.error === 'admin_not_configured' ? T[L].notConfigured : T[L].wrong; render(); }
+    }).catch(function () { S.err = T[L].error; render(); });
+  });
+  app.addEventListener('click', function (e) {
+    var el = e.target.closest('button'); if (!el) return;
+    var t = T[L];
+    if (el.hasAttribute('data-lang')) { L = L === 'en' ? 'es' : 'en'; try { localStorage.setItem('lz-admin-lang', L); } catch (x) {} return render(); }
+    if (el.dataset.tab) { S.tab = el.dataset.tab; S.open = null; return load(); }
+    if (el.dataset.open) { S.open = S.open === el.dataset.open ? null : el.dataset.open; return render(); }
+    if (el.dataset.act === 'logout') return logout(false);
+    if (el.dataset.status) {
+      if (!confirm(t.sure[el.dataset.status])) return;
+      return api('/bookings/' + el.dataset.code, { method: 'POST', body: { status: el.dataset.status } }).then(function (j) {
+        if (j.ok) { toast(t.saved); S.open = j.booking.code; S.tab = j.booking.status === 'pending' ? 'pending' : S.tab === 'pending' ? j.booking.status : S.tab; load(); }
+        else toast(j.error === 'dates_unavailable' ? t.taken : t.error);
+      });
+    }
+    if (el.dataset.notes) {
+      return api('/bookings/' + el.dataset.notes, { method: 'POST', body: { notes: document.getElementById('n-' + el.dataset.notes).value } }).then(function (j) { toast(j.ok ? t.saved : t.error); if (j.ok) load(); });
+    }
+    if (el.dataset.act === 'block') {
+      var f = document.getElementById('bf').value, to = document.getElementById('bt').value || f;
+      if (!f) return;
+      return api('/blocks', { method: 'POST', body: { from: f, to: to, note: document.getElementById('bn').value } }).then(function (j) { toast(j.ok ? t.saved : t.error); load(); });
+    }
+    if (el.dataset.unblock) return api('/blocks/' + el.dataset.unblock, { method: 'DELETE' }).then(function () { load(); });
+  });
+  // ¿Ya hay sesión abierta?
+  api('/me').then(function (j) { if (j.ok || j.error === 'db_not_configured') { S.logged = true; load(); } else render(); }).catch(render);
+  render();
+})();
+</script>
+</body>
+</html>

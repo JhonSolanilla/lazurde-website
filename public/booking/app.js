@@ -12,9 +12,8 @@
     weekendPrice: 285,   // noches de jueves y viernes (antes 260 + impuestos)
     holidayPrice: 285,   // feriados
     extraRoomPrice: 15,  // por habitación extra y por noche, impuestos incluidos
-    // Cupones de descuento (% sobre el total de la estadía; el depósito no se descuenta).
-    // De PRUEBA: cuando exista la base de datos, los cupones se validarán en el servidor.
-    coupons: { LAZURDE5: 5, LAZURDE10: 10, LAZURDE15: 15, LAZURDE20: 20 },
+    // Precios, feriados y fechas ocupadas llegan del servidor (/api/config). Los de aquí son solo
+    // un respaldo mientras carga. Los cupones se validan SOLO en el servidor (src/worker.js).
     tourismTax: 4,       // %
     vat: 5,              // %
     deposit: 100,        // depósito de garantía, se paga al llegar
@@ -97,7 +96,7 @@
       coupon: 'Cupón de descuento', couponPh: 'Escribe tu código', couponApply: 'Aplicar', couponBad: 'Este cupón no es válido.', couponRemove: 'Quitar', couponOk: function (p) { return '−' + p + '% aplicado'; }, discountLine: function (c, p) { return 'Descuento ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Descuento (' + p + '%)'; }, missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono válido', ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccClose: 'Cerrar', ccNone: 'Sin resultados', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, mTerms: 'aceptar los términos',
       barSub: function (n, r) { return n + (n === 1 ? ' noche' : ' noches') + ' · ' + r + ' habitaciones'; }, pickDates: 'Elige tus fechas',
       sending: 'Enviando…',
-      sentTitle: '¡Solicitud enviada!', sentText: 'Te enviamos los detalles por WhatsApp y correo. Te avisaremos cuando la reserva quede confirmada.',
+      sentTitle: '¡Solicitud recibida!', sentText: 'Tus fechas quedaron apartadas. Revisaremos tu solicitud y te confirmaremos por WhatsApp muy pronto.', sentTextWa: 'Envíanos el mensaje de WhatsApp que se abrió para completar tu solicitud. Te confirmaremos muy pronto.', waSend: 'Escribirnos por WhatsApp', errTaken: 'Lo sentimos, esas fechas se acaban de reservar. Por favor elige otras.', errGeneric: 'No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo.',
       code: 'Código de reserva', example: ' (ejemplo)',
       rIn: 'Llegada', rOut: 'Salida', rGuests: 'Personas', rRooms: 'Habitaciones', rPurpose: 'Motivo', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' personas'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' de 2 camas)'; }, notGiven: 'No indicado',
@@ -162,7 +161,7 @@
       coupon: 'Discount code', couponPh: 'Enter your code', couponApply: 'Apply', couponBad: 'This code is not valid.', couponRemove: 'Remove', couponOk: function (p) { return p + '% off applied'; }, discountLine: function (c, p) { return 'Discount ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Discount (' + p + '%)'; }, missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'valid phone', ccTitle: 'Country code', ccSearch: 'Search country or code', ccClose: 'Close', ccNone: 'No results', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, mTerms: 'accept the terms',
       barSub: function (n, r) { return n + (n === 1 ? ' night' : ' nights') + ' · ' + r + ' bedrooms'; }, pickDates: 'Choose your dates',
       sending: 'Sending…',
-      sentTitle: 'Request sent!', sentText: 'We’ve sent the details by WhatsApp and email. We’ll let you know as soon as your booking is confirmed.',
+      sentTitle: 'Request received!', sentText: 'Your dates are on hold. We’ll review your request and confirm by WhatsApp very soon.', sentTextWa: 'Please send us the WhatsApp message that just opened to complete your request. We’ll confirm very soon.', waSend: 'Message us on WhatsApp', errTaken: 'Sorry, those dates were just booked. Please choose other dates.', errGeneric: 'We couldn’t send your request. Please check your connection and try again.',
       code: 'Booking code', example: ' (example)',
       rIn: 'Check-in', rOut: 'Check-out', rGuests: 'Guests', rRooms: 'Bedrooms', rPurpose: 'Purpose', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
@@ -227,7 +226,7 @@
       coupon: 'كود الخصم', couponPh: 'أدخل الكود', couponApply: 'تطبيق', couponBad: 'هذا الكود غير صحيح.', couponRemove: 'إزالة', couponOk: function (p) { return 'تم تطبيق خصم ' + p + '%'; }, discountLine: function (c, p) { return 'خصم ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'خصم (' + p + '%)'; }, missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return 'ينقص ' + n + ' أرقام'; }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
       barSub: function (n, r) { return arNights(n) + ' · ' + r + ' غرف'; }, pickDates: 'اختر التواريخ',
       sending: 'جارٍ الإرسال…',
-      sentTitle: 'تم إرسال طلبك!', sentText: 'أرسلنا التفاصيل عبر واتساب والبريد الإلكتروني، وسنبلغك فور تأكيد الحجز.',
+      sentTitle: 'تم استلام طلبك!', sentText: 'تم حجز التواريخ مبدئيًا. سنراجع طلبك ونؤكده لك عبر واتساب قريبًا جدًا.', sentTextWa: 'يرجى إرسال رسالة واتساب التي فُتحت لإكمال طلبك، وسنؤكد لك قريبًا جدًا.', waSend: 'راسلنا عبر واتساب', errTaken: 'عذرًا، تم حجز هذه التواريخ للتو. يرجى اختيار تواريخ أخرى.', errGeneric: 'تعذّر إرسال طلبك. تحقّق من الاتصال وحاول مرة أخرى.',
       code: 'رمز الحجز', example: ' (مثال)',
       rIn: 'الوصول', rOut: 'المغادرة', rGuests: 'الضيوف', rRooms: 'الغرف', rPurpose: 'السبب', rTotal: 'الإجمالي',
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
@@ -344,7 +343,7 @@
   var state = {
     screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
-    event: null, coupon: null, couponTry: '', couponErr: false, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
+    event: null, coupon: null, couponPct: 0, couponTry: '', couponErr: false, bookingCode: null, submitError: null, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
   };
   function set(patch) {
     var prevScreen = state.screen;
@@ -389,7 +388,7 @@
     var extraTotal = extra * incl(CONFIG.extraRoomPrice) * nights;
     var subtotal = roomTotal + extraTotal;
     // Descuento: se calcula en baisas (1 OMR = 1000 baisas) y se redondea a 10 baisas (0,01 OMR)
-    var pct = state.coupon ? CONFIG.coupons[state.coupon] || 0 : 0;
+    var pct = state.coupon ? state.couponPct || 0 : 0;
     var subB = Math.round(subtotal * 1000);
     var discB = Math.round(subB * pct / 1000) * 10;
     var discount = discB / 1000, total = (subB - discB) / 1000;
@@ -458,6 +457,17 @@
   function indexPhones() { PHONE_BY = {}; PHONES.forEach(function (p) { PHONE_BY[p[0]] = p; }); }
   indexPhones();
   fetch('phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (state.screen === 'book') render(); }).catch(function () {});
+  // Configuración y fechas ocupadas desde el servidor
+  var API = { enabled: false };
+  function loadConfig() {
+    return fetch('/api/config', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.ok) return;
+      for (var k in d.config) CONFIG[k] = d.config[k];
+      CONFIG.booked = d.unavailable || [];
+      API.enabled = !!d.bookingsEnabled;
+      if (state.screen === 'home' || state.screen === 'book') render();
+    }).catch(function () {});
+  }
   var PINNED = ['OM', 'AE', 'SA', 'QA', 'KW', 'BH'];
   function flag(iso) { return iso.replace(/./g, function (ch) { return String.fromCodePoint(127397 + ch.charCodeAt(0)); }); }
   var nameCache = {};
@@ -622,7 +632,7 @@
   function bookingMessage(c) {
     var E = DICT.en, f = function (k) { var p = k.split('-').map(Number); return E.fmt(dow(k), p[2], p[1] - 1) + ', ' + p[0]; };
     var lines = [
-      'New booking request – Lazurde Resort',
+      'New booking request – Lazurde Resort' + (state.bookingCode ? ' · ' + state.bookingCode : ''),
       '',
       'Check-in: ' + f(state.checkin) + ' (2:00 pm)',
       'Check-out: ' + f(state.checkout) + ' (11:00 am)',
@@ -910,7 +920,8 @@
   }
   function tplBar(c) {
     var T = c.T, ok = c.canSubmit || state.submitting;
-    return (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : (CONFIG.whatsapp ? '<p style="font-size:12px;color:#14532D;text-align:center;margin-bottom:6px">' + T.waOpen + '</p>' : '')) +
+    return (state.submitError ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : T.errGeneric) + '</p>' : '') +
+      (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : (!API.enabled && CONFIG.whatsapp ? '<p style="font-size:12px;color:#14532D;text-align:center;margin-bottom:6px">' + T.waOpen + '</p>' : '')) +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong>' +
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="height:52px;min-width:150px;padding:0 22px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;' +
@@ -926,14 +937,15 @@
     return '<main style="background:#fff;min-height:100vh;padding:48px 22px 28px;display:flex;flex-direction:column;align-items:center;gap:16px">' +
       '<svg class="lz-pop" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true" style="flex:none"><circle cx="48" cy="48" r="44" fill="#E7F5EC" stroke="#1F8A4C" stroke-width="3"></circle><path class="lz-check" d="M30 49l12 12 24-26" fill="none" stroke="#1F8A4C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>' +
       '<h1 class="lz-up" style="margin-top:4px;font-size:26px;font-weight:800;text-align:center">' + T.sentTitle + '</h1>' +
-      '<p class="lz-up" style="font-size:15px;color:#3D4A58;line-height:1.6;text-align:center">' + T.sentText + '</p>' +
+      '<p class="lz-up" style="font-size:15px;color:#3D4A58;line-height:1.6;text-align:center">' + (state.bookingCode ? T.sentText : T.sentTextWa) + '</p>' +
       '<div class="lz-up" style="width:100%;border:1px solid #E3E8EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px">' +
-      '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + T.code + '</span><strong style="color:#0F4C81">LZ-0001' + T.example + '</strong></div>' +
+      (state.bookingCode ? '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + T.code + '</span><strong style="color:#0F4C81;letter-spacing:.04em" dir="ltr">' + state.bookingCode + '</strong></div>' : '') +
       rows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + r[0] + '</span><strong style="text-align:end">' + esc(r[1]) + '</strong></div>'; }).join('') + '</div>' +
       '<div class="lz-up" style="width:100%;background:#FFF6DF;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:15px;color:#5C4510;line-height:1.4"><strong style="font-size:16px">' + T.remember + '</strong>' +
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockIn, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remIn + '</strong></span>' +
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockOut, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remOut + '</strong></span>' +
       '<div style="margin-top:4px;background:#fff;border:1.5px solid #D3AE2A;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px">' + svg(ICON.info, { w: 22, stroke: '#5C4510', style: 'flex:none' }) + '<strong style="font-size:17px;color:#0B2E4F;line-height:1.35">' + T.depositRem(c.whole(CONFIG.deposit)) + '</strong></div></div>' +
+      (state.bookingCode && CONFIG.whatsapp ? '<a class="lz-up" href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c)) + '" target="_blank" rel="noopener" style="width:100%;height:52px;border-radius:14px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;text-decoration:none">' + svg(ICON.chat, { w: 20, stroke: '#fff' }) + T.waSend + '</a>' : '') +
       '<button type="button" class="btn-primary" data-act="restart" style="width:100%">' + T.backHome + '</button></main>';
   }
 
@@ -977,10 +989,12 @@
     },
     couponApply: function () {
       var code = String(state.couponTry || '').replace(/\s+/g, '').toUpperCase();
-      if (code && Object.prototype.hasOwnProperty.call(CONFIG.coupons, code)) set({ coupon: code, couponErr: false, couponTry: '' });
-      else set({ coupon: null, couponErr: !!code });
+      if (!code) return set({ coupon: null, couponErr: false });
+      fetch('/api/coupon?code=' + encodeURIComponent(code)).then(function (r) { return r.json(); })
+        .then(function (d) { if (d.ok) set({ coupon: d.code, couponPct: d.pct, couponErr: false, couponTry: '' }); else set({ coupon: null, couponPct: 0, couponErr: true }); })
+        .catch(function () { set({ coupon: null, couponPct: 0, couponErr: true }); });
     },
-    couponRemove: function () { set({ coupon: null, couponErr: false, couponTry: '' }); },
+    couponRemove: function () { set({ coupon: null, couponPct: 0, couponErr: false, couponTry: '' }); },
     areasStep: function (d) {
       var row = document.querySelector('.lz-areas'); if (!row) return;
       var step = row.children[1].offsetLeft - row.children[0].offsetLeft;
@@ -1012,14 +1026,28 @@
     submit: function () {
       var c0 = calc();
       if (!c0.canSubmit) return;
-      if (CONFIG.whatsapp) window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c0)), '_blank');
-      set({ submitting: true });
+      // Sin base de datos todavía: la solicitud se envía por WhatsApp
+      if (!API.enabled && CONFIG.whatsapp) window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c0)), '_blank');
+      set({ submitting: true, submitError: null, bookingCode: null });
       var sv = document.querySelector('#lz-bar .lz-stone');
       var stop = sv ? stoneLoop(sv, true) : function () {};
-      submitTimer = setTimeout(function () { stop(); set({ submitting: false, screen: 'done' }); }, 2600);
+      var started = Date.now();
+      function finish(patch) { setTimeout(function () { stop(); set(patch); }, Math.max(0, 1800 - (Date.now() - started))); }
+      if (!API.enabled) return finish({ submitting: false, screen: 'done' });
+      var p = PHONE_BY[state.cc] || PHONE_BY.OM;
+      fetch('/api/bookings', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+        checkin: state.checkin, checkout: state.checkout, guests: state.guests, kings: c0.kings, event: state.event,
+        name: state.name.trim(), phone: '+' + p[1] + phoneCheck(state.cc, state.phone).digits, email: state.email.trim(),
+        lang: state.lang, coupon: state.coupon, termsAccepted: state.termsOk })
+      }).then(function (r) { return r.json().then(function (d) { return { status: r.status, d: d }; }); })
+        .then(function (res) {
+          if (res.d.ok) { loadConfig(); finish({ submitting: false, screen: 'done', bookingCode: res.d.code }); }
+          else { if (res.status === 409) loadConfig(); finish({ submitting: false, submitError: res.status === 409 ? 'taken' : 'generic' }); }
+        })
+        .catch(function () { finish({ submitting: false, submitError: 'generic' }); });
     },
     restart: function () {
-      set({ screen: 'home', checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing, event: null, termsOk: false, termsOpen: false });
+      set({ screen: 'home', checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing, event: null, termsOk: false, termsOpen: false, coupon: null, couponPct: 0, bookingCode: null, submitError: null });
     }
   };
   function setGuests(n) {
@@ -1127,4 +1155,5 @@
   opening.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endOpening(); } });
   opTimer = setTimeout(endOpening, 3900);
   set({ screen: 'lang' });
+  loadConfig();
 })();

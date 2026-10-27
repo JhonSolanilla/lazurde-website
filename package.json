@@ -1,0 +1,11 @@
+{
+  "name": "lazurde-website",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "test": "node --no-warnings tests/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.45.0"
+  }
+}

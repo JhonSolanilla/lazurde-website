@@ -36,9 +36,16 @@ No hay que instalar nada ni hacer pasos manuales.
 
 En `CONFIG` (`public/booking/app.js`): `whatsapp` (solo números con indicativo, ej. `96891234567`), `phone` y `email`. Con `whatsapp` lleno, los botones de WhatsApp/Llamar funcionan y al tocar Reservar se abre WhatsApp con el resumen de la reserva (en inglés) para el resort.
 
+## Servidor, base de datos y panel
+
+- `src/worker.js`: API (`/api/*`). Precios, feriados y **cupones** viven aquí; el precio final siempre se recalcula en el servidor.
+- Base de datos **D1** (binding `DB`): las tablas se crean solas la primera vez.
+- Panel de administración: **/admin** (clave en el secreto `ADMIN_PASSWORD` de Cloudflare). Confirmar / rechazar / cancelar reservas, notas, bloquear fechas y enviar la confirmación por WhatsApp.
+- Pruebas: `npm test` (base de datos simulada).
+
 ## Cupones de descuento
 
-En `CONFIG.coupons` (`public/booking/app.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Son de prueba: cuando exista la base de datos se validarán en el servidor.
+En `COUPONS` (`src/worker.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Se validan solo en el servidor.
 
 ## Fotos y videos
 
