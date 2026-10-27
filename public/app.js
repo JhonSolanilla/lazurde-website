@@ -780,7 +780,7 @@
     goHome: function () { set({ screen: 'home' }); },
     ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
     ccClose: function () { set({ ccOpen: false }); lockPage(false); },
-    ccPick: function (iso) { set({ cc: iso, ccOpen: false }); lockPage(false); var i = document.getElementById('lz-phone'); if (i) i.focus({ preventScroll: true }); },
+    ccPick: function (iso) { set({ cc: iso, ccOpen: false }); lockPage(false); var i = document.getElementById('lz-phone'); if (i) { i.focus({ preventScroll: true }); setTimeout(function () { i.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 150); } },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },
@@ -844,6 +844,15 @@
     if (f) { state[f] = e.target.value; renderBar(); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.ccOpen) actions.ccClose(); });
+  // Mientras el cliente escribe (teclado abierto) la barra de Reservar se oculta para no tapar los datos
+  var kbTimer = null;
+  function isTyping(el) { return el && el.matches && el.matches('input:not([type=checkbox]):not([type=radio]), textarea'); }
+  document.addEventListener('focusin', function (e) { if (isTyping(e.target)) { clearTimeout(kbTimer); document.body.classList.add('lz-typing'); } });
+  document.addEventListener('focusout', function (e) {
+    if (!isTyping(e.target)) return;
+    clearTimeout(kbTimer);
+    kbTimer = setTimeout(function () { if (!isTyping(document.activeElement)) document.body.classList.remove('lz-typing'); }, 120);
+  });
 
   // ===================== GALERÍA: cambia sola y se desliza con el dedo =====================
   var galLast = 0;

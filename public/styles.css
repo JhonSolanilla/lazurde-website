@@ -153,3 +153,4 @@ button.cell:disabled{cursor:not-allowed}
 .lz-cc-row strong{color:#5A6573;font-weight:700}
 
 body.lz-lock{position:fixed;left:0;right:0;overflow:hidden}
+body.lz-typing #lz-bar{display:none}
