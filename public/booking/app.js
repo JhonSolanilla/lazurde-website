@@ -615,7 +615,7 @@
     try { new Image().src = photo(nx.img || nx.poster); } catch (e) {}
     return '<div id="lz-top" class="lz-gal" style="position:relative;height:300px;background:#0B2E4F">' +
       '<button type="button" class="lz-hero-img" data-act="heroOpen" aria-label="' + esc(h.t[c.L]) + '">' + (h.loop
-        ? '<video src="video/' + h.loop + '.mp4" poster="' + img + '" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>'
+        ? '<video src="video/' + h.loop + '.mp4" poster="' + img + '"' + (holdHero ? '' : ' autoplay') + ' muted loop playsinline preload="auto" aria-hidden="true"></video>'
         : '<img src="' + img + '" alt="' + esc(h.t[c.L]) + '">') + '</button>' +
       '<span class="lz-hero-cap">' + h.t[c.L] + '</span>' +
       (h.video ? '<span aria-hidden="true" class="lz-sound">' + T.withSound + '</span>' : '') +
@@ -926,7 +926,7 @@
   // ===================== ACCIONES =====================
   var submitTimer = null;
   var actions = {
-    lang: function (code) { var first = !introShown; set({ lang: code, screen: 'home' }); if (first) playIntro(); },
+    lang: function (code) { var first = !introShown; if (first) holdHero = true; set({ lang: code, screen: 'home' }); if (first) playIntro(); },
     openLang: function () { set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
@@ -1027,7 +1027,7 @@
   });
 
   // ===================== GALERÍA: cambia sola y se desliza con el dedo =====================
-  var galLast = 0;
+  var galLast = 0, holdHero = false;
   function galGo(step, byUser) {
     state.gIdx += step;
     if (byUser) galLast = Date.now();
@@ -1054,6 +1054,10 @@
   var introShown = false, introTimers = [];
   function endIntro() {
     introTimers.forEach(clearTimeout);
+    // El video de arriba arranca desde el segundo 0 justo cuando la piedra hace el acercamiento
+    holdHero = false;
+    var hv = document.querySelector('#lz-top video');
+    if (hv) { try { hv.currentTime = 0; } catch (e) {} var pp = hv.play(); if (pp && pp.catch) pp.catch(function () {}); }
     splash.classList.add('hide');
     setTimeout(function () { splash.style.display = 'none'; }, 750);
   }
