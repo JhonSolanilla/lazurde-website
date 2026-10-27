@@ -263,6 +263,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
 
 .toast{position:fixed;left:50%;top:calc(var(--sat) + 12px);transform:translateX(-50%);z-index:90;background:var(--deep);color:#fff;padding:12px 16px;border-radius:16px;font-weight:700;font-size:14.5px;box-shadow:0 10px 30px rgba(0,32,50,.3);display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);animation:drop .25s ease}
 .toast.new{background:linear-gradient(135deg,#FAD26D,#D3AE2A);color:#002233}
+.noanim{animation:none!important}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @keyframes drop{from{transform:translate(-50%,-16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -855,6 +856,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
     else if (b.status === 'confirmed') h += '<button class="btn btn-bad" data-status="cancelled">' + x.cancel + '</button>';
     else h += '<button class="btn btn-ghost" data-status="pending">' + x.reopen + '</button>';
     h += '</div></section>';
+    // Al actualizar (no al abrir) se reemplaza sin animación para que no parpadee
+    if (!fresh) h = h.replace('class="scrim"', 'class="scrim noanim"').replace('class="sheet"', 'class="sheet noanim"');
     layer.innerHTML = h;
     if (scroll) layer.querySelector('.body').scrollTop = scroll;
   }
@@ -1239,6 +1242,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
       '<div class="f"><label for="nbnotes">' + x.notes + '</label><textarea id="nbnotes" data-nb="notes" maxlength="2000" placeholder="' + x.notesPh + '">' + esc(n.notes) + '</textarea></div>' +
       (n.err ? '<p class="ferr" role="alert">' + n.err + '</p>' : '') +
       '</div></div><div class="foot"><button class="btn btn-ghost" data-act="closenew">' + x.back + '</button><button class="btn btn-ok" data-act="nbsave"' + (n.busy ? ' disabled' : '') + '>' + I('check') + x.create + '</button></div></section>';
+    // Al actualizar (no al abrir) se reemplaza sin animación para que no parpadee
+    if (!fresh) h = h.replace('class="scrim"', 'class="scrim noanim"').replace('class="sheet"', 'class="sheet noanim"');
     layer.innerHTML = h;
     if (scroll) layer.querySelector('.body').scrollTop = scroll;
   }
