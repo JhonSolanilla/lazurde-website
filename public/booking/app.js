@@ -628,18 +628,42 @@
   }
 
   // Zonas del resort: una fila de tarjetas; al tocar una se abren todas sus fotos
+  // La fila es un círculo: se pinta 3 veces (copia · original · copia) y al terminar de
+  // deslizar se salta sin que se note a la misma tarjeta de la tanda del medio.
   function tplAreas(c) {
     var T = c.T;
+    function card(z, i, copy) {
+      var media = z.video
+        ? (copy ? '<img class="lz-area-media" src="video/' + z.poster + '.webp" alt="" loading="lazy">'
+                : '<video class="lz-area-media" src="video/' + z.loop + '.mp4" poster="video/' + z.poster + '.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>')
+        : '<img class="lz-area-media" src="' + photo(z.p[0]) + '" alt="" loading="lazy">';
+      var tag = z.video ? '▶ ' + T.video : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>' + T.photosN(z.p.length);
+      return '<button type="button" class="lz-area" data-act="zoneOpen" data-arg="' + i + '" aria-label="' + esc(z.t[c.L]) + '"' + (copy ? ' aria-hidden="true" tabindex="-1" data-copy="1"' : '') + '>' + media +
+        '<span class="lz-area-tag">' + tag + '</span>' +
+        '<span class="lz-area-cap" dir="' + (c.rtl ? 'rtl' : 'ltr') + '"><span class="lz-area-n">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="lz-area-name">' + z.t[c.L] + '</span></span></button>';
+    }
+    var set = function (copy) { return ZONES.map(function (z, i) { return card(z, i, copy); }).join(''); };
     return '<div class="gap8"></div><section class="card" style="padding:20px 0 18px"><div style="padding:0 18px"><h2 class="h2">' + T.areasTitle + '</h2><p class="muted" style="font-size:13px;margin-top:4px">' + T.areasSub + '</p></div>' +
-      '<div class="lz-areas">' + ZONES.map(function (z, i) {
-        var media = z.video
-          ? '<video class="lz-area-media" src="video/' + z.loop + '.mp4" poster="video/' + z.poster + '.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>'
-          : '<img class="lz-area-media" src="' + photo(z.p[0]) + '" alt="" loading="lazy">';
-        var tag = z.video ? '▶ ' + T.video : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>' + T.photosN(z.p.length);
-        return '<button type="button" class="lz-area" data-act="zoneOpen" data-arg="' + i + '" aria-label="' + esc(z.t[c.L]) + '">' + media +
-          '<span class="lz-area-tag">' + tag + '</span>' +
-          '<span class="lz-area-cap"><span class="lz-area-n">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="lz-area-name">' + z.t[c.L] + '</span></span></button>';
-      }).join('') + '</div></section>';
+      '<div class="lz-areas" dir="ltr">' + set(true) + set(false) + set(true) + '</div></section>';
+  }
+  function initAreasLoop() {
+    var row = document.querySelector('.lz-areas');
+    if (!row || row._loop) return;
+    row._loop = true;
+    var n = ZONES.length;
+    function setW() { return row.children[n].offsetLeft - row.children[0].offsetLeft; }
+    function jump(to) {
+      row.style.scrollSnapType = 'none'; row.scrollLeft = to; void row.offsetWidth; row.style.scrollSnapType = '';
+    }
+    jump(setW());                                   // empieza en la tanda del medio (tarjeta 01)
+    var t = null;
+    row.addEventListener('scroll', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        var w = setW(), x = row.scrollLeft;
+        if (x < w * 0.5) jump(x + w); else if (x >= w * 1.5) jump(x - w);
+      }, 140);
+    }, { passive: true });
   }
 
   // Visor a pantalla completa (fotos y videos), se desliza con el dedo
@@ -890,6 +914,7 @@
     else if (state.screen === 'book') html = tplBook(c);
     else if (state.screen === 'done') html = tplDone(c);
     app.innerHTML = html;
+    if (state.screen === 'home') initAreasLoop();
   }
   function renderBar() {
     var bar = document.getElementById('lz-bar');
