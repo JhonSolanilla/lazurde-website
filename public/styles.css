@@ -190,3 +190,15 @@ body.lz-typing #lz-bar{display:none}
 .lz-coupon-ok{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;padding:10px 12px;border-radius:12px;background:#ECFDF3;border:1px dashed #15803D;color:#14532D;font-size:14px;font-weight:700}
 .lz-coupon-tag{padding:3px 8px;border-radius:8px;background:#15803D;color:#fff;font-size:12px;letter-spacing:.04em}
 .lz-coupon-x{border:0;background:none;color:#14532D;text-decoration:underline;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
+
+/* Intro al abrir la página (igual que el video) */
+.lz-opening{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;cursor:pointer;
+  background:radial-gradient(circle at 50% 45%,#104862 0%,#003047 75%);transition:opacity .8s ease}
+.lz-opening.hide{opacity:0;pointer-events:none}
+.lz-opening svg{position:relative;width:170px;height:auto;margin-top:-40px}
+.lz-op-glow{position:absolute;left:50%;top:calc(50% - 70px);width:340px;height:340px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(250,210,109,.30) 0%,rgba(250,210,109,.12) 40%,rgba(250,210,109,0) 70%);opacity:0;animation:lzOpGlow 1.2s .6s ease-out forwards;pointer-events:none}
+@keyframes lzOpGlow{to{opacity:1}}
+.lz-op-word{position:relative;width:236px;height:auto;opacity:0;animation:lzOpWord .8s 1.7s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes lzOpWord{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.lz-op-glow,.lz-op-word{animation:none;opacity:1}}

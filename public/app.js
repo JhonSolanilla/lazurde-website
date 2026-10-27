@@ -1034,5 +1034,26 @@
   }
   splash.addEventListener('click', endIntro);
   splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endIntro(); } });
+
+  // ===================== INTRO AL ABRIR LA PÁGINA =====================
+  // La piedra se arma sobre el azul, aparece el brillo dorado y el nombre LAZURDE;
+  // luego se desvanece y queda la pantalla de idiomas.
+  var opening = document.createElement('div');
+  opening.className = 'lz-opening';
+  opening.setAttribute('role', 'button'); opening.setAttribute('tabindex', '0'); opening.setAttribute('aria-label', 'Lazurde Resort');
+  opening.innerHTML = '<span class="lz-op-glow"></span>' + STONE_SVG.replace(/lzg2/g, 'lzg3') + '<img class="lz-op-word" src="img/wordmark.svg" alt="Lazurde">';
+  document.body.appendChild(opening);
+  var opTimer = null;
+  function endOpening() {
+    clearTimeout(opTimer);
+    if (!opening) return;
+    var el = opening; opening = null;
+    el.classList.add('hide');
+    setTimeout(function () { el.remove(); }, 800);
+  }
+  stoneLoop(opening.querySelector('svg'), false, 1);
+  opening.addEventListener('click', endOpening);
+  opening.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endOpening(); } });
+  opTimer = setTimeout(endOpening, 3900);
   set({ screen: 'lang' });
 })();
