@@ -156,7 +156,13 @@ h1,h2,h3,p{margin:0}
 .seg b{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--gold-l);color:#002233;font-size:11.5px;display:inline-flex;align-items:center;justify-content:center}
 
 /* Calendario */
-.cal{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 10px 12px}
+.cal{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 10px 12px;position:relative;overflow:hidden}
+.cal>*{position:relative;z-index:1}
+.cal>.calwm{position:absolute;z-index:0;left:50%;top:55%;transform:translate(-50%,-50%);width:58%;max-width:340px;opacity:.07;pointer-events:none}
+.day.free small{color:#A57F12;opacity:1}
+.day.free small .rs{margin-inline-end:1px}
+.day.free{background:rgba(255,255,255,.75)}
+.day.holi{border:1.5px solid var(--gold)}
 .cal-h{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px}
 .cal-h h2{font-size:18px;font-weight:800}
 .cal-h .iconbtn{background:var(--bg);color:var(--navy)}
@@ -338,6 +344,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
   .cal{padding:20px}
   .day{aspect-ratio:auto;height:84px;align-items:flex-start;justify-content:flex-start;padding:8px;font-size:15px}
   .day small{font-size:11.5px;padding:0;margin-top:auto}
+  .day.free small{font-size:13.5px}
   .msum{grid-template-columns:1fr;margin-top:0}
   .selbar{left:auto;right:28px;bottom:28px;width:380px}
   .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
@@ -464,7 +471,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       back: 'Volver', taken: 'Esas fechas ya las tiene otra reserva.', error: 'Algo salió mal. Inténtalo de nuevo.', offline: 'Sin conexión. Reintentando…',
       noDb: 'La base de datos no está conectada.',
       calHint: 'Toca un día libre para seleccionarlo y bloquearlo. Toca un día ocupado para ver la reserva.',
-      lgConfirmed: 'Confirmada', lgPending: 'Pendiente', lgBlocked: 'Bloqueada', lgHoliday: 'Feriado',
+      lgConfirmed: 'Confirmada', lgPending: 'Pendiente', lgBlocked: 'Bloqueada', lgHoliday: 'Feriado', lgPrice: 'Precio por noche',
       mConfirmed: 'Noches confirmadas', mPending: 'Noches pendientes', mBlocked: 'Días bloqueados',
       selected: function (n) { return n === 1 ? '1 día seleccionado' : n + ' días seleccionados'; }, blockReason: 'Motivo (opcional) · ej. Masarrah, mantenimiento', block: 'Bloquear', blocked: 'Fechas bloqueadas',
       blockedDay: 'Día bloqueado', unblock: 'Desbloquear', unblockQ: '¿Desbloquear este día?', unblockTxt: 'Se podrá reservar otra vez en la web.', noReason: 'Sin motivo',
@@ -528,7 +535,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       back: 'Back', taken: 'Those dates are already taken by another booking.', error: 'Something went wrong. Please try again.', offline: 'Offline. Retrying…',
       noDb: 'The database is not connected.',
       calHint: 'Tap a free day to select and block it. Tap a booked day to open the booking.',
-      lgConfirmed: 'Confirmed', lgPending: 'Pending', lgBlocked: 'Blocked', lgHoliday: 'Holiday',
+      lgConfirmed: 'Confirmed', lgPending: 'Pending', lgBlocked: 'Blocked', lgHoliday: 'Holiday', lgPrice: 'Price per night',
       mConfirmed: 'Confirmed nights', mPending: 'Pending nights', mBlocked: 'Blocked days',
       selected: function (n) { return n === 1 ? '1 day selected' : n + ' days selected'; }, blockReason: 'Reason (optional) · e.g. Masarrah, maintenance', block: 'Block', blocked: 'Blocked dates',
       blockedDay: 'Blocked day', unblock: 'Unblock', unblockQ: 'Unblock this day?', unblockTxt: 'It can be booked on the website again.', noReason: 'No reason',
@@ -801,18 +808,21 @@ textarea:focus{border-color:var(--blue);background:#fff}
     for (i = 0; i < first; i++) cells += '<span class="day pad"></span>';
     for (var d = 1; d <= days; d++) {
       var k = ym + '-' + (d < 10 ? '0' : '') + d, b = nm[k], bl = bm[k], cls = 'day', lab = '';
+      var isHol = S.cfg ? S.cfg.config.holidays.indexOf(k) !== -1 : HOLIDAYS.indexOf(k) !== -1;
       if (b) { cls += ' ' + b.status; lab = esc(firstName(b.name)); }
       else if (bl) { cls += ' blocked'; lab = bl.note ? esc(bl.note) : '—'; }
+      else if (S.cfg && k >= td) { lab = '<i class="rs"></i>' + nightP(k); cls += ' free'; }
+      if (isHol) cls += ' holi';
       if (S.sel.indexOf(k) !== -1) cls += ' sel';
       if (k < td) cls += ' past';
       if (k === td) cls += ' now';
-      cells += '<button class="' + cls + '" data-day="' + k + '"' + (k < td && !b ? ' disabled' : '') + '>' + d + (lab ? '<small>' + lab + '</small>' : '') + (HOLIDAYS.indexOf(k) !== -1 ? '<span class="hol"></span>' : '') + '</button>';
+      cells += '<button class="' + cls + '" data-day="' + k + '"' + (k < td && !b ? ' disabled' : '') + '>' + d + (lab ? '<small>' + lab + '</small>' : '') + (isHol ? '<span class="hol"></span>' : '') + '</button>';
     }
     var monthBlocks = S.blocks.filter(function (b) { return b.date.slice(0, 7) === ym; });
     var h = '<header class="top"><div class="ttl"><h1>' + x.nav.calendar + '</h1>' + clockChip() + '<button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div></header><div class="wrap"><div class="cal-wrap"><div>' +
-      '<div class="cal"><div class="cal-h"><button class="iconbtn" data-month="-1" aria-label="prev">' + I('left') + '</button><h2>' + cap(fmt(ym + '-01', { month: 'long', year: 'numeric' })) + '</h2><button class="iconbtn" data-month="1" aria-label="next">' + I('right') + '</button></div>' +
+      '<div class="cal"><img class="calwm" src="/booking/img/stone.svg" alt=""><div class="cal-h"><button class="iconbtn" data-month="-1" aria-label="prev">' + I('left') + '</button><h2>' + cap(fmt(ym + '-01', { month: 'long', year: 'numeric' })) + '</h2><button class="iconbtn" data-month="1" aria-label="next">' + I('right') + '</button></div>' +
       '<div class="wd">' + wd.map(function (w) { return '<span>' + w + '</span>'; }).join('') + '</div><div class="days">' + cells + '</div>' +
-      '<div class="legend"><span><i style="background:linear-gradient(160deg,#14607f,#003047)"></i>' + x.lgConfirmed + '</span><span><i style="background:#FFF6DF;border:1px solid #F1DC9A"></i>' + x.lgPending + '</span><span><i style="background:repeating-linear-gradient(135deg,#ECEFF3 0 3px,#D9DFE6 3px 6px)"></i>' + x.lgBlocked + '</span><span><i style="background:#D3AE2A;width:8px;height:8px;border-radius:50%"></i>' + x.lgHoliday + '</span></div></div>' +
+      '<div class="legend"><span><i style="background:linear-gradient(160deg,#14607f,#003047)"></i>' + x.lgConfirmed + '</span><span><i style="background:#FFF6DF;border:1px solid #F1DC9A"></i>' + x.lgPending + '</span><span><i style="background:repeating-linear-gradient(135deg,#ECEFF3 0 3px,#D9DFE6 3px 6px)"></i>' + x.lgBlocked + '</span><span><i style="border:1.5px solid #D3AE2A;background:#fff;position:relative"></i>' + x.lgHoliday + '</span><span><b style="color:#A57F12;font-size:12px"><i class="rs" style="width:1.1em;height:.65em;border-radius:0;display:inline-block"></i>240</b>' + x.lgPrice + '</span></div></div>' +
       '<p class="hint">' + x.calHint + '</p></div><div>' +
       '<div class="msum"><div><b>' + ms.confirmed + '</b><span>' + x.mConfirmed + '</span></div><div><b>' + ms.pending + '</b><span>' + x.mPending + '</span></div><div><b>' + ms.blocked + '</b><span>' + x.mBlocked + '</span></div></div>';
     if (monthBlocks.length) {
@@ -1595,7 +1605,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
   function checkVersion() {
     return fetch('/api/config', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
       if (!d.version) return;
-      if (d.config) S.cfg = { config: d.config, unavailable: d.unavailable || [] };
+      if (d.config) { var hadCfg = !!S.cfg; S.cfg = { config: d.config, unavailable: d.unavailable || [] }; if (!hadCfg && S.view === 'calendar' && !busyNow()) render(); }
       if (!APPVER) { APPVER = d.version; return; }
       if (d.version !== APPVER) newVersion();
     }).catch(function () {});
