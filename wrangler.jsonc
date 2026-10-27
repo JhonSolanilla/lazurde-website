@@ -12,7 +12,9 @@
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
-  }
-  // Base de datos de reservas (D1). Se activa cuando exista en Cloudflare:
-  // ,"d1_databases": [{ "binding": "DB", "database_name": "lazurde-bookings", "database_id": "PEGAR-AQUI-EL-ID" }]
+  },
+  // Base de datos de reservas (D1). Las tablas se crean solas la primera vez.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "lazurde-bookings", "database_id": "5a370f2e-118b-4e6e-bdd4-b7b657f91ee7" }
+  ]
 }
