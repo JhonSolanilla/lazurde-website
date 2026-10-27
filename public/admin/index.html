@@ -371,6 +371,23 @@ textarea:focus{border-color:var(--blue);background:#fff}
 .selbar .r2{display:flex;gap:8px}
 .selbar .go2{height:44px;padding:0 14px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;font-weight:800;flex:1}
 @media (min-width:1000px){.fab{display:none}}
+.occ{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:14px}
+.occ .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.occ .lft{display:flex;align-items:center;gap:12px;min-width:0}
+.occ .ib{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
+.occ .ib.g{background:var(--bg);color:var(--ink2)}
+.occ .bedic{width:44px;height:33px;flex:none;fill:none;stroke:var(--navy);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.occ strong{font-size:15px;display:block}.occ small{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.occ .st{display:flex;align-items:center;gap:10px;flex:none}
+.occ .st button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--navy);background:#fff;font-size:20px;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:center}
+.occ .st button:disabled{opacity:.28}
+.occ .st b{min-width:22px;text-align:center;font-size:18px}
+.occ hr{border:0;height:1px;background:var(--line);margin:0}
+.occ .big{font-size:20px;font-weight:800;min-width:44px;text-align:center}
+.occ .gold{display:flex;gap:10px;align-items:flex-start;background:var(--gold-bg);border-radius:12px;padding:12px;font-size:13px;color:var(--gold-ink);font-weight:700;line-height:1.5}
+.occ .gold .ic{width:19px;height:19px;flex:none}
+.occ .asg{display:flex;justify-content:space-between;background:var(--bg);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
+.nbh{font-size:17px;font-weight:800;margin-bottom:-4px}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -441,7 +458,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       depCollect: 'Marcar cobrado', depReturn: 'Devuelto completo', depKeep: 'Retener una parte', change: 'Cambiar', depReturnQ: '¿Depósito devuelto completo?', depReturnTxt: function (m) { return 'Se devolvieron ' + m + ' al cliente.'; },
       keptAmt: 'Monto retenido (máx. 100)', reason: 'Motivo', reasonPh: 'Daño, faltante, limpieza extra…', needReason: 'Escribe el motivo.',
       photos: 'Fotos de la revisión', photosHint: 'Fotos del resort a la llegada y a la salida: sirven de prueba si hay daños.', addPhoto: 'Agregar foto', tooManyPhotos: 'Máximo 15 fotos por reserva.', delPhotoQ: '¿Borrar esta foto?', delete: 'Borrar',
-      newB: 'Nueva reserva', newFromSel: 'Crear reserva', newHint: 'Para reservas que llegan por llamada, WhatsApp o en persona. Aparta las fechas igual que la web.', kingBeds: 'Camas king', nameL: 'Nombre del cliente', phoneL: 'Teléfono', emailL: 'Correo (opcional)',
+      guestsRange: 'De 6 a 14 personas', autoRooms: 'Se calculan solas', extraNotice: 'Desde la persona 7 se abre una habitación extra: 15 OMR por habitación y por noche.', bedsL: 'Camas', kingBed: '1 cama king', kingBedSub: 'Matrimonial · máx. 3', twinBed: '2 camas individuales', twinBedSub: 'Separadas · máx. 4', assigned: 'Habitaciones asignadas', ofWord: 'de', optional: 'opcional', newB: 'Nueva reserva', newFromSel: 'Crear reserva', newHint: 'Para reservas que llegan por llamada, WhatsApp o en persona. Aparta las fechas igual que la web.', kingBeds: 'Camas king', nameL: 'Nombre del cliente', phoneL: 'Teléfono', emailL: 'Correo (opcional)',
       pickDates: 'Elige llegada y salida para ver el precio.', badDates: 'La salida debe ser después de la llegada.', normalPrice: function (m, n) { return 'Precio normal: <b>' + m + '</b> · ' + n; },
       totalL: 'Total a cobrar', totalHint: 'Déjalo vacío para usar el precio normal. Cámbialo solo si acordaron otro precio.', paidQ: 'El cliente ya pagó el 100%',
       willConfirm: 'Se creará confirmada y pagada.', willPending: 'Se creará pendiente y aparta las fechas hasta que pague.', create: 'Crear reserva', needName: 'Escribe el nombre del cliente.', badPhone: 'Teléfono no válido. Ej.: +968 9123 4567',
@@ -505,7 +522,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       depCollect: 'Mark collected', depReturn: 'Fully returned', depKeep: 'Keep part of it', change: 'Change', depReturnQ: 'Deposit fully returned?', depReturnTxt: function (m) { return m + ' returned to the guest.'; },
       keptAmt: 'Amount kept (max 100)', reason: 'Reason', reasonPh: 'Damage, missing item, extra cleaning…', needReason: 'Please write the reason.',
       photos: 'Inspection photos', photosHint: 'Photos of the resort at check-in and check-out: proof if anything is damaged.', addPhoto: 'Add photo', tooManyPhotos: 'Maximum 15 photos per booking.', delPhotoQ: 'Delete this photo?', delete: 'Delete',
-      newB: 'New booking', newFromSel: 'Create booking', newHint: 'For bookings that come by phone, WhatsApp or in person. It holds the dates just like the website.', kingBeds: 'King beds', nameL: 'Guest name', phoneL: 'Phone', emailL: 'Email (optional)',
+      guestsRange: '6 to 14 guests', autoRooms: 'Calculated automatically', extraNotice: 'From the 7th guest an extra bedroom opens: 15 OMR per bedroom per night.', bedsL: 'Beds', kingBed: '1 king bed', kingBedSub: 'Double · max. 3', twinBed: '2 twin beds', twinBedSub: 'Separate · max. 4', assigned: 'Bedrooms assigned', ofWord: 'of', optional: 'optional', newB: 'New booking', newFromSel: 'Create booking', newHint: 'For bookings that come by phone, WhatsApp or in person. It holds the dates just like the website.', kingBeds: 'King beds', nameL: 'Guest name', phoneL: 'Phone', emailL: 'Email (optional)',
       pickDates: 'Pick check-in and check-out to see the price.', badDates: 'Check-out must be after check-in.', normalPrice: function (m, n) { return 'Standard price: <b>' + m + '</b> · ' + n; },
       totalL: 'Total to charge', totalHint: 'Leave empty for the standard price. Change it only if a different price was agreed.', paidQ: 'The guest has already paid 100%',
       willConfirm: 'It will be created as confirmed and paid.', willPending: 'It will be created as pending and holds the dates until paid.', create: 'Create booking', needName: 'Please write the guest name.', badPhone: 'Invalid phone. E.g. +968 9123 4567',
@@ -1182,6 +1199,14 @@ textarea:focus{border-color:var(--blue);background:#fff}
     return x.normalPrice(money(n.quote.total), x.nights(n.quote.nights));
   }
   function updateQbox() { var q = document.getElementById('nbq'); if (q) q.innerHTML = qboxHtml(); var tt = document.getElementById('nbtotal'); if (tt) tt.placeholder = S.nb.quote ? omr(S.nb.quote.total) : ''; }
+  var BED = {
+    king: 'M3 20v-7a2 2 0 0 1 2-2h22a2 2 0 0 1 2 2v7 M3 17h26 M3 20v2 M29 20v2 M6 11V7a1.5 1.5 0 0 1 1.5-1.5h17A1.5 1.5 0 0 1 26 7v4 M9 11V9h6v2 M17 11V9h6v2',
+    twin: 'M2 20v-6a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 14 14v6 M2 17.5h12 M2 20v2 M14 20v2 M4 12.5V9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3.5 M18 20v-6a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 30 14v6 M18 17.5h12 M18 20v2 M30 20v2 M20 12.5V9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3.5'
+  };
+  function bedRowA(path, title, sub, disMinus, disPlus, dMinus, dPlus, val) {
+    return '<div class="row"><div class="lft"><svg class="bedic" viewBox="0 0 32 24" aria-hidden="true"><path d="' + path + '"/></svg><div><strong>' + title + '</strong><small>' + sub + '</small></div></div>' +
+      '<div class="st"><button type="button" data-act="nbk" data-d="' + dMinus + '"' + (disMinus ? ' disabled' : '') + ' aria-label="−">−</button><b>' + val + '</b><button type="button" data-act="nbk" data-d="' + dPlus + '"' + (disPlus ? ' disabled' : '') + ' aria-label="+">+</button></div></div>';
+  }
   function renderNew(fresh) {
     var n = S.nb, x = t();
     if (!n) return;
@@ -1193,13 +1218,18 @@ textarea:focus{border-color:var(--blue);background:#fff}
       '<div class="sh"><span class="code" style="color:var(--navy);font-size:19px;letter-spacing:0">' + x.newB + '</span><button class="iconbtn" data-act="closenew" aria-label="' + x.back + '">' + I('x') + '</button></div><div class="body"><div class="nbform">' +
       '<p class="info-line" style="margin-top:0">' + x.newHint + '</p>' +
       '<div class="f2"><div class="f"><label for="nbci">' + x.checkin + '</label><input id="nbci" type="date" data-nb="checkin" value="' + n.checkin + '"></div><div class="f"><label for="nbco">' + x.checkout + '</label><input id="nbco" type="date" data-nb="checkout" value="' + n.checkout + '"' + (n.checkin ? ' min="' + addDays(n.checkin, 1) + '"' : '') + '></div></div>' +
-      '<div class="f2"><div class="f"><span class="lb">' + x.guestsL + '</span><div class="stepper"><button type="button" data-act="nbg" data-d="-1"' + (n.guests <= 1 ? ' disabled' : '') + '>−</button><b>' + n.guests + '</b><button type="button" data-act="nbg" data-d="1"' + (n.guests >= 14 ? ' disabled' : '') + '>+</button></div></div>' +
-      '<div class="f"><span class="lb">' + x.kingBeds + '</span><div class="stepper"><button type="button" data-act="nbk" data-d="-1"' + (n.kings <= kMin ? ' disabled' : '') + '>−</button><b>' + n.kings + '</b><button type="button" data-act="nbk" data-d="1"' + (n.kings >= kMax ? ' disabled' : '') + '>+</button></div></div></div>' +
-      '<p class="info-line" style="margin-top:-6px">' + x.rooms + ': <b>' + rooms + '</b> · ' + x.beds(n.kings, rooms - n.kings) + '</p>' +
+      '<h3 class="nbh">' + x.guestsL + '</h3><div class="occ"><div class="row"><div class="lft"><span class="ib">' + I('users') + '</span><div><strong>' + x.guestsL + '</strong><small>' + x.guestsRange + '</small></div></div>' +
+      '<div class="st"><button type="button" data-act="nbg" data-d="-1"' + (n.guests <= 6 ? ' disabled' : '') + ' aria-label="−">−</button><b>' + n.guests + '</b><button type="button" data-act="nbg" data-d="1"' + (n.guests >= 14 ? ' disabled' : '') + ' aria-label="+">+</button></div></div><hr>' +
+      '<div class="row"><div class="lft"><span class="ib g">' + I('lock') + '</span><div><strong>' + x.rooms + '</strong><small>' + x.autoRooms + '</small></div></div><span class="big">' + rooms + '</span></div>' +
+      '<div class="gold">' + I('info') + '<span>' + x.extraNotice + '</span></div></div>' +
+      '<h3 class="nbh">' + x.bedsL + '</h3><div class="occ">' +
+      bedRowA(BED.king, x.kingBed, x.kingBedSub, n.kings <= kMin, n.kings >= kMax, -1, 1, n.kings) + '<hr>' +
+      bedRowA(BED.twin, x.twinBed, x.twinBedSub, n.kings >= kMax, n.kings <= kMin, 1, -1, rooms - n.kings) +
+      '<div class="asg"><span class="muted">' + x.assigned + '</span><b>' + rooms + ' ' + x.ofWord + ' ' + rooms + '</b></div></div>' +
       '<div class="f"><label for="nbname">' + x.nameL + '</label><input id="nbname" data-nb="name" autocomplete="off" value="' + esc(n.name) + '"></div>' +
       '<div class="f2"><div class="f"><label for="nbphone">' + x.phoneL + '</label><input id="nbphone" type="tel" dir="ltr" data-nb="phone" value="' + esc(n.phone) + '"></div><div class="f"><label for="nbemail">' + x.emailL + '</label><input id="nbemail" type="email" data-nb="email" value="' + esc(n.email) + '"></div></div>' +
       '<div class="f"><span class="lb">' + x.language + '</span><div class="chips">' + [['ar', 'العربية'], ['en', 'English'], ['es', 'Español']].map(function (l) { return '<button type="button" data-act="nblang" data-v="' + l[0] + '" aria-pressed="' + (n.lang === l[0]) + '">' + l[1] + '</button>'; }).join('') + '</div></div>' +
-      '<div class="f"><label for="nbev">' + x.purpose + '</label><select id="nbev" data-nb="event"><option value="">' + x.notGiven + '</option>' + ev.map(function (e, i) { return '<option value="' + i + '"' + (String(n.event) === String(i) ? ' selected' : '') + '>' + e + '</option>'; }).join('') + '</select></div>' +
+      '<div class="f"><span class="lb">' + x.purpose + ' · ' + x.optional + '</span><div class="chips">' + ev.map(function (e, i) { return '<button type="button" data-act="nbev" data-v="' + i + '" aria-pressed="' + (String(n.event) === String(i)) + '">' + e + '</button>'; }).join('') + '</div></div>' +
       '<p class="qbox" id="nbq">' + qboxHtml() + '</p>' +
       '<div class="f"><label for="nbtotal">' + x.totalL + '</label><input id="nbtotal" type="number" inputmode="decimal" step="0.001" min="0" data-nb="total" value="' + esc(n.total) + '" placeholder="' + (n.quote ? omr(n.quote.total) : '') + '"><span class="info-line" style="margin-top:0">' + x.totalHint + '</span></div>' +
       '<button type="button" class="toggle" data-act="nbpaid"><span>' + x.paidQ + '</span><span class="sw' + (n.paid ? ' on' : '') + '" style="flex:none"></span></button>';
@@ -1216,8 +1246,9 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var n = S.nb, x = t();
     if (!n) return;
     if (a === 'closenew') { S.nb = null; layer.innerHTML = ''; return; }
-    if (a === 'nbg') { n.guests = Math.max(1, Math.min(14, n.guests + +el.dataset.d)); renderNew(false); fetchQuote(); return; }
+    if (a === 'nbg') { n.guests = Math.max(6, Math.min(14, n.guests + +el.dataset.d)); renderNew(false); fetchQuote(); return; }
     if (a === 'nbk') { n.kings += +el.dataset.d; renderNew(false); return; }
+    if (a === 'nbev') { n.event = String(n.event) === el.dataset.v ? '' : el.dataset.v; renderNew(false); return; }
     if (a === 'nblang') { n.lang = el.dataset.v; renderNew(false); return; }
     if (a === 'nbpaid') { n.paid = !n.paid; renderNew(false); return; }
     if (a === 'nbmethod') { n.method = el.dataset.v; renderNew(false); return; }

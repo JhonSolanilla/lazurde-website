@@ -332,7 +332,7 @@ async function apiAdmin(request, env, url) {
     const ci = String(b.checkin || ''), co = String(b.checkout || ''), guests = Number(b.guests);
     if (!validDate(ci) || !validDate(co) || co <= ci) return bad('invalid_dates');
     if (Math.round((Date.parse(co) - Date.parse(ci)) / 864e5) > 60) return bad('too_many_nights');
-    if (!Number.isInteger(guests) || guests < 1 || guests > CONFIG.maxGuests) return bad('invalid_guests');
+    if (!Number.isInteger(guests) || guests < CONFIG.baseGuests || guests > CONFIG.maxGuests) return bad('invalid_guests');
     const q = quote({ checkin: ci, checkout: co, guests });
     const kings = b.kings == null ? Math.min(CONFIG.maxKing, q.rooms) : Number(b.kings);
     if (!Number.isInteger(kings) || kings < Math.max(0, q.rooms - CONFIG.maxTwin) || kings > Math.min(CONFIG.maxKing, q.rooms)) return bad('invalid_beds');
