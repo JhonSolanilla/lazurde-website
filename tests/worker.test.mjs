@@ -102,3 +102,52 @@ const r3 = await worker.fetch(new Request('https://x/api/bookings', { method: 'P
   ok(r.body.sent === 0, 'prueba con dispositivo vencido');
   r = await call('POST', '/api/admin/push/test', {}, { cookie: ck, 'x-lz': '1' }); ok(r.body.sent === 0, 'dispositivo vencido eliminado de la lista');
 }
+
+// ---------- Pagos, depósito, reservas manuales, fotos ----------
+{
+  const H = { cookie: ck, 'x-lz': '1' };
+  r = await call('GET', '/api/admin/quote?checkin=2027-02-03&checkout=2027-02-05&guests=8', null, { cookie: ck }); ok(r.body.quote.total === 555, 'precio para reserva manual: ' + r.body.quote.total);
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-02-03', checkout: '2027-02-05', guests: 8, name: 'Cliente Teléfono', phone: '+968 9988 7766', paid: true, payMethod: 'transfer', payRef: 'TRX-1', status: 'confirmed' }, H);
+  ok(r.status === 200 && r.body.booking.source === 'manual' && r.body.booking.pay_status === 'paid' && r.body.booking.status === 'confirmed' && r.body.booking.total === 555, 'reserva manual pagada y confirmada');
+  const mc = r.body.booking.code;
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-02-04', checkout: '2027-02-06', guests: 6, name: 'Choque', phone: '+96811112222' }, H); ok(r.status === 409, 'reserva manual que se cruza → 409');
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-03-01', checkout: '2027-03-02', guests: 6, name: 'Precio especial', phone: '+96811112222', total: 200 }, H);
+  ok(r.body.booking.total === 200 && r.body.booking.discount === 40 && r.body.booking.pay_status === 'unpaid' && r.body.booking.status === 'pending', 'reserva manual con precio especial, sin pagar');
+  const sc = r.body.booking.code;
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-03-05', checkout: '2027-03-06', guests: 6, name: 'X', phone: '+968' }, H); ok(r.status === 400, 'reserva manual con datos malos → 400');
+  // pago
+  r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'refunded', amount: 50 } }, H); ok(r.body.error === 'not_paid', 'no se reembolsa lo que no se ha pagado');
+  r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'paid', method: 'card', ref: 'PM-77' }, status: 'confirmed' }, H);
+  ok(r.body.booking.pay_status === 'paid' && r.body.booking.pay_method === 'card' && r.body.booking.status === 'confirmed', 'registrar pago y confirmar en un paso');
+  r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'refunded', amount: 999 } }, H); ok(r.body.error === 'invalid_amount', 'reembolso mayor que el total → rechazado');
+  r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'refunded', amount: 100 }, status: 'cancelled' }, H);
+  ok(r.body.booking.pay_status === 'refunded' && r.body.booking.refund_amount === 100 && r.body.booking.status === 'cancelled', 'cancelar con reembolso parcial');
+  // depósito
+  r = await call('POST', '/api/admin/bookings/' + mc, { deposit: { status: 'collected' } }, H); ok(r.body.booking.deposit_status === 'collected', 'depósito cobrado');
+  r = await call('POST', '/api/admin/bookings/' + mc, { deposit: { status: 'partial', kept: 150 } }, H); ok(r.body.error === 'invalid_amount', 'retener más de 100 → rechazado');
+  r = await call('POST', '/api/admin/bookings/' + mc, { deposit: { status: 'partial', kept: 30, note: 'Vaso roto' } }, H);
+  ok(r.body.booking.deposit_status === 'partial' && r.body.booking.deposit_kept === 30 && r.body.booking.deposit_note === 'Vaso roto', 'depósito: retener 30 con motivo');
+  // fotos
+  const png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+  r = await call('POST', '/api/admin/bookings/' + mc + '/photos', { data: 'javascript:alert(1)' }, H); ok(r.status === 400, 'foto inválida rechazada');
+  r = await call('POST', '/api/admin/bookings/' + mc + '/photos', { data: png }, H); ok(r.body.ok, 'foto subida');
+  r = await call('GET', '/api/admin/bookings/' + mc + '/photos', null, { cookie: ck }); ok(r.body.photos.length === 1, 'lista de fotos');
+  const pid = r.body.photos[0].id;
+  const img = await worker.fetch(new Request('https://lazurdeom.com/api/admin/photos/' + pid, { headers: { cookie: ck } }), env);
+  ok(img.headers.get('content-type') === 'image/png' && (await img.arrayBuffer()).byteLength === 70, 'ver foto');
+  const img2 = await worker.fetch(new Request('https://lazurdeom.com/api/admin/photos/' + pid), env); ok(img2.status === 401, 'foto sin sesión → 401');
+  r = await call('DELETE', '/api/admin/photos/' + pid, null, H); ok(r.body.ok, 'borrar foto');
+}
+// Base de datos vieja (sin columnas nuevas) se actualiza sola
+{
+  const { DatabaseSync } = await import('node:sqlite');
+  const raw = new DatabaseSync(':memory:');
+  raw.exec(`CREATE TABLE bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT UNIQUE NOT NULL, status TEXT NOT NULL DEFAULT 'pending', checkin TEXT NOT NULL, checkout TEXT NOT NULL, nights INTEGER NOT NULL, guests INTEGER NOT NULL, rooms INTEGER NOT NULL, kings INTEGER NOT NULL, twins INTEGER NOT NULL, event TEXT, name TEXT NOT NULL, phone TEXT NOT NULL, email TEXT, lang TEXT, coupon TEXT, pct INTEGER NOT NULL DEFAULT 0, subtotal REAL NOT NULL, discount REAL NOT NULL DEFAULT 0, total REAL NOT NULL, notes TEXT, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+    INSERT INTO bookings (code, checkin, checkout, nights, guests, rooms, kings, twins, name, phone, subtotal, total, created_at, updated_at) VALUES ('LZ-OLD11','2027-05-01','2027-05-02',1,6,3,3,0,'Viejo','+96890000000',240,240,'x','x');`);
+  const { default: w2 } = await import('../src/worker.js?fresh=' + Date.now());
+  const env2 = { DB: D1(raw), ADMIN_PASSWORD: 'p', ASSETS: env.ASSETS };
+  const lg = await w2.fetch(new Request('https://x/api/admin/login', { method: 'POST', body: JSON.stringify({ password: 'p' }) }), env2);
+  const c2 = lg.headers.get('set-cookie').split(';')[0];
+  const lst = await (await w2.fetch(new Request('https://x/api/admin/bookings', { headers: { cookie: c2 } }), env2)).json();
+  ok(lst.bookings[0].pay_status === 'unpaid' && lst.bookings[0].deposit_status === 'pending' && lst.bookings[0].source === 'web', 'base vieja actualizada con columnas nuevas');
+}

@@ -73,6 +73,17 @@ function newCode() {
 
 // ===================== BASE DE DATOS =====================
 let schemaReady = false;
+const EXTRA_COLS = {
+  pay_status: "TEXT NOT NULL DEFAULT 'unpaid'",      // unpaid | paid | refunded
+  paid_at: 'TEXT', pay_method: 'TEXT', pay_ref: 'TEXT',
+  refund_amount: 'REAL NOT NULL DEFAULT 0', refunded_at: 'TEXT',
+  deposit_status: "TEXT NOT NULL DEFAULT 'pending'",  // pending | collected | returned | partial
+  deposit_kept: 'REAL NOT NULL DEFAULT 0', deposit_note: 'TEXT', deposit_at: 'TEXT',
+  source: "TEXT NOT NULL DEFAULT 'web'"               // web | manual
+};
+const PAY_STATUSES = ['unpaid', 'paid', 'refunded'];
+const PAY_METHODS = ['card', 'transfer', 'cash', 'other'];
+const DEPOSIT_STATUSES = ['pending', 'collected', 'returned', 'partial'];
 async function ensureSchema(db) {
   if (schemaReady) return;
   await db.batch([
@@ -89,8 +100,16 @@ async function ensureSchema(db) {
     db.prepare(`CREATE INDEX IF NOT EXISTS bookings_dates ON bookings (status, checkin, checkout)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS blocks (date TEXT PRIMARY KEY, note TEXT, created_at TEXT NOT NULL)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, p256dh TEXT NOT NULL, auth TEXT NOT NULL, lang TEXT, created_at TEXT NOT NULL)`),
-    db.prepare(`CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT NOT NULL)`)
+    db.prepare(`CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS photos (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL, data TEXT NOT NULL, created_at TEXT NOT NULL)`),
+    db.prepare(`CREATE INDEX IF NOT EXISTS photos_code ON photos (code)`)
   ]);
+  // Columnas nuevas (pago, depósito, origen) en bases ya creadas
+  const { results: cols } = await db.prepare(`PRAGMA table_info(bookings)`).all();
+  const have = new Set(cols.map(c => c.name));
+  for (const [name, def] of Object.entries(EXTRA_COLS)) {
+    if (!have.has(name)) await db.prepare(`ALTER TABLE bookings ADD COLUMN ${name} ${def}`).run().catch(e => { if (!/duplicate/i.test(String(e))) throw e; });
+  }
   schemaReady = true;
 }
 
@@ -299,6 +318,90 @@ async function apiAdmin(request, env, url) {
     return json({ ok: true, bookings: results, counts: Object.fromEntries(counts.map(r => [r.status, r.n])) });
   }
 
+  // --- precio para reservas manuales ---
+  if (path === '/quote' && request.method === 'GET') {
+    const ci = url.searchParams.get('checkin') || '', co = url.searchParams.get('checkout') || '', g = Number(url.searchParams.get('guests'));
+    if (!validDate(ci) || !validDate(co) || co <= ci || !Number.isInteger(g) || g < 1 || g > CONFIG.maxGuests) return bad('invalid');
+    return json({ ok: true, quote: quote({ checkin: ci, checkout: co, guests: g }) });
+  }
+
+  // --- reserva manual (llamada, WhatsApp, en persona) ---
+  if (path === '/bookings' && request.method === 'POST') {
+    let b = {};
+    try { b = await request.json(); } catch (e) { return bad('invalid_json'); }
+    const ci = String(b.checkin || ''), co = String(b.checkout || ''), guests = Number(b.guests);
+    if (!validDate(ci) || !validDate(co) || co <= ci) return bad('invalid_dates');
+    if (Math.round((Date.parse(co) - Date.parse(ci)) / 864e5) > 60) return bad('too_many_nights');
+    if (!Number.isInteger(guests) || guests < 1 || guests > CONFIG.maxGuests) return bad('invalid_guests');
+    const q = quote({ checkin: ci, checkout: co, guests });
+    const kings = b.kings == null ? Math.min(CONFIG.maxKing, q.rooms) : Number(b.kings);
+    if (!Number.isInteger(kings) || kings < Math.max(0, q.rooms - CONFIG.maxTwin) || kings > Math.min(CONFIG.maxKing, q.rooms)) return bad('invalid_beds');
+    const name = clip(b.name, 120), phone = String(b.phone || '').replace(/[\s-]/g, ''), email = clip(b.email, 160);
+    if (name.length < 2) return bad('invalid_name');
+    if (!/^\+\d{6,16}$/.test(phone)) return bad('invalid_phone');
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return bad('invalid_email');
+    if (b.event != null && !(Number.isInteger(b.event) && b.event >= 0 && b.event < EVENTS.length)) return bad('invalid_event');
+    let total = q.total, discount = 0;
+    if (b.total != null && b.total !== '') {
+      total = Math.round(Number(b.total) * 1000) / 1000;
+      if (!(total >= 0 && total <= 100000)) return bad('invalid_total');
+      discount = Math.max(0, Math.round((q.subtotal - total) * 1000) / 1000);
+    }
+    const paid = b.paid === true;
+    if (paid && !PAY_METHODS.includes(b.payMethod)) return bad('invalid_method');
+    const status = b.status === 'confirmed' ? 'confirmed' : 'pending';
+    const now = new Date().toISOString();
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const code = newCode();
+      const res = await env.DB.prepare(`INSERT INTO bookings
+        (code, status, checkin, checkout, nights, guests, rooms, kings, twins, event, name, phone, email, lang, coupon, pct, subtotal, discount, total, notes, created_at, updated_at,
+         pay_status, paid_at, pay_method, pay_ref, source)
+        SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'manual'
+        WHERE NOT EXISTS (SELECT 1 FROM bookings WHERE status IN ('pending','confirmed') AND checkin < ? AND checkout > ?)
+          AND NOT EXISTS (SELECT 1 FROM blocks WHERE date >= ? AND date < ?)`)
+        .bind(code, status, ci, co, q.nights, guests, q.rooms, kings, q.rooms - kings, b.event == null ? null : EVENTS[b.event], name, phone, email || null,
+          ['ar', 'en', 'es'].includes(b.lang) ? b.lang : 'ar', Math.max(q.subtotal, total), discount, total, clip(b.notes, 2000) || null, now, now,
+          paid ? 'paid' : 'unpaid', paid ? now : null, paid ? b.payMethod : null, paid ? clip(b.payRef, 80) || null : null,
+          co, ci, ci, co)
+        .run().catch(e => ({ error: e }));
+      if (res.error) { if (String(res.error).includes('UNIQUE')) continue; throw res.error; }
+      if (!res.meta || res.meta.changes !== 1) return bad('dates_unavailable', 409);
+      return json({ ok: true, booking: await env.DB.prepare(`SELECT * FROM bookings WHERE code = ?`).bind(code).first() });
+    }
+    return bad('try_again', 500);
+  }
+
+  // --- fotos del depósito (inspección) ---
+  const mp = path.match(/^\/bookings\/(LZ-[A-Z0-9]{5})\/photos$/);
+  if (mp && request.method === 'GET') {
+    const { results } = await env.DB.prepare(`SELECT id, created_at FROM photos WHERE code = ? ORDER BY id`).bind(mp[1]).all();
+    return json({ ok: true, photos: results });
+  }
+  if (mp && request.method === 'POST') {
+    let body = {};
+    try { body = await request.json(); } catch (e) {}
+    const data = String(body.data || '');
+    if (!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(data) || data.length > 1400000) return bad('invalid_photo');
+    if (!(await env.DB.prepare(`SELECT 1 FROM bookings WHERE code = ?`).bind(mp[1]).first())) return bad('not_found', 404);
+    const n = await env.DB.prepare(`SELECT COUNT(*) AS n FROM photos WHERE code = ?`).bind(mp[1]).first();
+    if (n.n >= 15) return bad('too_many_photos');
+    await env.DB.prepare(`INSERT INTO photos (code, data, created_at) VALUES (?, ?, ?)`).bind(mp[1], data, new Date().toISOString()).run();
+    return json({ ok: true });
+  }
+  const mph = path.match(/^\/photos\/(\d+)$/);
+  if (mph && request.method === 'GET') {
+    const r = await env.DB.prepare(`SELECT data FROM photos WHERE id = ?`).bind(Number(mph[1])).first();
+    if (!r) return bad('not_found', 404);
+    const [, type, b64] = r.data.match(/^data:(image\/\w+);base64,(.*)$/);
+    const bin = atob(b64), out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return new Response(out, { headers: { 'content-type': type, 'cache-control': 'private, max-age=86400' } });
+  }
+  if (mph && request.method === 'DELETE') {
+    await env.DB.prepare(`DELETE FROM photos WHERE id = ?`).bind(Number(mph[1])).run();
+    return json({ ok: true });
+  }
+
   const m = path.match(/^\/bookings\/(LZ-[A-Z0-9]{5})$/);
   if (m && request.method === 'POST') {
     let body = {};
@@ -306,6 +409,35 @@ async function apiAdmin(request, env, url) {
     const now = new Date().toISOString();
     const cur = await env.DB.prepare(`SELECT * FROM bookings WHERE code = ?`).bind(m[1]).first();
     if (!cur) return bad('not_found', 404);
+    // Pago (siempre el 100%)
+    if (body.payment) {
+      const p = body.payment;
+      if (!PAY_STATUSES.includes(p.status)) return bad('invalid_payment');
+      if (p.status === 'unpaid') {
+        await env.DB.prepare(`UPDATE bookings SET pay_status = 'unpaid', paid_at = NULL, pay_method = NULL, pay_ref = NULL, refund_amount = 0, refunded_at = NULL, updated_at = ? WHERE code = ?`).bind(now, m[1]).run();
+      } else if (p.status === 'paid') {
+        if (!PAY_METHODS.includes(p.method)) return bad('invalid_method');
+        await env.DB.prepare(`UPDATE bookings SET pay_status = 'paid', paid_at = ?, pay_method = ?, pay_ref = ?, refund_amount = 0, refunded_at = NULL, updated_at = ? WHERE code = ?`)
+          .bind(now, p.method, clip(p.ref, 80) || null, now, m[1]).run();
+      } else {
+        if (cur.pay_status === 'unpaid') return bad('not_paid');
+        const amt = Math.round(Number(p.amount) * 1000) / 1000;
+        if (!(amt > 0 && amt <= cur.total)) return bad('invalid_amount');
+        await env.DB.prepare(`UPDATE bookings SET pay_status = 'refunded', refund_amount = ?, refunded_at = ?, updated_at = ? WHERE code = ?`).bind(amt, now, now, m[1]).run();
+      }
+    }
+    // Depósito de garantía
+    if (body.deposit) {
+      const d = body.deposit;
+      if (!DEPOSIT_STATUSES.includes(d.status)) return bad('invalid_deposit');
+      let kept = 0;
+      if (d.status === 'partial') {
+        kept = Math.round(Number(d.kept) * 1000) / 1000;
+        if (!(kept > 0 && kept <= CONFIG.deposit)) return bad('invalid_amount');
+      }
+      await env.DB.prepare(`UPDATE bookings SET deposit_status = ?, deposit_kept = ?, deposit_note = ?, deposit_at = ?, updated_at = ? WHERE code = ?`)
+        .bind(d.status, kept, clip(d.note, 300) || null, d.status === 'pending' ? null : now, now, m[1]).run();
+    }
     if (typeof body.notes === 'string') {
       await env.DB.prepare(`UPDATE bookings SET notes = ?, updated_at = ? WHERE code = ?`).bind(clip(body.notes, 2000), now, m[1]).run();
     }

@@ -192,8 +192,8 @@ h1,h2,h3,p{margin:0}
 .group{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
 .item{display:flex;align-items:center;gap:13px;padding:14px;width:100%;text-align:start;border-top:1px solid var(--line)}
 .item:first-child{border-top:0}
-.item i{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
-.item .ic{width:19px;height:19px}
+.item>i{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.item>i .ic{width:19px;height:19px}
 .item .t{flex:1;min-width:0}
 .item .t b{display:block;font-size:15.5px}
 .item .t span{display:block;font-size:13px;color:var(--muted);font-weight:600;margin-top:2px;line-height:1.4}
@@ -255,8 +255,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
 /* Diálogo */
 .dlg{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:center;padding:12px 12px calc(var(--sab) + 12px);background:rgba(0,20,32,.42);animation:fade .18s ease}
 .dlg .box{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:22px 18px 16px;text-align:center;animation:up .22s ease}
-.dlg .box i{width:56px;height:56px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
-.dlg .box i .ic{width:28px;height:28px}
+.dlg .box>i{width:56px;height:56px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
+.dlg .box>i .ic{width:28px;height:28px}
 .dlg h3{font-size:19px;font-weight:800}
 .dlg p{font-size:14.5px;color:var(--muted);font-weight:600;margin:8px 0 18px;line-height:1.45}
 .dlg .bb{display:flex;gap:10px}
@@ -313,6 +313,65 @@ textarea:focus{border-color:var(--blue);background:#fff}
   .toast{top:auto;bottom:28px}
   @keyframes side{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
 }
+/* Pago, depósito, tareas, formularios */
+.paylbl{font-size:11.5px;font-weight:800;white-space:nowrap}
+.p-paid{color:var(--ok)}.p-unpaid{color:var(--bad)}.p-refunded{color:var(--grey)}
+.c-paid{background:var(--ok-bg);color:var(--ok)}.c-unpaid{background:var(--bad-bg);color:var(--bad)}.c-refunded{background:var(--grey-bg);color:var(--grey)}
+.c-dep-pending{background:var(--gold-bg);color:var(--gold-ink)}.c-dep-collected{background:var(--blue-soft);color:var(--blue)}.c-dep-returned{background:var(--ok-bg);color:var(--ok)}.c-dep-partial{background:var(--bad-bg);color:var(--bad)}
+.card h3 .chip{margin-inline-start:auto}
+.info-line{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5;margin-top:10px}
+.warn{margin-top:12px;display:flex;gap:10px;align-items:center;background:var(--bad-bg);color:var(--bad);border-radius:14px;padding:11px 12px;font-size:13.5px;font-weight:700;line-height:1.4}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sbtn{height:42px;padding:0 14px;border-radius:12px;font-weight:800;font-size:14px;background:var(--bg);color:var(--navy);display:inline-flex;align-items:center;gap:6px}
+.sbtn .ic{width:18px;height:18px}
+.sbtn.pri{background:var(--deep);color:#fff}.sbtn.ok{background:var(--ok);color:#fff}.sbtn.bad{color:var(--bad);background:var(--bad-bg)}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.photos .ph{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--bg)}
+.photos .ph img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.photos .ph .del{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center}
+.photos .ph .del .ic{width:14px;height:14px}
+.photos .add{aspect-ratio:1;border-radius:12px;border:2px dashed #C9D1DA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:800;color:var(--muted);cursor:pointer;text-align:center;padding:4px}
+.photos .add.busy{opacity:.5;pointer-events:none}
+.flbl{display:block;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:14px}
+.tasks{display:flex;flex-direction:column;gap:8px}
+.task{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:var(--shadow);width:100%;text-align:start}
+.task>i{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.task>i .ic{width:19px;height:19px}
+.task .t{flex:1;min-width:0}.task b{display:block;font-size:14.5px}.task span{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:1px}
+.task.late{box-shadow:inset 4px 0 0 var(--bad),var(--shadow)}
+.fab{position:fixed;right:16px;bottom:calc(var(--tabbar) + var(--sab) + 14px);z-index:31;height:52px;padding:0 20px 0 16px;border-radius:999px;background:linear-gradient(180deg,#FAD26D,#D3AE2A);color:#002233;font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 28px rgba(160,125,20,.4)}
+.side .newb{margin-top:16px;height:48px;border-radius:14px;background:linear-gradient(180deg,#FAD26D,#D3AE2A);color:#002233;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f label,.f .lb{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.f input,.f select,.f textarea{width:100%;min-width:0;height:48px;border:1px solid var(--line);border-radius:14px;padding:0 12px;font-size:16px;background:#fff;color:var(--navy);-webkit-appearance:none;appearance:none;outline:none;font-family:inherit}
+.f textarea{height:auto;min-height:80px;padding:12px}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--blue)}
+.f input[type=date]{display:block;line-height:46px}
+.f2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.stepper{display:flex;align-items:center;justify-content:space-between;height:48px;border:1px solid var(--line);border-radius:14px;padding:0 5px;background:#fff}
+.stepper button{width:38px;height:38px;border-radius:10px;background:var(--bg);font-size:20px;font-weight:800;color:var(--navy)}
+.stepper button:disabled{opacity:.35}
+.stepper b{font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{height:40px;padding:0 14px;border-radius:12px;background:var(--bg);font-weight:800;font-size:14px;color:var(--ink2)}
+.chips button[aria-pressed=true]{background:var(--deep);color:#fff}
+.nbform .chips button{background:#fff;box-shadow:var(--shadow)}
+.nbform .chips button[aria-pressed=true]{background:var(--deep)}
+.toggle{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;box-shadow:var(--shadow);width:100%;text-align:start;font-weight:800;font-size:15px}
+.toggle span{flex:1}
+.qbox{background:var(--blue-soft);color:var(--blue);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:700;line-height:1.45}
+.ferr{color:var(--bad);font-size:14px;font-weight:700}
+.nbform{display:flex;flex-direction:column;gap:14px}
+.dlg .box.form{text-align:start;max-height:calc(100dvh - 40px);overflow-y:auto}
+.dlg .box.form h3{margin-bottom:14px}
+.dlg .box.form .f,.dlg .box.form .qbox{margin-bottom:12px}
+.viewer{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:calc(var(--sat) + 20px) 16px calc(var(--sab) + 20px)}
+.viewer img{max-width:100%;max-height:100%;border-radius:12px}
+.viewer button{position:absolute;top:calc(var(--sat) + 14px);right:14px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center}
+.selbar .r2{display:flex;gap:8px}
+.selbar .go2{height:44px;padding:0 14px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;font-weight:800;flex:1}
+@media (min-width:1000px){.fab{display:none}}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -334,7 +393,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       needYou: 'Esperan tu respuesta', upcoming: 'Próximas llegadas', seeAll: 'Ver todas', allClear: 'Todo al día. No hay solicitudes pendientes.', noUpcoming: 'No hay llegadas confirmadas próximas.',
       pendingAlert: function (n) { return n === 1 ? 'Tienes 1 solicitud nueva por responder' : 'Tienes ' + n + ' solicitudes por responder'; },
       st: { pending: 'Pendiente', confirmed: 'Confirmada', rejected: 'Rechazada', cancelled: 'Cancelada' },
-      filters: { pending: 'Pendientes', confirmed: 'Confirmadas', cancelled: 'Canceladas', rejected: 'Rechazadas', all: 'Todas' },
+      filters: { unpaid: 'Sin pagar', pending: 'Pendientes', confirmed: 'Confirmadas', cancelled: 'Canceladas', rejected: 'Rechazadas', all: 'Todas' },
       search: 'Buscar nombre, código o teléfono', noResults: 'No hay reservas aquí.', past: 'Pasadas',
       nights: function (n) { return n === 1 ? '1 noche' : n + ' noches'; }, guests: function (n) { return n + ' personas'; }, guestsS: function (n) { return n + ' pers.'; },
       nightsL: 'Noches', guestsL: 'Personas', checkin: 'Llegada', checkout: 'Salida', rooms: 'Habitaciones', beds: function (k, t) { return k + ' king · ' + t + ' de 2 camas'; }, purpose: 'Motivo', notGiven: 'Sin indicar',
@@ -367,6 +426,26 @@ textarea:focus{border-color:var(--blue);background:#fff}
       iosSteps: ['Abre lazurdeom.com/admin en Safari.', 'Toca el botón Compartir (cuadro con flecha).', 'Elige “Agregar a pantalla de inicio” y toca Agregar.', 'Abre Lazurde Admin desde el ícono dorado.'],
       pcSteps: ['Abre lazurdeom.com/admin en Chrome o Edge.', 'Haz clic en el ícono de instalar en la barra de direcciones (o menú ⋯ → Instalar).', 'Queda en el escritorio y en la barra de tareas.'],
       sLang: 'Idioma del panel', sAccount: 'Sesión', sAccountTxt: 'La sesión dura 30 días en este dispositivo.', logout: 'Cerrar sesión',
+      todo: 'Por hacer', tCollect: function (n) { return 'Cobrar depósito a ' + n; }, tCollectSub: function (m) { return 'Llega hoy o está en el resort · ' + m; }, tReturn: function (n) { return 'Devolver depósito a ' + n; }, tReturnSub: function (d) { return 'Salió el ' + d + ' · devolver dentro de 24 h'; }, tLate: function (d) { return 'Vencido · salió el ' + d; },
+      tUnpaid: function (n) { return n === 1 ? '1 reserva sin pagar' : n + ' reservas sin pagar'; }, tUnpaidSub: 'Están apartando fechas. Confírmalas cuando paguen o recházalas.',
+      paidOnly: 'Solo lo pagado', pay: { unpaid: 'Sin pagar', paid: 'Pagada', refunded: 'Reembolsada' }, methods: { card: 'Tarjeta', transfer: 'Transferencia', cash: 'Efectivo', other: 'Otro' },
+      specialPrice: 'Precio especial', paidInfo: function (d, m, r) { return 'Pagada el ' + d + ' · ' + m + (r ? ' · Ref. ' + r : ''); }, refundInfo: function (a, d) { return 'Reembolsado ' + a + ' el ' + d; },
+      unpaidWarn: 'El cliente aún no ha pagado. La reserva se confirma cuando pague el 100%.', regPay: 'Registrar pago', regPayConfirm: 'Registrar pago y confirmar', payConfirmShort: 'Pagó · Confirmar', fullOnly: 'Se paga siempre el 100% de la reserva.',
+      payMethod: 'Método de pago', payRef: 'Referencia (opcional)', payRefPh: 'Nº de transacción, recibo…', paidConfirmed: 'Pago registrado y reserva confirmada',
+      regRefund: 'Registrar reembolso', editRefund: 'Cambiar reembolso', refundAmt: 'Monto devuelto', refundHint: function (t) { return 'Total pagado: ' + t + '. Devuelve según la política de cancelación.'; }, badAmount: 'Monto no válido.',
+      undoPay: 'Marcar sin pagar', undoPayQ: '¿Marcar como sin pagar?', undoPayTxt: 'Úsalo solo si el pago se registró por error.',
+      refundNowQ: '¿Registrar el reembolso ahora?', refundNowTxt: 'Esta reserva estaba pagada. Registra cuánto se le devuelve al cliente.',
+      depTitle: 'Depósito de garantía', dep: { pending: 'Por cobrar', collected: 'Cobrado', returned: 'Devuelto', partial: 'Retenido en parte' },
+      depPendingTxt: function (m) { return 'Se cobran ' + m + ' al llegar. Se devuelve dentro de 24 h después de la salida, tras revisar el resort.'; }, depCollectedTxt: function (d) { return 'Cobrado el ' + d + '. Devuélvelo dentro de 24 h después de la salida.'; },
+      depReturnedTxt: function (d) { return 'Devuelto completo el ' + d + '.'; }, depPartialTxt: function (k, r) { return 'Retenido: <b>' + k + '</b> · Devuelto: <b>' + r + '</b>'; },
+      depCollect: 'Marcar cobrado', depReturn: 'Devuelto completo', depKeep: 'Retener una parte', change: 'Cambiar', depReturnQ: '¿Depósito devuelto completo?', depReturnTxt: function (m) { return 'Se devolvieron ' + m + ' al cliente.'; },
+      keptAmt: 'Monto retenido (máx. 100)', reason: 'Motivo', reasonPh: 'Daño, faltante, limpieza extra…', needReason: 'Escribe el motivo.',
+      photos: 'Fotos de la revisión', photosHint: 'Fotos del resort a la llegada y a la salida: sirven de prueba si hay daños.', addPhoto: 'Agregar foto', tooManyPhotos: 'Máximo 15 fotos por reserva.', delPhotoQ: '¿Borrar esta foto?', delete: 'Borrar',
+      newB: 'Nueva reserva', newFromSel: 'Crear reserva', newHint: 'Para reservas que llegan por llamada, WhatsApp o en persona. Aparta las fechas igual que la web.', kingBeds: 'Camas king', nameL: 'Nombre del cliente', phoneL: 'Teléfono', emailL: 'Correo (opcional)',
+      pickDates: 'Elige llegada y salida para ver el precio.', badDates: 'La salida debe ser después de la llegada.', normalPrice: function (m, n) { return 'Precio normal: <b>' + m + '</b> · ' + n; },
+      totalL: 'Total a cobrar', totalHint: 'Déjalo vacío para usar el precio normal. Cámbialo solo si acordaron otro precio.', paidQ: 'El cliente ya pagó el 100%',
+      willConfirm: 'Se creará confirmada y pagada.', willPending: 'Se creará pendiente y aparta las fechas hasta que pague.', create: 'Crear reserva', needName: 'Escribe el nombre del cliente.', badPhone: 'Teléfono no válido. Ej.: +968 9123 4567',
+      createdPaid: 'Reserva creada y confirmada', createdUnpaid: 'Reserva creada: pendiente de pago', manual: 'Creada en el panel',
       newBooking: function (n) { return 'Nueva reserva de ' + n; }, syncTitle: 'Hora de Omán · datos en vivo', syncing: 'Sincronizando…', synced: function (s) { return s < 5 ? 'En vivo · actualizado ahora' : 'En vivo · hace ' + s + ' s'; }, open: 'Ver'
     },
     en: {
@@ -378,7 +457,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       needYou: 'Waiting for your answer', upcoming: 'Upcoming arrivals', seeAll: 'See all', allClear: 'All caught up. No pending requests.', noUpcoming: 'No upcoming confirmed arrivals.',
       pendingAlert: function (n) { return n === 1 ? 'You have 1 new request to answer' : 'You have ' + n + ' requests to answer'; },
       st: { pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled' },
-      filters: { pending: 'Pending', confirmed: 'Confirmed', cancelled: 'Cancelled', rejected: 'Rejected', all: 'All' },
+      filters: { unpaid: 'Unpaid', pending: 'Pending', confirmed: 'Confirmed', cancelled: 'Cancelled', rejected: 'Rejected', all: 'All' },
       search: 'Search name, code or phone', noResults: 'No bookings here.', past: 'Past',
       nights: function (n) { return n === 1 ? '1 night' : n + ' nights'; }, guests: function (n) { return n + ' guests'; }, guestsS: function (n) { return n + ' guests'; },
       nightsL: 'Nights', guestsL: 'Guests', checkin: 'Check-in', checkout: 'Check-out', rooms: 'Bedrooms', beds: function (k, t) { return k + ' king · ' + t + ' twin'; }, purpose: 'Purpose', notGiven: 'Not given',
@@ -411,6 +490,26 @@ textarea:focus{border-color:var(--blue);background:#fff}
       iosSteps: ['Open lazurdeom.com/admin in Safari.', 'Tap the Share button (square with arrow).', 'Choose “Add to Home Screen” and tap Add.', 'Open Lazurde Admin from the gold icon.'],
       pcSteps: ['Open lazurdeom.com/admin in Chrome or Edge.', 'Click the install icon in the address bar (or menu ⋯ → Install).', 'It stays on the desktop and taskbar.'],
       sLang: 'Panel language', sAccount: 'Session', sAccountTxt: 'Sessions last 30 days on this device.', logout: 'Log out',
+      todo: 'To do', tCollect: function (n) { return 'Collect deposit from ' + n; }, tCollectSub: function (m) { return 'Arriving today or staying now · ' + m; }, tReturn: function (n) { return 'Return deposit to ' + n; }, tReturnSub: function (d) { return 'Checked out ' + d + ' · return within 24 h'; }, tLate: function (d) { return 'Overdue · checked out ' + d; },
+      tUnpaid: function (n) { return n === 1 ? '1 unpaid booking' : n + ' unpaid bookings'; }, tUnpaidSub: 'They are holding dates. Confirm them once paid, or reject them.',
+      paidOnly: 'Paid only', pay: { unpaid: 'Unpaid', paid: 'Paid', refunded: 'Refunded' }, methods: { card: 'Card', transfer: 'Transfer', cash: 'Cash', other: 'Other' },
+      specialPrice: 'Special price', paidInfo: function (d, m, r) { return 'Paid on ' + d + ' · ' + m + (r ? ' · Ref. ' + r : ''); }, refundInfo: function (a, d) { return 'Refunded ' + a + ' on ' + d; },
+      unpaidWarn: 'The guest has not paid yet. The booking is confirmed once 100% is paid.', regPay: 'Record payment', regPayConfirm: 'Record payment and confirm', payConfirmShort: 'Paid · Confirm', fullOnly: 'Bookings are always paid in full (100%).',
+      payMethod: 'Payment method', payRef: 'Reference (optional)', payRefPh: 'Transaction no., receipt…', paidConfirmed: 'Payment recorded and booking confirmed',
+      regRefund: 'Record refund', editRefund: 'Change refund', refundAmt: 'Amount refunded', refundHint: function (t) { return 'Total paid: ' + t + '. Refund according to the cancellation policy.'; }, badAmount: 'Invalid amount.',
+      undoPay: 'Mark as unpaid', undoPayQ: 'Mark as unpaid?', undoPayTxt: 'Only use this if the payment was recorded by mistake.',
+      refundNowQ: 'Record the refund now?', refundNowTxt: 'This booking was paid. Record how much is returned to the guest.',
+      depTitle: 'Security deposit', dep: { pending: 'To collect', collected: 'Collected', returned: 'Returned', partial: 'Partly kept' },
+      depPendingTxt: function (m) { return m + ' is collected on arrival and returned within 24 h after check-out, after the inspection.'; }, depCollectedTxt: function (d) { return 'Collected on ' + d + '. Return it within 24 h after check-out.'; },
+      depReturnedTxt: function (d) { return 'Fully returned on ' + d + '.'; }, depPartialTxt: function (k, r) { return 'Kept: <b>' + k + '</b> · Returned: <b>' + r + '</b>'; },
+      depCollect: 'Mark collected', depReturn: 'Fully returned', depKeep: 'Keep part of it', change: 'Change', depReturnQ: 'Deposit fully returned?', depReturnTxt: function (m) { return m + ' returned to the guest.'; },
+      keptAmt: 'Amount kept (max 100)', reason: 'Reason', reasonPh: 'Damage, missing item, extra cleaning…', needReason: 'Please write the reason.',
+      photos: 'Inspection photos', photosHint: 'Photos of the resort at check-in and check-out: proof if anything is damaged.', addPhoto: 'Add photo', tooManyPhotos: 'Maximum 15 photos per booking.', delPhotoQ: 'Delete this photo?', delete: 'Delete',
+      newB: 'New booking', newFromSel: 'Create booking', newHint: 'For bookings that come by phone, WhatsApp or in person. It holds the dates just like the website.', kingBeds: 'King beds', nameL: 'Guest name', phoneL: 'Phone', emailL: 'Email (optional)',
+      pickDates: 'Pick check-in and check-out to see the price.', badDates: 'Check-out must be after check-in.', normalPrice: function (m, n) { return 'Standard price: <b>' + m + '</b> · ' + n; },
+      totalL: 'Total to charge', totalHint: 'Leave empty for the standard price. Change it only if a different price was agreed.', paidQ: 'The guest has already paid 100%',
+      willConfirm: 'It will be created as confirmed and paid.', willPending: 'It will be created as pending and holds the dates until paid.', create: 'Create booking', needName: 'Please write the guest name.', badPhone: 'Invalid phone. E.g. +968 9123 4567',
+      createdPaid: 'Booking created and confirmed', createdUnpaid: 'Booking created: waiting for payment', manual: 'Created in the panel',
       newBooking: function (n) { return 'New booking from ' + n; }, syncTitle: 'Oman time · live data', syncing: 'Syncing…', synced: function (s) { return s < 5 ? 'Live · updated just now' : 'Live · ' + s + ' s ago'; }, open: 'Open'
     }
   };
@@ -462,7 +561,10 @@ textarea:focus{border-color:var(--blue);background:#fff}
     chart: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     lock: '<rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    cam: '<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    alert: '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>'
   };
   function I(n, cls) { return '<svg class="ic' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true">' + P[n] + '</svg>'; }
 
@@ -497,7 +599,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
   var S = {
     logged: false, booting: true, view: 'home', filter: 'pending', q: '', all: [], blocks: [], loaded: false, noDb: false,
     month: today().slice(0, 7), sel: [], open: null, err: '', busy: false, seen: null,
-    push: 'unknown', sound: true, installEvt: null
+    push: 'unknown', sound: true, installEvt: null, photos: {}, uploading: false, nb: null
   };
   try { S.sound = localStorage.getItem('lz-admin-sound') !== '0'; } catch (e) {}
   var app = document.getElementById('app'), layer = document.getElementById('layer');
@@ -523,7 +625,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       var k = ym + '-' + (d < 10 ? '0' : '') + d, b = nm[k];
       if (b && b.status === 'confirmed') c++; else if (b) p++; else if (bm[k]) bl++;
     }
-    S.all.forEach(function (b) { if (b.status === 'confirmed' && b.checkin.slice(0, 7) === ym) income += b.total; });
+    S.all.forEach(function (b) { if (b.checkin.slice(0, 7) === ym) income += netPaid(b); });
     return { days: days, confirmed: c, pending: p, blocked: bl, income: income };
   }
 
@@ -538,9 +640,10 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var navs = [['home', 'home'], ['bookings', 'list'], ['calendar', 'cal'], ['settings', 'gear']];
     var navBtn = function (v) { return '<button data-nav="' + v[0] + '"' + (S.view === v[0] ? ' aria-current="page"' : '') + '>' + I(v[1]) + '<span>' + x.nav[v[0]] + '</span>' + (v[0] === 'bookings' && n ? '<span class="dot">' + n + '</span>' : '') + '</button>'; };
     var body = S.view === 'home' ? homeView() : S.view === 'bookings' ? bookingsView() : S.view === 'calendar' ? calendarView() : settingsView();
-    app.innerHTML = '<div class="shell"><aside class="side"><div class="brand"><img src="/booking/img/stone.svg" alt=""><div><b>LAZURDE</b><span>' + x.tagline + '</span></div></div><div class="sclock' + (isLive() ? '' : ' off') + '" data-clockwrap><b data-clock>' + clockText(true) + '</b><span><i class="lv"></i><em data-synced style="font-style:normal">' + syncText() + '</em></span></div><nav>' + navs.map(navBtn).join('') + '</nav><div class="foot">lazurdeom.com</div></aside>' +
+    app.innerHTML = '<div class="shell"><aside class="side"><div class="brand"><img src="/booking/img/stone.svg" alt=""><div><b>LAZURDE</b><span>' + x.tagline + '</span></div></div><div class="sclock' + (isLive() ? '' : ' off') + '" data-clockwrap><b data-clock>' + clockText(true) + '</b><span><i class="lv"></i><em data-synced style="font-style:normal">' + syncText() + '</em></span></div><nav>' + navs.map(navBtn).join('') + '</nav><button class="newb" data-act="newb">' + I('plus') + x.newB + '</button><div class="foot">lazurdeom.com</div></aside>' +
       '<main class="view">' + body + '</main></div>' +
-      '<nav class="tabbar">' + navs.map(navBtn).join('') + '</nav>' + (S.view === 'calendar' && S.sel.length ? selBar() : '');
+      '<nav class="tabbar">' + navs.map(navBtn).join('') + '</nav>' + (S.view === 'calendar' && S.sel.length ? selBar() : '') +
+      (S.view !== 'settings' && !(S.view === 'calendar' && S.sel.length) ? '<button class="fab" data-act="newb">' + I('plus') + x.newB + '</button>' : '');
   }
 
   function loginView() {
@@ -555,7 +658,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var x = t();
     return '<button class="bk" data-open="' + b.code + '"><div class="dt ' + b.status + '"><small>' + fmt(b.checkin, { weekday: 'short' }) + '</small><b>' + +b.checkin.slice(8) + '</b><small>' + fmt(b.checkin, { month: 'short' }) + '</small></div>' +
       '<div class="mid"><span class="nm">' + esc(b.name) + '</span><span class="sb">' + dShort(b.checkin) + ' → ' + dShort(b.checkout) + ' · ' + x.nights(b.nights) + '</span><span class="sb">' + x.guestsS(b.guests) + ' · ' + b.code + '</span></div>' +
-      '<div class="end"><span class="tot">' + money(b.total) + '</span><span class="chip c-' + b.status + '">' + x.st[b.status] + '</span></div></button>';
+      '<div class="end"><span class="tot">' + money(b.total) + '</span><span class="chip c-' + b.status + '">' + x.st[b.status] + '</span>' + (isActive(b) || payOf(b) !== 'unpaid' ? '<span class="paylbl p-' + payOf(b) + '">' + x.pay[payOf(b)] + '</span>' : '') + '</div></button>';
   }
   function emptyBox(icon, txt) { return '<div class="empty">' + I(icon) + '<span>' + txt + '</span></div>'; }
   function skeleton(n) { var h = ''; for (var i = 0; i < n; i++) h += '<div class="skel"></div>'; return '<div class="list">' + h + '</div>'; }
@@ -575,10 +678,20 @@ textarea:focus{border-color:var(--blue);background:#fff}
     h += '<div class="stats">' +
       '<button class="stat" data-go="pending"><div class="k"><i class="i-gold">' + I('inbox') + '</i>' + x.stPending + '</div><div class="v">' + pend.length + '</div><div class="s">' + x.tapReview + '</div></button>' +
       '<button class="stat" data-go="confirmed"><div class="k"><i class="i-blue">' + I('cal') + '</i>' + x.stArrivals + '</div><div class="v">' + arrivals + '</div><div class="s">' + (upcoming[0] ? dMed(upcoming[0].checkin) : '—') + '</div></button>' +
-      '<div class="stat"><div class="k"><i class="i-green">' + I('coin') + '</i>' + x.stIncome + '</div><div class="v">' + money(ms.income) + '</div><div class="s">' + x.confirmedOnly + '</div></div>' +
+      '<div class="stat"><div class="k"><i class="i-green">' + I('coin') + '</i>' + x.stIncome + '</div><div class="v">' + money(ms.income) + '</div><div class="s">' + x.paidOnly + '</div></div>' +
       '<div class="stat"><div class="k"><i class="i-violet">' + I('chart') + '</i>' + x.stOcc + '</div><div class="v">' + occ + '%</div><div class="s">' + x.nightsOf(ms.confirmed, ms.days) + '</div><div class="bar"><span style="width:' + occ + '%"></span></div></div></div>';
     if (!S.loaded) return h + '<div class="wrap sec">' + skeleton(3) + '</div>';
     if (S.noDb) return h + '<div class="wrap sec">' + emptyBox('info', x.noDb) + '</div>';
+    var dt = depositTasks(), up = unpaidList();
+    if (dt.length || up.length) {
+      h += '<div class="wrap"><section class="sec"><div class="sec-h"><h2>' + x.todo + '</h2></div><div class="tasks">';
+      dt.forEach(function (k) {
+        var collect = k.kind === 'collect';
+        h += '<button class="task' + (k.late ? ' late' : '') + '" data-open="' + k.b.code + '"><i class="' + (collect ? 'i-blue' : k.late ? '' : 'i-green') + '"' + (k.late ? ' style="background:var(--bad-bg);color:var(--bad)"' : '') + '>' + I(k.late ? 'alert' : 'lock') + '</i><div class="t"><b>' + esc(collect ? x.tCollect(k.b.name) : x.tReturn(k.b.name)) + '</b><span>' + (collect ? x.tCollectSub(money(100)) : k.late ? x.tLate(dMed(k.b.checkout)) : x.tReturnSub(dMed(k.b.checkout))) + '</span></div>' + I('right') + '</button>';
+      });
+      if (up.length) h += '<button class="task" data-go="unpaid"><i style="background:var(--bad-bg);color:var(--bad)">' + I('coin') + '</i><div class="t"><b>' + x.tUnpaid(up.length) + '</b><span>' + x.tUnpaidSub + '</span></div>' + I('right') + '</button>';
+      h += '</div></section></div>';
+    }
     h += '<div class="wrap"><div class="home-cols"><section class="sec"><div class="sec-h"><h2>' + x.needYou + '</h2>' + (pend.length ? '<button data-go="pending">' + x.seeAll + '</button>' : '') + '</div>';
     if (pend.length) h += '<div class="alert" style="margin-bottom:10px">' + I('bell') + '<span>' + x.pendingAlert(pend.length) + '</span></div><div class="list">' + pend.slice(0, 5).map(bkRow).join('') + '</div>';
     else h += emptyBox('check', x.allClear);
@@ -592,14 +705,16 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var counts = { pending: 0, confirmed: 0, cancelled: 0, rejected: 0, all: S.all.length };
     S.all.forEach(function (b) { counts[b.status]++; });
     var list = S.all.filter(function (b) {
-      if (S.filter !== 'all' && b.status !== S.filter) return false;
+      if (S.filter === 'unpaid') { if (!(isActive(b) && payOf(b) === 'unpaid' && b.checkout > td)) return false; }
+      else if (S.filter !== 'all' && b.status !== S.filter) return false;
       if (!q) return true;
       return (b.name + ' ' + b.code + ' ' + b.phone + ' ' + (b.email || '')).toLowerCase().indexOf(q) !== -1;
     });
     var h = '<header class="top"><div class="ttl"><h1>' + x.nav.bookings + '</h1>' + clockChip() + '<button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div>' +
       '<label class="search">' + I('search') + '<span class="sr">' + x.search + '</span><input id="q" type="search" placeholder="' + x.search + '" value="' + esc(S.q) + '" autocomplete="off"></label>' +
-      '<div class="seg">' + ['pending', 'confirmed', 'cancelled', 'rejected', 'all'].map(function (f) {
-        return '<button data-filter="' + f + '" aria-pressed="' + (S.filter === f) + '">' + x.filters[f] + (f === 'pending' && counts.pending ? '<b>' + counts.pending + '</b>' : '') + '</button>';
+      '<div class="seg">' + ['pending', 'unpaid', 'confirmed', 'cancelled', 'rejected', 'all'].map(function (f) {
+        var nUnpaid = unpaidList().length;
+        return '<button data-filter="' + f + '" aria-pressed="' + (S.filter === f) + '">' + x.filters[f] + (f === 'pending' && counts.pending ? '<b>' + counts.pending + '</b>' : '') + (f === 'unpaid' && nUnpaid ? '<b style="background:#F9C9C4;color:#7A1A12">' + nUnpaid + '</b>' : '') + '</button>';
       }).join('') + '</div></header><div class="wrap" style="padding-top:8px">';
     if (!S.loaded) return h + skeleton(4) + '</div>';
     if (!list.length) return h + emptyBox('inbox', x.noResults) + '</div>';
@@ -657,7 +772,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
   function selBar() {
     var x = t();
     return '<div class="selbar"><div class="r"><b>' + x.selected(S.sel.length) + '</b><button class="x" data-act="clearsel" aria-label="x">' + I('x') + '</button></div>' +
-      '<div class="r"><input id="bn" type="text" placeholder="' + x.blockReason + '" maxlength="120"><button class="go" data-act="block">' + x.block + '</button></div></div>';
+      '<div class="r"><input id="bn" type="text" placeholder="' + x.blockReason + '" maxlength="120"><button class="go" data-act="block">' + x.block + '</button></div>' +
+      '<div class="r2"><button class="go2" data-act="newfromsel">' + I('plus') + ' ' + x.newFromSel + '</button></div></div>';
   }
 
   function settingsView() {
@@ -687,12 +803,13 @@ textarea:focus{border-color:var(--blue);background:#fff}
   function openSheet(code) {
     var b = byCode(code);
     if (!b) return;
-    S.open = code;
+    S.open = code; S.nb = null;
     try { history.replaceState(null, '', '#' + code); } catch (e) {}
     renderSheet(true);
+    if (b.status === 'confirmed') loadPhotos(code);
   }
   function closeSheet() {
-    S.open = null; layer.innerHTML = '';
+    S.open = null; S.nb = null; layer.innerHTML = '';
     try { history.replaceState(null, '', location.pathname); } catch (e) {}
   }
   function renderSheet(fresh) {
@@ -703,7 +820,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var scroll = !fresh && layer.querySelector('.body') ? layer.querySelector('.body').scrollTop : 0;
     var h = '<div class="scrim" data-act="close"></div><section class="sheet" role="dialog" aria-modal="true" aria-label="' + b.code + '"><div class="grab"></div>' +
       '<div class="sh"><span class="code">' + b.code + '</span><span class="chip c-' + b.status + '">' + x.st[b.status] + '</span><button class="iconbtn" data-act="close" aria-label="' + x.back + '">' + I('x') + '</button></div><div class="body">';
-    h += '<div><h2 class="g-name">' + esc(b.name) + '</h2><p class="g-sub">' + x.received + ' ' + new Date(b.created_at).toLocaleString(loc(L), { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) + ' · ' + x.language + ': ' + ({ ar: 'العربية', en: 'English', es: 'Español' }[b.lang] || b.lang) + '</p></div>';
+    h += '<div><h2 class="g-name">' + esc(b.name) + '</h2><p class="g-sub">' + x.received + ' ' + new Date(b.created_at).toLocaleString(loc(L), { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) + ' · ' + x.language + ': ' + ({ ar: 'العربية', en: 'English', es: 'Español' }[b.lang] || b.lang) + (b.source === 'manual' ? ' · ' + x.manual : '') + '</p></div>';
     h += '<div class="contact"><a class="wa" href="https://wa.me/' + wa + '" target="_blank" rel="noopener">' + I('wa') + x.whatsapp + '</a><a href="tel:' + esc(b.phone) + '">' + I('phone') + x.call + '</a>' +
       '<a href="' + (b.email ? 'mailto:' + esc(b.email) : '#') + '"' + (b.email ? '' : ' aria-disabled="true"') + '>' + I('mail') + x.email + '</a></div>';
     if (b.status === 'confirmed') h += '<div class="msgcard"><p>' + x.msgConfirm + '</p><a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(MSG.confirmed[ml](b)) + '">' + I('wa') + x.sendConfirm + '</a></div>';
@@ -713,12 +830,11 @@ textarea:focus{border-color:var(--blue);background:#fff}
       '<div class="facts"><div class="fact">' + I('moon') + '<div><span>' + x.nightsL + '</span>' + b.nights + '</div></div><div class="fact">' + I('users') + '<div><span>' + x.guestsL + '</span>' + b.guests + '</div></div>' +
       '<div class="fact wide">' + I('bed') + '<div><span>' + x.rooms + '</span>' + b.rooms + ' · ' + x.beds(b.kings, b.twins) + '</div></div>' +
       '<div class="fact wide">' + I('tag') + '<div><span>' + x.purpose + '</span>' + esc(b.event || x.notGiven) + '</div></div></div></div>';
-    h += '<div class="card"><h3>' + I('coin') + x.payment + '</h3><div class="rows"><div><span class="muted">' + x.subtotal + '</span><span>' + money(b.subtotal) + '</span></div>' +
-      (b.discount ? '<div><span class="muted">' + x.discount + ' · ' + esc(b.coupon) + ' (' + b.pct + '%)</span><span>−' + money(b.discount) + '</span></div>' : '') +
-      '<div class="t"><span>' + x.total + '</span><span>' + money(b.total) + '</span></div></div><div class="dep">' + I('info') + '<span>' + x.deposit + '</span></div></div>';
+    h += payCard(b) + depCard(b);
     h += '<div class="card"><h3>' + I('note') + x.notes + '</h3><textarea id="notes" placeholder="' + x.notesPh + '" maxlength="2000">' + esc(keepNotes != null ? keepNotes : b.notes || '') + '</textarea><button class="savebtn" data-act="savenotes"' + (keepNotes != null ? '' : ' disabled') + '>' + x.save + '</button></div>';
     h += '</div><div class="foot">';
-    if (b.status === 'pending') h += '<button class="btn btn-bad" data-status="rejected">' + I('x') + x.reject + '</button><button class="btn btn-ok" data-status="confirmed">' + I('check') + x.confirm + '</button>';
+    if (b.status === 'pending' && payOf(b) === 'unpaid') h += '<button class="btn btn-bad" data-status="rejected" style="flex:.6">' + x.reject + '</button><button class="btn btn-ok" data-act="payconfirm">' + I('check') + x.payConfirmShort + '</button>';
+    else if (b.status === 'pending') h += '<button class="btn btn-bad" data-status="rejected">' + I('x') + x.reject + '</button><button class="btn btn-ok" data-status="confirmed">' + I('check') + x.confirm + '</button>';
     else if (b.status === 'confirmed') h += '<button class="btn btn-bad" data-status="cancelled">' + x.cancel + '</button>';
     else h += '<button class="btn btn-ghost" data-status="pending">' + x.reopen + '</button>';
     h += '</div></section>';
@@ -871,6 +987,259 @@ textarea:focus{border-color:var(--blue);background:#fff}
     }).then(function () { S.push = 'off'; render(); });
   }
 
+  // ================= Pago, depósito y fotos =================
+  var EVENTS_EN = ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'];
+  var EVENTS_ES = ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de equipo', 'Otro'];
+  function payOf(b) { return b.pay_status || 'unpaid'; }
+  function depOf(b) { return b.deposit_status || 'pending'; }
+  function isActive(b) { return b.status === 'pending' || b.status === 'confirmed'; }
+  function netPaid(b) { var p = payOf(b); return p === 'paid' ? b.total : p === 'refunded' ? b.total - (b.refund_amount || 0) : 0; }
+  function dTime(iso) { return iso ? new Date(iso).toLocaleString(loc(L), { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Muscat' }) : ''; }
+  function roomsFor(g) { return 3 + Math.max(0, Math.ceil((g - 6) / 2)); }
+  function unpaidList() { var td = today(); return S.all.filter(function (b) { return isActive(b) && payOf(b) === 'unpaid' && b.checkout > td; }); }
+  function depositTasks() {
+    var td = today(), out = [];
+    S.all.forEach(function (b) {
+      if (b.status !== 'confirmed') return;
+      var d = depOf(b);
+      if (d === 'pending' && b.checkin <= td && b.checkout >= td) out.push({ kind: 'collect', b: b });
+      if (d === 'collected' && b.checkout <= td) out.push({ kind: 'return', b: b, late: addDays(b.checkout, 1) < td });
+    });
+    return out;
+  }
+
+  function payCard(b) {
+    var x = t(), p = payOf(b);
+    var h = '<div class="card"><h3>' + I('coin') + x.payment + '<span class="chip c-' + p + '">' + x.pay[p] + '</span></h3><div class="rows"><div><span class="muted">' + x.subtotal + '</span><span>' + money(b.subtotal) + '</span></div>' +
+      (b.discount ? '<div><span class="muted">' + (b.coupon ? x.discount + ' · ' + esc(b.coupon) + ' (' + b.pct + '%)' : x.specialPrice) + '</span><span>−' + money(b.discount) + '</span></div>' : '') +
+      '<div class="t"><span>' + x.total + '</span><span>' + money(b.total) + '</span></div></div>';
+    if (p !== 'unpaid') h += '<p class="info-line">' + x.paidInfo(dTime(b.paid_at), x.methods[b.pay_method] || '—', esc(b.pay_ref || '')) + '</p>';
+    if (p === 'refunded') h += '<p class="info-line" style="color:var(--bad)">' + x.refundInfo(money(b.refund_amount), dTime(b.refunded_at)) + '</p>';
+    if (p === 'unpaid' && isActive(b)) h += '<div class="warn">' + I('info') + '<span>' + x.unpaidWarn + '</span></div>';
+    h += '<div class="btnrow">';
+    if (p === 'unpaid') h += '<button class="sbtn pri" data-act="pay">' + I('check') + x.regPay + '</button>';
+    if (p === 'paid') h += '<button class="sbtn" data-act="refund">' + x.regRefund + '</button><button class="sbtn" data-act="unpay">' + x.undoPay + '</button>';
+    if (p === 'refunded') h += '<button class="sbtn" data-act="refund">' + x.editRefund + '</button>';
+    return h + '</div></div>';
+  }
+
+  function depCard(b) {
+    if (b.status !== 'confirmed') return '';
+    var x = t(), d = depOf(b), ph = S.photos[b.code];
+    var h = '<div class="card"><h3>' + I('lock') + x.depTitle + '<span class="chip c-dep-' + d + '">' + x.dep[d] + '</span></h3>';
+    if (d === 'pending') h += '<p class="info-line" style="margin-top:0">' + x.depPendingTxt(money(100)) + '</p>';
+    if (d === 'collected') h += '<p class="info-line" style="margin-top:0">' + x.depCollectedTxt(dTime(b.deposit_at)) + '</p>';
+    if (d === 'returned') h += '<p class="info-line" style="margin-top:0">' + x.depReturnedTxt(dTime(b.deposit_at)) + '</p>';
+    if (d === 'partial') h += '<p class="info-line" style="margin-top:0">' + x.depPartialTxt(money(b.deposit_kept), money(100 - b.deposit_kept)) + (b.deposit_note ? '<br>' + x.reason + ': <b>' + esc(b.deposit_note) + '</b>' : '') + '</p>';
+    h += '<div class="btnrow">';
+    if (d === 'pending') h += '<button class="sbtn pri" data-act="depcollect">' + I('check') + x.depCollect + '</button>';
+    if (d === 'collected') h += '<button class="sbtn ok" data-act="depreturn">' + I('check') + x.depReturn + '</button><button class="sbtn bad" data-act="depkeep">' + x.depKeep + '</button>';
+    if (d === 'returned' || d === 'partial') h += '<button class="sbtn" data-act="depundo">' + x.change + '</button>';
+    h += '</div><span class="flbl">' + x.photos + '</span><p class="info-line" style="margin-top:4px">' + x.photosHint + '</p><div class="photos">';
+    (ph || []).forEach(function (p) { h += '<div class="ph"><img src="/api/admin/photos/' + p.id + '" alt="" loading="lazy" data-act="viewphoto" data-id="' + p.id + '"><button class="del" data-act="delphoto" data-id="' + p.id + '" aria-label="x">' + I('x') + '</button></div>'; });
+    h += '<label class="add' + (S.uploading ? ' busy' : '') + '">' + I(S.uploading ? 'refresh' : 'cam', S.uploading ? 'spin' : '') + '<span>' + x.addPhoto + '</span><input type="file" accept="image/*" multiple data-photo hidden></label></div></div>';
+    return h;
+  }
+  function loadPhotos(code) {
+    api('/bookings/' + code + '/photos').then(function (j) { if (j.ok) { S.photos[code] = j.photos; if (S.open === code) renderSheet(false); } });
+  }
+  function resizeImage(file) {
+    return new Promise(function (res, rej) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var m = 1280, w = img.naturalWidth, h = img.naturalHeight, s = Math.min(1, m / Math.max(w, h)), c = document.createElement('canvas');
+        c.width = Math.round(w * s); c.height = Math.round(h * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', 0.72));
+      };
+      img.onerror = rej; img.src = url;
+    });
+  }
+  function uploadPhotos(files) {
+    var code = S.open, x = t(), list = Array.prototype.slice.call(files || []);
+    if (!list.length || !code) return;
+    S.uploading = true; renderSheet(false);
+    list.reduce(function (p, f) { return p.then(function () { return resizeImage(f).then(function (data) { return api('/bookings/' + code + '/photos', { method: 'POST', body: { data: data } }); }).then(function (j) { if (!j.ok) toast(j.error === 'too_many_photos' ? x.tooManyPhotos : x.error); }); }); }, Promise.resolve())
+      .catch(function () { toast(x.error); })
+      .then(function () { S.uploading = false; loadPhotos(code); });
+  }
+  function viewPhoto(id) {
+    var v = document.createElement('div');
+    v.className = 'viewer';
+    v.innerHTML = '<img src="/api/admin/photos/' + id + '" alt=""><button aria-label="x">' + I('x') + '</button>';
+    v.addEventListener('click', function () { v.remove(); });
+    document.body.appendChild(v);
+  }
+
+  // Guarda un cambio de la reserva y actualiza la pantalla
+  function updateBooking(code, body, okMsg) {
+    var x = t();
+    return api('/bookings/' + code, { method: 'POST', body: body }).then(function (j) {
+      if (j.ok) {
+        for (var i = 0; i < S.all.length; i++) if (S.all[i].code === code) S.all[i] = j.booking;
+        toast(okMsg || x.saved); render(); if (S.open === code) renderSheet(false);
+        load(true);
+        return j.booking;
+      }
+      toast(j.error === 'dates_unavailable' ? x.taken : j.error === 'invalid_amount' ? x.badAmount : x.error);
+      return null;
+    }).catch(function () { toast(x.error); return null; });
+  }
+
+  // Ventana con formulario
+  function formDlg(title, inner, okLabel, tone, collect) {
+    return new Promise(function (resolve) {
+      var d = document.createElement('div');
+      d.className = 'dlg';
+      d.innerHTML = '<form class="box form" novalidate><h3>' + title + '</h3>' + inner + '<p class="ferr" role="alert"></p><div class="bb" style="margin-top:6px"><button type="button" class="btn btn-ghost" data-r="0">' + t().back + '</button><button type="submit" class="btn ' + (tone === 'bad' ? 'btn-bad' : tone === 'ok' ? 'btn-ok' : 'btn-navy') + '">' + okLabel + '</button></div></form>';
+      d.addEventListener('click', function (e) {
+        var pick = e.target.closest('[data-pick]');
+        if (pick) { pick.parentNode.querySelectorAll('[data-pick]').forEach(function (b) { b.setAttribute('aria-pressed', b === pick); }); return; }
+        if (e.target.closest('[data-r="0"]') || e.target === d) { d.remove(); resolve(null); }
+      });
+      d.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = collect(d);
+        if (typeof v === 'string') { d.querySelector('.ferr').textContent = v; return; }
+        d.remove(); resolve(v);
+      });
+      document.body.appendChild(d);
+    });
+  }
+  function methodChips(sel) {
+    var x = t();
+    return '<div class="f"><span class="lb">' + x.payMethod + '</span><div class="chips" data-group="m">' + ['card', 'transfer', 'cash', 'other'].map(function (m) {
+      return '<button type="button" data-pick="' + m + '" aria-pressed="' + (m === (sel || 'card')) + '">' + x.methods[m] + '</button>';
+    }).join('') + '</div></div>';
+  }
+  function payDialog(b, andConfirm) {
+    var x = t();
+    return formDlg(andConfirm ? x.regPayConfirm : x.regPay,
+      '<p class="qbox">' + x.total + ': ' + money(b.total) + '<br>' + x.fullOnly + '</p>' + methodChips() +
+      '<div class="f"><label for="pref">' + x.payRef + '</label><input id="pref" maxlength="80" placeholder="' + x.payRefPh + '" autocomplete="off"></div>',
+      andConfirm ? x.regPayConfirm : x.regPay, 'ok',
+      function (d) { return { method: d.querySelector('[data-group=m] [aria-pressed=true]').dataset.pick, ref: d.querySelector('#pref').value }; });
+  }
+  function refundDialog(b) {
+    var x = t();
+    return formDlg(x.regRefund,
+      '<p class="qbox">' + x.refundHint(money(b.total)) + '</p><div class="f"><label for="ramt">' + x.refundAmt + '</label><input id="ramt" type="number" inputmode="decimal" step="0.001" min="0" value="' + (b.refund_amount || b.total) + '"></div>',
+      x.regRefund, 'bad',
+      function (d) { var v = Number(d.querySelector('#ramt').value); return v > 0 && v <= b.total ? v : x.badAmount; });
+  }
+  function keepDialog() {
+    var x = t();
+    return formDlg(x.depKeep,
+      '<div class="f"><label for="kamt">' + x.keptAmt + '</label><input id="kamt" type="number" inputmode="decimal" step="0.001" min="0" max="100" placeholder="0 – 100"></div>' +
+      '<div class="f"><label for="knote">' + x.reason + '</label><input id="knote" maxlength="300" placeholder="' + x.reasonPh + '"></div>',
+      x.depKeep, 'bad',
+      function (d) { var v = Number(d.querySelector('#kamt').value), n = d.querySelector('#knote').value.trim(); if (!(v > 0 && v <= 100)) return x.badAmount; if (!n) return x.needReason; return { kept: v, note: n }; });
+  }
+
+  function bookingAction(a, el) {
+    var b = byCode(S.open), x = t();
+    if (!b) return;
+    if (a === 'pay' || a === 'payconfirm') {
+      return payDialog(b, a === 'payconfirm').then(function (v) {
+        if (!v) return;
+        var body = { payment: { status: 'paid', method: v.method, ref: v.ref } };
+        if (a === 'payconfirm') body.status = 'confirmed';
+        updateBooking(b.code, body, a === 'payconfirm' ? x.paidConfirmed : x.saved).then(function (nb) { if (nb && nb.status === 'confirmed') { loadPhotos(nb.code); var bd = layer.querySelector('.body'); if (bd) bd.scrollTop = 0; } });
+      });
+    }
+    if (a === 'refund') return refundDialog(b).then(function (v) { if (v) updateBooking(b.code, { payment: { status: 'refunded', amount: v } }); });
+    if (a === 'unpay') return ask(x.undoPayQ, x.undoPayTxt, x.undoPay, 'info').then(function (y) { if (y) updateBooking(b.code, { payment: { status: 'unpaid' } }); });
+    if (a === 'depcollect') return updateBooking(b.code, { deposit: { status: 'collected' } });
+    if (a === 'depreturn') return ask(x.depReturnQ, x.depReturnTxt(money(100)), x.depReturn, 'ok').then(function (y) { if (y) updateBooking(b.code, { deposit: { status: 'returned' } }); });
+    if (a === 'depkeep') return keepDialog().then(function (v) { if (v) updateBooking(b.code, { deposit: { status: 'partial', kept: v.kept, note: v.note } }); });
+    if (a === 'depundo') return updateBooking(b.code, { deposit: { status: 'collected' } });
+    if (a === 'viewphoto') return viewPhoto(el.dataset.id);
+    if (a === 'delphoto') return ask(x.delPhotoQ, '', x.delete, 'bad').then(function (y) { if (y) api('/photos/' + el.dataset.id, { method: 'DELETE' }).then(function () { loadPhotos(b.code); }); });
+  }
+
+  // ================= Nueva reserva (llamada, WhatsApp, en persona) =================
+  function openNew(pre) {
+    pre = pre || {};
+    S.open = null;
+    S.nb = { checkin: pre.checkin || '', checkout: pre.checkout || '', guests: 6, kings: 3, name: '', phone: '+968 ', email: '', lang: 'ar', event: '', total: '', paid: false, method: 'card', ref: '', notes: '', quote: null, err: '', busy: false };
+    renderNew(true);
+    if (S.nb.checkin && S.nb.checkout) fetchQuote();
+  }
+  var qTimer;
+  function fetchQuote() {
+    var n = S.nb;
+    clearTimeout(qTimer);
+    if (!n.checkin || !n.checkout || n.checkout <= n.checkin) { n.quote = null; updateQbox(); return; }
+    qTimer = setTimeout(function () {
+      api('/quote?checkin=' + n.checkin + '&checkout=' + n.checkout + '&guests=' + n.guests).then(function (j) { if (S.nb === n) { n.quote = j.ok ? j.quote : null; updateQbox(); } });
+    }, 200);
+  }
+  function qboxHtml() {
+    var n = S.nb, x = t();
+    if (!n.checkin || !n.checkout) return x.pickDates;
+    if (n.checkout <= n.checkin) return x.badDates;
+    if (!n.quote) return '…';
+    return x.normalPrice(money(n.quote.total), x.nights(n.quote.nights));
+  }
+  function updateQbox() { var q = document.getElementById('nbq'); if (q) q.innerHTML = qboxHtml(); var tt = document.getElementById('nbtotal'); if (tt) tt.placeholder = S.nb.quote ? omr(S.nb.quote.total) : ''; }
+  function renderNew(fresh) {
+    var n = S.nb, x = t();
+    if (!n) return;
+    var rooms = roomsFor(n.guests), kMin = Math.max(0, rooms - 4), kMax = Math.min(3, rooms);
+    n.kings = Math.min(kMax, Math.max(kMin, n.kings));
+    var scroll = !fresh && layer.querySelector('.body') ? layer.querySelector('.body').scrollTop : 0;
+    var ev = L === 'es' ? EVENTS_ES : EVENTS_EN;
+    var h = '<div class="scrim" data-act="closenew"></div><section class="sheet" role="dialog" aria-modal="true" aria-label="' + x.newB + '"><div class="grab"></div>' +
+      '<div class="sh"><span class="code" style="color:var(--navy);font-size:19px;letter-spacing:0">' + x.newB + '</span><button class="iconbtn" data-act="closenew" aria-label="' + x.back + '">' + I('x') + '</button></div><div class="body"><div class="nbform">' +
+      '<p class="info-line" style="margin-top:0">' + x.newHint + '</p>' +
+      '<div class="f2"><div class="f"><label for="nbci">' + x.checkin + '</label><input id="nbci" type="date" data-nb="checkin" value="' + n.checkin + '"></div><div class="f"><label for="nbco">' + x.checkout + '</label><input id="nbco" type="date" data-nb="checkout" value="' + n.checkout + '"' + (n.checkin ? ' min="' + addDays(n.checkin, 1) + '"' : '') + '></div></div>' +
+      '<div class="f2"><div class="f"><span class="lb">' + x.guestsL + '</span><div class="stepper"><button type="button" data-act="nbg" data-d="-1"' + (n.guests <= 1 ? ' disabled' : '') + '>−</button><b>' + n.guests + '</b><button type="button" data-act="nbg" data-d="1"' + (n.guests >= 14 ? ' disabled' : '') + '>+</button></div></div>' +
+      '<div class="f"><span class="lb">' + x.kingBeds + '</span><div class="stepper"><button type="button" data-act="nbk" data-d="-1"' + (n.kings <= kMin ? ' disabled' : '') + '>−</button><b>' + n.kings + '</b><button type="button" data-act="nbk" data-d="1"' + (n.kings >= kMax ? ' disabled' : '') + '>+</button></div></div></div>' +
+      '<p class="info-line" style="margin-top:-6px">' + x.rooms + ': <b>' + rooms + '</b> · ' + x.beds(n.kings, rooms - n.kings) + '</p>' +
+      '<div class="f"><label for="nbname">' + x.nameL + '</label><input id="nbname" data-nb="name" autocomplete="off" value="' + esc(n.name) + '"></div>' +
+      '<div class="f2"><div class="f"><label for="nbphone">' + x.phoneL + '</label><input id="nbphone" type="tel" dir="ltr" data-nb="phone" value="' + esc(n.phone) + '"></div><div class="f"><label for="nbemail">' + x.emailL + '</label><input id="nbemail" type="email" data-nb="email" value="' + esc(n.email) + '"></div></div>' +
+      '<div class="f"><span class="lb">' + x.language + '</span><div class="chips">' + [['ar', 'العربية'], ['en', 'English'], ['es', 'Español']].map(function (l) { return '<button type="button" data-act="nblang" data-v="' + l[0] + '" aria-pressed="' + (n.lang === l[0]) + '">' + l[1] + '</button>'; }).join('') + '</div></div>' +
+      '<div class="f"><label for="nbev">' + x.purpose + '</label><select id="nbev" data-nb="event"><option value="">' + x.notGiven + '</option>' + ev.map(function (e, i) { return '<option value="' + i + '"' + (String(n.event) === String(i) ? ' selected' : '') + '>' + e + '</option>'; }).join('') + '</select></div>' +
+      '<p class="qbox" id="nbq">' + qboxHtml() + '</p>' +
+      '<div class="f"><label for="nbtotal">' + x.totalL + '</label><input id="nbtotal" type="number" inputmode="decimal" step="0.001" min="0" data-nb="total" value="' + esc(n.total) + '" placeholder="' + (n.quote ? omr(n.quote.total) : '') + '"><span class="info-line" style="margin-top:0">' + x.totalHint + '</span></div>' +
+      '<button type="button" class="toggle" data-act="nbpaid"><span>' + x.paidQ + '</span><span class="sw' + (n.paid ? ' on' : '') + '" style="flex:none"></span></button>';
+    if (n.paid) h += methodChips(n.method).replace('data-group="m"', 'data-group="nbm"').replace(/data-pick=/g, 'data-act="nbmethod" data-v=') +
+      '<div class="f"><label for="nbref">' + x.payRef + '</label><input id="nbref" data-nb="ref" maxlength="80" value="' + esc(n.ref) + '" placeholder="' + x.payRefPh + '"></div>';
+    h += '<p class="qbox" style="background:' + (n.paid ? 'var(--ok-bg);color:var(--ok)' : 'var(--gold-bg);color:var(--gold-ink)') + '">' + (n.paid ? x.willConfirm : x.willPending) + '</p>' +
+      '<div class="f"><label for="nbnotes">' + x.notes + '</label><textarea id="nbnotes" data-nb="notes" maxlength="2000" placeholder="' + x.notesPh + '">' + esc(n.notes) + '</textarea></div>' +
+      (n.err ? '<p class="ferr" role="alert">' + n.err + '</p>' : '') +
+      '</div></div><div class="foot"><button class="btn btn-ghost" data-act="closenew">' + x.back + '</button><button class="btn btn-ok" data-act="nbsave"' + (n.busy ? ' disabled' : '') + '>' + I('check') + x.create + '</button></div></section>';
+    layer.innerHTML = h;
+    if (scroll) layer.querySelector('.body').scrollTop = scroll;
+  }
+  function newAction(a, el) {
+    var n = S.nb, x = t();
+    if (!n) return;
+    if (a === 'closenew') { S.nb = null; layer.innerHTML = ''; return; }
+    if (a === 'nbg') { n.guests = Math.max(1, Math.min(14, n.guests + +el.dataset.d)); renderNew(false); fetchQuote(); return; }
+    if (a === 'nbk') { n.kings += +el.dataset.d; renderNew(false); return; }
+    if (a === 'nblang') { n.lang = el.dataset.v; renderNew(false); return; }
+    if (a === 'nbpaid') { n.paid = !n.paid; renderNew(false); return; }
+    if (a === 'nbmethod') { n.method = el.dataset.v; renderNew(false); return; }
+    if (a === 'nbsave') {
+      var err = !n.checkin || !n.checkout || n.checkout <= n.checkin ? x.badDates : n.name.trim().length < 2 ? x.needName : !/^\+\d{6,16}$/.test(n.phone.replace(/[\s-]/g, '')) ? x.badPhone : '';
+      if (err) { n.err = err; renderNew(false); var f = layer.querySelector('.ferr'); if (f) f.scrollIntoView({ block: 'center' }); return; }
+      n.err = ''; n.busy = true; renderNew(false);
+      api('/bookings', { method: 'POST', body: { checkin: n.checkin, checkout: n.checkout, guests: n.guests, kings: n.kings, name: n.name.trim(), phone: n.phone, email: n.email.trim(), lang: n.lang, event: n.event === '' ? null : Number(n.event), total: n.total === '' ? null : Number(n.total), paid: n.paid, status: n.paid ? 'confirmed' : 'pending', payMethod: n.method, payRef: n.ref, notes: n.notes } })
+        .then(function (j) {
+          n.busy = false;
+          if (j.ok) {
+            S.nb = null; S.all.unshift(j.booking); if (S.seen) S.seen.push(j.booking.code); render();
+            toast(j.booking.status === 'confirmed' ? x.createdPaid : x.createdUnpaid);
+            openSheet(j.booking.code); load(true);
+          } else {
+            n.err = { dates_unavailable: x.taken, invalid_phone: x.badPhone, invalid_name: x.needName, invalid_dates: x.badDates, invalid_total: x.badAmount }[j.error] || x.error;
+            renderNew(false);
+          }
+        }).catch(function () { n.busy = false; n.err = x.error; renderNew(false); });
+    }
+  }
+
   // ================= Acciones =================
   function setStatus(status) {
     var b = byCode(S.open), x = t();
@@ -885,6 +1254,10 @@ textarea:focus{border-color:var(--blue);background:#fff}
           toast(x.saved); render(); renderSheet(false);
           var body = layer.querySelector('.body'); if (body) body.scrollTop = 0;
           load(true);
+          if (status === 'confirmed') loadPhotos(b.code);
+          if ((status === 'cancelled' || status === 'rejected') && payOf(j.booking) === 'paid') {
+            ask(x.refundNowQ, x.refundNowTxt, x.regRefund, 'bad').then(function (y) { if (y) bookingAction('refund'); });
+          }
         } else toast(j.error === 'dates_unavailable' ? x.taken : x.error);
       }).catch(function () { toast(x.error); });
     });
@@ -934,7 +1307,20 @@ textarea:focus{border-color:var(--blue);background:#fff}
       var q = document.getElementById('q'); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} }
     }
   });
+  layer.addEventListener('change', function (e) {
+    if (e.target.hasAttribute('data-photo')) { uploadPhotos(e.target.files); e.target.value = ''; }
+  });
   layer.addEventListener('input', function (e) {
+    var f = e.target.dataset && e.target.dataset.nb;
+    if (f && S.nb) {
+      S.nb[f] = e.target.value;
+      if (f === 'checkin' || f === 'checkout') {
+        if (f === 'checkin' && S.nb.checkin && (!S.nb.checkout || S.nb.checkout <= S.nb.checkin)) { S.nb.checkout = addDays(S.nb.checkin, 1); var co = document.getElementById('nbco'); if (co) co.value = S.nb.checkout; }
+        var co2 = document.getElementById('nbco'); if (co2 && S.nb.checkin) co2.min = addDays(S.nb.checkin, 1);
+        fetchQuote();
+      }
+      return;
+    }
     if (e.target.id === 'notes') { var b = byCode(S.open), btn = layer.querySelector('[data-act=savenotes]'); if (btn) btn.disabled = e.target.value === (b && b.notes || ''); }
   });
 
@@ -951,6 +1337,13 @@ textarea:focus{border-color:var(--blue);background:#fff}
     if (el.dataset.unblock) { var k = el.dataset.unblock; return api('/blocks/' + k, { method: 'DELETE' }).then(function () { toast(x.saved); load(); }); }
     if (el.dataset.status) return setStatus(el.dataset.status);
     if (el.dataset.setlang) { L = el.dataset.setlang; try { localStorage.setItem('lz-admin-lang', L); } catch (er) {} if (S.push === 'on' && swReg) swReg.pushManager.getSubscription().then(function (s) { if (s) api('/push/subscribe', { method: 'POST', body: { endpoint: s.endpoint, keys: s.toJSON().keys, lang: L } }); }); render(); if (S.open) renderSheet(false); return; }
+    if (a && (a === 'newb' || a === 'newfromsel')) {
+      if (a === 'newfromsel') { var ds = S.sel.slice().sort(); S.sel = []; render(); openNew({ checkin: ds[0], checkout: addDays(ds[ds.length - 1], 1) }); }
+      else openNew();
+      return;
+    }
+    if (a && (a === 'closenew' || a.indexOf('nb') === 0)) return newAction(a, el);
+    if (a && ['pay', 'payconfirm', 'refund', 'unpay', 'depcollect', 'depreturn', 'depkeep', 'depundo', 'viewphoto', 'delphoto'].indexOf(a) !== -1) return bookingAction(a, el);
     switch (a) {
       case 'lang': L = L === 'es' ? 'en' : 'es'; try { localStorage.setItem('lz-admin-lang', L); } catch (er) {} render(); break;
       case 'peek': var pw = document.getElementById('pw'); pw.type = pw.type === 'password' ? 'text' : 'password'; break;
@@ -975,7 +1368,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
   }
   app.addEventListener('click', onClick);
   layer.addEventListener('click', onClick);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && S.open && !document.querySelector('.dlg')) closeSheet(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && (S.open || S.nb) && !document.querySelector('.dlg')) closeSheet(); });
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); S.installEvt = e; if (S.view === 'settings') render(); });
 
   // Se actualiza solo: cada 20 s y al volver a la app
