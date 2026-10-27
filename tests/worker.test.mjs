@@ -115,6 +115,9 @@ const r3 = await worker.fetch(new Request('https://x/api/bookings', { method: 'P
   ok(r.body.booking.total === 200 && r.body.booking.discount === 40 && r.body.booking.pay_status === 'unpaid' && r.body.booking.status === 'pending', 'reserva manual con precio especial, sin pagar');
   const sc = r.body.booking.code;
   r = await call('POST', '/api/admin/bookings', { checkin: '2027-03-05', checkout: '2027-03-06', guests: 6, name: 'X', phone: '+968' }, H); ok(r.status === 400, 'reserva manual con datos malos → 400');
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-03-10', checkout: '2027-03-11', guests: 6, name: 'Con cupón', phone: '+96811112222', coupon: 'lazurde10' }, H);
+  ok(r.body.booking.total === 216 && r.body.booking.coupon === 'LAZURDE10' && r.body.booking.pct === 10, 'reserva manual con cupón 10%: ' + r.body.booking.total);
+  r = await call('POST', '/api/admin/bookings', { checkin: '2027-03-12', checkout: '2027-03-13', guests: 5, name: 'Pocos', phone: '+96811112222' }, H); ok(r.body.error === 'invalid_guests', 'reserva manual con menos de 6 personas → rechazada');
   // pago
   r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'refunded', amount: 50 } }, H); ok(r.body.error === 'not_paid', 'no se reembolsa lo que no se ha pagado');
   r = await call('POST', '/api/admin/bookings/' + sc, { payment: { status: 'paid', method: 'card', ref: 'PM-77' }, status: 'confirmed' }, H);

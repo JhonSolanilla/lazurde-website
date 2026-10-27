@@ -64,3 +64,13 @@ El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce 
 - Secciones: Inicio (resumen del día y del mes), Reservas (buscador y filtros), Calendario (ver ocupación, bloquear/desbloquear días tocándolos) y Ajustes.
 - Avisos: notificaciones push (Ajustes → Notificaciones → Activar) que llegan aunque la app esté cerrada, más campanita y aviso cuando la app está abierta (revisa cada 20 s).
 - Las claves de las notificaciones (VAPID) se crean solas y se guardan en la base de datos. La sesión dura 30 días.
+
+## Web y panel en sincronía
+
+La reserva manual del panel usa lo mismo que la web:
+- Precios, feriados, fin de semana, depósito y fechas ocupadas: `/api/config` (se definen una sola vez en `src/worker.js`).
+- Indicativos y validación de teléfono: `public/booking/phones.json`.
+- Cupones: `/api/coupon` (lista en `src/worker.js`).
+- Reglas de personas, habitaciones y camas: 6–14 personas, habitaciones automáticas, camas king/individuales (también las valida el servidor).
+
+Regla de trabajo: todo cambio en el formulario de reserva de la web se replica en "Nueva reserva" del panel en el mismo cambio.

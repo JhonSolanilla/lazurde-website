@@ -333,7 +333,9 @@ async function apiAdmin(request, env, url) {
     if (!validDate(ci) || !validDate(co) || co <= ci) return bad('invalid_dates');
     if (Math.round((Date.parse(co) - Date.parse(ci)) / 864e5) > 60) return bad('too_many_nights');
     if (!Number.isInteger(guests) || guests < CONFIG.baseGuests || guests > CONFIG.maxGuests) return bad('invalid_guests');
-    const q = quote({ checkin: ci, checkout: co, guests });
+    const coupon = cleanCoupon(b.coupon);
+    if (coupon && !COUPONS[coupon]) return bad('invalid_coupon');
+    const q = quote({ checkin: ci, checkout: co, guests, coupon });
     const kings = b.kings == null ? Math.min(CONFIG.maxKing, q.rooms) : Number(b.kings);
     if (!Number.isInteger(kings) || kings < Math.max(0, q.rooms - CONFIG.maxTwin) || kings > Math.min(CONFIG.maxKing, q.rooms)) return bad('invalid_beds');
     const name = clip(b.name, 120), phone = String(b.phone || '').replace(/[\s-]/g, ''), email = clip(b.email, 160);
@@ -346,7 +348,7 @@ async function apiAdmin(request, env, url) {
       total = Math.round(Number(b.total) * 1000) / 1000;
       if (!(total >= 0 && total <= 100000)) return bad('invalid_total');
       discount = Math.max(0, Math.round((q.subtotal - total) * 1000) / 1000);
-    }
+    } else discount = q.discount;
     const paid = b.paid === true;
     if (paid && !PAY_METHODS.includes(b.payMethod)) return bad('invalid_method');
     const status = b.status === 'confirmed' ? 'confirmed' : 'pending';
@@ -356,11 +358,11 @@ async function apiAdmin(request, env, url) {
       const res = await env.DB.prepare(`INSERT INTO bookings
         (code, status, checkin, checkout, nights, guests, rooms, kings, twins, event, name, phone, email, lang, coupon, pct, subtotal, discount, total, notes, created_at, updated_at,
          pay_status, paid_at, pay_method, pay_ref, source)
-        SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'manual'
+        SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'manual'
         WHERE NOT EXISTS (SELECT 1 FROM bookings WHERE status IN ('pending','confirmed') AND checkin < ? AND checkout > ?)
           AND NOT EXISTS (SELECT 1 FROM blocks WHERE date >= ? AND date < ?)`)
         .bind(code, status, ci, co, q.nights, guests, q.rooms, kings, q.rooms - kings, b.event == null ? null : EVENTS[b.event], name, phone, email || null,
-          ['ar', 'en', 'es'].includes(b.lang) ? b.lang : 'ar', Math.max(q.subtotal, total), discount, total, clip(b.notes, 2000) || null, now, now,
+          ['ar', 'en', 'es'].includes(b.lang) ? b.lang : 'ar', coupon || null, coupon ? q.pct : 0, Math.max(q.subtotal, total), discount, total, clip(b.notes, 2000) || null, now, now,
           paid ? 'paid' : 'unpaid', paid ? now : null, paid ? b.payMethod : null, paid ? clip(b.payRef, 80) || null : null,
           co, ci, ci, co)
         .run().catch(e => ({ error: e }));

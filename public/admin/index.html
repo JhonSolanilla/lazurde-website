@@ -263,6 +263,40 @@ textarea:focus{border-color:var(--blue);background:#fff}
 
 .toast{position:fixed;left:50%;top:calc(var(--sat) + 12px);transform:translateX(-50%);z-index:90;background:var(--deep);color:#fff;padding:12px 16px;border-radius:16px;font-weight:700;font-size:14.5px;box-shadow:0 10px 30px rgba(0,32,50,.3);display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);animation:drop .25s ease}
 .toast.new{background:linear-gradient(135deg,#FAD26D,#D3AE2A);color:#002233}
+.dbox{border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;border:1.5px solid var(--navy);background:#fff;min-width:0}
+.dbox.on{border:2px solid var(--blue);background:#F2F7FC}
+.dbox small{font-size:12px;color:var(--muted);font-weight:700}.dbox b{font-size:15px}
+.ncal{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 10px}
+.ncal-h{display:flex;align-items:center;justify-content:space-between;padding:0 2px 8px}
+.ncal-h b{font-size:16px}.ncal-h .iconbtn{background:var(--bg);color:var(--navy)}
+.ncal-w,.ncal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.ncal-w span{text-align:center;font-size:11.5px;font-weight:800;color:var(--muted);padding:4px 0}
+.nc{height:52px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:none;min-width:0;padding:0 1px}
+.nc b{font-size:15px}.nc small{font-size:10px;font-weight:700;color:#A57F12;white-space:nowrap;overflow:hidden;max-width:100%}
+.nc small .rs{margin-inline-end:1px}
+.nc.hol{box-shadow:inset 0 0 0 1.5px var(--gold)}
+.nc.bk b{text-decoration:line-through;color:#8A94A1}.nc.bk small,.nc.cout small{color:#4F5B69}
+.nc.rng{background:var(--blue-soft)}
+.nc.sel{background:var(--deep);color:#fff}.nc.sel small{color:var(--gold-l)}
+.nc.past{opacity:.3}
+.nc:disabled{cursor:default}
+.ncal-f{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 4px 0;font-size:13.5px;font-weight:700}
+.ncal-f button{color:var(--blue);text-decoration:underline;font-weight:700;font-size:13.5px}
+.phrow{display:flex;gap:8px}
+.ccbtn{height:48px;padding:0 10px;border:1px solid var(--line);border-radius:14px;background:#fff;display:flex;align-items:center;gap:6px;font-weight:800;font-size:15px;flex:none;color:var(--navy)}
+.ccbtn .fl,.ccrow .fl{font-size:20px;line-height:1}.ccbtn .ccv{width:14px;height:14px}
+.phrow input{flex:1}
+.cclist{max-height:min(60vh,520px);overflow-y:auto;margin:0 -6px}
+.ccrow{display:flex;align-items:center;gap:12px;width:100%;padding:11px 8px;border-radius:12px;text-align:start;font-weight:600;font-size:15px}
+.ccrow[aria-current=true]{background:var(--blue-soft)}
+.ccdlg{align-items:flex-start;padding-top:calc(var(--sat) + 16px)}
+.ptable{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ptable>div{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid #EEF2F6;font-size:14px}
+.ptable>.ph{background:var(--bg);border-top:0;font-size:12px;font-weight:800;color:var(--ink2);padding:8px 12px}
+.taxbox{margin-top:10px;background:var(--bg);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);font-weight:600}
+.taxbox>div{display:flex;justify-content:space-between}
+.cpok{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700}
+.cpok button{color:var(--bad);font-weight:800;font-size:13.5px}
 .noanim{animation:none!important}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @keyframes drop{from{transform:translate(-50%,-16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
@@ -459,9 +493,9 @@ textarea:focus{border-color:var(--blue);background:#fff}
       depCollect: 'Marcar cobrado', depReturn: 'Devuelto completo', depKeep: 'Retener una parte', change: 'Cambiar', depReturnQ: '¿Depósito devuelto completo?', depReturnTxt: function (m) { return 'Se devolvieron ' + m + ' al cliente.'; },
       keptAmt: 'Monto retenido (máx. 100)', reason: 'Motivo', reasonPh: 'Daño, faltante, limpieza extra…', needReason: 'Escribe el motivo.',
       photos: 'Fotos de la revisión', photosHint: 'Fotos del resort a la llegada y a la salida: sirven de prueba si hay daños.', addPhoto: 'Agregar foto', tooManyPhotos: 'Máximo 15 fotos por reserva.', delPhotoQ: '¿Borrar esta foto?', delete: 'Borrar',
-      guestsRange: 'De 6 a 14 personas', autoRooms: 'Se calculan solas', extraNotice: 'Desde la persona 7 se abre una habitación extra: 15 OMR por habitación y por noche.', bedsL: 'Camas', kingBed: '1 cama king', kingBedSub: 'Matrimonial · máx. 3', twinBed: '2 camas individuales', twinBedSub: 'Separadas · máx. 4', assigned: 'Habitaciones asignadas', ofWord: 'de', optional: 'opcional', newB: 'Nueva reserva', newFromSel: 'Crear reserva', newHint: 'Para reservas que llegan por llamada, WhatsApp o en persona. Aparta las fechas igual que la web.', kingBeds: 'Camas king', nameL: 'Nombre del cliente', phoneL: 'Teléfono', emailL: 'Correo (opcional)',
+      guestsRange: 'De 6 a 14 personas', autoRooms: 'Se calculan solas', extraNotice: 'Desde la persona 7 se abre una habitación extra: 15 OMR por habitación y por noche.', bedsL: 'Camas', kingBed: '1 cama king', kingBedSub: 'Matrimonial · máx. 3', twinBed: '2 camas individuales', twinBedSub: 'Separadas · máx. 4', assigned: 'Habitaciones asignadas', ofWord: 'de', optional: 'opcional', bookedLbl: 'Ocupado', outOnly: 'Solo salida', cin: 'Llega', cout: 'Sale', hintIn: 'Toca el día de llegada', hintOut: 'Ahora toca el día de salida', clearDates: 'Borrar fechas', datesL: 'Fechas', choose: 'Elegir', guestData: 'Datos del cliente', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccNone: 'Sin resultados', priceDetails: 'Detalle del precio', nightL: 'Noche', priceL: 'Precio', holidayTag: ' · feriado', weekendTag: ' · fin de semana', stayLine: function (n) { return 'Alojamiento (' + n + (n === 1 ? ' noche)' : ' noches)'); }, extraLine: function (e, n) { return e + (e === 1 ? ' habitación extra' : ' habitaciones extra') + ' × ' + n + (n === 1 ? ' noche' : ' noches'); }, discountLine: function (c, p) { return 'Descuento ' + c + ' (' + p + '%)'; }, inclTaxes: 'Ya incluido en el precio:', taxLine: function (p) { return 'Impuesto de turismo (' + p + '%)'; }, vatLine: function (p) { return 'IVA (' + p + '%)'; }, couponL: 'Cupón de descuento', couponPh: 'Escribe el código', couponApply: 'Aplicar', couponBad: 'Este cupón no es válido.', couponRemove: 'Quitar', couponOk: function (p) { return '−' + p + '% aplicado'; }, depositInfo: 'Depósito de garantía de 100 OMR: se paga al llegar y se devuelve dentro de 24 h después de la salida. No va incluido en el total.', specialL: 'Precio especial (opcional)', newB: 'Nueva reserva', newFromSel: 'Crear reserva', newHint: 'Para reservas que llegan por llamada, WhatsApp o en persona. Aparta las fechas igual que la web.', kingBeds: 'Camas king', nameL: 'Nombre del cliente', phoneL: 'Teléfono', emailL: 'Correo (opcional)',
       pickDates: 'Elige llegada y salida para ver el precio.', badDates: 'La salida debe ser después de la llegada.', normalPrice: function (m, n) { return 'Precio normal: <b>' + m + '</b> · ' + n; },
-      totalL: 'Total a cobrar', totalHint: 'Déjalo vacío para usar el precio normal. Cámbialo solo si acordaron otro precio.', paidQ: 'El cliente ya pagó el 100%',
+      totalL: 'Total a cobrar', totalHint: 'Déjalo vacío para cobrar el total de arriba. Escríbelo solo si acordaron otro precio con el cliente.', paidQ: 'El cliente ya pagó el 100%',
       willConfirm: 'Se creará confirmada y pagada.', willPending: 'Se creará pendiente y aparta las fechas hasta que pague.', create: 'Crear reserva', needName: 'Escribe el nombre del cliente.', badPhone: 'Teléfono no válido. Ej.: +968 9123 4567',
       createdPaid: 'Reserva creada y confirmada', createdUnpaid: 'Reserva creada: pendiente de pago', manual: 'Creada en el panel',
       newBooking: function (n) { return 'Nueva reserva de ' + n; }, syncTitle: 'Hora de Omán · datos en vivo', syncing: 'Sincronizando…', synced: function (s) { return s < 5 ? 'En vivo · actualizado ahora' : 'En vivo · hace ' + s + ' s'; }, open: 'Ver'
@@ -523,9 +557,9 @@ textarea:focus{border-color:var(--blue);background:#fff}
       depCollect: 'Mark collected', depReturn: 'Fully returned', depKeep: 'Keep part of it', change: 'Change', depReturnQ: 'Deposit fully returned?', depReturnTxt: function (m) { return m + ' returned to the guest.'; },
       keptAmt: 'Amount kept (max 100)', reason: 'Reason', reasonPh: 'Damage, missing item, extra cleaning…', needReason: 'Please write the reason.',
       photos: 'Inspection photos', photosHint: 'Photos of the resort at check-in and check-out: proof if anything is damaged.', addPhoto: 'Add photo', tooManyPhotos: 'Maximum 15 photos per booking.', delPhotoQ: 'Delete this photo?', delete: 'Delete',
-      guestsRange: '6 to 14 guests', autoRooms: 'Calculated automatically', extraNotice: 'From the 7th guest an extra bedroom opens: 15 OMR per bedroom per night.', bedsL: 'Beds', kingBed: '1 king bed', kingBedSub: 'Double · max. 3', twinBed: '2 twin beds', twinBedSub: 'Separate · max. 4', assigned: 'Bedrooms assigned', ofWord: 'of', optional: 'optional', newB: 'New booking', newFromSel: 'Create booking', newHint: 'For bookings that come by phone, WhatsApp or in person. It holds the dates just like the website.', kingBeds: 'King beds', nameL: 'Guest name', phoneL: 'Phone', emailL: 'Email (optional)',
+      guestsRange: '6 to 14 guests', autoRooms: 'Calculated automatically', extraNotice: 'From the 7th guest an extra bedroom opens: 15 OMR per bedroom per night.', bedsL: 'Beds', kingBed: '1 king bed', kingBedSub: 'Double · max. 3', twinBed: '2 twin beds', twinBedSub: 'Separate · max. 4', assigned: 'Bedrooms assigned', ofWord: 'of', optional: 'optional', bookedLbl: 'Booked', outOnly: 'Check-out only', cin: 'In', cout: 'Out', hintIn: 'Tap the check-in day', hintOut: 'Now tap the check-out day', clearDates: 'Clear dates', datesL: 'Dates', choose: 'Choose', guestData: 'Guest details', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, ccTitle: 'Country code', ccSearch: 'Search country or code', ccNone: 'No results', priceDetails: 'Price details', nightL: 'Night', priceL: 'Price', holidayTag: ' · holiday', weekendTag: ' · weekend', stayLine: function (n) { return 'Stay (' + n + (n === 1 ? ' night)' : ' nights)'); }, extraLine: function (e, n) { return e + (e === 1 ? ' extra bedroom' : ' extra bedrooms') + ' × ' + n + (n === 1 ? ' night' : ' nights'); }, discountLine: function (c, p) { return 'Discount ' + c + ' (' + p + '%)'; }, inclTaxes: 'Already included in the price:', taxLine: function (p) { return 'Tourism tax (' + p + '%)'; }, vatLine: function (p) { return 'VAT (' + p + '%)'; }, couponL: 'Discount code', couponPh: 'Enter the code', couponApply: 'Apply', couponBad: 'This code is not valid.', couponRemove: 'Remove', couponOk: function (p) { return p + '% off applied'; }, depositInfo: 'Security deposit of 100 OMR: paid on arrival and returned within 24 h after check-out. Not included in the total.', specialL: 'Special price (optional)', newB: 'New booking', newFromSel: 'Create booking', newHint: 'For bookings that come by phone, WhatsApp or in person. It holds the dates just like the website.', kingBeds: 'King beds', nameL: 'Guest name', phoneL: 'Phone', emailL: 'Email (optional)',
       pickDates: 'Pick check-in and check-out to see the price.', badDates: 'Check-out must be after check-in.', normalPrice: function (m, n) { return 'Standard price: <b>' + m + '</b> · ' + n; },
-      totalL: 'Total to charge', totalHint: 'Leave empty for the standard price. Change it only if a different price was agreed.', paidQ: 'The guest has already paid 100%',
+      totalL: 'Total to charge', totalHint: 'Leave empty to charge the total above. Fill it in only if a different price was agreed with the guest.', paidQ: 'The guest has already paid 100%',
       willConfirm: 'It will be created as confirmed and paid.', willPending: 'It will be created as pending and holds the dates until paid.', create: 'Create booking', needName: 'Please write the guest name.', badPhone: 'Invalid phone. E.g. +968 9123 4567',
       createdPaid: 'Booking created and confirmed', createdUnpaid: 'Booking created: waiting for payment', manual: 'Created in the panel',
       newBooking: function (n) { return 'New booking from ' + n; }, syncTitle: 'Oman time · live data', syncing: 'Syncing…', synced: function (s) { return s < 5 ? 'Live · updated just now' : 'Live · ' + s + ' s ago'; }, open: 'Open'
@@ -582,6 +616,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     cam: '<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
+    chev: '<path d="M6 9l6 6 6-6"/>',
     alert: '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>'
   };
   function I(n, cls) { return '<svg class="ic' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true">' + P[n] + '</svg>'; }
@@ -1178,30 +1213,75 @@ textarea:focus{border-color:var(--blue);background:#fff}
   }
 
   // ================= Nueva reserva (llamada, WhatsApp, en persona) =================
+  // Usa las mismas reglas y datos que la web: precios, feriados y fechas ocupadas salen de /api/config,
+  // los indicativos de /booking/phones.json, los cupones de /api/coupon. El servidor vuelve a calcular todo.
+  var PHONES = [['OM', '968', '', '(?:[279]\\d{7})', [8], '92123456']], PHONE_BY = {};
+  function indexPhones() { PHONE_BY = {}; PHONES.forEach(function (p) { PHONE_BY[p[0]] = p; }); }
+  indexPhones();
+  var phonesLoaded = false;
+  function loadPhones() {
+    if (phonesLoaded) return;
+    phonesLoaded = true;
+    fetch('/booking/phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (S.nb) renderNew(false); }).catch(function () { phonesLoaded = false; });
+  }
+  var PINNED = ['OM', 'AE', 'SA', 'QA', 'KW', 'BH'];
+  function flag(iso) { return iso.replace(/./g, function (ch) { return String.fromCodePoint(127397 + ch.charCodeAt(0)); }); }
+  var nameCache = {};
+  function countryName(iso) {
+    var k = L + iso;
+    if (!nameCache[k]) { try { nameCache[k] = new Intl.DisplayNames([L], { type: 'region' }).of(iso) || iso; } catch (e) { nameCache[k] = iso; } }
+    return nameCache[k];
+  }
+  function phoneCheck(iso, raw) {
+    var p = PHONE_BY[iso] || PHONE_BY.OM, d = String(raw || '').replace(/\D/g, '');
+    if (p[2] && d.indexOf(p[2]) === 0 && p[4].indexOf(d.length - p[2].length) >= 0) d = d.slice(p[2].length);
+    var min = p[4][0], max = p[4][p[4].length - 1];
+    if (!d) return { status: 'empty', digits: d, min: min, max: max };
+    if (d.length < min) return { status: 'short', need: min - d.length, digits: d, min: min, max: max };
+    var ok = p[4].indexOf(d.length) >= 0 && new RegExp('^(?:' + p[3] + ')$').test(d);
+    return { status: ok ? 'ok' : 'bad', digits: d, min: min, max: max };
+  }
+  function phoneMsg(n) {
+    var x = t(), ck = phoneCheck(n.cc, n.phone), p = PHONE_BY[n.cc] || PHONE_BY.OM;
+    if (ck.status === 'ok') return '<span style="color:var(--ok)">✓ ' + x.phoneOk + ' · +' + p[1] + ' ' + ck.digits + '</span>';
+    if (ck.status === 'short') return x.phoneShort(ck.need);
+    if (ck.status === 'bad') return '<span style="color:var(--bad)">' + x.phoneBad(esc(countryName(n.cc))) + '</span>';
+    return x.phoneDigits(p[4].length > 1 ? p[4][0] + '–' + p[4][p[4].length - 1] : p[4][0]);
+  }
+
+  // Configuración de la web (precios, feriados, ocupadas)
+  S.cfg = null;
+  function loadCfg() {
+    return fetch('/api/config', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) { if (d.ok) S.cfg = { config: d.config, unavailable: d.unavailable || [] }; }).catch(function () {});
+  }
+  function dowOf(k) { return pd(k).getUTCDay(); }
+  function nightP(k) { var C = S.cfg.config; return C.holidays.indexOf(k) >= 0 ? C.holidayPrice : C.weekendDays.indexOf(dowOf(k)) >= 0 ? C.weekendPrice : C.weekdayPrice; }
+  function isBk(k) { return S.cfg.unavailable.indexOf(k) >= 0; }
+  function rangeFree(a, b) { for (var k = a; k < b; k = addDays(k, 1)) if (isBk(k)) return false; return true; }
+  function nbCompute(n) {
+    if (!S.cfg || !n.checkin || !n.checkout) return null;
+    var C = S.cfg.config, rows = [], room = 0;
+    for (var k = n.checkin; k < n.checkout; k = addDays(k, 1)) {
+      var p = nightP(k); room += p;
+      rows.push({ k: k, p: p, tag: C.holidays.indexOf(k) >= 0 ? 'hol' : C.weekendDays.indexOf(dowOf(k)) >= 0 ? 'we' : '' });
+    }
+    var nights = rows.length, rooms = roomsFor(n.guests), extra = rooms - C.baseRooms, extraTotal = extra * C.extraRoomPrice * nights;
+    var sub = room + extraTotal, pct = n.coupon ? n.couponPct : 0, subB = Math.round(sub * 1000), discB = Math.round(subB * pct / 1000) * 10, total = (subB - discB) / 1000;
+    var net = total * 100 / (100 + C.tourismTax + C.vat);
+    return { rows: rows, nights: nights, room: room, extra: extra, extraTotal: extraTotal, sub: sub, pct: pct, discount: discB / 1000, total: total, tax: net * C.tourismTax / 100, vat: net * C.vat / 100 };
+  }
+
   function openNew(pre) {
     pre = pre || {};
     S.open = null;
-    S.nb = { checkin: pre.checkin || '', checkout: pre.checkout || '', guests: 6, kings: 3, name: '', phone: '+968 ', email: '', lang: 'ar', event: '', total: '', paid: false, method: 'card', ref: '', notes: '', quote: null, err: '', busy: false };
+    var ci = pre.checkin || '', co = pre.checkout || '';
+    S.nb = { checkin: ci, checkout: co, month: (ci || today()).slice(0, 7), guests: 6, kings: 3, name: '', cc: 'OM', phone: '', email: '', lang: 'ar', event: '',
+      coupon: '', couponPct: 0, couponTry: '', couponErr: false, total: '', paid: false, method: 'card', ref: '', notes: '', err: '', busy: false };
+    loadPhones();
     renderNew(true);
-    if (S.nb.checkin && S.nb.checkout) fetchQuote();
+    loadCfg().then(function () { if (S.nb) renderNew(false); });
   }
-  var qTimer;
-  function fetchQuote() {
-    var n = S.nb;
-    clearTimeout(qTimer);
-    if (!n.checkin || !n.checkout || n.checkout <= n.checkin) { n.quote = null; updateQbox(); return; }
-    qTimer = setTimeout(function () {
-      api('/quote?checkin=' + n.checkin + '&checkout=' + n.checkout + '&guests=' + n.guests).then(function (j) { if (S.nb === n) { n.quote = j.ok ? j.quote : null; updateQbox(); } });
-    }, 200);
-  }
-  function qboxHtml() {
-    var n = S.nb, x = t();
-    if (!n.checkin || !n.checkout) return x.pickDates;
-    if (n.checkout <= n.checkin) return x.badDates;
-    if (!n.quote) return '…';
-    return x.normalPrice(money(n.quote.total), x.nights(n.quote.nights));
-  }
-  function updateQbox() { var q = document.getElementById('nbq'); if (q) q.innerHTML = qboxHtml(); var tt = document.getElementById('nbtotal'); if (tt) tt.placeholder = S.nb.quote ? omr(S.nb.quote.total) : ''; }
+
   var BED = {
     king: 'M3 20v-7a2 2 0 0 1 2-2h22a2 2 0 0 1 2 2v7 M3 17h26 M3 20v2 M29 20v2 M6 11V7a1.5 1.5 0 0 1 1.5-1.5h17A1.5 1.5 0 0 1 26 7v4 M9 11V9h6v2 M17 11V9h6v2',
     twin: 'M2 20v-6a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 14 14v6 M2 17.5h12 M2 20v2 M14 20v2 M4 12.5V9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3.5 M18 20v-6a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 30 14v6 M18 17.5h12 M18 20v2 M30 20v2 M20 12.5V9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3.5'
@@ -1210,66 +1290,173 @@ textarea:focus{border-color:var(--blue);background:#fff}
     return '<div class="row"><div class="lft"><svg class="bedic" viewBox="0 0 32 24" aria-hidden="true"><path d="' + path + '"/></svg><div><strong>' + title + '</strong><small>' + sub + '</small></div></div>' +
       '<div class="st"><button type="button" data-act="nbk" data-d="' + dMinus + '"' + (disMinus ? ' disabled' : '') + ' aria-label="−">−</button><b>' + val + '</b><button type="button" data-act="nbk" data-d="' + dPlus + '"' + (disPlus ? ' disabled' : '') + ' aria-label="+">+</button></div></div>';
   }
+
+  function nbCalendar(n) {
+    var x = t();
+    if (!S.cfg) return '<div class="ncal"><div class="skel" style="height:300px"></div></div>';
+    var ym = n.month, y = +ym.slice(0, 4), mo = +ym.slice(5, 7), td = today();
+    var first = new Date(Date.UTC(y, mo - 1, 1)).getUTCDay(), dim = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+    var wd = [], cells = '';
+    for (var i = 0; i < 7; i++) wd.push('<span>' + fmt(addDays('2026-11-01', i), { weekday: 'short' }).slice(0, 3) + '</span>');
+    for (i = 0; i < first; i++) cells += '<span></span>';
+    for (var d = 1; d <= dim; d++) {
+      var k = ym + '-' + (d < 10 ? '0' : '') + d, past = k < td, bk = isBk(k), hol = S.cfg.config.holidays.indexOf(k) >= 0;
+      var canEnd = !!(n.checkin && !n.checkout && k > n.checkin && rangeFree(n.checkin, k));
+      var isIn = k === n.checkin, isOut = k === n.checkout, inRange = !!(n.checkin && n.checkout && k > n.checkin && k < n.checkout);
+      var cls = 'nc', lab = '<i class="rs"></i>' + nightP(k);
+      if (hol) cls += ' hol';
+      if (bk && !isIn && !isOut) { if (canEnd) { cls += ' cout'; lab = x.outOnly; } else { cls += ' bk'; lab = x.bookedLbl; } }
+      if (inRange) cls += ' rng';
+      if (isIn || isOut) { cls += ' sel'; lab = isIn ? x.cin : x.cout; }
+      var dis = past || (bk && !canEnd && !isOut);
+      if (past) { cls = 'nc past'; lab = ''; }
+      cells += '<button type="button" class="' + cls + '" data-act="nbpick" data-v="' + k + '"' + (dis ? ' disabled' : '') + '><b>' + d + '</b><small>' + lab + '</small></button>';
+    }
+    var curM = today().slice(0, 7);
+    return '<div class="ncal"><div class="ncal-h"><button type="button" class="iconbtn" data-act="nbmonth" data-d="-1"' + (ym <= curM ? ' disabled style="opacity:.35"' : '') + ' aria-label="prev">' + I('left') + '</button><b>' + cap(fmt(ym + '-01', { month: 'long', year: 'numeric' })) + '</b><button type="button" class="iconbtn" data-act="nbmonth" data-d="1" aria-label="next">' + I('right') + '</button></div>' +
+      '<div class="ncal-w">' + wd.join('') + '</div><div class="ncal-g">' + cells + '</div>' +
+      '<div class="ncal-f"><span>' + (n.checkin && n.checkout ? x.nights(nbCompute(n).nights) : n.checkin ? x.hintOut : x.hintIn) + '</span>' + (n.checkin ? '<button type="button" data-act="nbclear">' + x.clearDates + '</button>' : '') + '</div></div>';
+  }
+
+  function nbPrice(n) {
+    var x = t(), c = nbCompute(n);
+    if (!c) return '<p class="info-line" style="margin:0">' + x.pickDates + '</p>';
+    var h = '<div class="ptable"><div class="ph"><span>' + x.nightL + '</span><span>' + x.priceL + '</span></div>' +
+      c.rows.map(function (r) { return '<div><span>' + cap(dMed(r.k)) + (r.tag === 'hol' ? x.holidayTag : r.tag === 'we' ? x.weekendTag : '') + '</span><b>' + money(r.p) + '</b></div>'; }).join('') + '</div>' +
+      '<div class="rows" style="margin-top:12px"><div><span class="muted">' + x.stayLine(c.nights) + '</span><span>' + money(c.room) + '</span></div>' +
+      (c.extra > 0 ? '<div><span class="muted">' + x.extraLine(c.extra, c.nights) + '</span><span>' + money(c.extraTotal) + '</span></div>' : '') +
+      (c.discount ? '<div style="color:var(--ok)"><span>' + x.discountLine(n.coupon, c.pct) + '</span><span>−' + money(c.discount) + '</span></div>' : '') +
+      '<div class="t"><span>' + x.total + '</span><span>' + money(c.total) + '</span></div></div>' +
+      '<div class="taxbox"><span>' + x.inclTaxes + '</span><div><span>' + x.taxLine(S.cfg.config.tourismTax) + '</span><span>' + money(Math.round(c.tax * 1000) / 1000) + '</span></div><div><span>' + x.vatLine(S.cfg.config.vat) + '</span><span>' + money(Math.round(c.vat * 1000) / 1000) + '</span></div></div>';
+    // cupón
+    if (n.coupon) h += '<div class="cpok"><span><b>' + esc(n.coupon) + '</b> ' + x.couponOk(n.couponPct) + '</span><button type="button" data-act="nbcpdel">' + x.couponRemove + '</button></div>';
+    else h += '<div class="f" style="margin-top:12px"><label for="nbcp">' + x.couponL + '</label><div style="display:flex;gap:8px"><input id="nbcp" data-nb="couponTry" autocomplete="off" autocapitalize="characters" spellcheck="false" style="text-transform:uppercase' + (n.couponErr ? ';border-color:var(--bad)' : '') + '" value="' + esc(n.couponTry) + '" placeholder="' + x.couponPh + '"><button type="button" class="sbtn pri" style="height:48px" data-act="nbcp">' + x.couponApply + '</button></div>' + (n.couponErr ? '<span class="ferr">' + x.couponBad + '</span>' : '') + '</div>';
+    return h;
+  }
+
   function renderNew(fresh) {
     var n = S.nb, x = t();
     if (!n) return;
     var rooms = roomsFor(n.guests), kMin = Math.max(0, rooms - 4), kMax = Math.min(3, rooms);
     n.kings = Math.min(kMax, Math.max(kMin, n.kings));
     var scroll = !fresh && layer.querySelector('.body') ? layer.querySelector('.body').scrollTop : 0;
-    var ev = L === 'es' ? EVENTS_ES : EVENTS_EN;
+    var ev = L === 'es' ? EVENTS_ES : EVENTS_EN, p = PHONE_BY[n.cc] || PHONE_BY.OM, c = nbCompute(n);
     var h = '<div class="scrim" data-act="closenew"></div><section class="sheet" role="dialog" aria-modal="true" aria-label="' + x.newB + '"><div class="grab"></div>' +
       '<div class="sh"><span class="code" style="color:var(--navy);font-size:19px;letter-spacing:0">' + x.newB + '</span><button class="iconbtn" data-act="closenew" aria-label="' + x.back + '">' + I('x') + '</button></div><div class="body"><div class="nbform">' +
       '<p class="info-line" style="margin-top:0">' + x.newHint + '</p>' +
-      '<div class="f2"><div class="f"><label for="nbci">' + x.checkin + '</label><input id="nbci" type="date" data-nb="checkin" value="' + n.checkin + '"></div><div class="f"><label for="nbco">' + x.checkout + '</label><input id="nbco" type="date" data-nb="checkout" value="' + n.checkout + '"' + (n.checkin ? ' min="' + addDays(n.checkin, 1) + '"' : '') + '></div></div>' +
+      // Fechas
+      '<h3 class="nbh">' + x.datesL + '</h3><div class="f2"><div class="dbox' + (!n.checkin ? ' on' : '') + '"><small>' + x.checkin + '</small><b>' + (n.checkin ? cap(dMed(n.checkin)) : x.choose) + '</b><small>2:00 pm</small></div>' +
+      '<div class="dbox' + (n.checkin && !n.checkout ? ' on' : '') + '"><small>' + x.checkout + '</small><b>' + (n.checkout ? cap(dMed(n.checkout)) : x.choose) + '</b><small>11:00 am</small></div></div>' +
+      nbCalendar(n) +
+      // Personas y habitaciones
       '<h3 class="nbh">' + x.guestsL + '</h3><div class="occ"><div class="row"><div class="lft"><span class="ib">' + I('users') + '</span><div><strong>' + x.guestsL + '</strong><small>' + x.guestsRange + '</small></div></div>' +
       '<div class="st"><button type="button" data-act="nbg" data-d="-1"' + (n.guests <= 6 ? ' disabled' : '') + ' aria-label="−">−</button><b>' + n.guests + '</b><button type="button" data-act="nbg" data-d="1"' + (n.guests >= 14 ? ' disabled' : '') + ' aria-label="+">+</button></div></div><hr>' +
       '<div class="row"><div class="lft"><span class="ib g">' + I('lock') + '</span><div><strong>' + x.rooms + '</strong><small>' + x.autoRooms + '</small></div></div><span class="big">' + rooms + '</span></div>' +
       '<div class="gold">' + I('info') + '<span>' + x.extraNotice + '</span></div></div>' +
+      // Camas
       '<h3 class="nbh">' + x.bedsL + '</h3><div class="occ">' +
       bedRowA(BED.king, x.kingBed, x.kingBedSub, n.kings <= kMin, n.kings >= kMax, -1, 1, n.kings) + '<hr>' +
       bedRowA(BED.twin, x.twinBed, x.twinBedSub, n.kings >= kMax, n.kings <= kMin, 1, -1, rooms - n.kings) +
       '<div class="asg"><span class="muted">' + x.assigned + '</span><b>' + rooms + ' ' + x.ofWord + ' ' + rooms + '</b></div></div>' +
+      // Motivo
+      '<h3 class="nbh">' + x.purpose + ' <span class="muted" style="font-size:13px;font-weight:600">' + x.optional + '</span></h3><div class="chips">' + ev.map(function (e, i) { return '<button type="button" data-act="nbev" data-v="' + i + '" aria-pressed="' + (String(n.event) === String(i)) + '">' + e + '</button>'; }).join('') + '</div>' +
+      // Datos del cliente
+      '<h3 class="nbh">' + x.guestData + '</h3>' +
       '<div class="f"><label for="nbname">' + x.nameL + '</label><input id="nbname" data-nb="name" autocomplete="off" value="' + esc(n.name) + '"></div>' +
-      '<div class="f2"><div class="f"><label for="nbphone">' + x.phoneL + '</label><input id="nbphone" type="tel" dir="ltr" data-nb="phone" value="' + esc(n.phone) + '"></div><div class="f"><label for="nbemail">' + x.emailL + '</label><input id="nbemail" type="email" data-nb="email" value="' + esc(n.email) + '"></div></div>' +
+      '<div class="f"><label for="nbphone">' + x.phoneL + '</label><div class="phrow" dir="ltr"><button type="button" class="ccbtn" data-act="nbcc"><span class="fl">' + flag(p[0]) + '</span>+' + p[1] + I('chev', 'ccv') + '</button>' +
+      '<input id="nbphone" type="tel" inputmode="numeric" data-nb="phone" value="' + esc(n.phone) + '" placeholder="' + esc(p[5]) + '"></div><span class="info-line" id="nbphmsg" style="margin-top:0">' + phoneMsg(n) + '</span></div>' +
+      '<div class="f"><label for="nbemail">' + x.emailL + '</label><input id="nbemail" type="email" dir="ltr" data-nb="email" value="' + esc(n.email) + '" placeholder="name@email.com"></div>' +
       '<div class="f"><span class="lb">' + x.language + '</span><div class="chips">' + [['ar', 'العربية'], ['en', 'English'], ['es', 'Español']].map(function (l) { return '<button type="button" data-act="nblang" data-v="' + l[0] + '" aria-pressed="' + (n.lang === l[0]) + '">' + l[1] + '</button>'; }).join('') + '</div></div>' +
-      '<div class="f"><span class="lb">' + x.purpose + ' · ' + x.optional + '</span><div class="chips">' + ev.map(function (e, i) { return '<button type="button" data-act="nbev" data-v="' + i + '" aria-pressed="' + (String(n.event) === String(i)) + '">' + e + '</button>'; }).join('') + '</div></div>' +
-      '<p class="qbox" id="nbq">' + qboxHtml() + '</p>' +
-      '<div class="f"><label for="nbtotal">' + x.totalL + '</label><input id="nbtotal" type="number" inputmode="decimal" step="0.001" min="0" data-nb="total" value="' + esc(n.total) + '" placeholder="' + (n.quote ? omr(n.quote.total) : '') + '"><span class="info-line" style="margin-top:0">' + x.totalHint + '</span></div>' +
-      '<button type="button" class="toggle" data-act="nbpaid"><span>' + x.paidQ + '</span><span class="sw' + (n.paid ? ' on' : '') + '" style="flex:none"></span></button>';
+      // Precio
+      '<h3 class="nbh">' + x.priceDetails + '</h3><div class="card">' + nbPrice(n) + '</div>' +
+      '<div class="dep">' + I('info') + '<span>' + x.depositInfo + '</span></div>' +
+      '<div class="f"><label for="nbtotal">' + x.specialL + '</label><input id="nbtotal" type="number" inputmode="decimal" step="0.001" min="0" data-nb="total" value="' + esc(n.total) + '" placeholder="' + (c ? omr(c.total) : '') + '"><span class="info-line" style="margin-top:0">' + x.totalHint + '</span></div>' +
+      // Pago
+      '<h3 class="nbh">' + x.payment + '</h3><button type="button" class="toggle" data-act="nbpaid"><span>' + x.paidQ + '</span><span class="sw' + (n.paid ? ' on' : '') + '" style="flex:none"></span></button>';
     if (n.paid) h += methodChips(n.method).replace('data-group="m"', 'data-group="nbm"').replace(/data-pick=/g, 'data-act="nbmethod" data-v=') +
       '<div class="f"><label for="nbref">' + x.payRef + '</label><input id="nbref" data-nb="ref" maxlength="80" value="' + esc(n.ref) + '" placeholder="' + x.payRefPh + '"></div>';
     h += '<p class="qbox" style="background:' + (n.paid ? 'var(--ok-bg);color:var(--ok)' : 'var(--gold-bg);color:var(--gold-ink)') + '">' + (n.paid ? x.willConfirm : x.willPending) + '</p>' +
       '<div class="f"><label for="nbnotes">' + x.notes + '</label><textarea id="nbnotes" data-nb="notes" maxlength="2000" placeholder="' + x.notesPh + '">' + esc(n.notes) + '</textarea></div>' +
       (n.err ? '<p class="ferr" role="alert">' + n.err + '</p>' : '') +
       '</div></div><div class="foot"><button class="btn btn-ghost" data-act="closenew">' + x.back + '</button><button class="btn btn-ok" data-act="nbsave"' + (n.busy ? ' disabled' : '') + '>' + I('check') + x.create + '</button></div></section>';
-    // Al actualizar (no al abrir) se reemplaza sin animación para que no parpadee
     if (!fresh) h = h.replace('class="scrim"', 'class="scrim noanim"').replace('class="sheet"', 'class="sheet noanim"');
     layer.innerHTML = h;
     if (scroll) layer.querySelector('.body').scrollTop = scroll;
   }
+
+  // Lista de países (igual que en la web)
+  function openCc() {
+    var x = t(), d = document.createElement('div');
+    d.className = 'dlg ccdlg';
+    d.innerHTML = '<div class="box form" role="dialog" aria-modal="true"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">' + x.ccTitle + '</h3><button type="button" class="iconbtn" style="background:var(--bg);color:var(--navy)" data-cc-close aria-label="x">' + I('x') + '</button></div>' +
+      '<div class="f" style="margin-bottom:8px"><input id="ccq" type="search" placeholder="' + x.ccSearch + '" autocomplete="off"></div><div class="cclist">' + ccRows('') + '</div></div>';
+    d.addEventListener('click', function (e) {
+      var row = e.target.closest('[data-cc]');
+      if (row) { S.nb.cc = row.dataset.cc; d.remove(); renderNew(false); var ph = document.getElementById('nbphone'); if (ph) ph.focus(); return; }
+      if (e.target.closest('[data-cc-close]') || e.target === d) d.remove();
+    });
+    d.querySelector('#ccq').addEventListener('input', function (e) { d.querySelector('.cclist').innerHTML = ccRows(e.target.value); });
+    document.body.appendChild(d);
+  }
+  function ccRows(q) {
+    var x = t(), norm = function (s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+    q = norm((q || '').trim()).replace(/^\+/, '');
+    var list = PHONES.slice().sort(function (a, b) { return countryName(a[0]).localeCompare(countryName(b[0]), L); });
+    if (q) list = list.filter(function (p) { return norm(countryName(p[0])).indexOf(q) >= 0 || p[1].indexOf(q) === 0 || p[0].toLowerCase() === q; });
+    else list = PINNED.map(function (k) { return PHONE_BY[k]; }).filter(Boolean).concat([null], list);
+    if (!list.length) return '<p class="info-line" style="text-align:center;padding:20px 0">' + x.ccNone + '</p>';
+    return list.map(function (p) {
+      if (!p) return '<hr style="border:0;height:1px;background:var(--line);margin:6px 0">';
+      return '<button type="button" class="ccrow" data-cc="' + p[0] + '"' + (S.nb && p[0] === S.nb.cc ? ' aria-current="true"' : '') + '><span class="fl">' + flag(p[0]) + '</span><span style="flex:1">' + esc(countryName(p[0])) + '</span><b dir="ltr">+' + p[1] + '</b></button>';
+    }).join('');
+  }
+
   function newAction(a, el) {
     var n = S.nb, x = t();
     if (!n) return;
     if (a === 'closenew') { S.nb = null; layer.innerHTML = ''; return; }
-    if (a === 'nbg') { n.guests = Math.max(6, Math.min(14, n.guests + +el.dataset.d)); renderNew(false); fetchQuote(); return; }
+    if (a === 'nbg') { n.guests = Math.max(6, Math.min(14, n.guests + +el.dataset.d)); renderNew(false); return; }
     if (a === 'nbk') { n.kings += +el.dataset.d; renderNew(false); return; }
     if (a === 'nbev') { n.event = String(n.event) === el.dataset.v ? '' : el.dataset.v; renderNew(false); return; }
     if (a === 'nblang') { n.lang = el.dataset.v; renderNew(false); return; }
     if (a === 'nbpaid') { n.paid = !n.paid; renderNew(false); return; }
     if (a === 'nbmethod') { n.method = el.dataset.v; renderNew(false); return; }
+    if (a === 'nbcc') return openCc();
+    if (a === 'nbmonth') { var pm = n.month.split('-').map(Number); n.month = new Date(Date.UTC(pm[0], pm[1] - 1 + +el.dataset.d, 1)).toISOString().slice(0, 7); renderNew(false); return; }
+    if (a === 'nbclear') { n.checkin = ''; n.checkout = ''; renderNew(false); return; }
+    if (a === 'nbpick') {
+      var k = el.dataset.v;
+      if (!n.checkin || n.checkout) { if (isBk(k)) return; n.checkin = k; n.checkout = ''; }
+      else if (k > n.checkin && rangeFree(n.checkin, k)) n.checkout = k;
+      else if (!isBk(k)) { n.checkin = k; }
+      renderNew(false); return;
+    }
+    if (a === 'nbcp') {
+      var code = String(n.couponTry || '').replace(/\s+/g, '').toUpperCase();
+      if (!code) return;
+      fetch('/api/coupon?code=' + encodeURIComponent(code)).then(function (r) { return r.json(); }).then(function (j) {
+        if (j.ok) { n.coupon = j.code; n.couponPct = j.pct; n.couponErr = false; n.couponTry = ''; } else n.couponErr = true;
+        renderNew(false);
+      });
+      return;
+    }
+    if (a === 'nbcpdel') { n.coupon = ''; n.couponPct = 0; renderNew(false); return; }
     if (a === 'nbsave') {
-      var err = !n.checkin || !n.checkout || n.checkout <= n.checkin ? x.badDates : n.name.trim().length < 2 ? x.needName : !/^\+\d{6,16}$/.test(n.phone.replace(/[\s-]/g, '')) ? x.badPhone : '';
-      if (err) { n.err = err; renderNew(false); var f = layer.querySelector('.ferr'); if (f) f.scrollIntoView({ block: 'center' }); return; }
+      var ck = phoneCheck(n.cc, n.phone), pp = PHONE_BY[n.cc] || PHONE_BY.OM;
+      var err = !n.checkin || !n.checkout ? x.pickDates : n.name.trim().length < 2 ? x.needName : ck.status !== 'ok' ? x.badPhone : '';
+      if (err) { n.err = err; renderNew(false); var f = layer.querySelector('.ferr[role=alert]'); if (f) f.scrollIntoView({ block: 'center' }); return; }
       n.err = ''; n.busy = true; renderNew(false);
-      api('/bookings', { method: 'POST', body: { checkin: n.checkin, checkout: n.checkout, guests: n.guests, kings: n.kings, name: n.name.trim(), phone: n.phone, email: n.email.trim(), lang: n.lang, event: n.event === '' ? null : Number(n.event), total: n.total === '' ? null : Number(n.total), paid: n.paid, status: n.paid ? 'confirmed' : 'pending', payMethod: n.method, payRef: n.ref, notes: n.notes } })
+      api('/bookings', { method: 'POST', body: { checkin: n.checkin, checkout: n.checkout, guests: n.guests, kings: n.kings, name: n.name.trim(), phone: '+' + pp[1] + ck.digits, email: n.email.trim(), lang: n.lang,
+        event: n.event === '' ? null : Number(n.event), coupon: n.coupon || null, total: n.total === '' ? null : Number(n.total), paid: n.paid, status: n.paid ? 'confirmed' : 'pending', payMethod: n.method, payRef: n.ref, notes: n.notes } })
         .then(function (j) {
           n.busy = false;
           if (j.ok) {
             S.nb = null; S.all.unshift(j.booking); if (S.seen) S.seen.push(j.booking.code); render();
             toast(j.booking.status === 'confirmed' ? x.createdPaid : x.createdUnpaid);
-            openSheet(j.booking.code); load(true);
+            openSheet(j.booking.code); load(true); loadCfg();
           } else {
-            n.err = { dates_unavailable: x.taken, invalid_phone: x.badPhone, invalid_name: x.needName, invalid_dates: x.badDates, invalid_total: x.badAmount }[j.error] || x.error;
+            if (j.error === 'dates_unavailable') loadCfg().then(function () { if (S.nb) renderNew(false); });
+            n.err = { dates_unavailable: x.taken, invalid_phone: x.badPhone, invalid_name: x.needName, invalid_dates: x.badDates, invalid_total: x.badAmount, invalid_coupon: x.couponBad }[j.error] || x.error;
             renderNew(false);
           }
         }).catch(function () { n.busy = false; n.err = x.error; renderNew(false); });
@@ -1350,11 +1537,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var f = e.target.dataset && e.target.dataset.nb;
     if (f && S.nb) {
       S.nb[f] = e.target.value;
-      if (f === 'checkin' || f === 'checkout') {
-        if (f === 'checkin' && S.nb.checkin && (!S.nb.checkout || S.nb.checkout <= S.nb.checkin)) { S.nb.checkout = addDays(S.nb.checkin, 1); var co = document.getElementById('nbco'); if (co) co.value = S.nb.checkout; }
-        var co2 = document.getElementById('nbco'); if (co2 && S.nb.checkin) co2.min = addDays(S.nb.checkin, 1);
-        fetchQuote();
-      }
+      if (f === 'phone') { var pm = document.getElementById('nbphmsg'); if (pm) pm.innerHTML = phoneMsg(S.nb); }
       return;
     }
     if (e.target.id === 'notes') { var b = byCode(S.open), btn = layer.querySelector('[data-act=savenotes]'); if (btn) btn.disabled = e.target.value === (b && b.notes || ''); }
