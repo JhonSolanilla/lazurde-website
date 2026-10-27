@@ -514,7 +514,7 @@
       '<img class="lz-lang-wm" src="img/stone.svg" alt="" aria-hidden="true">' +
       '<div class="lz-lang-box">' +
       '<img class="lz-lang-stone" src="img/stone.svg" alt="Lazurde">' +
-      '<p class="lz-lang-hello">Welcome · Bienvenido · <span lang="ar">أهلاً بك</span></p>' +
+      '<p class="lz-lang-hello" dir="ltr">Welcome · <span lang="ar" dir="rtl">أهلاً بك</span> · Bienvenido</p>' +
       '<h1 class="lz-lang-title">Select your language</h1>' +
       '<div class="lz-lang-rule" aria-hidden="true"><span></span><i></i><span></span></div>' +
       '<div class="lz-lang-list">' +
