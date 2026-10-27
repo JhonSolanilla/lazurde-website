@@ -459,12 +459,16 @@
   fetch('phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (state.screen === 'book') render(); }).catch(function () {});
   // Configuración y fechas ocupadas desde el servidor
   var API = { enabled: false };
-  function loadConfig() {
+  function loadConfig(silent) {
     return fetch('/api/config', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
       if (!d.ok) return;
       for (var k in d.config) CONFIG[k] = d.config[k];
+      var before = JSON.stringify(CONFIG.booked);
       CONFIG.booked = d.unavailable || [];
       API.enabled = !!d.bookingsEnabled;
+      if (silent && before === JSON.stringify(CONFIG.booked)) return;
+      var ae = document.activeElement;
+      if (silent && ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) return;
       if (state.screen === 'home' || state.screen === 'book') render();
     }).catch(function () {});
   }
@@ -1156,4 +1160,7 @@
   opTimer = setTimeout(endOpening, 3900);
   set({ screen: 'lang' });
   loadConfig();
+  // Keep availability fresh: re-check every 30 s while the page is visible, and when the guest returns to it
+  setInterval(function () { if (!document.hidden && !state.submitting && (state.screen === 'home' || state.screen === 'book')) loadConfig(true); }, 30000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) loadConfig(true); });
 })();
