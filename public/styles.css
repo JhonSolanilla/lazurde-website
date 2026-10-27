@@ -122,9 +122,11 @@ button.cell:disabled{cursor:not-allowed}
   background:radial-gradient(120% 80% at 50% 0%,#185A78 0%,rgba(16,72,98,0) 60%),radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%)}
 .lz-lang-wm{position:absolute;width:560px;max-width:none;left:50%;bottom:-210px;transform:translateX(-50%) rotate(-14deg);opacity:.07;pointer-events:none}
 .lz-lang-box{position:relative;width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.lz-lang-stone{width:78px;height:auto;filter:drop-shadow(0 8px 26px rgba(250,210,109,.35));animation:lzUp .6s ease-out both}
+.lz-lang-glow{position:relative;display:flex;align-items:center;justify-content:center;animation:lzUp .6s ease-out both}
+.lz-lang-glow::before{content:"";position:absolute;width:190px;height:190px;left:50%;top:50%;transform:translate(-50%,-46%);border-radius:50%;background:radial-gradient(circle,rgba(250,210,109,.28) 0%,rgba(250,210,109,.10) 38%,rgba(250,210,109,0) 68%);pointer-events:none}
+.lz-lang-stone{position:relative;width:78px;height:auto}
 .lz-lang-hello{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FAD26D;animation:lzUp .6s .08s ease-out both}
-.lz-lang-hello span{letter-spacing:0;font-family:Cairo,sans-serif}
+.lz-lang-hello bdi{letter-spacing:0;font-family:Cairo,sans-serif;margin:0 .15em}
 .lz-lang-title{margin-top:10px;font-size:27px;font-weight:700;letter-spacing:-.01em;animation:lzUp .6s .14s ease-out both}
 .lz-lang-rule{display:flex;align-items:center;gap:10px;margin:18px 0 26px;animation:lzUp .6s .18s ease-out both}
 .lz-lang-rule span{width:54px;height:1px;background:linear-gradient(90deg,transparent,#D3AE2A)}

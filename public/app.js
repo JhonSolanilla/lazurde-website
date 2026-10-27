@@ -513,8 +513,8 @@
     return '<div class="lz-lang" dir="ltr">' +
       '<img class="lz-lang-wm" src="img/stone.svg" alt="" aria-hidden="true">' +
       '<div class="lz-lang-box">' +
-      '<img class="lz-lang-stone" src="img/stone.svg" alt="Lazurde">' +
-      '<p class="lz-lang-hello" dir="ltr">Welcome · <span lang="ar" dir="rtl">أهلاً بك</span> · Bienvenido</p>' +
+      '<span class="lz-lang-glow"><img class="lz-lang-stone" src="img/stone.svg" alt="Lazurde"></span>' +
+      '<p class="lz-lang-hello" dir="ltr">Welcome · <bdi lang="ar">أهلاً بك</bdi> · Bienvenido</p>' +
       '<h1 class="lz-lang-title">Select your language</h1>' +
       '<div class="lz-lang-rule" aria-hidden="true"><span></span><i></i><span></span></div>' +
       '<div class="lz-lang-list">' +
