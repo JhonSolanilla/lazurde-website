@@ -32,6 +32,10 @@ No hay que instalar nada ni hacer pasos manuales.
 - Impuesto de turismo 4 % e IVA 5 %. Todos los precios de la web ya incluyen los impuestos (también los 15 OMR de la habitación extra).
 - Depósito de garantía: 100 OMR al llegar, se devuelve dentro de 24 horas.
 
+## Contacto y reservas por WhatsApp
+
+En `CONFIG` (`public/booking/app.js`): `whatsapp` (solo números con indicativo, ej. `96891234567`), `phone` y `email`. Con `whatsapp` lleno, los botones de WhatsApp/Llamar funcionan y al tocar Reservar se abre WhatsApp con el resumen de la reserva (en inglés) para el resort.
+
 ## Cupones de descuento
 
 En `CONFIG.coupons` (`public/booking/app.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Son de prueba: cuando exista la base de datos se validarán en el servidor.

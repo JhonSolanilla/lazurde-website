@@ -27,7 +27,11 @@
     // Feriados oficiales (fecha de la noche que se cobra con precio de feriado)
     holidays: ['2026-11-25', '2026-11-26'],
     // Noches ocupadas: EJEMPLO para la vista previa. Luego vendrán de la base de datos.
-    booked: ['2026-11-06', '2026-11-07', '2026-11-13', '2026-11-19', '2026-11-20', '2026-11-27', '2026-11-28'],
+    booked: [],   // fechas ocupadas (por ahora a mano; luego vendrán de la base de datos)
+    // Contacto del resort. Si whatsapp queda vacío, el botón Reservar funciona como demostración.
+    whatsapp: '',        // solo números con indicativo, ej. '96891234567'
+    phone: '',           // ej. '+96891234567'
+    email: 'info@lazurdeom.com',
     monthsAhead: 12
   };
 
@@ -64,7 +68,7 @@
       events: ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de trabajo', 'Otro'],
       policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', tbd: '[Por definir con Salim]',
       terms: 'Términos y condiciones', termLine: function (i) { return i + '. [Término ' + i + ' — texto pendiente. Aquí van los términos y condiciones oficiales de Lazurde Resort.]'; },
-      showMore: 'Ver más', footer: 'Lazurde Resort · Omán',
+      showMore: 'Ver más', footer: 'Lazurde Resort · Omán', privacy: 'Política de privacidad', privacyNote: 'Lee cómo usamos tus datos en nuestra política de privacidad.', waOpen: 'Se abrirá WhatsApp con tu solicitud: solo toca Enviar.',
       from: 'Desde', perNight: '/ noche', baseInfo: '6 personas · 3 habitaciones', bookNow: 'Reservar',
       navAria: 'Navegación principal', navHome: 'Inicio', navCal: 'Calendario', navMine: 'Mis reservas', navContact: 'Contacto',
       back: 'Volver', confirmTitle: 'Confirmar reserva', summarySub: 'Resort privado · [Ubicación], Omán',
@@ -129,7 +133,7 @@
       events: ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'],
       policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', tbd: '[To be confirmed]',
       terms: 'Terms & conditions', termLine: function (i) { return i + '. [Term ' + i + ' — pending text. The official Lazurde Resort terms & conditions go here.]'; },
-      showMore: 'Show more', footer: 'Lazurde Resort · Oman',
+      showMore: 'Show more', footer: 'Lazurde Resort · Oman', privacy: 'Privacy policy', privacyNote: 'Read how we use your data in our privacy policy.', waOpen: 'WhatsApp will open with your request — just tap Send.',
       from: 'From', perNight: '/ night', baseInfo: '6 guests · 3 bedrooms', bookNow: 'Book now',
       navAria: 'Main navigation', navHome: 'Home', navCal: 'Calendar', navMine: 'My bookings', navContact: 'Contact',
       back: 'Back', confirmTitle: 'Confirm booking', summarySub: 'Private resort · [Location], Oman',
@@ -194,7 +198,7 @@
       eventsNote: 'جميع المناسبات تحتاج إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.', events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
       policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', tbd: '[سيتم تأكيده]',
       terms: 'الشروط والأحكام', termLine: function (i) { return i + '. [البند ' + i + ' — نص قيد الإعداد. هنا تُضاف الشروط والأحكام الرسمية لمنتجع لازورد.]'; },
-      showMore: 'عرض المزيد', footer: 'منتجع لازورد · عُمان',
+      showMore: 'عرض المزيد', footer: 'منتجع لازورد · عُمان', privacy: 'سياسة الخصوصية', privacyNote: 'اطّلع على كيفية استخدامنا لبياناتك في سياسة الخصوصية.', waOpen: 'سيُفتح واتساب ومعه طلبك — فقط اضغط إرسال.',
       from: 'ابتداءً من', perNight: '/ الليلة', baseInfo: '6 ضيوف · 3 غرف', bookNow: 'احجز الآن',
       navAria: 'التنقل الرئيسي', navHome: 'الرئيسية', navCal: 'التقويم', navMine: 'حجوزاتي', navContact: 'تواصل',
       back: 'رجوع', confirmTitle: 'تأكيد الحجز', summarySub: 'منتجع خاص · [الموقع]، عُمان',
@@ -609,6 +613,33 @@
       (state.couponErr ? '<p style="font-size:12px;color:#B42318">' + T.couponBad + '</p>' : '') + '</div>';
   }
 
+  function contactBtn(href, colors, inner) {
+    var st = 'flex:1;height:48px;border-radius:14px;border:0;' + colors + ';display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none';
+    return href ? '<a href="' + href + '" target="_blank" rel="noopener" style="' + st + '">' + inner + '</a>' : '<button type="button" style="' + st + '">' + inner + '</button>';
+  }
+
+  // Mensaje de WhatsApp con la reserva (siempre en inglés para el equipo del resort)
+  function bookingMessage(c) {
+    var E = DICT.en, f = function (k) { var p = k.split('-').map(Number); return E.fmt(dow(k), p[2], p[1] - 1) + ', ' + p[0]; };
+    var lines = [
+      'New booking request – Lazurde Resort',
+      '',
+      'Check-in: ' + f(state.checkin) + ' (2:00 pm)',
+      'Check-out: ' + f(state.checkout) + ' (11:00 am)',
+      'Nights: ' + c.nights,
+      'Guests: ' + state.guests + ' · Bedrooms: ' + c.rooms + ' (' + c.kings + ' king, ' + c.twins + ' twin)',
+      'Purpose: ' + (state.event === null ? 'Not specified' : E.events[state.event]),
+      'Total: ' + (Math.round(c.total * 100) / 100) + ' OMR (taxes included)' + (c.discount > 0 ? ' – coupon ' + state.coupon + ' (' + c.pct + '%, −' + (Math.round(c.discount * 100) / 100) + ' OMR)' : ''),
+      'Security deposit on arrival: ' + CONFIG.deposit + ' OMR',
+      '',
+      'Name: ' + state.name.trim(),
+      'Phone: +' + (PHONE_BY[state.cc] || PHONE_BY.OM)[1] + ' ' + phoneCheck(state.cc, state.phone).digits,
+      'Email: ' + (state.email.trim() || '-'),
+      'Language: ' + ({ ar: 'Arabic', en: 'English', es: 'Spanish' })[state.lang]
+    ];
+    return lines.join('\n');
+  }
+
   function tplGallery(c) {
     var T = c.T, n = HERO.length, gi = ((state.gIdx % n) + n) % n, h = HERO[gi], nx = HERO[(gi + 1) % n];
     var img = photo(h.img || h.poster);
@@ -723,7 +754,8 @@
     h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;justify-content:space-between;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="openLang" aria-label="' + T.changeLang + '">' + svg(ICON.globe, { sw: 1.7 }) + '</button>' +
       '<img src="img/wordmark.svg" alt="Lazurde" style="height:26px;width:auto">' +
-      '<button type="button" class="icon-btn" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</button></header>';
+      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</a>'
+        : '<button type="button" class="icon-btn" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</button>') + '</header>';
     h += '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(190px + env(safe-area-inset-bottom))">';
     // Galería
     h += tplGallery(c);
@@ -736,8 +768,8 @@
       '<span style="font-size:12px;color:#5A6573">' + T.license + '</span></div>';
     // Contacto
     h += '<div id="lz-contact" style="background:#fff;padding:0 18px 18px;display:flex;gap:10px">' +
-      '<button type="button" style="flex:1;height:48px;border-radius:14px;border:0;background:#E7F5EC;color:#14532D;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;cursor:pointer">' + svg(ICON.chat, { w: 20 }) + T.whatsapp + '</button>' +
-      '<button type="button" style="flex:1;height:48px;border-radius:14px;border:0;background:#EAF1F8;color:#0F4C81;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;cursor:pointer">' + svg(ICON.phone, { w: 20 }) + T.call + '</button></div>';
+      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', svg(ICON.chat, { w: 20 }) + T.whatsapp) +
+      contactBtn(CONFIG.phone ? 'tel:' + CONFIG.phone : '', 'background:#EAF1F8;color:#0F4C81', svg(ICON.phone, { w: 20 }) + T.call) + '</div>';
     // Zonas del resort
     h += tplAreas(c);
     // Disponibilidad
@@ -772,7 +804,7 @@
       '<div style="border:1px solid #F3C9C9;background:#FDF2F2;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#8B1D1D">' + T.cancellation + '</strong><span style="font-size:14px;color:#6E1A1A;line-height:1.6">' + T.tbd + '</span></div>' +
       '<div style="border:1px solid #EFDFA6;background:#FFFBEA;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#6B4F00">' + T.dateChange + '</strong><span style="font-size:14px;color:#5C4510;line-height:1.6">' + T.tbd + '</span></div>' +
       '<h3 style="margin-top:8px;font-size:16px;font-weight:800">' + T.terms + '</h3>' + tplTerms(T) + '</section>';
-    h += '<div class="muted" style="padding:22px 18px;text-align:center;font-size:12px">' + T.footer + '</div></main>';
+    h += '<div class="muted" style="padding:22px 18px;text-align:center;font-size:12px;display:flex;flex-direction:column;gap:8px;align-items:center"><span>' + T.footer + '</span><a href="privacy.html?lang=' + c.L + '" style="color:#0F4C81;font-weight:700">' + T.privacy + '</a></div></main>';
     // Barra de reservar + navegación
     h += '<div class="fixed-bottom" style="padding:0 12px calc(14px + env(safe-area-inset-bottom))">' +
       '<div style="background:#fff;border:1px solid #E3E8EE;border-radius:18px;padding:10px;padding-inline-start:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(11,46,79,.14);margin-bottom:10px">' +
@@ -863,7 +895,8 @@
     // Términos
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
-      '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label></section></main>';
+      '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label>' +
+      '<a href="privacy.html?lang=' + c.L + '" target="_blank" rel="noopener" style="font-size:13px;color:#0F4C81;font-weight:700;text-decoration:underline">' + T.privacyNote + '</a></section></main>';
     h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px calc(18px + env(safe-area-inset-bottom))">' + tplBar(c) + '</div>';
     if (state.ccOpen) h += tplCcSheet(T);
     return h;
@@ -877,7 +910,7 @@
   }
   function tplBar(c) {
     var T = c.T, ok = c.canSubmit || state.submitting;
-    return (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : '') +
+    return (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : (CONFIG.whatsapp ? '<p style="font-size:12px;color:#14532D;text-align:center;margin-bottom:6px">' + T.waOpen + '</p>' : '')) +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong>' +
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="height:52px;min-width:150px;padding:0 22px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;' +
@@ -977,7 +1010,9 @@
     event: function (i) { i = Number(i); set({ event: state.event === i ? null : i }); },
     termsOk: function () { set({ termsOk: !state.termsOk }); },
     submit: function () {
-      if (!calc().canSubmit) return;
+      var c0 = calc();
+      if (!c0.canSubmit) return;
+      if (CONFIG.whatsapp) window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c0)), '_blank');
       set({ submitting: true });
       var sv = document.querySelector('#lz-bar .lz-stone');
       var stop = sv ? stoneLoop(sv, true) : function () {};
