@@ -125,8 +125,9 @@ button.cell:disabled{cursor:not-allowed}
 .lz-lang-glow{position:relative;display:flex;align-items:center;justify-content:center;animation:lzUp .6s ease-out both}
 .lz-lang-glow::before{content:"";position:absolute;width:190px;height:190px;left:50%;top:50%;transform:translate(-50%,-46%);border-radius:50%;background:radial-gradient(circle,rgba(250,210,109,.28) 0%,rgba(250,210,109,.10) 38%,rgba(250,210,109,0) 68%);pointer-events:none}
 .lz-lang-stone{position:relative;width:78px;height:auto}
-.lz-lang-hello{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FAD26D;animation:lzUp .6s .08s ease-out both}
-.lz-lang-hello bdi{letter-spacing:0;font-family:Cairo,sans-serif;margin:0 .15em}
+.lz-lang-hello{width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.5em;white-space:nowrap;margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FAD26D;animation:lzUp .6s .08s ease-out both}
+.lz-lang-hello bdi{letter-spacing:0;font-family:Cairo,sans-serif;font-size:14px}
+.lz-h-l{text-align:right}.lz-h-r{text-align:left}
 .lz-lang-title{margin-top:10px;font-size:27px;font-weight:700;letter-spacing:-.01em;animation:lzUp .6s .14s ease-out both}
 .lz-lang-rule{display:flex;align-items:center;gap:10px;margin:18px 0 26px;animation:lzUp .6s .18s ease-out both}
 .lz-lang-rule span{width:54px;height:1px;background:linear-gradient(90deg,transparent,#D3AE2A)}
