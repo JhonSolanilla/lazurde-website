@@ -932,15 +932,15 @@
   function tplDone(c) {
     var T = c.T;
     var rows = [[T.rIn, c.fmt(state.checkin)], [T.rOut, c.fmt(state.checkout)], [T.rGuests, T.guestsTxt(state.guests)], [T.rRooms, T.roomsTxt(c.rooms, c.kings, c.twins)],
-      [T.rPurpose, state.event === null ? T.notGiven : T.events[state.event]], [T.rTotal, c.hasNights ? c.money(c.total) : '—']];
-    if (c.discount > 0) rows.splice(rows.length - 1, 0, [T.rDiscount(state.coupon, c.pct), '−' + c.money(c.discount)]);
+      [T.rPurpose, state.event === null ? T.notGiven : T.events[state.event]], [T.rTotal, c.hasNights ? c.money(c.total) : '—', true]];
+    if (c.discount > 0) rows.splice(rows.length - 1, 0, [T.rDiscount(state.coupon, c.pct), '−' + c.money(c.discount), true]);
     return '<main style="background:#fff;min-height:100vh;padding:48px 22px 28px;display:flex;flex-direction:column;align-items:center;gap:16px">' +
       '<svg class="lz-pop" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true" style="flex:none"><circle cx="48" cy="48" r="44" fill="#E7F5EC" stroke="#1F8A4C" stroke-width="3"></circle><path class="lz-check" d="M30 49l12 12 24-26" fill="none" stroke="#1F8A4C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>' +
       '<h1 class="lz-up" style="margin-top:4px;font-size:26px;font-weight:800;text-align:center">' + T.sentTitle + '</h1>' +
       '<p class="lz-up" style="font-size:15px;color:#3D4A58;line-height:1.6;text-align:center">' + (state.bookingCode ? T.sentText : T.sentTextWa) + '</p>' +
       '<div class="lz-up" style="width:100%;border:1px solid #E3E8EE;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px">' +
       (state.bookingCode ? '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + T.code + '</span><strong style="color:#0F4C81;letter-spacing:.04em" dir="ltr">' + state.bookingCode + '</strong></div>' : '') +
-      rows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + r[0] + '</span><strong style="text-align:end">' + esc(r[1]) + '</strong></div>'; }).join('') + '</div>' +
+      rows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span class="muted">' + r[0] + '</span><strong style="text-align:end">' + (r[2] ? r[1] : esc(r[1])) + '</strong></div>'; }).join('') + '</div>' +
       '<div class="lz-up" style="width:100%;background:#FFF6DF;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:15px;color:#5C4510;line-height:1.4"><strong style="font-size:16px">' + T.remember + '</strong>' +
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockIn, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remIn + '</strong></span>' +
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockOut, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remOut + '</strong></span>' +
