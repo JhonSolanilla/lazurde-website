@@ -184,3 +184,9 @@ body.lz-typing #lz-bar{display:none}
 .lz-v-prev,.lz-v-next{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;line-height:1}
 .lz-v-prev{left:10px}.lz-v-next{right:10px}
 @media (hover:none){.lz-v-prev,.lz-v-next{display:none}}
+
+/* Cupón de descuento */
+.lz-coupon-btn{height:50px;padding:0 18px;border:0;border-radius:12px;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;font-size:15px;font-weight:800;cursor:pointer}
+.lz-coupon-ok{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;padding:10px 12px;border-radius:12px;background:#ECFDF3;border:1px dashed #15803D;color:#14532D;font-size:14px;font-weight:700}
+.lz-coupon-tag{padding:3px 8px;border-radius:8px;background:#15803D;color:#fff;font-size:12px;letter-spacing:.04em}
+.lz-coupon-x{border:0;background:none;color:#14532D;text-decoration:underline;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}

@@ -12,6 +12,9 @@
     weekendPrice: 285,   // noches de jueves y viernes (antes 260 + impuestos)
     holidayPrice: 285,   // feriados
     extraRoomPrice: 15,  // por habitación extra y por noche, impuestos incluidos
+    // Cupones de descuento (% sobre el total de la estadía; el depósito no se descuenta).
+    // De PRUEBA: cuando exista la base de datos, los cupones se validarán en el servidor.
+    coupons: { LAZURDE5: 5, LAZURDE10: 10, LAZURDE15: 15, LAZURDE20: 20 },
     tourismTax: 4,       // %
     vat: 5,              // %
     deposit: 100,        // depósito de garantía, se paga al llegar
@@ -87,7 +90,7 @@
       totalLabel: 'Total (OMR)', inclTaxes: 'Ya incluido en el precio:', pickToSee: 'Elige tus fechas para ver el precio.',
       depositBook: function (d) { return 'Depósito de garantía de ' + d + ': se paga al llegar y se devuelve dentro de 24 horas después de la salida. No está incluido en el total.'; },
       accept: 'He leído y acepto los términos y condiciones de Lazurde Resort.',
-      missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono válido', ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccClose: 'Cerrar', ccNone: 'Sin resultados', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, mTerms: 'aceptar los términos',
+      coupon: 'Cupón de descuento', couponPh: 'Escribe tu código', couponApply: 'Aplicar', couponBad: 'Este cupón no es válido.', couponRemove: 'Quitar', couponOk: function (p) { return '−' + p + '% aplicado'; }, discountLine: function (c, p) { return 'Descuento ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Descuento (' + p + '%)'; }, missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono válido', ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccClose: 'Cerrar', ccNone: 'Sin resultados', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, mTerms: 'aceptar los términos',
       barSub: function (n, r) { return n + (n === 1 ? ' noche' : ' noches') + ' · ' + r + ' habitaciones'; }, pickDates: 'Elige tus fechas',
       sending: 'Enviando…',
       sentTitle: '¡Solicitud enviada!', sentText: 'Te enviamos los detalles por WhatsApp y correo. Te avisaremos cuando la reserva quede confirmada.',
@@ -152,7 +155,7 @@
       totalLabel: 'Total (OMR)', inclTaxes: 'Already included in the price:', pickToSee: 'Choose your dates to see the price.',
       depositBook: function (d) { return 'Security deposit of ' + d + ': paid on arrival and refunded within 24 hours after check-out. Not included in the total.'; },
       accept: 'I have read and accept the Lazurde Resort terms & conditions.',
-      missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'valid phone', ccTitle: 'Country code', ccSearch: 'Search country or code', ccClose: 'Close', ccNone: 'No results', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, mTerms: 'accept the terms',
+      coupon: 'Discount code', couponPh: 'Enter your code', couponApply: 'Apply', couponBad: 'This code is not valid.', couponRemove: 'Remove', couponOk: function (p) { return p + '% off applied'; }, discountLine: function (c, p) { return 'Discount ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Discount (' + p + '%)'; }, missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'valid phone', ccTitle: 'Country code', ccSearch: 'Search country or code', ccClose: 'Close', ccNone: 'No results', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, mTerms: 'accept the terms',
       barSub: function (n, r) { return n + (n === 1 ? ' night' : ' nights') + ' · ' + r + ' bedrooms'; }, pickDates: 'Choose your dates',
       sending: 'Sending…',
       sentTitle: 'Request sent!', sentText: 'We’ve sent the details by WhatsApp and email. We’ll let you know as soon as your booking is confirmed.',
@@ -217,7 +220,7 @@
       totalLabel: 'الإجمالي (ر.ع.)', inclTaxes: 'مشمول في السعر:', pickToSee: 'اختر التواريخ لعرض السعر.',
       depositBook: function (d) { return 'مبلغ تأمين ' + d + ': يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، وهو غير مشمول في الإجمالي.'; },
       accept: 'قرأت الشروط والأحكام الخاصة بمنتجع لازورد وأوافق عليها.',
-      missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return 'ينقص ' + n + ' أرقام'; }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
+      coupon: 'كود الخصم', couponPh: 'أدخل الكود', couponApply: 'تطبيق', couponBad: 'هذا الكود غير صحيح.', couponRemove: 'إزالة', couponOk: function (p) { return 'تم تطبيق خصم ' + p + '%'; }, discountLine: function (c, p) { return 'خصم ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'خصم (' + p + '%)'; }, missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return 'ينقص ' + n + ' أرقام'; }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
       barSub: function (n, r) { return arNights(n) + ' · ' + r + ' غرف'; }, pickDates: 'اختر التواريخ',
       sending: 'جارٍ الإرسال…',
       sentTitle: 'تم إرسال طلبك!', sentText: 'أرسلنا التفاصيل عبر واتساب والبريد الإلكتروني، وسنبلغك فور تأكيد الحجز.',
@@ -337,7 +340,7 @@
   var state = {
     screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
-    event: null, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
+    event: null, coupon: null, couponTry: '', couponErr: false, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
   };
   function set(patch) {
     var prevScreen = state.screen;
@@ -381,13 +384,19 @@
     var rooms = roomsFor(state.guests), extra = rooms - CONFIG.baseRooms;
     var extraTotal = extra * incl(CONFIG.extraRoomPrice) * nights;
     var subtotal = roomTotal + extraTotal;
-    var total = subtotal, net = total * 100 / (100 + CONFIG.tourismTax + CONFIG.vat);
+    // Descuento: se calcula en baisas (1 OMR = 1000 baisas) y se redondea a 10 baisas (0,01 OMR)
+    var pct = state.coupon ? CONFIG.coupons[state.coupon] || 0 : 0;
+    var subB = Math.round(subtotal * 1000);
+    var discB = Math.round(subB * pct / 1000) * 10;
+    var discount = discB / 1000, total = (subB - discB) / 1000;
+    var net = total * 100 / (100 + CONFIG.tourismTax + CONFIG.vat);
     var taxAmt = net * CONFIG.tourismTax / 100, vatAmt = net * CONFIG.vat / 100;
     var taxLines = [];
     var priceLines = [];
     if (hasNights) {
       priceLines.push({ label: T.stayLine(nights), amount: money(roomTotal) });
       if (extra > 0) priceLines.push({ label: T.extraLine(extra, nights), amount: money(extraTotal) });
+      if (discB > 0) priceLines.push({ label: T.discountLine(state.coupon, pct), amount: '−' + money(discount), green: true });
       taxLines.push({ label: T.taxLine(CONFIG.tourismTax), amount: money(taxAmt) });
       taxLines.push({ label: T.vatLine(CONFIG.vat), amount: money(vatAmt) });
     }
@@ -406,7 +415,7 @@
       L: L, T: T, rtl: rtl, money: money, whole: whole, fmt: fmt, todayKey: todayKey,
       y: y, m: m, first: first, dim: dim,
       nightRows: nightRows, nights: nights, hasNights: hasNights, rooms: rooms, extra: extra,
-      priceLines: priceLines, taxLines: taxLines, total: total, kMin: kMin, kMax: kMax, kings: kings, twins: twins,
+      priceLines: priceLines, taxLines: taxLines, total: total, subtotal: subtotal, discount: discount, pct: pct, kMin: kMin, kMax: kMax, kings: kings, twins: twins,
       missing: missing, canSubmit: missing.length === 0 && !state.submitting
     };
   }
@@ -585,6 +594,19 @@
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#F5F7FA;border:1px solid #E9EDF2;border-radius:16px;padding:18px">' +
       '<span style="font-size:16px;font-weight:700">' + T.depositAmount + '</span><strong style="font-size:22px;font-weight:800;color:#0B2E4F">' + c.whole(CONFIG.deposit) + '</strong></div>' +
       '<ul style="list-style:none;margin:0;padding:0 2px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.6;color:#3D4A58">' + li(T.depositNote) + (inBooking ? li(T.notInTotal) : '') + '</ul></section>';
+  }
+
+  // Cupón de descuento
+  function tplCoupon(c) {
+    var T = c.T;
+    if (state.coupon) {
+      return '<div class="lz-coupon-ok"><span style="display:flex;align-items:center;gap:8px"><span class="lz-coupon-tag">' + esc(state.coupon) + '</span>' + T.couponOk(c.pct) + '</span>' +
+        '<button type="button" data-act="couponRemove" class="lz-coupon-x">' + T.couponRemove + '</button></div>';
+    }
+    return '<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px"><label for="lz-coupon" class="label">' + T.coupon + '</label>' +
+      '<div style="display:flex;gap:8px"><input id="lz-coupon" class="field" type="text" data-field="couponTry" autocomplete="off" autocapitalize="characters" spellcheck="false" value="' + esc(state.couponTry) + '" placeholder="' + T.couponPh + '" style="flex:1;min-width:0;text-transform:uppercase' + (state.couponErr ? ';border-color:#B42318' : '') + '">' +
+      '<button type="button" class="lz-coupon-btn" data-act="couponApply">' + T.couponApply + '</button></div>' +
+      (state.couponErr ? '<p style="font-size:12px;color:#B42318">' + T.couponBad + '</p>' : '') + '</div>';
   }
 
   function tplGallery(c) {
@@ -804,14 +826,14 @@
     if (c.hasNights) {
       h += '<div style="border:1px solid #E3E8EE;border-radius:14px;overflow:hidden"><div style="display:flex;justify-content:space-between;background:#F5F7FA;padding:8px 12px;font-size:12px;font-weight:700;color:#3D4A58"><span>' + T.night + '</span><span>' + T.price + '</span></div>' +
         c.nightRows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid #EEF2F6;font-size:14px"><span>' + r.label + '</span><span style="font-weight:700;white-space:nowrap">' + r.amount + '</span></div>'; }).join('') + '</div>' +
-        c.priceLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#3D4A58"><span>' + p.label + '</span><span style="color:#0B2E4F;font-weight:700;white-space:nowrap">' + p.amount + '</span></div>'; }).join('') +
+        c.priceLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;color:' + (p.green ? '#15803D' : '#3D4A58') + '"><span>' + p.label + '</span><span style="color:' + (p.green ? '#15803D' : '#0B2E4F') + ';font-weight:700;white-space:nowrap">' + p.amount + '</span></div>'; }).join('') +
         '<div style="height:1px;background:#E3E8EE;margin:4px 0"></div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><strong style="font-size:16px">' + (RIAL ? T.totalLabel.replace(/\s*\(.*\)/, '') : T.totalLabel) + '</strong><strong style="font-size:22px;white-space:nowrap">' + c.money(c.total) + '</strong></div>' +
         '<div style="background:#F5F7FA;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span class="muted" style="font-size:12px;font-weight:700">' + T.inclTaxes + '</span>' +
         c.taxLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#5A6573"><span>' + p.label + '</span><span style="white-space:nowrap">' + p.amount + '</span></div>'; }).join('') + '</div>';
     } else {
       h += '<span class="muted" style="font-size:14px">' + T.pickToSee + '</span>';
     }
-    h += '</section>' + tplDeposit(c, true);
+    h += tplCoupon(c) + '</section>' + tplDeposit(c, true);
     // Términos
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
@@ -841,6 +863,7 @@
     var T = c.T;
     var rows = [[T.rIn, c.fmt(state.checkin)], [T.rOut, c.fmt(state.checkout)], [T.rGuests, T.guestsTxt(state.guests)], [T.rRooms, T.roomsTxt(c.rooms, c.kings, c.twins)],
       [T.rPurpose, state.event === null ? T.notGiven : T.events[state.event]], [T.rTotal, c.hasNights ? c.money(c.total) : '—']];
+    if (c.discount > 0) rows.splice(rows.length - 1, 0, [T.rDiscount(state.coupon, c.pct), '−' + c.money(c.discount)]);
     return '<main style="background:#fff;min-height:100vh;padding:48px 22px 28px;display:flex;flex-direction:column;align-items:center;gap:16px">' +
       '<svg class="lz-pop" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true" style="flex:none"><circle cx="48" cy="48" r="44" fill="#E7F5EC" stroke="#1F8A4C" stroke-width="3"></circle><path class="lz-check" d="M30 49l12 12 24-26" fill="none" stroke="#1F8A4C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>' +
       '<h1 class="lz-up" style="margin-top:4px;font-size:26px;font-weight:800;text-align:center">' + T.sentTitle + '</h1>' +
@@ -892,6 +915,12 @@
       var z = ZONES[+i], L = state.lang;
       openViewer(z.video ? [{ video: z.video, poster: z.poster }] : z.p.map(function (p) { return { img: p }; }), 0, z.t[L]);
     },
+    couponApply: function () {
+      var code = String(state.couponTry || '').replace(/\s+/g, '').toUpperCase();
+      if (code && Object.prototype.hasOwnProperty.call(CONFIG.coupons, code)) set({ coupon: code, couponErr: false, couponTry: '' });
+      else set({ coupon: null, couponErr: !!code });
+    },
+    couponRemove: function () { set({ coupon: null, couponErr: false, couponTry: '' }); },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },
@@ -954,7 +983,7 @@
     }
     if (f) { state[f] = e.target.value; renderBar(); }
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.ccOpen) actions.ccClose(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.ccOpen) actions.ccClose(); if (e.key === 'Enter' && e.target.id === 'lz-coupon') { e.preventDefault(); actions.couponApply(); } });
   // Mientras el cliente escribe (teclado abierto) la barra de Reservar se oculta para no tapar los datos
   var kbTimer = null;
   function isTyping(el) { return el && el.matches && el.matches('input:not([type=checkbox]):not([type=radio]), textarea'); }

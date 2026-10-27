@@ -31,6 +31,10 @@ No hay que instalar nada ni hacer pasos manuales.
 - Impuesto de turismo 4 % e IVA 5 %. Todos los precios de la web ya incluyen los impuestos (también los 15 OMR de la habitación extra).
 - Depósito de garantía: 100 OMR al llegar, se devuelve dentro de 24 horas.
 
+## Cupones de descuento
+
+En `CONFIG.coupons` (`public/app.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Son de prueba: cuando exista la base de datos se validarán en el servidor.
+
 ## Fotos y videos
 
 El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce el resort" (`ZONES`), con sus títulos en los 3 idiomas, está al comienzo de `public/app.js`.
