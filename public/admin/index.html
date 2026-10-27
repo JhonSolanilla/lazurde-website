@@ -68,6 +68,19 @@ h1,h2,h3,p{margin:0}
 .tabbar button[aria-current=page] .ic{stroke-width:2.3}
 .tabbar .dot,.side .dot{position:absolute;top:7px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#E5484D;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
 
+/* Reloj en vivo */
+.clock{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border-radius:999px;font-weight:800;font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap;background:#fff;color:var(--navy);box-shadow:var(--shadow)}
+.hero .clock{background:rgba(255,255,255,.12);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.16)}
+.clock .lv{width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 0 rgba(34,197,94,.55);animation:lv 2s infinite}
+.clock.off .lv{background:#9AA5B1;animation:none}
+.clock small{font-size:11px;font-weight:700;opacity:.7;letter-spacing:.04em}
+@keyframes lv{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.side .sclock{margin:0 8px 22px;padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.side .sclock b{display:block;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.side .sclock span{display:flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(255,255,255,.7);font-weight:600;margin-top:4px}
+.side .sclock .lv{width:8px;height:8px;border-radius:50%;background:#22C55E;animation:lv 2s infinite}
+.side .sclock.off .lv{background:#9AA5B1;animation:none}
+
 /* Encabezado grande */
 .hero{background:radial-gradient(130% 120% at 85% 0%,#14607f 0%,#003047 55%,#00263a 100%);color:#fff;padding:calc(var(--sat) + 18px) 20px 26px;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;right:-40px;top:calc(var(--sat) - 10px);width:190px;height:256px;background:url(/booking/img/stone.svg) center/contain no-repeat;opacity:.09;pointer-events:none}
@@ -85,7 +98,10 @@ h1,h2,h3,p{margin:0}
 
 .top{position:sticky;top:0;z-index:20;background:rgba(241,244,248,.88);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);padding:calc(var(--sat) + 14px) 20px 10px}
 .top .ttl{display:flex;align-items:center;gap:10px}
-.top h1{flex:1;font-size:30px;font-weight:800;letter-spacing:-.01em}
+.top h1{flex:1;min-width:0;font-size:28px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iconbtn{flex:none}
+@media (max-width:400px){.top h1{font-size:25px}.top .clock small{display:none}}
+@media (min-width:1000px){.top h1{font-size:30px}}
 .top .iconbtn{background:#fff;color:var(--navy);box-shadow:var(--shadow)}
 .wrap{padding:0 16px}
 .sec{margin-top:24px}
@@ -276,6 +292,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
   .hero .row1{display:none}
   .hero h1{font-size:34px}
   .top{padding:30px 40px 12px;background:rgba(241,244,248,.92)}
+  .top .clock{display:none}
   .wrap{padding:0 40px}
   .stats{grid-template-columns:repeat(4,1fr);margin:-22px 24px 0;padding:0 16px}
   .home-cols{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
@@ -350,7 +367,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       iosSteps: ['Abre lazurdeom.com/admin en Safari.', 'Toca el botón Compartir (cuadro con flecha).', 'Elige “Agregar a pantalla de inicio” y toca Agregar.', 'Abre Lazurde Admin desde el ícono dorado.'],
       pcSteps: ['Abre lazurdeom.com/admin en Chrome o Edge.', 'Haz clic en el ícono de instalar en la barra de direcciones (o menú ⋯ → Instalar).', 'Queda en el escritorio y en la barra de tareas.'],
       sLang: 'Idioma del panel', sAccount: 'Sesión', sAccountTxt: 'La sesión dura 30 días en este dispositivo.', logout: 'Cerrar sesión',
-      newBooking: function (n) { return 'Nueva reserva de ' + n; }, open: 'Ver'
+      newBooking: function (n) { return 'Nueva reserva de ' + n; }, syncTitle: 'Hora de Omán · datos en vivo', syncing: 'Sincronizando…', synced: function (s) { return s < 5 ? 'En vivo · actualizado ahora' : 'En vivo · hace ' + s + ' s'; }, open: 'Ver'
     },
     en: {
       lang: 'en', other: 'Español', tagline: 'Bookings panel', password: 'Password', signIn: 'Sign in', wrong: 'Wrong password.', notConfigured: 'The admin password has not been set up in Cloudflare yet.', show: 'Show password',
@@ -394,7 +411,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       iosSteps: ['Open lazurdeom.com/admin in Safari.', 'Tap the Share button (square with arrow).', 'Choose “Add to Home Screen” and tap Add.', 'Open Lazurde Admin from the gold icon.'],
       pcSteps: ['Open lazurdeom.com/admin in Chrome or Edge.', 'Click the install icon in the address bar (or menu ⋯ → Install).', 'It stays on the desktop and taskbar.'],
       sLang: 'Panel language', sAccount: 'Session', sAccountTxt: 'Sessions last 30 days on this device.', logout: 'Log out',
-      newBooking: function (n) { return 'New booking from ' + n; }, open: 'Open'
+      newBooking: function (n) { return 'New booking from ' + n; }, syncTitle: 'Oman time · live data', syncing: 'Syncing…', synced: function (s) { return s < 5 ? 'Live · updated just now' : 'Live · ' + s + ' s ago'; }, open: 'Open'
     }
   };
 
@@ -521,7 +538,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var navs = [['home', 'home'], ['bookings', 'list'], ['calendar', 'cal'], ['settings', 'gear']];
     var navBtn = function (v) { return '<button data-nav="' + v[0] + '"' + (S.view === v[0] ? ' aria-current="page"' : '') + '>' + I(v[1]) + '<span>' + x.nav[v[0]] + '</span>' + (v[0] === 'bookings' && n ? '<span class="dot">' + n + '</span>' : '') + '</button>'; };
     var body = S.view === 'home' ? homeView() : S.view === 'bookings' ? bookingsView() : S.view === 'calendar' ? calendarView() : settingsView();
-    app.innerHTML = '<div class="shell"><aside class="side"><div class="brand"><img src="/booking/img/stone.svg" alt=""><div><b>LAZURDE</b><span>' + x.tagline + '</span></div></div><nav>' + navs.map(navBtn).join('') + '</nav><div class="foot">lazurdeom.com</div></aside>' +
+    app.innerHTML = '<div class="shell"><aside class="side"><div class="brand"><img src="/booking/img/stone.svg" alt=""><div><b>LAZURDE</b><span>' + x.tagline + '</span></div></div><div class="sclock' + (isLive() ? '' : ' off') + '" data-clockwrap><b data-clock>' + clockText(true) + '</b><span><i class="lv"></i><em data-synced style="font-style:normal">' + syncText() + '</em></span></div><nav>' + navs.map(navBtn).join('') + '</nav><div class="foot">lazurdeom.com</div></aside>' +
       '<main class="view">' + body + '</main></div>' +
       '<nav class="tabbar">' + navs.map(navBtn).join('') + '</nav>' + (S.view === 'calendar' && S.sel.length ? selBar() : '');
   }
@@ -552,7 +569,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var occ = Math.round(ms.confirmed / ms.days * 100);
     var todayLine = inHouse ? '<span class="pulse busy"></span><div><b>' + esc(x.todayBusy(inHouse.name)) + '</b><span>' + x.guests(inHouse.guests) + ' · ' + x.checkout + ' ' + dMed(inHouse.checkout) + ' · 11:00 am</span></div>'
       : '<span class="pulse"></span><div><b>' + x.todayFree + '</b><span>' + (upcoming[0] ? esc(x.todayNext(dMed(upcoming[0].checkin) + ' · ' + firstName(upcoming[0].name))) : x.todayNone) + '</span></div>';
-    var h = '<header class="hero"><div class="row1"><img src="/booking/img/stone.svg" alt=""><span class="brand">LAZURDE</span><button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div>' +
+    var h = '<header class="hero"><div class="row1"><img src="/booking/img/stone.svg" alt=""><span class="brand">LAZURDE</span>' + clockChip() + '<button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div>' +
       '<h1>' + x.hello(now.getUTCHours()) + '</h1><p>' + cap(fmt(td, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })) + '</p>' +
       '<button class="today"' + (inHouse ? ' data-open="' + inHouse.code + '"' : upcoming[0] ? ' data-open="' + upcoming[0].code + '"' : '') + '>' + todayLine + '</button></header>';
     h += '<div class="stats">' +
@@ -579,7 +596,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       if (!q) return true;
       return (b.name + ' ' + b.code + ' ' + b.phone + ' ' + (b.email || '')).toLowerCase().indexOf(q) !== -1;
     });
-    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.bookings + '</h1><button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div>' +
+    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.bookings + '</h1>' + clockChip() + '<button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div>' +
       '<label class="search">' + I('search') + '<span class="sr">' + x.search + '</span><input id="q" type="search" placeholder="' + x.search + '" value="' + esc(S.q) + '" autocomplete="off"></label>' +
       '<div class="seg">' + ['pending', 'confirmed', 'cancelled', 'rejected', 'all'].map(function (f) {
         return '<button data-filter="' + f + '" aria-pressed="' + (S.filter === f) + '">' + x.filters[f] + (f === 'pending' && counts.pending ? '<b>' + counts.pending + '</b>' : '') + '</button>';
@@ -624,7 +641,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       cells += '<button class="' + cls + '" data-day="' + k + '"' + (k < td && !b ? ' disabled' : '') + '>' + d + (lab ? '<small>' + lab + '</small>' : '') + (HOLIDAYS.indexOf(k) !== -1 ? '<span class="hol"></span>' : '') + '</button>';
     }
     var monthBlocks = S.blocks.filter(function (b) { return b.date.slice(0, 7) === ym; });
-    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.calendar + '</h1><button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div></header><div class="wrap"><div class="cal-wrap"><div>' +
+    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.calendar + '</h1>' + clockChip() + '<button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div></header><div class="wrap"><div class="cal-wrap"><div>' +
       '<div class="cal"><div class="cal-h"><button class="iconbtn" data-month="-1" aria-label="prev">' + I('left') + '</button><h2>' + cap(fmt(ym + '-01', { month: 'long', year: 'numeric' })) + '</h2><button class="iconbtn" data-month="1" aria-label="next">' + I('right') + '</button></div>' +
       '<div class="wd">' + wd.map(function (w) { return '<span>' + w + '</span>'; }).join('') + '</div><div class="days">' + cells + '</div>' +
       '<div class="legend"><span><i style="background:linear-gradient(160deg,#14607f,#003047)"></i>' + x.lgConfirmed + '</span><span><i style="background:#FFF6DF;border:1px solid #F1DC9A"></i>' + x.lgPending + '</span><span><i style="background:repeating-linear-gradient(135deg,#ECEFF3 0 3px,#D9DFE6 3px 6px)"></i>' + x.lgBlocked + '</span><span><i style="background:#D3AE2A;width:8px;height:8px;border-radius:50%"></i>' + x.lgHoliday + '</span></div></div>' +
@@ -650,7 +667,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     else if (!supported) pushTxt = isIOS && !standalone ? x.sNotifIos : x.sNotifNo;
     else if (window.Notification && Notification.permission === 'denied') pushTxt = x.sNotifDenied;
     else { pushTxt = x.sNotifOff; pushBtn = '<button class="pillbtn" data-act="pushon">' + x.sNotifBtn + '</button>'; }
-    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.settings + '</h1></div></header><div class="wrap"><div class="settings-grid"><div>';
+    var h = '<header class="top"><div class="ttl"><h1>' + x.nav.settings + '</h1>' + clockChip() + '</div></header><div class="wrap"><div class="settings-grid"><div>';
     h += '<div class="sec"><div class="sec-h"><h2>' + x.sNotif + '</h2></div><div class="group">' +
       '<div class="item"><i class="i-gold">' + I('bell') + '</i><div class="t"><b>' + x.sNotif + '</b><span>' + pushTxt + '</span></div>' + pushBtn + '</div>' +
       (S.push === 'on' ? '<div class="item"><i class="i-blue">' + I('check') + '</i><div class="t"><b>' + x.sTest + '</b></div><button class="pillbtn" data-act="pushtest">' + x.sTest + '</button></div>' : '') +
@@ -758,6 +775,30 @@ textarea:focus{border-color:var(--blue);background:#fff}
   }
 
   // ================= Carga de datos =================
+  // ================= Reloj (hora de Omán) =================
+  function omanNow() { return new Date(Date.now() + 4 * 3600e3); }
+  function clockText(withSec) {
+    var d = omanNow(), h = d.getUTCHours(), m = d.getUTCMinutes(), sec = d.getUTCSeconds();
+    var ap = h < 12 ? 'am' : 'pm', h12 = h % 12 || 12;
+    return h12 + ':' + (m < 10 ? '0' : '') + m + (withSec ? ':' + (sec < 10 ? '0' : '') + sec : '') + ' ' + ap;
+  }
+  function isLive() { return S.lastSync && Date.now() - S.lastSync < 75000 && navigator.onLine !== false; }
+  function clockChip() { return '<span class="clock' + (isLive() ? '' : ' off') + '" data-clockwrap title="' + t().syncTitle + '"><span class="lv"></span><span data-clock>' + clockText(true) + '</span><small>GST</small></span>'; }
+  function tickClock() {
+    var txt = clockText(true), live = isLive();
+    document.querySelectorAll('[data-clock]').forEach(function (e) { e.textContent = txt; });
+    document.querySelectorAll('[data-clockwrap]').forEach(function (e) { e.classList.toggle('off', !live); });
+    document.querySelectorAll('[data-synced]').forEach(function (e) { e.textContent = syncText(); });
+  }
+  function syncText() {
+    var x = t();
+    if (!S.lastSync) return x.syncing;
+    if (!isLive()) return x.offline;
+    var s = Math.round((Date.now() - S.lastSync) / 1000);
+    return x.synced(s);
+  }
+  setInterval(tickClock, 1000);
+
   var loading = false;
   function load(quiet) {
     if (!S.logged || loading) return Promise.resolve();
@@ -768,7 +809,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       if (r[0].error === 'db_not_configured') { S.noDb = true; S.loaded = true; render(); return; }
       if (!r[0].ok) return;
       var before = JSON.stringify([S.all, S.blocks]);
-      S.all = r[0].bookings || []; S.blocks = r[1].blocks || []; S.loaded = true; S.noDb = false;
+      S.all = r[0].bookings || []; S.blocks = r[1].blocks || []; S.loaded = true; S.noDb = false; S.lastSync = Date.now(); tickClock();
       // ¿Llegó algo nuevo?
       var codes = pendings().map(function (b) { return b.code; });
       if (S.seen) {
