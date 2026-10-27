@@ -199,7 +199,7 @@ async function apiConfig(env) {
   let unavailable = [];
   if (env.DB) { await ensureSchema(env.DB); unavailable = await unavailableNights(env.DB); }
   const { weekdayPrice, weekendPrice, holidayPrice, extraRoomPrice, tourismTax, vat, deposit, baseGuests, baseRooms, maxGuests, maxKing, maxTwin, weekendDays, holidays } = CONFIG;
-  return json({ ok: true, bookingsEnabled: !!env.DB, config: { weekdayPrice, weekendPrice, holidayPrice, extraRoomPrice, tourismTax, vat, deposit, baseGuests, baseRooms, maxGuests, maxKing, maxTwin, weekendDays, holidays }, unavailable });
+  return json({ ok: true, version: (env.CF_VERSION_METADATA && env.CF_VERSION_METADATA.id) || 'dev', bookingsEnabled: !!env.DB, config: { weekdayPrice, weekendPrice, holidayPrice, extraRoomPrice, tourismTax, vat, deposit, baseGuests, baseRooms, maxGuests, maxKing, maxTwin, weekendDays, holidays }, unavailable });
 }
 
 function apiCoupon(url) {

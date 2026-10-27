@@ -458,7 +458,18 @@
   indexPhones();
   fetch('phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (state.screen === 'book') render(); }).catch(function () {});
   // Configuración y fechas ocupadas desde el servidor
-  var API = { enabled: false };
+  var API = { enabled: false }, APPVER = null;
+  var UPD = { es: 'Hay una versión nueva', en: 'A new version is available', ar: 'يتوفر إصدار جديد' }, UPDB = { es: 'Actualizar', en: 'Update', ar: 'تحديث' };
+  function showUpdate() {
+    if (document.getElementById('lz-update')) return;
+    // Si la página está en segundo plano se actualiza sola; si la están usando, se avisa con un botón
+    if (document.hidden) { location.reload(); return; }
+    var l = UPD[state.lang] ? state.lang : 'en', el = document.createElement('button');
+    el.id = 'lz-update'; el.type = 'button';
+    el.innerHTML = '<span>' + UPD[l] + '</span><b>' + UPDB[l] + '</b>';
+    el.addEventListener('click', function () { location.reload(); });
+    document.body.appendChild(el);
+  }
   function loadConfig(silent) {
     return fetch('/api/config', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
       if (!d.ok) return;
@@ -466,6 +477,8 @@
       var before = JSON.stringify(CONFIG.booked);
       CONFIG.booked = d.unavailable || [];
       API.enabled = !!d.bookingsEnabled;
+      // ¿Se publicó una versión nueva mientras la página estaba abierta?
+      if (d.version) { if (!APPVER) APPVER = d.version; else if (d.version !== APPVER) showUpdate(); }
       if (silent && before === JSON.stringify(CONFIG.booked)) return;
       var ae = document.activeElement;
       if (silent && ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) return;

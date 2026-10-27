@@ -212,3 +212,7 @@ body.lz-typing #lz-bar{display:none}
 .lz-areas-arrow:active{transform:translateY(-50%) scale(.96)}
 .lz-prev{left:10px}.lz-next{right:10px}
 @media (hover:hover) and (pointer:fine){.lz-areas-arrow{display:flex}}
+
+/* Aviso de versión nueva */
+#lz-update{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 10px);z-index:200;display:flex;align-items:center;gap:12px;border:0;border-radius:999px;padding:10px 10px 10px 16px;background:#0B2E4F;color:#fff;font:inherit;font-size:14px;font-weight:700;box-shadow:0 10px 30px rgba(0,32,50,.3);cursor:pointer;max-width:calc(100% - 24px)}
+#lz-update b{background:#FAD26D;color:#002233;border-radius:999px;padding:6px 12px;font-weight:800}
