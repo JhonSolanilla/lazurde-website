@@ -644,7 +644,9 @@
     }
     var set = function (copy) { return ZONES.map(function (z, i) { return card(z, i, copy); }).join(''); };
     return '<div class="gap8"></div><section class="card" style="padding:20px 0 18px"><div style="padding:0 18px"><h2 class="h2">' + T.areasTitle + '</h2><p class="muted" style="font-size:13px;margin-top:4px">' + T.areasSub + '</p></div>' +
-      '<div class="lz-areas" dir="ltr">' + set(true) + set(false) + set(true) + '</div></section>';
+      '<div class="lz-areas-wrap"><div class="lz-areas" dir="ltr">' + set(true) + set(false) + set(true) + '</div>' +
+      '<button type="button" class="lz-areas-arrow lz-prev" data-act="areasStep" data-arg="-1" aria-label="' + T.prevPhoto + '"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+      '<button type="button" class="lz-areas-arrow lz-next" data-act="areasStep" data-arg="1" aria-label="' + T.nextPhoto + '"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div></section>';
   }
   function initAreasLoop() {
     var row = document.querySelector('.lz-areas');
@@ -946,6 +948,11 @@
       else set({ coupon: null, couponErr: !!code });
     },
     couponRemove: function () { set({ coupon: null, couponErr: false, couponTry: '' }); },
+    areasStep: function (d) {
+      var row = document.querySelector('.lz-areas'); if (!row) return;
+      var step = row.children[1].offsetLeft - row.children[0].offsetLeft;
+      row.scrollBy({ left: step * Number(d), behavior: 'smooth' });
+    },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },

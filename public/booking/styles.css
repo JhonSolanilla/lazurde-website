@@ -202,3 +202,13 @@ body.lz-typing #lz-bar{display:none}
 .lz-op-word{position:relative;width:236px;height:auto;opacity:0;animation:lzOpWord .8s 1.7s cubic-bezier(.22,1,.36,1) forwards}
 @keyframes lzOpWord{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.lz-op-glow,.lz-op-word{animation:none;opacity:1}}
+
+/* Flechas de "Conoce el resort" (para computador) */
+.lz-areas-wrap{position:relative}
+.lz-areas-arrow{position:absolute;top:calc(50% + 5px);transform:translateY(-50%);z-index:2;width:50px;height:50px;border-radius:999px;display:none;align-items:center;justify-content:center;cursor:pointer;color:#FAD26D;
+  background:radial-gradient(circle at 50% 35%,rgba(16,72,98,.92),rgba(0,48,71,.92));border:1.5px solid rgba(250,210,109,.75);box-shadow:0 8px 22px rgba(0,48,71,.35),inset 0 1px 0 rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}
+.lz-areas-arrow:hover{transform:translateY(-50%) scale(1.08);border-color:#FAD26D;color:#fff;background:radial-gradient(circle at 50% 35%,#D3AE2A,#A8841A)}
+.lz-areas-arrow:active{transform:translateY(-50%) scale(.96)}
+.lz-prev{left:10px}.lz-next{right:10px}
+@media (hover:hover) and (pointer:fine){.lz-areas-arrow{display:flex}}
