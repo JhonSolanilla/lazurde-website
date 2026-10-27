@@ -94,7 +94,7 @@
       code: 'Código de reserva', example: ' (ejemplo)',
       rIn: 'Llegada', rOut: 'Salida', rGuests: 'Personas', rRooms: 'Habitaciones', rPurpose: 'Motivo', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' personas'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' de 2 camas)'; }, notGiven: 'No indicado',
-      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', video: 'Video', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
+      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', video: 'Video', withSound: 'Toca para ver con sonido', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
       depositRem: function (d) { return 'Depósito de garantía: ' + d + ', se paga al llegar.'; }, backHome: 'Volver al inicio',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' de ' + mo + (booked ? ', ocupado' : ', ' + price + ' OMR por noche') + (isIn ? ', llegada' : '') + (isOut ? ', salida' : ''); }
     },
@@ -159,7 +159,7 @@
       code: 'Booking code', example: ' (example)',
       rIn: 'Check-in', rOut: 'Check-out', rGuests: 'Guests', rRooms: 'Bedrooms', rPurpose: 'Purpose', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
-      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', video: 'Video', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
+      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
       depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, backHome: 'Back to home',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return mo + ' ' + d + (booked ? ', booked' : ', ' + price + ' OMR per night') + (isIn ? ', check-in' : '') + (isOut ? ', check-out' : ''); }
     },
@@ -224,7 +224,7 @@
       code: 'رمز الحجز', example: ' (مثال)',
       rIn: 'الوصول', rOut: 'المغادرة', rGuests: 'الضيوف', rRooms: 'الغرف', rPurpose: 'السبب', rTotal: 'الإجمالي',
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
-      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', video: 'فيديو', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
+      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
       depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, backHome: 'العودة إلى الرئيسية',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' ' + mo + (booked ? '، محجوز' : '، ' + price + ' ر.ع. في الليلة') + (isIn ? '، الوصول' : '') + (isOut ? '، المغادرة' : ''); }
     }
@@ -268,7 +268,7 @@
   // Fotos en img/fotos/<nombre>-l.webp (grande) y -m.webp (mediana). Videos en video/.
   // Para cambiar el orden o los títulos, solo se edita esta lista.
   var HERO = [
-    { video: 'recorrido', poster: 'h-1-vista-principal', t: { es: 'Video · Recorrido por el resort', en: 'Video · Resort tour', ar: 'فيديو · جولة في المنتجع' } },
+    { video: 'recorrido', loop: 'recorrido-mudo', poster: 'h-1-vista-principal', t: { es: 'Video · Recorrido por el resort', en: 'Video · Resort tour', ar: 'فيديو · جولة في المنتجع' } },
     { img: 'h-2-area-de-piscina', t: { es: 'Patio de la piscina', en: 'Pool courtyard', ar: 'فناء المسبح' } },
     { img: 'h-8-wood-house', t: { es: 'Wood House', en: 'Wood House', ar: 'البيت الخشبي' } },
     { img: 'h-6-casa-principal', t: { es: 'Casa principal', en: 'Main house', ar: 'المبنى الرئيسي' } },
@@ -592,9 +592,11 @@
     var img = photo(h.img || h.poster);
     try { new Image().src = photo(nx.img || nx.poster); } catch (e) {}
     return '<div id="lz-top" class="lz-gal" style="position:relative;height:300px;background:#0B2E4F">' +
-      '<button type="button" class="lz-hero-img" data-act="heroOpen" aria-label="' + esc(h.t[c.L]) + '"><img src="' + img + '" alt="' + esc(h.t[c.L]) + '"' + (gi === 0 ? ' fetchpriority="high"' : '') + '></button>' +
+      '<button type="button" class="lz-hero-img" data-act="heroOpen" aria-label="' + esc(h.t[c.L]) + '">' + (h.loop
+        ? '<video src="video/' + h.loop + '.mp4" poster="' + img + '" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>'
+        : '<img src="' + img + '" alt="' + esc(h.t[c.L]) + '">') + '</button>' +
       '<span class="lz-hero-cap">' + h.t[c.L] + '</span>' +
-      (h.video ? '<span aria-hidden="true" class="lz-play">' + '<svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#0B2E4F"></path></svg></span>' : '') +
+      (h.video ? '<span aria-hidden="true" class="lz-sound">' + T.withSound + '</span>' : '') +
       '<button type="button" class="icon-btn" data-act="gPrev" aria-label="' + T.prevPhoto + '" style="position:absolute;inset-inline-start:10px;top:128px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.right : ICON.left, { w: 20, sw: 2 }) + '</button>' +
       '<button type="button" class="icon-btn" data-act="gNext" aria-label="' + T.nextPhoto + '" style="position:absolute;inset-inline-end:10px;top:128px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.left : ICON.right, { w: 20, sw: 2 }) + '</button>' +
       '<span style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;white-space:nowrap;pointer-events:none">' + T.of(gi + 1, n) + '</span>' +
@@ -972,7 +974,8 @@
     if (el) el.outerHTML = tplGallery(calc());
   }
   setInterval(function () {
-    if (state.screen === 'home' && Date.now() - galLast > 8000) galGo(1, false);
+    var n = HERO.length, cur = HERO[((state.gIdx % n) + n) % n];
+    if (state.screen === 'home' && !cur.loop && Date.now() - galLast > 8000) galGo(1, false);
   }, 4500);
   var touchX = null;
   app.addEventListener('touchstart', function (e) { touchX = e.target.closest && e.target.closest('#lz-top') ? e.touches[0].clientX : null; }, { passive: true });
