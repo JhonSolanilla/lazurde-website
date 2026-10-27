@@ -57,3 +57,10 @@ El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce 
 - Guardar las reservas en una base de datos y avisar por correo/WhatsApp.
 - Pasarela de pago.
 - Conectar el dominio lazurdeom.com.
+
+## Panel de administración (app)
+
+- Dirección: `lazurdeom.com/admin` — se instala como app (iPhone: Compartir → Agregar a pantalla de inicio; PC: Chrome/Edge → Instalar).
+- Secciones: Inicio (resumen del día y del mes), Reservas (buscador y filtros), Calendario (ver ocupación, bloquear/desbloquear días tocándolos) y Ajustes.
+- Avisos: notificaciones push (Ajustes → Notificaciones → Activar) que llegan aunque la app esté cerrada, más campanita y aviso cuando la app está abierta (revisa cada 20 s).
+- Las claves de las notificaciones (VAPID) se crean solas y se guardan en la base de datos. La sesión dura 30 días.

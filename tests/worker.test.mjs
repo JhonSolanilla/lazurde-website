@@ -54,3 +54,51 @@ r = await call('GET', '/booking/'); ok(r.status === 200, 'la web sigue sirviénd
 const noDb = { ASSETS: env.ASSETS };
 const r2 = await worker.fetch(new Request('https://x/api/config'), noDb); const j2 = await r2.json(); ok(j2.ok && j2.bookingsEnabled === false, 'sin base de datos: config funciona y avisa');
 const r3 = await worker.fetch(new Request('https://x/api/bookings', { method: 'POST', body: '{}' }), noDb); ok(r3.status === 503, 'sin base de datos: reservas → 503');
+
+// ---------- Notificaciones push ----------
+{
+  const { unb64u, b64u } = await import('../src/push.js');
+  const te = new TextEncoder();
+  // "Teléfono" falso con sus propias claves
+  const ua = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveBits']);
+  const uaPub = new Uint8Array(await crypto.subtle.exportKey('raw', ua.publicKey));
+  const auth = crypto.getRandomValues(new Uint8Array(16));
+  const sub = { endpoint: 'https://push.example.com/send/abc123xyz', keys: { p256dh: b64u(uaPub), auth: b64u(auth) }, lang: 'es' };
+  r = await call('GET', '/api/admin/push/key', null, { cookie: ck }); ok(r.body.ok && unb64u(r.body.key).length === 65, 'clave pública VAPID creada');
+  const vapidPub = r.body.key;
+  r = await call('POST', '/api/admin/push/subscribe', { endpoint: 'http://mal', keys: {} }, { cookie: ck, 'x-lz': '1' }); ok(r.status === 400, 'suscripción inválida rechazada');
+  r = await call('POST', '/api/admin/push/subscribe', sub, { cookie: ck, 'x-lz': '1' }); ok(r.body.ok, 'dispositivo suscrito');
+  // Interceptar el envío
+  const sent = []; const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, init) => { sent.push({ url, init }); return new Response('', { status: 201 }); };
+  const waits = [];
+  const res = await worker.fetch(new Request('https://lazurdeom.com/api/bookings', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...base, checkin: '2027-01-05', checkout: '2027-01-07', name: 'Salim Prueba' }) }), env, { waitUntil: p => waits.push(p) });
+  await Promise.all(waits);
+  globalThis.fetch = realFetch;
+  ok(res.status === 200 && sent.length === 1 && sent[0].url === sub.endpoint, 'nueva reserva → se envía aviso push');
+  const h = sent[0].init.headers;
+  // Verificar firma VAPID
+  const [, jwt, k] = h.authorization.match(/^vapid t=([^,]+), k=(.+)$/);
+  const [hd, cl, sg] = jwt.split('.');
+  const vk = await crypto.subtle.importKey('raw', unb64u(k), { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
+  const good = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, vk, unb64u(sg), te.encode(hd + '.' + cl));
+  const claims = JSON.parse(new TextDecoder().decode(unb64u(cl)));
+  ok(good && k === vapidPub && claims.aud === 'https://push.example.com', 'firma VAPID válida');
+  // Descifrar como lo haría el teléfono
+  const body = new Uint8Array(sent[0].init.body);
+  const salt = body.slice(0, 16), idlen = body[20], asPub = body.slice(21, 21 + idlen), ct = body.slice(21 + idlen);
+  const hk = async (s, ikm, info, n) => new Uint8Array(await crypto.subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: s, info }, await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']), n * 8));
+  const shared = new Uint8Array(await crypto.subtle.deriveBits({ name: 'ECDH', public: await crypto.subtle.importKey('raw', asPub, { name: 'ECDH', namedCurve: 'P-256' }, false, []) }, ua.privateKey, 256));
+  const info = new Uint8Array([...te.encode('WebPush: info\0'), ...uaPub, ...asPub]);
+  const ikm = await hk(auth, shared, info, 32);
+  const cek = await hk(salt, ikm, te.encode('Content-Encoding: aes128gcm\0'), 16), nonce = await hk(salt, ikm, te.encode('Content-Encoding: nonce\0'), 12);
+  const pt = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: nonce }, await crypto.subtle.importKey('raw', cek, 'AES-GCM', false, ['decrypt']), ct));
+  const msg = JSON.parse(new TextDecoder().decode(pt.slice(0, -1)));
+  ok(/^Nueva solicitud de reserva · LZ-/.test(msg.title) && msg.body.includes('Salim Prueba') && msg.body.includes('5 ene → 7 ene'), 'aviso descifrado en español: ' + msg.title + ' — ' + msg.body);
+  // Dispositivo que ya no existe → se borra
+  globalThis.fetch = async () => new Response('', { status: 410 });
+  r = await call('POST', '/api/admin/push/test', {}, { cookie: ck, 'x-lz': '1' });
+  globalThis.fetch = realFetch;
+  ok(r.body.sent === 0, 'prueba con dispositivo vencido');
+  r = await call('POST', '/api/admin/push/test', {}, { cookie: ck, 'x-lz': '1' }); ok(r.body.sent === 0, 'dispositivo vencido eliminado de la lista');
+}

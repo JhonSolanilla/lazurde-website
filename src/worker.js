@@ -6,6 +6,8 @@
 // - Precios, feriados y cupones viven AQUÍ: la web los pide a /api/config,
 //   y el precio final siempre se recalcula en el servidor.
 
+import { createVapidKeys, sendPush } from './push.js';
+
 // ===================== CONFIGURACIÓN =====================
 export const CONFIG = {
   weekdayPrice: 240,       // sábado a miércoles (impuestos incluidos)
@@ -85,7 +87,9 @@ async function ensureSchema(db) {
       subtotal REAL NOT NULL, discount REAL NOT NULL DEFAULT 0, total REAL NOT NULL,
       notes TEXT, created_at TEXT NOT NULL, updated_at TEXT NOT NULL)`),
     db.prepare(`CREATE INDEX IF NOT EXISTS bookings_dates ON bookings (status, checkin, checkout)`),
-    db.prepare(`CREATE TABLE IF NOT EXISTS blocks (date TEXT PRIMARY KEY, note TEXT, created_at TEXT NOT NULL)`)
+    db.prepare(`CREATE TABLE IF NOT EXISTS blocks (date TEXT PRIMARY KEY, note TEXT, created_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, p256dh TEXT NOT NULL, auth TEXT NOT NULL, lang TEXT, created_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT NOT NULL)`)
   ]);
   schemaReady = true;
 }
@@ -101,6 +105,48 @@ async function unavailableNights(db) {
   return [...set].sort();
 }
 
+// ===================== NOTIFICACIONES PUSH =====================
+const PUSH_SUBJECT = 'mailto:info@lazurdeom.com';
+async function vapidKeys(db) {
+  let row = await db.prepare(`SELECT v FROM settings WHERE k = 'vapid'`).first();
+  if (!row) {
+    const k = await createVapidKeys();
+    await db.prepare(`INSERT OR IGNORE INTO settings (k, v) VALUES ('vapid', ?)`).bind(JSON.stringify(k)).run();
+    row = await db.prepare(`SELECT v FROM settings WHERE k = 'vapid'`).first();
+  }
+  return JSON.parse(row.v);
+}
+const MONTHS = {
+  es: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+};
+function shortDate(k, lang) { const [, m, d] = k.split('-').map(Number); return lang === 'es' ? d + ' ' + MONTHS.es[m - 1] : MONTHS.en[m - 1] + ' ' + d; }
+export function bookingNotice(b, lang) {
+  const es = lang === 'es';
+  return {
+    title: (es ? 'Nueva solicitud de reserva · ' : 'New booking request · ') + b.code,
+    body: b.name + ' · ' + shortDate(b.checkin, lang) + ' → ' + shortDate(b.checkout, lang) + ' · ' + b.guests + (es ? ' personas · ' : ' guests · ') + b.total + ' OMR',
+    tag: b.code,
+    url: '/admin/#' + b.code
+  };
+}
+// Envía el aviso a todos los dispositivos suscritos; borra los que ya no existen
+export async function notifyAll(db, make) {
+  const { results: subs } = await db.prepare(`SELECT * FROM push_subs`).all();
+  if (!subs.length) return 0;
+  const keys = await vapidKeys(db);
+  let sent = 0;
+  await Promise.all(subs.map(async (s) => {
+    try {
+      const st = await sendPush(s, make(s.lang === 'es' ? 'es' : 'en'), keys, PUSH_SUBJECT);
+      if (st === 404 || st === 410) await db.prepare(`DELETE FROM push_subs WHERE endpoint = ?`).bind(s.endpoint).run();
+      else if (st < 300) sent++;
+      else console.error('push', st, new URL(s.endpoint).host);
+    } catch (e) { console.error('push error', e); }
+  }));
+  return sent;
+}
+
 // ===================== SESIÓN DEL PANEL =====================
 const enc = new TextEncoder();
 async function hmac(secret, msg) {
@@ -113,8 +159,9 @@ function safeEqual(a, b) {
   let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return r === 0;
 }
+const SESSION_DAYS = 30;   // en el celular o PC de la oficina no hay que entrar a cada rato
 async function makeToken(env) {
-  const exp = Date.now() + 12 * 3600e3;
+  const exp = Date.now() + SESSION_DAYS * 864e5;
   return exp + '.' + await hmac(env.ADMIN_PASSWORD, 'lz-admin.' + exp);
 }
 async function isAdmin(request, env) {
@@ -163,7 +210,7 @@ export function validateBooking(b) {
   return null;
 }
 
-async function apiCreateBooking(request, env) {
+async function apiCreateBooking(request, env, ctx) {
   if (!env.DB) return bad('bookings_disabled', 503);
   let b;
   try { b = await request.json(); } catch (e) { return bad('invalid_json'); }
@@ -191,6 +238,9 @@ async function apiCreateBooking(request, env) {
       .catch(e => ({ error: e }));
     if (res.error) { if (String(res.error).includes('UNIQUE')) continue; throw res.error; }
     if (!res.meta || res.meta.changes !== 1) return bad('dates_unavailable', 409);
+    const notice = { code, name: clip(b.name, 120), checkin: b.checkin, checkout: b.checkout, guests: Number(b.guests), total: q.total };
+    const job = notifyAll(env.DB, lang => bookingNotice(notice, lang)).catch(e => console.error(e));
+    if (ctx && ctx.waitUntil) ctx.waitUntil(job);
     return json({ ok: true, code, status: 'pending', nights: q.nights, rooms: q.rooms, subtotal: q.subtotal, pct: q.pct, discount: q.discount, total: q.total });
   }
   return bad('try_again', 500);
@@ -206,7 +256,7 @@ async function apiAdmin(request, env, url) {
     await new Promise(r => setTimeout(r, 400));   // frena intentos repetidos
     const ok = typeof body.password === 'string' && safeEqual(await hmac('lz', body.password), await hmac('lz', env.ADMIN_PASSWORD));
     if (!ok) return bad('wrong_password', 401);
-    return json({ ok: true }, 200, { 'set-cookie': COOKIE(await makeToken(env), 12 * 3600) });
+    return json({ ok: true }, 200, { 'set-cookie': COOKIE(await makeToken(env), SESSION_DAYS * 86400) });
   }
   if (path === '/logout') return json({ ok: true }, 200, { 'set-cookie': COOKIE('', 0) });
   if (!(await isAdmin(request, env))) return bad('unauthorized', 401);
@@ -214,6 +264,30 @@ async function apiAdmin(request, env, url) {
   await ensureSchema(env.DB);
 
   if (path === '/me') return json({ ok: true });
+
+  // --- notificaciones ---
+  if (path === '/push/key' && request.method === 'GET') return json({ ok: true, key: (await vapidKeys(env.DB)).publicKey });
+  if (path === '/push/subscribe' && request.method === 'POST') {
+    let body = {};
+    try { body = await request.json(); } catch (e) {}
+    const ep = String(body.endpoint || ''), k = body.keys || {};
+    if (!/^https:\/\/[^\s]{10,}$/.test(ep) || ep.length > 1000 || !/^[\w-]{80,100}$/.test(k.p256dh || '') || !/^[\w-]{16,30}$/.test(k.auth || '')) return bad('invalid_subscription');
+    await env.DB.prepare(`INSERT OR REPLACE INTO push_subs (endpoint, p256dh, auth, lang, created_at) VALUES (?, ?, ?, ?, ?)`)
+      .bind(ep, k.p256dh, k.auth, body.lang === 'es' ? 'es' : 'en', new Date().toISOString()).run();
+    return json({ ok: true });
+  }
+  if (path === '/push/unsubscribe' && request.method === 'POST') {
+    let body = {};
+    try { body = await request.json(); } catch (e) {}
+    await env.DB.prepare(`DELETE FROM push_subs WHERE endpoint = ?`).bind(String(body.endpoint || '')).run();
+    return json({ ok: true });
+  }
+  if (path === '/push/test' && request.method === 'POST') {
+    const sent = await notifyAll(env.DB, lang => lang === 'es'
+      ? { title: 'Lazurde · prueba', body: 'Las notificaciones funcionan ✅', tag: 'test', url: '/admin/' }
+      : { title: 'Lazurde · test', body: 'Notifications are working ✅', tag: 'test', url: '/admin/' });
+    return json({ ok: true, sent });
+  }
 
   if (path === '/bookings' && request.method === 'GET') {
     const st = url.searchParams.get('status');
@@ -273,13 +347,13 @@ async function apiAdmin(request, env, url) {
 
 // ===================== ENTRADA =====================
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/')) {
       try {
         if (url.pathname === '/api/config' && request.method === 'GET') return await apiConfig(env);
         if (url.pathname === '/api/coupon' && request.method === 'GET') return apiCoupon(url);
-        if (url.pathname === '/api/bookings' && request.method === 'POST') return await apiCreateBooking(request, env);
+        if (url.pathname === '/api/bookings' && request.method === 'POST') return await apiCreateBooking(request, env, ctx);
         if (url.pathname.startsWith('/api/admin')) return await apiAdmin(request, env, url);
         return bad('not_found', 404);
       } catch (e) {
