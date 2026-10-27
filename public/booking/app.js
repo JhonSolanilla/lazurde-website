@@ -657,7 +657,7 @@
     function jump(to) {
       row.style.scrollSnapType = 'none'; row.scrollLeft = to; void row.offsetWidth; row.style.scrollSnapType = '';
     }
-    jump(setW());                                   // empieza en la tanda del medio (tarjeta 01)
+    jump(row.children[n].offsetLeft - 18);          // empieza en la tarjeta 01 de la tanda del medio, pegada a la izquierda
     var t = null;
     row.addEventListener('scroll', function () {
       clearTimeout(t);
