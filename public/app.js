@@ -56,7 +56,7 @@
       fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Mini zoo: pavos reales, aves, conejos y cabras', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
       showAll: function (n) { return 'Ver todas (' + n + ')'; }, showLess: 'Ver menos',
       where: 'Dónde estarás', whereNote: 'La ubicación exacta se envía cuando se confirma la reserva.',
-      deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
+      deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', notInTotal: 'No está incluido en el total de la reserva.', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
       allowedEvents: 'Eventos permitidos', eventsNote: 'Todo evento necesita autorización previa de Lazurde. Después de reservar, coordínalo con nosotros por WhatsApp.',
       events: ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de trabajo', 'Otro'],
       policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', tbd: '[Por definir con Salim]',
@@ -121,7 +121,7 @@
       fac: ['Swimming pool', 'Football field', 'Billiards area', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Mini zoo: peacocks, birds, rabbits & goats', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
       showAll: function (n) { return 'Show all (' + n + ')'; }, showLess: 'Show less',
       where: 'Where you’ll be', whereNote: 'The exact location is shared once your booking is confirmed.',
-      deposit: 'Security deposit', depositAmount: 'Deposit amount', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
+      deposit: 'Security deposit', depositAmount: 'Deposit amount', notInTotal: 'It is not included in the booking total.', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
       allowedEvents: 'Allowed events', eventsNote: 'All events need prior approval from Lazurde. After booking, please arrange it with us on WhatsApp.',
       events: ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'],
       policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', tbd: '[To be confirmed]',
@@ -186,7 +186,7 @@
       fac: ['مسبح', 'ملعب كرة قدم', 'منطقة البلياردو', 'موقف سيارات', 'منطقة شواء', 'منطقة أطفال', 'ملعب أطفال', 'حديقة حيوانات صغيرة: طواويس وطيور وأرانب وماعز', 'البيت الخشبي (منطقة استرخاء)', 'نوافير', 'جلسات خارجية', 'حدائق'],
       showAll: function (n) { return 'عرض الكل (' + n + ')'; }, showLess: 'عرض أقل',
       where: 'أين ستقيم', whereNote: 'نرسل الموقع الدقيق بعد تأكيد الحجز.',
-      deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
+      deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', notInTotal: 'غير مشمول في إجمالي الحجز.', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
       allowedEvents: 'المناسبات المسموح بها',
       eventsNote: 'جميع المناسبات تحتاج إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.', events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
       policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', tbd: '[سيتم تأكيده]',
@@ -510,7 +510,7 @@
     for (var d = 1; d <= c.dim; d++) {
       var k = keyOf(c.y, c.m, d), price = nightPrice(k), past = k < c.todayKey, booked = isBooked(k), hol = isHoliday(k), we = isWeekendNight(k);
       var pc = '#A57F12';
-      var cls = 'cell', label = String(incl(price)), dis = false, labelColor = pc;
+      var cls = 'cell', label = cur(String(incl(price)), { unit: '' }), dis = false, labelColor = pc;
       if (!interactive) {
         if (hol) cls += ' hol';
         if (booked) { cls += ' booked'; label = T.booked; }
@@ -545,6 +545,15 @@
     for (var i = 1; i <= 10; i++) lines += '<p style="margin:0 0 8px;font-size:14px;color:#3D4A58;line-height:1.6">' + esc(T.termLine(i)) + '</p>';
     return '<div class="terms-box' + (state.termsOpen ? ' open' : '') + '">' + lines + '</div>' +
       '<button type="button" class="btn-outline" data-act="toggleTerms">' + (state.termsOpen ? T.showLess : T.showMore) + '</button>';
+  }
+
+  // Depósito de garantía: cuadro con el monto y debajo para qué es
+  function tplDeposit(c, inBooking) {
+    var T = c.T, li = function (t) { return '<li style="display:flex;gap:10px;align-items:flex-start"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none;margin-top:9px"></span><span>' + t + '</span></li>'; };
+    return '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:14px"><h2 class="h2">' + T.deposit + '</h2>' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#F5F7FA;border:1px solid #E9EDF2;border-radius:16px;padding:18px">' +
+      '<span style="font-size:16px;font-weight:700">' + T.depositAmount + '</span><strong style="font-size:22px;font-weight:800;color:#0B2E4F">' + c.whole(CONFIG.deposit) + '</strong></div>' +
+      '<ul style="list-style:none;margin:0;padding:0 2px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.6;color:#3D4A58">' + li(T.depositNote) + (inBooking ? li(T.notInTotal) : '') + '</ul></section>';
   }
 
   function tplGallery(c) {
@@ -619,9 +628,7 @@
       '<div style="position:relative;height:180px;border-radius:16px;overflow:hidden;background-color:#EEF1EC;background-image:linear-gradient(90deg,rgba(255,255,255,.9) 2px,transparent 2px),linear-gradient(rgba(255,255,255,.9) 2px,transparent 2px);background-size:46px 46px"><span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:999px;background:rgba(15,76,129,.22);border:2px solid #0F4C81"></span></div>' +
       '<p class="muted" style="font-size:14px;line-height:1.6">' + T.whereNote + '</p></section>';
     // Depósito
-    h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.deposit + '</h2>' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #E3E8EE;border-radius:14px;padding:14px 16px"><span style="font-size:15px;font-weight:600">' + T.depositAmount + '</span><strong style="font-size:17px">' + c.whole(CONFIG.deposit) + '</strong></div>' +
-      '<p class="muted" style="font-size:14px;line-height:1.6">' + T.depositNote + '</p></section>';
+    h += tplDeposit(c, false);
     // Eventos permitidos
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.allowedEvents + '</h2><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">' +
       T.events.slice(0, 8).map(function (e) { return '<span style="display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none"></span>' + e + '</span>'; }).join('') + '</div>' +
@@ -719,8 +726,7 @@
     } else {
       h += '<span class="muted" style="font-size:14px">' + T.pickToSee + '</span>';
     }
-    h += '<div style="display:flex;gap:10px;align-items:flex-start;background:#F5F7FA;border-radius:12px;padding:12px;margin-top:4px">' + svg(ICON.info, { w: 20, stroke: '#3D4A58', style: 'flex:none;margin-top:1px' }) +
-      '<span style="font-size:13px;color:#3D4A58;line-height:1.5">' + T.depositBook(c.whole(CONFIG.deposit)) + '</span></div></section>';
+    h += '</section>' + tplDeposit(c, true);
     // Términos
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
