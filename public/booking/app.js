@@ -515,9 +515,9 @@
   // ===================== PLANTILLAS =====================
   function tplLang() {
     var langs = [
-      ['es', 'ES', 'Español', 'Continuar en español', 'ltr'],
+      ['ar', 'ع', 'العربية', 'المتابعة باللغة العربية', 'rtl'],
       ['en', 'EN', 'English', 'Continue in English', 'ltr'],
-      ['ar', 'ع', 'العربية', 'المتابعة باللغة العربية', 'rtl']
+      ['es', 'ES', 'Español', 'Continuar en español', 'ltr']
     ];
     return '<div class="lz-lang" dir="ltr">' +
       '<img class="lz-lang-wm" src="img/stone.svg" alt="" aria-hidden="true">' +
