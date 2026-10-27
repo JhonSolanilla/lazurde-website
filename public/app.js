@@ -87,7 +87,7 @@
       totalLabel: 'Total (OMR)', inclTaxes: 'Ya incluido en el precio:', pickToSee: 'Elige tus fechas para ver el precio.',
       depositBook: function (d) { return 'Depósito de garantía de ' + d + ': se paga al llegar y se devuelve dentro de 24 horas después de la salida. No está incluido en el total.'; },
       accept: 'He leído y acepto los términos y condiciones de Lazurde Resort.',
-      missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono', mTerms: 'aceptar los términos',
+      missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono válido', ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccClose: 'Cerrar', ccNone: 'Sin resultados', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, mTerms: 'aceptar los términos',
       barSub: function (n, r) { return n + (n === 1 ? ' noche' : ' noches') + ' · ' + r + ' habitaciones'; }, pickDates: 'Elige tus fechas',
       sending: 'Enviando…',
       sentTitle: '¡Solicitud enviada!', sentText: 'Te enviamos los detalles por WhatsApp y correo. Te avisaremos cuando la reserva quede confirmada.',
@@ -152,7 +152,7 @@
       totalLabel: 'Total (OMR)', inclTaxes: 'Already included in the price:', pickToSee: 'Choose your dates to see the price.',
       depositBook: function (d) { return 'Security deposit of ' + d + ': paid on arrival and refunded within 24 hours after check-out. Not included in the total.'; },
       accept: 'I have read and accept the Lazurde Resort terms & conditions.',
-      missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'phone', mTerms: 'accept the terms',
+      missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'valid phone', ccTitle: 'Country code', ccSearch: 'Search country or code', ccClose: 'Close', ccNone: 'No results', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, mTerms: 'accept the terms',
       barSub: function (n, r) { return n + (n === 1 ? ' night' : ' nights') + ' · ' + r + ' bedrooms'; }, pickDates: 'Choose your dates',
       sending: 'Sending…',
       sentTitle: 'Request sent!', sentText: 'We’ve sent the details by WhatsApp and email. We’ll let you know as soon as your booking is confirmed.',
@@ -217,7 +217,7 @@
       totalLabel: 'الإجمالي (ر.ع.)', inclTaxes: 'مشمول في السعر:', pickToSee: 'اختر التواريخ لعرض السعر.',
       depositBook: function (d) { return 'مبلغ تأمين ' + d + ': يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، وهو غير مشمول في الإجمالي.'; },
       accept: 'قرأت الشروط والأحكام الخاصة بمنتجع لازورد وأوافق عليها.',
-      missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'الهاتف', mTerms: 'الموافقة على الشروط',
+      missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return 'ينقص ' + n + ' أرقام'; }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
       barSub: function (n, r) { return arNights(n) + ' · ' + r + ' غرف'; }, pickDates: 'اختر التواريخ',
       sending: 'جارٍ الإرسال…',
       sentTitle: 'تم إرسال طلبك!', sentText: 'أرسلنا التفاصيل عبر واتساب والبريد الإلكتروني، وسنبلغك فور تأكيد الحجز.',
@@ -306,7 +306,7 @@
   var state = {
     screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
-    event: null, name: '', phone: '', email: '', termsOk: false, submitting: false
+    event: null, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
   };
   function set(patch) {
     var prevScreen = state.screen;
@@ -357,7 +357,7 @@
     if (!hasNights) missing.push(T.mDates);
     if (!state.confirmed) missing.push(T.mGuests);
     if (!state.name.trim()) missing.push(T.mName);
-    if (!state.phone.trim()) missing.push(T.mPhone);
+    if (phoneCheck(state.cc, state.phone).status !== 'ok') missing.push(T.mPhone);
     if (!state.termsOk) missing.push(T.mTerms);
 
     return {
@@ -394,6 +394,64 @@
     }
     cycle();
     return function () { timers.forEach(clearTimeout); };
+  }
+
+  // ===================== TELÉFONO: TODOS LOS PAÍSES =====================
+  // phones.json sale del archivo oficial de Google (libphonenumber):
+  // [país, indicativo, prefijo nacional, patrón válido, cantidades de dígitos posibles, ejemplo]
+  var PHONES = [['OM', '968', '', '(?:[279]\\d{7})', [8], '92123456']], PHONE_BY = {};
+  function indexPhones() { PHONE_BY = {}; PHONES.forEach(function (p) { PHONE_BY[p[0]] = p; }); }
+  indexPhones();
+  fetch('phones.json').then(function (r) { return r.json(); }).then(function (d) { PHONES = d; indexPhones(); if (state.screen === 'book') render(); }).catch(function () {});
+  var PINNED = ['OM', 'AE', 'SA', 'QA', 'KW', 'BH'];
+  function flag(iso) { return iso.replace(/./g, function (ch) { return String.fromCodePoint(127397 + ch.charCodeAt(0)); }); }
+  var nameCache = {};
+  function countryName(iso) {
+    var k = state.lang + iso;
+    if (!nameCache[k]) { try { nameCache[k] = new Intl.DisplayNames([state.lang], { type: 'region' }).of(iso) || iso; } catch (e) { nameCache[k] = iso; } }
+    return nameCache[k];
+  }
+  function phoneCheck(iso, raw) {
+    var p = PHONE_BY[iso] || PHONE_BY.OM, d = String(raw || '').replace(/\D/g, '');
+    if (p[2] && d.indexOf(p[2]) === 0 && p[4].indexOf(d.length - p[2].length) >= 0) d = d.slice(p[2].length);
+    var min = p[4][0], max = p[4][p[4].length - 1];
+    if (!d) return { status: 'empty', digits: d, min: min, max: max };
+    if (d.length < min) return { status: 'short', need: min - d.length, digits: d, min: min, max: max };
+    var ok = p[4].indexOf(d.length) >= 0 && new RegExp('^(?:' + p[3] + ')$').test(d);
+    return { status: ok ? 'ok' : 'bad', digits: d, min: min, max: max };
+  }
+  function phoneMsg(T) {
+    var ck = phoneCheck(state.cc, state.phone);
+    if (ck.status === 'ok') return '<span style="color:#15803D">✓ ' + T.phoneOk + ' · +' + PHONE_BY[state.cc][1] + ' ' + ck.digits + '</span>';
+    if (ck.status === 'short') return '<span class="muted">' + T.phoneShort(ck.need) + '</span>';
+    if (ck.status === 'bad') return '<span style="color:#B42318">' + T.phoneBad(countryName(state.cc)) + '</span>';
+    var p = PHONE_BY[state.cc];
+    return '<span class="muted">' + T.phoneDigits(p[4].length > 1 ? p[4][0] + '–' + p[4][p[4].length - 1] : p[4][0]) + '</span>';
+  }
+  function tplPhone(c) {
+    var T = c.T, p = PHONE_BY[state.cc] || PHONE_BY.OM, max = p[4][p[4].length - 1] + (p[2] ? p[2].length : 0);
+    return '<div dir="ltr" style="display:flex;gap:8px"><button type="button" class="lz-cc" data-act="ccOpen" aria-label="' + T.ccTitle + ': ' + esc(countryName(p[0])) + ' +' + p[1] + '">' +
+      '<span style="font-size:20px;line-height:1">' + flag(p[0]) + '</span><span>+' + p[1] + '</span>' + svg(ICON.down || 'M6 9l6 6 6-6', { w: 14, sw: 2 }) + '</button>' +
+      '<input id="lz-phone" class="field" type="tel" inputmode="numeric" autocomplete="tel-national" data-field="phone" maxlength="' + (max + 4) + '" value="' + esc(state.phone) + '" placeholder="' + esc(p[5]) + '" style="flex:1;min-width:0"></div>' +
+      '<p id="lz-phone-msg" aria-live="polite" style="font-size:12px;margin-top:-4px">' + phoneMsg(T) + '</p>';
+  }
+  function ccRows(T, q) {
+    var norm = function (t) { return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
+    q = norm((q || '').trim()).replace(/^\+/, '');
+    var list = PHONES.slice().sort(function (a, b) { return countryName(a[0]).localeCompare(countryName(b[0]), state.lang); });
+    if (q) list = list.filter(function (p) { return norm(countryName(p[0])).indexOf(q) >= 0 || p[1].indexOf(q) === 0 || p[0].toLowerCase() === q; });
+    else list = PINNED.map(function (k) { return PHONE_BY[k]; }).filter(Boolean).concat([null], list);
+    if (!list.length) return '<p class="muted" style="padding:20px;text-align:center">' + T.ccNone + '</p>';
+    return list.map(function (p) {
+      if (!p) return '<div style="height:1px;background:#E3E8EE;margin:6px 0"></div>';
+      return '<button type="button" class="lz-cc-row" data-act="ccPick" data-arg="' + p[0] + '"' + (p[0] === state.cc ? ' aria-current="true"' : '') + '><span style="font-size:22px;line-height:1">' + flag(p[0]) + '</span><span style="flex:1">' + esc(countryName(p[0])) + '</span><strong dir="ltr">+' + p[1] + '</strong></button>';
+    }).join('');
+  }
+  function tplCcSheet(T) {
+    return '<div class="lz-sheet-bg" data-act="ccClose"></div><div class="lz-sheet" role="dialog" aria-modal="true" aria-label="' + T.ccTitle + '">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px"><strong style="font-size:17px">' + T.ccTitle + '</strong><button type="button" class="icon-btn" data-act="ccClose" aria-label="' + T.ccClose + '">✕</button></div>' +
+      '<div style="padding:0 18px 10px"><input id="lz-ccq" class="field" type="search" data-field="ccq" placeholder="' + T.ccSearch + '" autocomplete="off"></div>' +
+      '<div id="lz-cc-list" class="lz-cc-list">' + ccRows(T, '') + '</div></div>';
   }
 
   // ===================== PLANTILLAS =====================
@@ -629,8 +687,7 @@
     // Datos
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.details + '</h2>' +
       '<label for="lz-name" class="label">' + T.fullName + '</label><input id="lz-name" class="field" type="text" autocomplete="name" data-field="name" value="' + esc(state.name) + '" placeholder="' + esc(T.namePh) + '">' +
-      '<label for="lz-phone" class="label">' + T.phone + '</label><div dir="ltr" style="display:flex;gap:8px"><span style="height:50px;min-width:70px;border:1px solid #C9D2DC;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;background:#F5F7FA">+968</span>' +
-      '<input id="lz-phone" class="field" type="tel" inputmode="tel" autocomplete="tel" data-field="phone" value="' + esc(state.phone) + '" placeholder="9123 4567" style="flex:1;min-width:0"></div>' +
+      '<label for="lz-phone" class="label">' + T.phone + '</label>' + tplPhone(c) +
       '<label for="lz-email" class="label">' + T.email + '</label><input id="lz-email" class="field" dir="ltr" type="email" autocomplete="email" data-field="email" value="' + esc(state.email) + '" placeholder="name@email.com"></section>';
     // Precio
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px"><h2 style="font-size:18px;font-weight:800;margin-bottom:4px">' + T.priceDetails + '</h2>';
@@ -651,6 +708,7 @@
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
       '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label></section></main>';
     h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px calc(18px + env(safe-area-inset-bottom))">' + tplBar(c) + '</div>';
+    if (state.ccOpen) h += tplCcSheet(T);
     return h;
   }
   function bedRow(icon, title, sub, actMinus, actPlus, ariaMinus, ariaPlus, disMinus, disPlus, val) {
@@ -713,6 +771,9 @@
     openLang: function () { set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
+    ccOpen: function () { set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus(); }, 50); },
+    ccClose: function () { set({ ccOpen: false }); },
+    ccPick: function (iso) { set({ cc: iso, ccOpen: false }); var i = document.getElementById('lz-phone'); if (i) i.focus(); },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },
@@ -765,8 +826,17 @@
   });
   app.addEventListener('input', function (e) {
     var f = e.target.getAttribute('data-field');
+    if (f === 'ccq') { var l = document.getElementById('lz-cc-list'); if (l) l.innerHTML = ccRows(DICT[state.lang], e.target.value); return; }
+    if (f === 'phone') {
+      var clean = e.target.value.replace(/[^\d\s]/g, '');
+      if (clean !== e.target.value) e.target.value = clean;
+      state.phone = clean;
+      var m = document.getElementById('lz-phone-msg'); if (m) m.innerHTML = phoneMsg(DICT[state.lang]);
+      renderBar(); return;
+    }
     if (f) { state[f] = e.target.value; renderBar(); }
   });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.ccOpen) actions.ccClose(); });
 
   // ===================== GALERÍA: cambia sola y se desliza con el dedo =====================
   var galLast = 0;

@@ -16,6 +16,7 @@ No hay que instalar nada ni hacer pasos manuales.
 | `public/index.html` | La página y la animación del logo al cargar |
 | `public/app.js` | Pantallas, textos en los 3 idiomas, calendario, precios y reglas de habitaciones |
 | `public/styles.css` | Colores, tipografía y animaciones |
+| `public/phones.json` | Indicativos y reglas de números de todos los países (del archivo oficial de Google, libphonenumber) |
 | `public/img/` | Logo de Lazurde (piedra y logotipo) |
 | `wrangler.jsonc` | Configuración de Cloudflare |
 
