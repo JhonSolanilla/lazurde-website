@@ -293,7 +293,7 @@
     { t: { es: 'Espacios abiertos', en: 'Outdoor spaces', ar: 'المساحات الخارجية' }, p: ['v-2-espacios-abiertos-2', 'v-1-espacios-abiertos', 'v-3-espacios-abiertos-3', 'v-4-espacios-abiertos-4', 'v-5-espacios-abiertos-5', 'v-6-espacios-abiertos-6', 'v-7-espacios-abiertos-7', 'v-8-espacios-abiertos-8', 'v-9-espacios-abiertos-9', 'h-1-vista-principal'] },
     { t: { es: 'Zonas de descanso', en: 'Relaxation areas', ar: 'جلسات الاسترخاء' }, p: ['v-14-zona-de-estar-1', 'v-15-zona-de-estar-2', 'v-35-zona-de-relajacion-o-estar-trasera', 'v-34-zona-de-relajacion-o-estar-parte-frontal', 'v-36-zona-de-relajacion-o-estar-fachada'] },
     { t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' }, p: ['v-43-zona-de-billar-1', 'v-44-zona-de-billar-2', 'v-45-zona-de-billar-3', 'h-10-zona-de-billar'] },
-    { t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' }, p: ['h-3-area-de-bbq'] },
+    { t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' }, p: ['v-51-bbq-area-2', 'v-50-bbq-area-1', 'v-52-bbq-area-3', 'h-3-area-de-bbq'] },
     { t: { es: 'Cancha de fútbol', en: 'Football field', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2', 'v-26-cancha-de-futbol-1'] },
     { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-18-parque-para-ninos-1', 'v-19-parque-para-ninos-2'] },
     { t: { es: 'Mini zoo', en: 'Mini zoo', ar: 'حديقة الحيوانات الصغيرة' }, p: ['v-28-zona-de-animales'] },
