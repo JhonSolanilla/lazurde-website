@@ -34,8 +34,10 @@ h1,h2,h3,p{margin:0}
 section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 
 /* Pantalla de carga */
-.splash{position:fixed;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer;transition:opacity .4s ease}
+.splash{position:fixed;inset:0;transition:opacity .7s ease;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer}
 .splash.hide{opacity:0;pointer-events:none}
+.splash svg{transition:transform .7s ease}
+.splash.hide svg{transform:scale(1.12)}
 /* El fondo azul pasa al blanco de la página */
 .splash::before{content:"";position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .9s ease}
 .splash.light::before{opacity:1}

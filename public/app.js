@@ -373,7 +373,7 @@
   // Las piezas aparecen suavemente de arriba hacia abajo, la piedra completa se
   // desvanece y se vuelve a armar. Con loop=false se arma 2 veces y queda armada.
   var STONE_SVG = document.querySelector('#splash svg').outerHTML.replace(/lzg/g, 'lzg2').replace(/ class="[^"]*"/, '');
-  function stoneLoop(svg, loop) {
+  function stoneLoop(svg, loop, cycles) {
     var paths = svg.querySelectorAll('path'), timers = [], H = 1374;
     svg.classList.add('lz-stone');
     for (var i = 0; i < paths.length; i++) {
@@ -387,7 +387,7 @@
       void svg.getBoundingClientRect();
       svg.classList.add('run');
       count++;
-      if (loop || count < 2) {
+      if (loop || count < (cycles || 2)) {
         timers.push(setTimeout(function () { svg.classList.add('out'); }, 2050));
         timers.push(setTimeout(cycle, 2600));
       }
@@ -788,23 +788,22 @@
   }, { passive: true });
 
   // ===================== ANIMACIÓN DE ENTRADA =====================
-  // Se muestra después de escoger el idioma: la piedra se arma sobre el fondo azul,
-  // el fondo pasa suavemente al blanco de la página, la piedra se vuelve a armar y entra la página.
+  // Se muestra después de escoger el idioma: la piedra se arma una sola vez sobre el fondo azul
+  // y la pantalla se desvanece directo a la página.
   var splash = document.getElementById('splash');
   var splashSvg = splash.querySelector('svg');
   var introShown = false, introTimers = [];
   function endIntro() {
     introTimers.forEach(clearTimeout);
     splash.classList.add('hide');
-    setTimeout(function () { splash.style.display = 'none'; }, 450);
+    setTimeout(function () { splash.style.display = 'none'; }, 750);
   }
   function playIntro() {
     introShown = true;
     splash.classList.remove('hide', 'light');
     splash.style.display = 'flex';
-    stoneLoop(splashSvg, false);
-    introTimers.push(setTimeout(function () { splash.classList.add('light'); }, 2150));
-    introTimers.push(setTimeout(endIntro, 5000));
+    stoneLoop(splashSvg, false, 1);
+    introTimers.push(setTimeout(endIntro, 2500));
   }
   splash.addEventListener('click', endIntro);
   splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endIntro(); } });
