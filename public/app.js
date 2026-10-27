@@ -447,6 +447,13 @@
       return '<button type="button" class="lz-cc-row" data-act="ccPick" data-arg="' + p[0] + '"' + (p[0] === state.cc ? ' aria-current="true"' : '') + '><span style="font-size:22px;line-height:1">' + flag(p[0]) + '</span><span style="flex:1">' + esc(countryName(p[0])) + '</span><strong dir="ltr">+' + p[1] + '</strong></button>';
     }).join('');
   }
+  // Mientras la lista de países está abierta, la página de atrás queda quieta (iPhone)
+  var lockedY = 0;
+  function lockPage(on) {
+    var b = document.body;
+    if (on && !b.classList.contains('lz-lock')) { lockedY = window.scrollY; b.style.top = -lockedY + 'px'; b.classList.add('lz-lock'); }
+    else if (!on && b.classList.contains('lz-lock')) { b.classList.remove('lz-lock'); b.style.top = ''; window.scrollTo(0, lockedY); }
+  }
   function tplCcSheet(T) {
     return '<div class="lz-sheet-bg" data-act="ccClose"></div><div class="lz-sheet" role="dialog" aria-modal="true" aria-label="' + T.ccTitle + '">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px"><strong style="font-size:17px">' + T.ccTitle + '</strong><button type="button" class="icon-btn" data-act="ccClose" aria-label="' + T.ccClose + '">✕</button></div>' +
@@ -771,9 +778,9 @@
     openLang: function () { set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
-    ccOpen: function () { set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus(); }, 50); },
-    ccClose: function () { set({ ccOpen: false }); },
-    ccPick: function (iso) { set({ cc: iso, ccOpen: false }); var i = document.getElementById('lz-phone'); if (i) i.focus(); },
+    ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
+    ccClose: function () { set({ ccOpen: false }); lockPage(false); },
+    ccPick: function (iso) { set({ cc: iso, ccOpen: false }); lockPage(false); var i = document.getElementById('lz-phone'); if (i) i.focus({ preventScroll: true }); },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },

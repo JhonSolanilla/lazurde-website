@@ -144,9 +144,12 @@ button.cell:disabled{cursor:not-allowed}
 /* Indicativo del país */
 .lz-cc{height:50px;min-width:104px;padding:0 10px;border:1px solid #C9D2DC;border-radius:12px;background:#F5F7FA;display:flex;align-items:center;justify-content:center;gap:6px;font-size:16px;font-weight:700;color:var(--navy);cursor:pointer}
 .lz-sheet-bg{position:fixed;inset:0;background:rgba(0,48,71,.45);z-index:60;animation:lzGal .25s ease}
-.lz-sheet{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,520px);max-height:78vh;background:#fff;border-radius:22px 22px 0 0;z-index:61;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -10px 40px rgba(0,48,71,.25);animation:lzSheet .3s cubic-bezier(.22,1,.36,1)}
+/* Fija desde arriba y con alto fijo: el buscador no se mueve aunque haya pocos resultados o salga el teclado */
+.lz-sheet{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 56px);bottom:0;transform:translateX(-50%);width:min(100%,520px);background:#fff;border-radius:22px 22px 0 0;z-index:61;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -10px 40px rgba(0,48,71,.25);animation:lzSheet .3s cubic-bezier(.22,1,.36,1)}
 @keyframes lzSheet{from{transform:translate(-50%,40px);opacity:.4}to{transform:translate(-50%,0);opacity:1}}
-.lz-cc-list{overflow-y:auto;padding:0 8px 12px;-webkit-overflow-scrolling:touch}
+.lz-cc-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 8px 12px;-webkit-overflow-scrolling:touch}
 .lz-cc-row{width:100%;min-height:52px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0;border-radius:12px;background:transparent;color:var(--navy);font-size:15px;text-align:start;cursor:pointer}
 .lz-cc-row:hover,.lz-cc-row[aria-current=true]{background:#EAF1F8}
 .lz-cc-row strong{color:#5A6573;font-weight:700}
+
+body.lz-lock{position:fixed;left:0;right:0;overflow:hidden}
