@@ -142,7 +142,7 @@ h1,h2,h3,p{margin:0}
 /* Calendario */
 .cal{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 10px 12px}
 .cal-h{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px}
-.cal-h h2{font-size:18px;font-weight:800;text-transform:capitalize}
+.cal-h h2{font-size:18px;font-weight:800}
 .cal-h .iconbtn{background:var(--bg);color:var(--navy)}
 .wd,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .wd span{text-align:center;font-size:11.5px;font-weight:800;color:var(--muted);padding:4px 0}
@@ -625,7 +625,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
     }
     var monthBlocks = S.blocks.filter(function (b) { return b.date.slice(0, 7) === ym; });
     var h = '<header class="top"><div class="ttl"><h1>' + x.nav.calendar + '</h1><button class="iconbtn" data-act="refresh" aria-label="refresh">' + I('refresh') + '</button></div></header><div class="wrap"><div class="cal-wrap"><div>' +
-      '<div class="cal"><div class="cal-h"><button class="iconbtn" data-month="-1" aria-label="prev">' + I('left') + '</button><h2>' + fmt(ym + '-01', { month: 'long', year: 'numeric' }) + '</h2><button class="iconbtn" data-month="1" aria-label="next">' + I('right') + '</button></div>' +
+      '<div class="cal"><div class="cal-h"><button class="iconbtn" data-month="-1" aria-label="prev">' + I('left') + '</button><h2>' + cap(fmt(ym + '-01', { month: 'long', year: 'numeric' })) + '</h2><button class="iconbtn" data-month="1" aria-label="next">' + I('right') + '</button></div>' +
       '<div class="wd">' + wd.map(function (w) { return '<span>' + w + '</span>'; }).join('') + '</div><div class="days">' + cells + '</div>' +
       '<div class="legend"><span><i style="background:linear-gradient(160deg,#14607f,#003047)"></i>' + x.lgConfirmed + '</span><span><i style="background:#FFF6DF;border:1px solid #F1DC9A"></i>' + x.lgPending + '</span><span><i style="background:repeating-linear-gradient(135deg,#ECEFF3 0 3px,#D9DFE6 3px 6px)"></i>' + x.lgBlocked + '</span><span><i style="background:#D3AE2A;width:8px;height:8px;border-radius:50%"></i>' + x.lgHoliday + '</span></div></div>' +
       '<p class="hint">' + x.calHint + '</p></div><div>' +
