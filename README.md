@@ -13,16 +13,17 @@ No hay que instalar nada ni hacer pasos manuales.
 
 | Archivo | Qué contiene |
 |---|---|
-| `public/index.html` | La página y la animación del logo al cargar |
-| `public/app.js` | Pantallas, textos en los 3 idiomas, calendario, precios y reglas de habitaciones |
-| `public/styles.css` | Colores, tipografía y animaciones |
-| `public/phones.json` | Indicativos y reglas de números de todos los países (del archivo oficial de Google, libphonenumber) |
-| `public/img/fotos/` | Fotos del resort optimizadas (WebP, tamaño grande `-l` y mediano `-m`) |
-| `public/video/` | Videos del resort (MP4) y sus portadas |
-| `public/img/` | Logo de Lazurde (piedra y logotipo) |
+| `public/index.html` | Redirige la raíz del dominio a `/booking/` (más adelante: página con todos los resorts) |
+| `public/booking/index.html` | La página y la animación del logo al cargar |
+| `public/booking/app.js` | Pantallas, textos en los 3 idiomas, calendario, precios y reglas de habitaciones |
+| `public/booking/styles.css` | Colores, tipografía y animaciones |
+| `public/booking/phones.json` | Indicativos y reglas de números de todos los países (del archivo oficial de Google, libphonenumber) |
+| `public/booking/img/fotos/` | Fotos del resort optimizadas (WebP, tamaño grande `-l` y mediano `-m`) |
+| `public/booking/video/` | Videos del resort (MP4) y sus portadas |
+| `public/booking/img/` | Logo de Lazurde (piedra y logotipo) |
 | `wrangler.jsonc` | Configuración de Cloudflare |
 
-## Precios y reglas (en `public/app.js`, bloque `CONFIG`)
+## Precios y reglas (en `public/booking/app.js`, bloque `CONFIG`)
 
 - Base: 3 habitaciones y 6 personas.
 - Noche entre semana (sábado a miércoles): 240 OMR.
@@ -33,11 +34,11 @@ No hay que instalar nada ni hacer pasos manuales.
 
 ## Cupones de descuento
 
-En `CONFIG.coupons` (`public/app.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Son de prueba: cuando exista la base de datos se validarán en el servidor.
+En `CONFIG.coupons` (`public/booking/app.js`): código y porcentaje. Se descuentan del total de la estadía (no del depósito), redondeado a 0,01 OMR. Son de prueba: cuando exista la base de datos se validarán en el servidor.
 
 ## Fotos y videos
 
-El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce el resort" (`ZONES`), con sus títulos en los 3 idiomas, está al comienzo de `public/app.js`.
+El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce el resort" (`ZONES`), con sus títulos en los 3 idiomas, está al comienzo de `public/booking/app.js`.
 
 ## Pendiente
 
