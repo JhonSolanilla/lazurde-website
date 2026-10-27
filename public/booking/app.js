@@ -65,7 +65,7 @@
       deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', notInTotal: 'No está incluido en el total de la reserva.', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
       allowedEvents: 'Eventos permitidos', eventsNote: 'Todo evento necesita autorización previa de Lazurde. Después de reservar, coordínalo con nosotros por WhatsApp.',
       events: ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de trabajo', 'Otro'],
-      policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', tbd: '[Por definir con Salim]',
+      policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', refundTitle: 'Reembolsos', tbd: '[Por definir con Salim]',
       terms: 'Términos y condiciones', termLine: function (i) { return i + '. [Término ' + i + ' — texto pendiente. Aquí van los términos y condiciones oficiales de Lazurde Resort.]'; },
       showMore: 'Ver más', footer: 'Lazurde Resort · Omán', privacy: 'Política de privacidad', privacyNote: 'Lee cómo usamos tus datos en nuestra política de privacidad.', waOpen: 'Se abrirá WhatsApp con tu solicitud: solo toca Enviar.',
       from: 'Desde', perNight: '/ noche', baseInfo: '6 personas · 3 habitaciones', bookNow: 'Reservar',
@@ -130,7 +130,7 @@
       deposit: 'Security deposit', depositAmount: 'Deposit amount', notInTotal: 'It is not included in the booking total.', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
       allowedEvents: 'Allowed events', eventsNote: 'All events need prior approval from Lazurde. After booking, please arrange it with us on WhatsApp.',
       events: ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'],
-      policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', tbd: '[To be confirmed]',
+      policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', refundTitle: 'Refunds', tbd: '[To be confirmed]',
       terms: 'Terms & conditions', termLine: function (i) { return i + '. [Term ' + i + ' — pending text. The official Lazurde Resort terms & conditions go here.]'; },
       showMore: 'Show more', footer: 'Lazurde Resort · Oman', privacy: 'Privacy policy', privacyNote: 'Read how we use your data in our privacy policy.', waOpen: 'WhatsApp will open with your request — just tap Send.',
       from: 'From', perNight: '/ night', baseInfo: '6 guests · 3 bedrooms', bookNow: 'Book now',
@@ -195,7 +195,7 @@
       deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', notInTotal: 'غير مشمول في إجمالي الحجز.', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
       allowedEvents: 'المناسبات المسموح بها',
       eventsNote: 'جميع المناسبات تحتاج إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.', events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
-      policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', tbd: '[سيتم تأكيده]',
+      policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', refundTitle: 'استرداد المبالغ', tbd: '[سيتم تأكيده]',
       terms: 'الشروط والأحكام', termLine: function (i) { return i + '. [البند ' + i + ' — نص قيد الإعداد. هنا تُضاف الشروط والأحكام الرسمية لمنتجع لازورد.]'; },
       showMore: 'عرض المزيد', footer: 'منتجع لازورد · عُمان', privacy: 'سياسة الخصوصية', privacyNote: 'اطّلع على كيفية استخدامنا لبياناتك في سياسة الخصوصية.', waOpen: 'سيُفتح واتساب ومعه طلبك — فقط اضغط إرسال.',
       from: 'ابتداءً من', perNight: '/ الليلة', baseInfo: '6 ضيوف · 3 غرف', bookNow: 'احجز الآن',
@@ -817,6 +817,7 @@
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.policies + '</h2>' +
       '<div style="border:1px solid #F3C9C9;background:#FDF2F2;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#8B1D1D">' + T.cancellation + '</strong><span style="font-size:14px;color:#6E1A1A;line-height:1.6">' + T.tbd + '</span></div>' +
       '<div style="border:1px solid #EFDFA6;background:#FFFBEA;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#6B4F00">' + T.dateChange + '</strong><span style="font-size:14px;color:#5C4510;line-height:1.6">' + T.tbd + '</span></div>' +
+      '<div style="border:1px solid #C9DBF2;background:#F0F6FD;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#0F4C81">' + T.refundTitle + '</strong><span style="font-size:14px;color:#123E66;line-height:1.6">' + T.tbd + '</span></div>' +
       '<h3 style="margin-top:8px;font-size:16px;font-weight:800">' + T.terms + '</h3>' + tplTerms(T) + '</section>';
     h += '<div class="muted" style="padding:22px 18px;text-align:center;font-size:12px;display:flex;flex-direction:column;gap:8px;align-items:center"><span>' + T.footer + '</span><a href="privacy.html?lang=' + c.L + '" style="color:#0F4C81;font-weight:700">' + T.privacy + '</a></div></main>';
     // Barra de reservar + navegación
