@@ -154,3 +154,6 @@ button.cell:disabled{cursor:not-allowed}
 
 body.lz-lock{position:fixed;left:0;right:0;overflow:hidden}
 body.lz-typing #lz-bar{display:none}
+/* Símbolo del rial omaní antes del valor (toma el color del texto) */
+.lz-rial{display:inline-flex;align-items:baseline;gap:.14em;white-space:nowrap;unicode-bidi:isolate}
+.lz-rial-s{display:inline-block;width:.78em;height:.78em;background:currentColor;-webkit-mask:url(img/omr.svg) center/contain no-repeat;mask:url(img/omr.svg) center/contain no-repeat;align-self:center}

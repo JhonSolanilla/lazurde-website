@@ -315,11 +315,22 @@
     if (patch.screen && patch.screen !== prevScreen) window.scrollTo(0, 0);
   }
 
+  // ===================== MONEDA =====================
+  // Si existe img/omr.svg (símbolo oficial del rial omaní) los precios salen con el símbolo antes del valor.
+  // Si no existe, salen como antes: "240 OMR".
+  var RIAL = false;
+  function cur(num, T) {
+    return RIAL ? '<span class="lz-rial" dir="ltr"><span class="lz-rial-s" role="img" aria-label="OMR"></span>' + num + '</span>' : num + T.unit;
+  }
+  fetch('img/omr.svg', { method: 'HEAD' }).then(function (r) {
+    if (r.ok && (r.headers.get('content-type') || '').indexOf('svg') >= 0) { RIAL = true; render(); }
+  }).catch(function () {});
+
   // ===================== CÁLCULOS =====================
   function calc() {
     var L = state.lang, T = DICT[L], rtl = L === 'ar';
-    var money = function (n) { var r = Math.round(n * 100) / 100; return (r % 1 ? r.toFixed(2) : String(r)) + T.unit; };
-    var whole = function (n) { return n + T.unit; };
+    var money = function (n) { var r = Math.round(n * 100) / 100; return cur(r % 1 ? r.toFixed(2) : String(r), T); };
+    var whole = function (n) { return cur(String(n), T); };
     var fmt = function (k) { if (!k) return T.choose; var p = k.split('-').map(Number); return T.fmt(dow(k), p[2], p[1] - 1); };
     var t0 = new Date();
     var todayKey = keyOf(t0.getFullYear(), t0.getMonth(), t0.getDate());
@@ -702,7 +713,7 @@
       h += '<div style="border:1px solid #E3E8EE;border-radius:14px;overflow:hidden"><div style="display:flex;justify-content:space-between;background:#F5F7FA;padding:8px 12px;font-size:12px;font-weight:700;color:#3D4A58"><span>' + T.night + '</span><span>' + T.price + '</span></div>' +
         c.nightRows.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid #EEF2F6;font-size:14px"><span>' + r.label + '</span><span style="font-weight:700;white-space:nowrap">' + r.amount + '</span></div>'; }).join('') + '</div>' +
         c.priceLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#3D4A58"><span>' + p.label + '</span><span style="color:#0B2E4F;font-weight:700;white-space:nowrap">' + p.amount + '</span></div>'; }).join('') +
-        '<div style="height:1px;background:#E3E8EE;margin:4px 0"></div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><strong style="font-size:16px">' + T.totalLabel + '</strong><strong style="font-size:22px;white-space:nowrap">' + c.money(c.total) + '</strong></div>' +
+        '<div style="height:1px;background:#E3E8EE;margin:4px 0"></div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><strong style="font-size:16px">' + (RIAL ? T.totalLabel.replace(/\s*\(.*\)/, '') : T.totalLabel) + '</strong><strong style="font-size:22px;white-space:nowrap">' + c.money(c.total) + '</strong></div>' +
         '<div style="background:#F5F7FA;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span class="muted" style="font-size:12px;font-weight:700">' + T.inclTaxes + '</span>' +
         c.taxLines.map(function (p) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#5A6573"><span>' + p.label + '</span><span style="white-space:nowrap">' + p.amount + '</span></div>'; }).join('') + '</div>';
     } else {
@@ -728,7 +739,7 @@
   function tplBar(c) {
     var T = c.T, ok = c.canSubmit || state.submitting;
     return (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : '') +
-      '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : '—' + T.unit) + '</strong>' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong>' +
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="height:52px;min-width:150px;padding:0 22px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;' +
       (ok ? 'background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
