@@ -94,7 +94,7 @@
       code: 'Código de reserva', example: ' (ejemplo)',
       rIn: 'Llegada', rOut: 'Salida', rGuests: 'Personas', rRooms: 'Habitaciones', rPurpose: 'Motivo', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' personas'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' de 2 camas)'; }, notGiven: 'No indicado',
-      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza para ver cada zona.', areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
+      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', video: 'Video', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
       depositRem: function (d) { return 'Depósito de garantía: ' + d + ', se paga al llegar.'; }, backHome: 'Volver al inicio',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' de ' + mo + (booked ? ', ocupado' : ', ' + price + ' OMR por noche') + (isIn ? ', llegada' : '') + (isOut ? ', salida' : ''); }
     },
@@ -159,7 +159,7 @@
       code: 'Booking code', example: ' (example)',
       rIn: 'Check-in', rOut: 'Check-out', rGuests: 'Guests', rRooms: 'Bedrooms', rPurpose: 'Purpose', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
-      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe to see each area.', areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
+      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', video: 'Video', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
       depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, backHome: 'Back to home',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return mo + ' ' + d + (booked ? ', booked' : ', ' + price + ' OMR per night') + (isIn ? ', check-in' : '') + (isOut ? ', check-out' : ''); }
     },
@@ -224,7 +224,7 @@
       code: 'رمز الحجز', example: ' (مثال)',
       rIn: 'الوصول', rOut: 'المغادرة', rGuests: 'الضيوف', rRooms: 'الغرف', rPurpose: 'السبب', rTotal: 'الإجمالي',
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
-      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب لمشاهدة كل منطقة.', areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
+      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', video: 'فيديو', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
       depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, backHome: 'العودة إلى الرئيسية',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' ' + mo + (booked ? '، محجوز' : '، ' + price + ' ر.ع. في الليلة') + (isIn ? '، الوصول' : '') + (isOut ? '، المغادرة' : ''); }
     }
@@ -264,9 +264,40 @@
     'M4 12h16 M5 12V9h14v3 M6 12v6 M18 12v6 M4 15h16',
     'M12 22V12 M12 12c-4 0-7-3-7-7 4 0 7 3 7 7Z M12 14c3 0 6-2 6-6-3 0-6 2-6 6Z'
   ];
-  var AREA_IMG = ['', '', '', '', '', '', '', ''];  // aquí van las fotos de cada zona (img/areas/...)
-  var AREA_BG = ['linear-gradient(170deg,#0F4C81,#5FA8D9)', 'linear-gradient(170deg,#3A2A1A,#B4762E)', 'linear-gradient(170deg,#4A3420,#9A7A4F)', 'linear-gradient(170deg,#2F4A26,#8DB36F)', 'linear-gradient(170deg,#1E5130,#6FBF73)', 'linear-gradient(170deg,#1B2B3A,#3E6A8A)', 'linear-gradient(170deg,#5A4520,#D3AE2A)', 'linear-gradient(170deg,#24453A,#7FB59A)'];
-  var GAL_BG = ['linear-gradient(160deg,#0B2E4F,#1F6FB2)', 'linear-gradient(160deg,#155E9E,#7FB8E6)', 'linear-gradient(160deg,#5A4520,#D3AE2A)', 'linear-gradient(160deg,#2C3E50,#5D7A96)', 'linear-gradient(160deg,#3B5A2E,#8DB36F)'];
+  // ===================== FOTOS Y VIDEOS =====================
+  // Fotos en img/fotos/<nombre>-l.webp (grande) y -m.webp (mediana). Videos en video/.
+  // Para cambiar el orden o los títulos, solo se edita esta lista.
+  var HERO = [
+    { video: 'recorrido', poster: 'h-1-vista-principal', t: { es: 'Video · Recorrido por el resort', en: 'Video · Resort tour', ar: 'فيديو · جولة في المنتجع' } },
+    { img: 'h-2-area-de-piscina', t: { es: 'Patio de la piscina', en: 'Pool courtyard', ar: 'فناء المسبح' } },
+    { img: 'h-8-wood-house', t: { es: 'Wood House', en: 'Wood House', ar: 'البيت الخشبي' } },
+    { img: 'h-6-casa-principal', t: { es: 'Casa principal', en: 'Main house', ar: 'المبنى الرئيسي' } },
+    { img: 'h-10-zona-de-billar', t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' } },
+    { img: 'h-3-area-de-bbq', t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' } },
+    { img: 'h-5-fachada-principal', t: { es: 'Entrada principal', en: 'Main entrance', ar: 'المدخل الرئيسي' } },
+    { img: 'h-4-area-de-piscina', t: { es: 'Zona de descanso', en: 'Lounge area', ar: 'منطقة الجلوس' } },
+    { img: 'h-7-casa-principal-2', t: { es: 'Casa principal de noche', en: 'Main house at night', ar: 'المبنى الرئيسي ليلًا' } },
+    { img: 'h-9-zona-de-parqueadero', t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' } }
+  ];
+  var ZONES = [
+    { video: 'resumen', loop: 'resumen-mudo', poster: 'resumen', t: { es: 'El resort en 13 segundos', en: 'The resort in 13 seconds', ar: 'المنتجع في 13 ثانية' } },
+    { t: { es: 'Piscina', en: 'Swimming pool', ar: 'المسبح' }, p: ['v-22-zona-de-piscina-3', 'v-20-zona-de-piscina-1', 'v-21-zona-de-piscina-2', 'v-23-zona-de-piscina-4', 'v-24-zona-de-piscina-5', 'v-25-zona-de-piscina-6', 'h-2-area-de-piscina', 'h-4-area-de-piscina'] },
+    { t: { es: 'Llegada y casa principal', en: 'Arrival & main house', ar: 'المدخل والمبنى الرئيسي' }, p: ['v-31-entrada-principal', 'h-5-fachada-principal', 'v-33-casa-principal', 'v-32-casa-principal-2', 'h-6-casa-principal', 'h-7-casa-principal-2'] },
+    { t: { es: 'Sala principal', en: 'Main hall', ar: 'الصالة الرئيسية' }, p: ['v-38-sala-principal-1', 'v-39-sala-principal-2', 'v-40-sala-principal-3', 'v-37-interior'] },
+    { t: { es: 'Sala de estar', en: 'Living room', ar: 'غرفة الجلوس' }, p: ['v-41-sala-de-estar-interior', 'v-42-sala-de-estar-interior-2'] },
+    { t: { es: 'Cocina', en: 'Kitchen', ar: 'المطبخ' }, p: ['v-46-cocina-1', 'v-47-cocina-2', 'v-48-cocina-3', 'v-49-cocina-4'] },
+    { t: { es: 'Wood House', en: 'Wood House', ar: 'البيت الخشبي' }, p: ['v-13-wood-house-interior-1', 'v-13-wood-house-interior-2', 'v-11-wood-house-fachada-2', 'v-10-wood-house-fachada-1', 'v-12-wood-house-fachada-3', 'h-8-wood-house'] },
+    { t: { es: 'Espacios abiertos', en: 'Outdoor spaces', ar: 'المساحات الخارجية' }, p: ['v-2-espacios-abiertos-2', 'v-1-espacios-abiertos', 'v-3-espacios-abiertos-3', 'v-4-espacios-abiertos-4', 'v-5-espacios-abiertos-5', 'v-6-espacios-abiertos-6', 'v-7-espacios-abiertos-7', 'v-8-espacios-abiertos-8', 'v-9-espacios-abiertos-9', 'h-1-vista-principal'] },
+    { t: { es: 'Zonas de descanso', en: 'Relaxation areas', ar: 'جلسات الاسترخاء' }, p: ['v-14-zona-de-estar-1', 'v-15-zona-de-estar-2', 'v-35-zona-de-relajacion-o-estar-trasera', 'v-34-zona-de-relajacion-o-estar-parte-frontal', 'v-36-zona-de-relajacion-o-estar-fachada'] },
+    { t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' }, p: ['v-43-zona-de-billar-1', 'v-44-zona-de-billar-2', 'v-45-zona-de-billar-3', 'h-10-zona-de-billar'] },
+    { t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' }, p: ['h-3-area-de-bbq'] },
+    { t: { es: 'Cancha de fútbol', en: 'Football field', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2', 'v-26-cancha-de-futbol-1'] },
+    { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-18-parque-para-ninos-1', 'v-19-parque-para-ninos-2'] },
+    { t: { es: 'Mini zoo', en: 'Mini zoo', ar: 'حديقة الحيوانات الصغيرة' }, p: ['v-28-zona-de-animales'] },
+    { t: { es: 'Jardines', en: 'Gardens', ar: 'الحدائق' }, p: ['v-17-jardines-2', 'v-16-jardines-1'] },
+    { t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' }, p: ['v-29-parqueadero-1', 'v-30-parqueadero-2', 'h-9-zona-de-parqueadero'] }
+  ];
+  function photo(slug, size) { return 'img/fotos/' + slug + '-' + (size || 'l') + '.webp'; }
 
   function svg(d, opts) {
     opts = opts || {};
@@ -557,29 +588,81 @@
   }
 
   function tplGallery(c) {
-    var T = c.T, gi = ((state.gIdx % GAL_BG.length) + GAL_BG.length) % GAL_BG.length;
-    return '<div id="lz-top" class="lz-gal" style="position:relative;height:280px;background:' + GAL_BG[gi] + ';display:flex;align-items:center;justify-content:center">' +
-      '<span style="position:absolute;inset-inline-start:16px;top:14px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff">' + T.gal[gi] + '</span>' +
-      (gi === 0 ? '<span aria-hidden="true" style="width:66px;height:66px;border-radius:999px;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25)"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#0F4C81"></path></svg></span>' : '') +
-      '<button type="button" class="icon-btn" data-act="gPrev" aria-label="' + T.prevPhoto + '" style="position:absolute;inset-inline-start:10px;top:118px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.right : ICON.left, { w: 20, sw: 2 }) + '</button>' +
-      '<button type="button" class="icon-btn" data-act="gNext" aria-label="' + T.nextPhoto + '" style="position:absolute;inset-inline-end:10px;top:118px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.left : ICON.right, { w: 20, sw: 2 }) + '</button>' +
-      '<span style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;white-space:nowrap">' + T.of(gi + 1, GAL_BG.length) + '</span>' +
+    var T = c.T, n = HERO.length, gi = ((state.gIdx % n) + n) % n, h = HERO[gi], nx = HERO[(gi + 1) % n];
+    var img = photo(h.img || h.poster);
+    try { new Image().src = photo(nx.img || nx.poster); } catch (e) {}
+    return '<div id="lz-top" class="lz-gal" style="position:relative;height:300px;background:#0B2E4F">' +
+      '<button type="button" class="lz-hero-img" data-act="heroOpen" aria-label="' + esc(h.t[c.L]) + '"><img src="' + img + '" alt="' + esc(h.t[c.L]) + '"' + (gi === 0 ? ' fetchpriority="high"' : '') + '></button>' +
+      '<span class="lz-hero-cap">' + h.t[c.L] + '</span>' +
+      (h.video ? '<span aria-hidden="true" class="lz-play">' + '<svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#0B2E4F"></path></svg></span>' : '') +
+      '<button type="button" class="icon-btn" data-act="gPrev" aria-label="' + T.prevPhoto + '" style="position:absolute;inset-inline-start:10px;top:128px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.right : ICON.left, { w: 20, sw: 2 }) + '</button>' +
+      '<button type="button" class="icon-btn" data-act="gNext" aria-label="' + T.nextPhoto + '" style="position:absolute;inset-inline-end:10px;top:128px;border:0;background:rgba(255,255,255,.85)">' + svg(c.rtl ? ICON.left : ICON.right, { w: 20, sw: 2 }) + '</button>' +
+      '<span style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;white-space:nowrap;pointer-events:none">' + T.of(gi + 1, n) + '</span>' +
       '<div style="position:absolute;inset-inline-end:12px;bottom:10px;display:flex;gap:8px">' +
       '<button type="button" class="icon-btn" data-act="like" aria-label="' + T.fav + '" aria-pressed="' + state.liked + '" style="border:0">' + svg(ICON.heart, { w: 20, fill: state.liked ? '#D9364F' : 'none', stroke: state.liked ? '#D9364F' : '#0B2E4F' }) + '</button>' +
       '<button type="button" class="icon-btn" data-act="share" aria-label="' + T.share + '" style="border:0">' + svg(ICON.share, { w: 20 }) + '</button></div></div>';
   }
 
-  // Zonas del resort: una fila que se desliza (las fotos se agregan en AREA_IMG)
+  // Zonas del resort: una fila de tarjetas; al tocar una se abren todas sus fotos
   function tplAreas(c) {
-    var T = c.T, icons = [0, 4, 8, 7, 1, 2, 5, 11];
+    var T = c.T;
     return '<div class="gap8"></div><section class="card" style="padding:20px 0 18px"><div style="padding:0 18px"><h2 class="h2">' + T.areasTitle + '</h2><p class="muted" style="font-size:13px;margin-top:4px">' + T.areasSub + '</p></div>' +
-      '<div class="lz-areas">' + T.areas.map(function (name, i) {
-        var img = AREA_IMG[i];
-        return '<figure class="lz-area" style="background:' + (img ? 'url(' + img + ') center/cover' : AREA_BG[i % AREA_BG.length]) + '">' +
-          (img ? '' : '<span aria-hidden="true" style="position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);opacity:.35">' + svg(FAC_ICONS[icons[i]], { w: 64, stroke: '#fff', sw: 1.2 }) + '</span>') +
-          '<figcaption><span class="lz-area-n">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="lz-area-name">' + name + '</span></figcaption></figure>';
+      '<div class="lz-areas">' + ZONES.map(function (z, i) {
+        var media = z.video
+          ? '<video class="lz-area-media" src="video/' + z.loop + '.mp4" poster="video/' + z.poster + '.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>'
+          : '<img class="lz-area-media" src="' + photo(z.p[0]) + '" alt="" loading="lazy">';
+        var tag = z.video ? '▶ ' + T.video : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>' + T.photosN(z.p.length);
+        return '<button type="button" class="lz-area" data-act="zoneOpen" data-arg="' + i + '" aria-label="' + esc(z.t[c.L]) + '">' + media +
+          '<span class="lz-area-tag">' + tag + '</span>' +
+          '<span class="lz-area-cap"><span class="lz-area-n">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="lz-area-name">' + z.t[c.L] + '</span></span></button>';
       }).join('') + '</div></section>';
   }
+
+  // Visor a pantalla completa (fotos y videos), se desliza con el dedo
+  var viewerEl = null;
+  function openViewer(items, start, title) {
+    var T = DICT[state.lang];
+    closeViewer();
+    lockPage(true);
+    viewerEl = document.createElement('div');
+    viewerEl.className = 'lz-viewer';
+    viewerEl.setAttribute('role', 'dialog'); viewerEl.setAttribute('aria-modal', 'true'); viewerEl.setAttribute('aria-label', title);
+    viewerEl.innerHTML = '<div class="lz-v-top"><button type="button" class="lz-v-btn" data-v="close" aria-label="' + T.ccClose + '">✕</button><strong>' + esc(title) + '</strong><span class="lz-v-count"></span></div>' +
+      '<div class="lz-v-track" dir="ltr">' + items.map(function (it) {
+        return '<div class="lz-v-slide">' + (it.video
+          ? '<video src="video/' + it.video + '.mp4" poster="' + (it.poster.indexOf('/') >= 0 ? it.poster : (it.poster.charAt(1) === '-' ? photo(it.poster) : 'video/' + it.poster + '.webp')) + '" controls playsinline preload="metadata"></video>'
+          : '<img src="' + photo(it.img) + '" alt="' + esc(it.cap || title) + '" loading="lazy">') + '</div>';
+      }).join('') + '</div>' +
+      (items.length > 1 ? '<button type="button" class="lz-v-btn lz-v-prev" data-v="prev" aria-label="' + T.prevPhoto + '">‹</button><button type="button" class="lz-v-btn lz-v-next" data-v="next" aria-label="' + T.nextPhoto + '">›</button>' : '');
+    document.body.appendChild(viewerEl);
+    var track = viewerEl.querySelector('.lz-v-track'), count = viewerEl.querySelector('.lz-v-count');
+    function cur() { return Math.round(track.scrollLeft / track.clientWidth); }
+    function update() {
+      var k = cur(); count.textContent = items.length > 1 ? (k + 1) + ' / ' + items.length : '';
+      if (items[k] && items[k].cap) viewerEl.querySelector('.lz-v-top strong').textContent = items[k].cap;
+      track.querySelectorAll('video').forEach(function (v, i) { if (v.closest('.lz-v-slide') !== track.children[k]) v.pause(); });
+    }
+    track.scrollLeft = start * track.clientWidth; update();
+    var first = track.children[start] && track.children[start].querySelector('video');
+    if (first) { var p = first.play(); if (p && p.catch) p.catch(function () {}); }
+    track.addEventListener('scroll', function () { clearTimeout(track._t); track._t = setTimeout(update, 80); });
+    viewerEl.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-v]'); if (!b) return;
+      var v = b.getAttribute('data-v');
+      if (v === 'close') closeViewer();
+      else track.scrollTo({ left: (cur() + (v === 'next' ? 1 : -1)) * track.clientWidth, behavior: 'smooth' });
+    });
+  }
+  function closeViewer() {
+    if (!viewerEl) return;
+    viewerEl.querySelectorAll('video').forEach(function (v) { v.pause(); });
+    viewerEl.remove(); viewerEl = null; lockPage(false); galLast = Date.now();
+  }
+  document.addEventListener('keydown', function (e) {
+    if (!viewerEl) return;
+    if (e.key === 'Escape') closeViewer();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var b = viewerEl.querySelector(e.key === 'ArrowRight' ? '.lz-v-next' : '.lz-v-prev'); if (b) b.click(); }
+  });
 
   function tplHome(c) {
     var T = c.T;
@@ -798,6 +881,15 @@
     ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
     ccClose: function () { set({ ccOpen: false }); lockPage(false); },
     ccPick: function (iso) { set({ cc: iso, ccOpen: false }); lockPage(false); var i = document.getElementById('lz-phone'); if (i) { i.focus({ preventScroll: true }); setTimeout(function () { i.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 150); } },
+    heroOpen: function () {
+      var n = HERO.length, gi = ((state.gIdx % n) + n) % n, L = state.lang;
+      galLast = Date.now() + 600000;
+      openViewer(HERO.map(function (h) { return h.video ? { video: h.video, poster: h.poster, cap: h.t[L] } : { img: h.img, cap: h.t[L] }; }), gi, HERO[gi].t[L]);
+    },
+    zoneOpen: function (i) {
+      var z = ZONES[+i], L = state.lang;
+      openViewer(z.video ? [{ video: z.video, poster: z.poster }] : z.p.map(function (p) { return { img: p }; }), 0, z.t[L]);
+    },
     gPrev: function () { galGo(-1, true); },
     gNext: function () { galGo(1, true); },
     like: function () { set({ liked: !state.liked }); },

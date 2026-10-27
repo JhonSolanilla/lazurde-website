@@ -17,6 +17,8 @@ No hay que instalar nada ni hacer pasos manuales.
 | `public/app.js` | Pantallas, textos en los 3 idiomas, calendario, precios y reglas de habitaciones |
 | `public/styles.css` | Colores, tipografía y animaciones |
 | `public/phones.json` | Indicativos y reglas de números de todos los países (del archivo oficial de Google, libphonenumber) |
+| `public/img/fotos/` | Fotos del resort optimizadas (WebP, tamaño grande `-l` y mediano `-m`) |
+| `public/video/` | Videos del resort (MP4) y sus portadas |
 | `public/img/` | Logo de Lazurde (piedra y logotipo) |
 | `wrangler.jsonc` | Configuración de Cloudflare |
 
@@ -28,6 +30,10 @@ No hay que instalar nada ni hacer pasos manuales.
 - Cada 2 personas extra se abre 1 habitación extra: 15 OMR por noche. Máximo 14 personas y 7 habitaciones.
 - Impuesto de turismo 4 % e IVA 5 %. Todos los precios de la web ya incluyen los impuestos (también los 15 OMR de la habitación extra).
 - Depósito de garantía: 100 OMR al llegar, se devuelve dentro de 24 horas.
+
+## Fotos y videos
+
+El orden de las fotos del carrusel de arriba (`HERO`) y de las zonas de "Conoce el resort" (`ZONES`), con sus títulos en los 3 idiomas, está al comienzo de `public/app.js`.
 
 ## Pendiente
 

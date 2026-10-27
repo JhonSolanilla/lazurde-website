@@ -108,8 +108,11 @@ button.cell:disabled{cursor:not-allowed}
 /* Zonas del resort: una sola fila que se desliza */
 .lz-areas{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 18px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .lz-areas::-webkit-scrollbar{display:none}
-.lz-area{position:relative;flex:0 0 74%;height:340px;margin:0;border-radius:24px 24px 24px 6px;overflow:hidden;scroll-snap-align:center;box-shadow:0 10px 24px rgba(0,48,71,.18)}
-.lz-area figcaption{position:absolute;inset:auto 0 0 0;padding:44px 18px 18px;background:linear-gradient(transparent,rgba(0,48,71,.92));display:flex;flex-direction:column;gap:6px;color:#fff}
+.lz-area{position:relative;flex:0 0 74%;height:360px;margin:0;padding:0;border:0;border-radius:24px 24px 24px 6px;overflow:hidden;scroll-snap-align:center;box-shadow:0 10px 24px rgba(0,48,71,.18);background:#0B2E4F;cursor:pointer;color:#fff;text-align:start;font:inherit}
+.lz-area-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.lz-area:active .lz-area-media{transform:scale(1.03)}
+.lz-area-tag{position:absolute;top:12px;inset-inline-end:12px;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(0,48,71,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:12px;font-weight:700;color:#fff}
+.lz-area-cap{position:absolute;inset:auto 0 0 0;padding:56px 18px 18px;background:linear-gradient(transparent,rgba(0,48,71,.92));display:flex;flex-direction:column;gap:6px}
 .lz-area-n{font-size:12px;font-weight:800;letter-spacing:.12em;color:#FAD26D;display:flex;align-items:center;gap:8px}
 .lz-area-n::after{content:"";width:28px;height:1.5px;background:#FAD26D}
 .lz-area-name{font-size:20px;font-weight:800;line-height:1.2}
@@ -157,3 +160,22 @@ body.lz-typing #lz-bar{display:none}
 /* Símbolo del rial omaní antes del valor (toma el color del texto) */
 .lz-rial{display:inline-flex;align-items:baseline;gap:.22em;white-space:nowrap;unicode-bidi:isolate}
 .lz-rial-s{display:inline-block;width:1.16em;height:.65em;background:currentColor;-webkit-mask:url(img/omr.svg) center/contain no-repeat;mask:url(img/omr.svg) center/contain no-repeat;align-self:center}
+
+/* Carrusel de arriba con fotos */
+.lz-hero-img{position:absolute;inset:0;padding:0;border:0;background:none;cursor:zoom-in;display:block;width:100%}
+.lz-hero-img img{width:100%;height:100%;object-fit:cover}
+.lz-hero-cap{position:absolute;inset-inline-start:0;top:0;padding:14px 16px 30px;width:100%;background:linear-gradient(rgba(0,0,0,.45),transparent);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;pointer-events:none}
+.lz-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:999px;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.3);pointer-events:none}
+/* Visor de fotos a pantalla completa */
+.lz-viewer{position:fixed;inset:0;z-index:200;background:#000;display:flex;flex-direction:column;animation:lzGal .25s ease}
+.lz-v-top{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 8px) 12px 8px;color:#fff}
+.lz-v-top strong{flex:1;font-size:16px}
+.lz-v-count{font-size:14px;color:rgba(255,255,255,.75);min-width:44px;text-align:end}
+.lz-v-track{flex:1;min-height:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.lz-v-track::-webkit-scrollbar{display:none}
+.lz-v-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding-bottom:env(safe-area-inset-bottom)}
+.lz-v-slide img,.lz-v-slide video{max-width:100%;max-height:100%;object-fit:contain}
+.lz-v-btn{width:44px;height:44px;border-radius:999px;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lz-v-prev,.lz-v-next{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;line-height:1}
+.lz-v-prev{left:10px}.lz-v-next{right:10px}
+@media (hover:none){.lz-v-prev,.lz-v-next{display:none}}
