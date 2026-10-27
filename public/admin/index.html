@@ -66,6 +66,7 @@
   'use strict';
   var T = {
     en: { title: 'Lazurde Admin', signIn: 'Sign in', password: 'Password', wrong: 'Wrong password.', notConfigured: 'The admin password has not been set up yet in Cloudflare.',
+      st: { pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled' },
       bookings: 'Bookings', pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled', all: 'All', blocks: 'Blocked dates',
       logout: 'Log out', empty: 'No bookings here yet.', nights: function (n) { return n === 1 ? '1 night' : n + ' nights'; }, guests: function (n) { return n + ' guests'; },
       checkin: 'Check-in', checkout: 'Check-out', guestsL: 'Guests', rooms: 'Bedrooms', beds: function (k, t) { return k + ' king · ' + t + ' twin'; }, purpose: 'Purpose', phone: 'Phone', email: 'Email',
@@ -75,6 +76,7 @@
       taken: 'Those dates are already taken by another booking.', saved: 'Saved', error: 'Something went wrong. Please try again.', noDb: 'The database is not connected yet. Follow the setup guide to create it in Cloudflare.',
       blockTitle: 'Block dates', from: 'From', to: 'To', noteL: 'Reason (optional)', add: 'Block', unblock: 'Unblock', noBlocks: 'No blocked dates.', blockHelp: 'Blocked dates cannot be booked on the website (maintenance, private use, etc.).' },
     es: { title: 'Panel Lazurde', signIn: 'Entrar', password: 'Clave', wrong: 'Clave incorrecta.', notConfigured: 'Todavía no se ha creado la clave del panel en Cloudflare.',
+      st: { pending: 'Pendiente', confirmed: 'Confirmada', rejected: 'Rechazada', cancelled: 'Cancelada' },
       bookings: 'Reservas', pending: 'Pendientes', confirmed: 'Confirmadas', rejected: 'Rechazadas', cancelled: 'Canceladas', all: 'Todas', blocks: 'Fechas bloqueadas',
       logout: 'Salir', empty: 'Todavía no hay reservas aquí.', nights: function (n) { return n === 1 ? '1 noche' : n + ' noches'; }, guests: function (n) { return n + ' personas'; },
       checkin: 'Llegada', checkout: 'Salida', guestsL: 'Personas', rooms: 'Habitaciones', beds: function (k, t) { return k + ' king · ' + t + ' de 2 camas'; }, purpose: 'Motivo', phone: 'Teléfono', email: 'Correo',
@@ -135,7 +137,7 @@
   }
   function cardView(b, t) {
     var open = S.open === b.code;
-    var h = '<div class="card"><button class="row" data-open="' + b.code + '"><div class="main"><span><span class="code">' + b.code + '</span> &nbsp;<span class="chip s-' + b.status + '">' + t[b.status] + '</span></span>' +
+    var h = '<div class="card"><button class="row" data-open="' + b.code + '"><div class="main"><span><span class="code">' + b.code + '</span> &nbsp;<span class="chip s-' + b.status + '">' + t.st[b.status] + '</span></span>' +
       '<span class="name">' + esc(b.name) + '</span><span class="sub">' + d(b.checkin, L) + ' → ' + d(b.checkout, L) + ' · ' + t.nights(b.nights) + ' · ' + t.guests(b.guests) + '</span></div>' +
       '<span class="total">' + omr(b.total) + ' OMR</span></button>';
     if (open) {
