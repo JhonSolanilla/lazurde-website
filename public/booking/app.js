@@ -82,10 +82,10 @@
     ['كيف يعمل مبلغ التأمين؟', 'تدفعون 100 ر.ع. عند الوصول، ونعيده خلال 24 ساعة بعد المغادرة بعد فحص سريع للمنتجع.'],
     ['ماذا تشمل الإقامة؟', 'كل ما يوفره الفندق: أغطية الأسرّة والوسائد والمناشف والشامبو وورق التواليت والواي فاي والأساسيات. يكفي أن تحضروا ملابسكم.'],
     ['هل يمكننا الطبخ والشواء؟', 'نعم. يوجد مطبخ كامل ومنطقة شواء تعمل بالغاز مع الأدوات. لا حاجة لإحضار الفحم.'],
-    ['هل يمكن استخدام الملعب لكرة الطائرة؟', 'نعم. الملعب متعدد الاستخدامات ويمكن تجهيزه لكرة القدم أو لكرة الطائرة. لتغييره، راسلونا عبر <a href="https://wa.me/96895889552" target="_blank" rel="noopener" style="color:#0F4C81;font-weight:700">واتساب</a> قبل 30 دقيقة على الأقل من موعد اللعب، وسيقوم فريقنا بتجهيزه لكم.'],
+    ['هل يمكن استخدام الملعب للكرة الطائرة؟', 'نعم. الملعب متعدد الاستخدامات ويمكن تجهيزه لكرة القدم أو للكرة الطائرة. لتغييره، راسلونا عبر <a href="https://wa.me/96895889552" target="_blank" rel="noopener" style="color:#0F4C81;font-weight:700">واتساب</a> قبل 30 دقيقة على الأقل من موعد اللعب، وسيقوم فريقنا بتجهيزه لكم.'],
     ['هل يمكن إقامة الحفلات والمناسبات؟', 'نعم، بموافقة مسبقة من لازورد. أخبرونا عند الحجز وننسق معكم عبر واتساب.'],
     ['هل التدخين مسموح؟', 'نعم، ولكن في المناطق الخارجية فقط.'],
-    ['هل توجد حيوانات في المنتجع؟', 'نعم. في الحديقة الصغيرة طواويس وطيور وأرانب وماعز.'],
+    ['هل توجد حيوانات في المنتجع؟', 'نعم. في حديقة الحيوانات الصغيرة طواويس وطيور وأرانب وماعز.'],
     ['هل يوجد موقف للسيارات؟', 'نعم، موقف خاص داخل المنتجع.']
   ];
 
@@ -181,7 +181,7 @@
       rooms: 'Bedrooms', kingRooms: '3 bedrooms · 1 king bed', kingRoomsSub: 'Large double bed', twinRooms: '4 bedrooms · 2 twin beds', twinRoomsSub: 'Two separate beds',
       extraRoom: 'Extra bedroom', perNightShort: ' / night',
       facilities: 'Facilities',
-      fac: ['Swimming pool', 'Football field', 'Billiards area', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Mini zoo: peacocks, birds, rabbits & goats', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
+      fac: ['Swimming pool', 'Football pitch', 'Billiards area', 'Parking', 'BBQ area', 'Kids area', 'Playground', 'Mini zoo: peacocks, birds, rabbits & goats', 'Wood House (relaxation area)', 'Fountains', 'Outdoor seating', 'Gardens'],
       showAll: function (n) { return 'Show all (' + n + ')'; }, showLess: 'Show less',
       where: 'Where you’ll be', whereNote: 'The exact location is shared once your booking is confirmed.',
       deposit: 'Security deposit', depositAmount: 'Deposit amount', notInTotal: 'It is not included in the booking total.', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
@@ -224,7 +224,7 @@
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
       remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', day: 'Day', night: 'Night', dayNight: 'Day & night', atNight: 'At night', interior: 'Indoor', dayNightAria: 'See the resort by day or by night', atDay: 'by day', atNightCap: 'at night',
       faq: 'Frequently asked questions', faqSub: 'What guests ask us most before booking.', faqs: FAQ_EN,
-      steps: ['Dates', 'Guests', 'Beds', 'Your details', 'Confirm'], stepOf: function (i, n) { return 'Step ' + i + ' of ' + n; }, stepsDone: 'All set: tap “Book”', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
+      steps: ['Dates', 'Guests', 'Beds', 'Your details', 'Confirm'], stepOf: function (i, n) { return 'Step ' + i + ' of ' + n; }, stepsDone: 'All set: tap “Book now”', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football pitch', 'Billiards area', 'Kids area', 'Gardens & fountains'],
       depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, allPhotos: function (n) { return 'Show all ' + n + ' photos'; }, taxesIncl: 'taxes included', faqShort: 'FAQ', langName: 'English', summaryTitle: 'Your booking', backHome: 'Back to home',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return mo + ' ' + d + (booked ? ', booked' : ', ' + price + ' OMR per night') + (isIn ? ', check-in' : '') + (isOut ? ', check-out' : ''); }
     },
@@ -282,7 +282,7 @@
       totalLabel: 'الإجمالي (ر.ع.)', inclTaxes: 'مشمول في السعر:', pickToSee: 'اختر التواريخ لعرض السعر.',
       depositBook: function (d) { return 'مبلغ تأمين ' + d + ': يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، وهو غير مشمول في الإجمالي.'; },
       accept: 'قرأت الشروط والأحكام الخاصة بمنتجع لازورد وأوافق عليها.',
-      coupon: 'كود الخصم', couponPh: 'أدخل الكود', couponApply: 'تطبيق', couponBad: 'هذا الكود غير صحيح.', couponRemove: 'إزالة', couponOk: function (p) { return 'تم تطبيق خصم ' + p + '%'; }, discountLine: function (c, p) { return 'خصم ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'خصم (' + p + '%)'; }, missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return 'ينقص ' + n + ' أرقام'; }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
+      coupon: 'كود الخصم', couponPh: 'أدخل الكود', couponApply: 'تطبيق', couponBad: 'هذا الكود غير صحيح.', couponRemove: 'إزالة', couponOk: function (p) { return 'تم تطبيق خصم ' + p + '%'; }, discountLine: function (c, p) { return 'خصم ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'خصم (' + p + '%)'; }, missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return n === 1 ? 'ينقص رقم واحد' : (n === 2 ? 'ينقص رقمان' : 'ينقص ' + n + ' أرقام'); }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
       barSub: function (n, r) { return arNights(n) + ' · ' + r + ' غرف'; }, pickDates: 'اختر التواريخ',
       sending: 'جارٍ الإرسال…',
       sentTitle: 'تم استلام طلبك!', sentText: 'تم حجز التواريخ مبدئيًا. سنراجع طلبك ونؤكده لك عبر واتساب قريبًا جدًا.', sentTextWa: 'يرجى إرسال رسالة واتساب التي فُتحت لإكمال طلبك، وسنؤكد لك قريبًا جدًا.', waSend: 'راسلنا عبر واتساب', errTaken: 'عذرًا، تم حجز هذه التواريخ للتو. يرجى اختيار تواريخ أخرى.', errGeneric: 'تعذّر إرسال طلبك. تحقّق من الاتصال وحاول مرة أخرى.',
@@ -291,7 +291,7 @@
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
       remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', day: 'نهار', night: 'ليل', dayNight: 'نهارًا وليلًا', atNight: 'ليلًا', interior: 'داخلي', dayNightAria: 'شاهد المنتجع نهارًا أو ليلًا', atDay: 'نهارًا', atNightCap: 'ليلًا',
       faq: 'الأسئلة الشائعة', faqSub: 'أكثر ما يسألنا عنه الضيوف قبل الحجز.', faqs: FAQ_AR,
-      steps: ['التواريخ', 'الضيوف', 'الأسرّة', 'بياناتك', 'التأكيد'], stepOf: function (i, n) { return 'الخطوة ' + i + ' من ' + n; }, stepsDone: 'كل شيء جاهز: اضغط «احجز»', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
+      steps: ['التواريخ', 'الضيوف', 'الأسرّة', 'بياناتك', 'التأكيد'], stepOf: function (i, n) { return 'الخطوة ' + i + ' من ' + n; }, stepsDone: 'كل شيء جاهز: اضغط «احجز الآن»', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
       depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, allPhotos: function (n) { return 'عرض الصور (' + n + ')'; }, taxesIncl: 'شامل الضرائب', faqShort: 'الأسئلة', langName: 'العربية', summaryTitle: 'حجزك', backHome: 'العودة إلى الرئيسية',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' ' + mo + (booked ? '، محجوز' : '، ' + price + ' ر.ع. في الليلة') + (isIn ? '، الوصول' : '') + (isOut ? '، المغادرة' : ''); }
     }
@@ -359,7 +359,7 @@
     { t: { es: 'Zonas de descanso', en: 'Relaxation areas', ar: 'جلسات الاسترخاء' }, p: ['v-35-zona-de-relajacion-o-estar-trasera', 'v-34-zona-de-relajacion-o-estar-parte-frontal'], n: ['v-14-zona-de-estar-1', 'v-15-zona-de-estar-2', 'v-36-zona-de-relajacion-o-estar-fachada'] },
     { t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' }, p: ['v-43-zona-de-billar-1', 'v-44-zona-de-billar-2', 'v-45-zona-de-billar-3', 'h-10-zona-de-billar'], interior: true },
     { t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' }, p: ['v-51-bbq-area-2', 'v-50-bbq-area-1', 'v-52-bbq-area-3', 'h-3-area-de-bbq'] },
-    { t: { es: 'Cancha de fútbol', en: 'Football field', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2'], n: ['v-26-cancha-de-futbol-1'] },
+    { t: { es: 'Cancha de fútbol', en: 'Football pitch', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2'], n: ['v-26-cancha-de-futbol-1'] },
     { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-19-parque-para-ninos-2'], n: ['v-18-parque-para-ninos-1'] },
     { t: { es: 'Mini zoo', en: 'Mini zoo', ar: 'حديقة الحيوانات الصغيرة' }, p: ['v-28-zona-de-animales'] },
     { t: { es: 'Jardines', en: 'Gardens', ar: 'الحدائق' }, p: ['v-17-jardines-2'], n: ['v-16-jardines-1'] },
