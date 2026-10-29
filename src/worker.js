@@ -29,7 +29,9 @@ export const CONFIG = {
 };
 // Cupones: código → % de descuento sobre el total de la estadía
 const COUPONS = { LAZURDE5: 5, LAZURDE10: 10, LAZURDE15: 15, LAZURDE20: 20 };
-const EVENTS = ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'];
+// Motivo de la reserva: 0–4 grupos normales («Ideal para»), 5–10 celebraciones especiales (necesitan autorización), 11 otro.
+// Debe coincidir con DICT.*.events de la web y EVENTS_EN/EVENTS_ES del panel.
+const EVENTS = ['Family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Team gathering', 'Wedding', 'Engagement / Malka', 'Henna night', 'Birthday party', 'Graduation', 'Baby celebration', 'Other'];
 const STATUSES = ['pending', 'confirmed', 'rejected', 'cancelled'];
 const HOLDING = ['pending', 'confirmed'];   // estos estados ocupan fechas
 

@@ -34,6 +34,10 @@
     monthsAhead: 12
   };
 
+  // Motivo de la reserva: los primeros 5 son grupos normales («Ideal para»), del 5 al 10 celebraciones especiales
+  // (necesitan autorización) y el último es «Otro». Debe coincidir con EVENTS de src/worker.js y del panel.
+  var EV_IDEAL = 5, EV_OTHER = 11;
+
   // ===================== PREGUNTAS FRECUENTES =====================
   // Solo preguntas con respuesta confirmada. Las que faltan por definir con Salim se agregan después.
   var FAQ_ES = [
@@ -111,8 +115,8 @@
       showAll: function (n) { return 'Ver todas (' + n + ')'; }, showLess: 'Ver menos',
       where: 'Dónde estarás', whereNote: 'La ubicación exacta se envía cuando se confirma la reserva.',
       deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', notInTotal: 'No está incluido en el total de la reserva.', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
-      allowedEvents: 'Eventos permitidos', eventsNote: 'Todo evento necesita autorización previa de Lazurde. Después de reservar, coordínalo con nosotros por WhatsApp.',
-      events: ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de trabajo', 'Otro'],
+      idealFor: 'Ideal para', specialTitle: 'Celebraciones especiales', eventsNote: 'Requieren autorización previa de Lazurde. Coordínala con nosotros por WhatsApp después de reservar.', eventNeedsOk: 'Esta celebración necesita autorización previa de Lazurde. Después de reservar, coordínala con nosotros por WhatsApp.',
+      events: ['Familia', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Reunión de trabajo', 'Boda', 'Compromiso / Malka', 'Noche de henna', 'Cumpleaños', 'Graduación', 'Celebración de bebé', 'Otro'],
       policies: 'Políticas', cancellation: 'Cancelación', dateChange: 'Cambio de fecha', refundTitle: 'Reembolsos', tbd: '[Por definir con Salim]',
       terms: 'Términos y condiciones', termLine: function (i) { return i + '. [Término ' + i + ' — texto pendiente. Aquí van los términos y condiciones oficiales de Lazurde Resort.]'; },
       showMore: 'Ver más', footer: 'Lazurde Resort · Omán', privacy: 'Política de privacidad', privacyNote: 'Lee cómo usamos tus datos en nuestra política de privacidad.', waOpen: 'Se abrirá WhatsApp con tu solicitud: solo toca Enviar.',
@@ -178,8 +182,8 @@
       showAll: function (n) { return 'Show all (' + n + ')'; }, showLess: 'Show less',
       where: 'Where you’ll be', whereNote: 'The exact location is shared once your booking is confirmed.',
       deposit: 'Security deposit', depositAmount: 'Deposit amount', notInTotal: 'It is not included in the booking total.', depositNote: 'Paid on arrival and refunded within 24 hours after check-out, once the resort has been inspected.',
-      allowedEvents: 'Allowed events', eventsNote: 'All events need prior approval from Lazurde. After booking, please arrange it with us on WhatsApp.',
-      events: ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'],
+      idealFor: 'Perfect for', specialTitle: 'Special celebrations', eventsNote: 'These need prior approval from Lazurde. Please arrange it with us on WhatsApp after booking.', eventNeedsOk: 'This celebration needs prior approval from Lazurde. After booking, please arrange it with us on WhatsApp.',
+      events: ['Family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Team gathering', 'Wedding', 'Engagement / Malka', 'Henna night', 'Birthday party', 'Graduation', 'Baby celebration', 'Other'],
       policies: 'Policies', cancellation: 'Cancellation', dateChange: 'Date change', refundTitle: 'Refunds', tbd: '[To be confirmed]',
       terms: 'Terms & conditions', termLine: function (i) { return i + '. [Term ' + i + ' — pending text. The official Lazurde Resort terms & conditions go here.]'; },
       showMore: 'Show more', footer: 'Lazurde Resort · Oman', privacy: 'Privacy policy', privacyNote: 'Read how we use your data in our privacy policy.', waOpen: 'WhatsApp will open with your request — just tap Send.',
@@ -245,8 +249,8 @@
       showAll: function (n) { return 'عرض الكل (' + n + ')'; }, showLess: 'عرض أقل',
       where: 'أين ستقيم', whereNote: 'نرسل الموقع الدقيق بعد تأكيد الحجز.',
       deposit: 'مبلغ التأمين', depositAmount: 'قيمة التأمين', notInTotal: 'غير مشمول في إجمالي الحجز.', depositNote: 'يُدفع عند الوصول ويُسترد خلال 24 ساعة بعد المغادرة، بعد معاينة المنتجع.',
-      allowedEvents: 'المناسبات المسموح بها',
-      eventsNote: 'جميع المناسبات تحتاج إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.', events: ['عائلة', 'عائلة كبيرة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'حفلة عيد ميلاد', 'حفل زفاف', 'تجمع عمل', 'أخرى'],
+      idealFor: 'مثالي لـ', specialTitle: 'المناسبات الخاصة', eventNeedsOk: 'تحتاج هذه المناسبة إلى موافقة مسبقة من لازورد. بعد الحجز، يرجى التنسيق معنا عبر واتساب.',
+      eventsNote: 'تحتاج إلى موافقة مسبقة من لازورد. يرجى التنسيق معنا عبر واتساب بعد الحجز.', events: ['عائلة', 'تجمع رجال', 'تجمع نساء', 'أزواج', 'تجمع عمل', 'حفل زفاف', 'ملكة / خطوبة', 'ليلة الحناء', 'حفلة عيد ميلاد', 'حفل تخرج', 'احتفال بمولود', 'أخرى'],
       policies: 'السياسات', cancellation: 'الإلغاء', dateChange: 'تغيير التاريخ', refundTitle: 'استرداد المبالغ', tbd: '[سيتم تأكيده]',
       terms: 'الشروط والأحكام', termLine: function (i) { return i + '. [البند ' + i + ' — نص قيد الإعداد. هنا تُضاف الشروط والأحكام الرسمية لمنتجع لازورد.]'; },
       showMore: 'عرض المزيد', footer: 'منتجع لازورد · عُمان', privacy: 'سياسة الخصوصية', privacyNote: 'اطّلع على كيفية استخدامنا لبياناتك في سياسة الخصوصية.', waOpen: 'سيُفتح واتساب ومعه طلبك — فقط اضغط إرسال.',
@@ -946,9 +950,12 @@
       '<p class="muted" style="font-size:14px;line-height:1.6">' + T.whereNote + '</p></section>';
     // Depósito
     h += tplDeposit(c, false);
-    // Eventos permitidos
-    h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.allowedEvents + '</h2><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">' +
-      T.events.slice(0, 8).map(function (e) { return '<span style="display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none"></span>' + e + '</span>'; }).join('') + '</div>' +
+    // Ideal para (grupos normales) y celebraciones especiales (necesitan autorización)
+    var evItem = function (e, gold) { return '<span style="display:flex;align-items:center;gap:8px;background:' + (gold ? '#FFFBEF;border:1px solid #F1E2B3' : '#F5F7FA') + ';border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:' + (gold ? '#D3AE2A' : '#0F4C81') + ';flex:none"></span>' + e + '</span>'; };
+    h += '<div class="gap8"></div><section id="lz-events" class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.idealFor + '</h2><div class="lz-ev-grid">' +
+      T.events.slice(0, EV_IDEAL).map(function (e) { return evItem(e, false); }).join('') + '</div>' +
+      '<h3 style="margin-top:10px;font-size:17px;font-weight:800">' + T.specialTitle + '</h3><div class="lz-ev-grid">' +
+      T.events.slice(EV_IDEAL, EV_OTHER).map(function (e) { return evItem(e, true); }).join('') + '</div>' +
       '<div style="display:flex;gap:10px;align-items:flex-start;background:#FFF6DF;border-radius:12px;padding:12px 14px">' + svg(ICON.info, { w: 20, stroke: '#5C4510', style: 'flex:none;margin-top:1px' }) +
       '<span style="font-size:13px;color:#5C4510;line-height:1.5;font-weight:600">' + T.eventsNote + '</span></div></section>';
     // Preguntas frecuentes
@@ -1048,7 +1055,8 @@
       '</div></section>';
     // Motivo
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.purpose + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.optional + '</span></h2>' +
-      '<div style="display:flex;flex-wrap:wrap;gap:8px">' + T.events.map(function (e, i) { return '<button type="button" class="chip" data-act="event" data-arg="' + i + '" aria-pressed="' + (state.event === i) + '">' + e + '</button>'; }).join('') + '</div></section>';
+      '<div style="display:flex;flex-wrap:wrap;gap:8px">' + T.events.map(function (e, i) { return '<button type="button" class="chip" data-act="event" data-arg="' + i + '" aria-pressed="' + (state.event === i) + '">' + e + '</button>'; }).join('') + '</div>' +
+      (state.event !== null && state.event >= EV_IDEAL && state.event < EV_OTHER ? '<div style="display:flex;gap:10px;align-items:flex-start;background:#FFF6DF;border-radius:12px;padding:12px 14px">' + svg(ICON.info, { w: 20, stroke: '#5C4510', style: 'flex:none;margin-top:1px' }) + '<span style="font-size:13px;color:#5C4510;line-height:1.5;font-weight:600">' + T.eventNeedsOk + '</span></div>' : '') + '</section>';
     // Datos
     h += '<div class="gap8"></div><section id="lz-s-details" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.details + '</h2>' +
       '<label for="lz-name" class="label">' + T.fullName + '</label><input id="lz-name" class="field" type="text" autocomplete="name" data-field="name" value="' + esc(state.name) + '" placeholder="' + esc(T.namePh) + '">' +

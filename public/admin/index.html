@@ -1052,8 +1052,8 @@ textarea:focus{border-color:var(--blue);background:#fff}
   }
 
   // ================= Pago, depósito y fotos =================
-  var EVENTS_EN = ['Family', 'Large family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Birthday party', 'Wedding', 'Team gathering', 'Other'];
-  var EVENTS_ES = ['Familia', 'Familia grande', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Cumpleaños', 'Boda', 'Reunión de equipo', 'Otro'];
+  var EVENTS_EN = ['Family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Team gathering', 'Wedding', 'Engagement / Malka', 'Henna night', 'Birthday party', 'Graduation', 'Baby celebration', 'Other'];
+  var EVENTS_ES = ['Familia', 'Reunión de hombres', 'Reunión de mujeres', 'Parejas', 'Reunión de trabajo', 'Boda', 'Compromiso / Malka', 'Noche de henna', 'Cumpleaños', 'Graduación', 'Celebración de bebé', 'Otro'];
   function payOf(b) { return b.pay_status || 'unpaid'; }
   function depOf(b) { return b.deposit_status || 'pending'; }
   function isActive(b) { return b.status === 'pending' || b.status === 'confirmed'; }

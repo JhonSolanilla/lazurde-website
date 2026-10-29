@@ -262,6 +262,10 @@ body.lz-typing #lz-bar{display:none}
 .lz-dn-vsw button[aria-pressed=true] small{opacity:.8}
 @media (prefers-reduced-motion:reduce){.lz-sky i{animation:none;opacity:.8}.lz-dn,.lz-area .lz-area-n,.lz-dn-thumb{transition:none}}
 
+/* ===== Ideal para / Celebraciones especiales ===== */
+.lz-ev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:1024px){.lz-ev-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 /* ===== Preguntas frecuentes ===== */
 .lz-faq{border-top:1px solid #E3E8EE}
 .lz-faq:last-of-type{border-bottom:1px solid #E3E8EE}
