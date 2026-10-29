@@ -361,7 +361,7 @@ body.lz-typing #lz-bar{display:none}
   /* Zonas: se ven 2,5 tarjetas y las flechas siempre visibles */
   .lz-dcol .lz-dn{padding:24px 0 20px !important}
   .lz-dcol .lz-dn>div:first-of-type{padding:0 24px !important}
-  .lz-areas{padding:16px 24px 6px;scroll-padding-left:24px}
+  .lz-areas{padding:16px 18px 6px;scroll-padding-left:18px}
   .lz-area{flex:0 0 40%;height:380px}
   .lz-area:hover .lz-area-media{transform:scale(1.04)}
   .lz-areas-arrow{display:flex}
