@@ -748,12 +748,14 @@
 
   // Computador: mosaico de fotos (1 grande con el video + 4), cada una abre el visor
   function tplDeskGallery(c) {
-    var T = c.T, tiles = HERO.slice(0, 5);
-    return '<div id="lz-top" class="lz-dgal">' + tiles.map(function (h, i) {
-      var img = photo(h.img || h.poster);
-      var media = h.loop ? '<video src="video/' + h.loop + '.mp4" poster="' + img + '"' + (holdHero ? '' : ' autoplay') + ' muted loop playsinline preload="auto" aria-hidden="true"></video>' : '<img src="' + img + '" alt="' + esc(h.t[c.L]) + '"' + (i ? ' loading="lazy"' : '') + '>';
-      return '<button type="button" class="lz-dgal-t lz-dgal-' + i + '" data-act="heroAt" data-arg="' + i + '" aria-label="' + esc(h.t[c.L]) + '">' + media + (i === 0 ? '<span class="lz-hero-cap">' + h.t[c.L] + '</span>' + (h.video ? '<span aria-hidden="true" class="lz-sound">' + T.withSound + '</span>' : '') : '') + '</button>';
-    }).join('') + '<button type="button" class="lz-dgal-all" data-act="heroAt" data-arg="0">' + svg(ICON.grid || 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', { w: 16, sw: 2 }) + T.allPhotos(HERO.length) + '</button></div>';
+    var T = c.T, h = HERO[0], img = photo(h.poster), thumbs = HERO.slice(1, 5);
+    return '<div id="lz-top" class="lz-dhero">' +
+      '<button type="button" class="lz-dhero-v" data-act="heroAt" data-arg="0" aria-label="' + esc(h.t[c.L]) + '"><video src="video/' + h.loop + '.mp4" poster="' + img + '"' + (holdHero ? '' : ' autoplay') + ' muted loop playsinline preload="auto" aria-hidden="true"></video></button>' +
+      '<div class="lz-dhero-shade" aria-hidden="true"></div>' +
+      '<div class="lz-dhero-txt"><span class="lz-dhero-k">' + T.badge + ' · Oman</span><h1>' + T.resortName + '</h1><p>' + T.specs.slice(0, 3).join(' · ') + '</p>' +
+      '<button type="button" class="lz-dhero-play" data-act="heroAt" data-arg="0"><span class="lz-dhero-pi"></span>' + T.withSound + '</button></div>' +
+      '<div class="lz-dhero-th">' + thumbs.map(function (t, i) { return '<button type="button" data-act="heroAt" data-arg="' + (i + 1) + '" aria-label="' + esc(t.t[c.L]) + '"><img src="' + photo(t.img, 'm') + '" alt="" loading="lazy"></button>'; }).join('') +
+      '<button type="button" class="lz-dhero-all" data-act="heroAt" data-arg="1">' + svg('M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', { w: 16, sw: 2 }) + T.allPhotos(HERO.length) + '</button></div></div>';
   }
   // Computador: tarjeta de reserva fija a la derecha
   function tplDeskSide(c) {
