@@ -419,7 +419,7 @@
     var prevScreen = state.screen;
     for (var k in patch) state[k] = patch[k];
     render();
-    if (patch.screen && patch.screen !== prevScreen) window.scrollTo(0, 0);
+    if (patch.screen && patch.screen !== prevScreen) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }
 
   // ===================== MONEDA =====================
@@ -1171,8 +1171,14 @@
       var first = !introShown; if (first) holdHero = true;
       // Si cambia de idioma a mitad de la página, vuelve a la misma pantalla y a la misma posición
       var back = langBack; langBack = null;
-      set({ lang: code, screen: back ? back.screen : 'home' });
-      if (back) { var y = back.y, go = function () { window.scrollTo(0, y); }; go(); requestAnimationFrame(go); setTimeout(go, 120); setTimeout(go, 400); }
+      if (back) {
+        // Sin animación: se redibuja y se coloca en el mismo punto antes de que se pinte nada
+        var root = document.documentElement, y = back.y;
+        root.style.scrollBehavior = 'auto';
+        state.lang = code; state.screen = back.screen; render();
+        window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+        requestAnimationFrame(function () { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); root.style.scrollBehavior = ''; });
+      } else set({ lang: code, screen: 'home' });
       if (first) playIntro();
     },
     openLang: function () { langBack = (state.screen !== 'lang' && introShown) ? { screen: state.screen, y: window.pageYOffset || document.documentElement.scrollTop || 0 } : null; set({ screen: 'lang' }); },
