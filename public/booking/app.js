@@ -34,6 +34,54 @@
     monthsAhead: 12
   };
 
+  // ===================== PREGUNTAS FRECUENTES =====================
+  // Solo preguntas con respuesta confirmada. Las que faltan por definir con Salim se agregan después.
+  var FAQ_ES = [
+    ['¿Se alquila todo el resort?', 'Sí. Durante tu estadía el resort es solo para tu grupo: no se comparte con nadie ni se alquilan habitaciones sueltas.'],
+    ['¿Cuántas personas pueden quedarse?', 'De 6 a 14 personas. Los niños cuentan como personas.'],
+    ['¿Cómo se asignan las habitaciones?', '6 personas usan 3 habitaciones y cada 2 personas más se abre otra, hasta 7 habitaciones. Tú eliges cama king o dos camas individuales.'],
+    ['¿Cuándo queda confirmada mi reserva?', 'Cuando pagas el 100 % del total. Hasta entonces tu solicitud queda pendiente.'],
+    ['¿El precio incluye impuestos?', 'Sí. El precio que ves ya incluye el impuesto de turismo (4 %) y el IVA (5 %).'],
+    ['¿A qué hora es la llegada y la salida?', 'Llegada a las 2:00 pm y salida a las 11:00 am. Te pedimos puntualidad.'],
+    ['¿Cómo funciona el depósito de garantía?', 'Pagas 100 OMR al llegar. Te lo devolvemos dentro de las 24 horas después de la salida, tras una revisión rápida del resort.'],
+    ['¿Qué incluye la estadía?', 'Todo lo que ofrece un hotel: sábanas, almohadas, toallas, champú, papel higiénico, wifi y lo básico para habitar. Solo tienes que traer tu ropa.'],
+    ['¿Podemos cocinar y hacer parrilla?', 'Sí. Hay cocina completa y zona de barbacoa a gas, con los utensilios incluidos. No necesitas traer carbón.'],
+    ['¿Podemos hacer fiestas o eventos?', 'Sí, con aprobación previa de Lazurde. Avísanos al reservar y lo coordinamos por WhatsApp.'],
+    ['¿Se permite fumar?', 'Sí, pero solo en las zonas exteriores.'],
+    ['¿Hay animales en el resort?', 'Sí. En el mini zoo viven pavos reales, aves, conejos y cabras.'],
+    ['¿Hay parqueadero?', 'Sí, privado y dentro del resort.']
+  ];
+  var FAQ_EN = [
+    ['Do we get the whole resort?', 'Yes. During your stay the resort is only for your group: it is never shared and we do not rent single rooms.'],
+    ['How many guests can stay?', 'From 6 to 14 guests. Children count as guests.'],
+    ['How are the bedrooms assigned?', '6 guests use 3 bedrooms and every 2 more guests open another one, up to 7 bedrooms. You choose a king bed or two twin beds.'],
+    ['When is my booking confirmed?', 'When you pay 100% of the total. Until then your request stays pending.'],
+    ['Does the price include taxes?', 'Yes. The price you see already includes the tourism tax (4%) and VAT (5%).'],
+    ['What are the check-in and check-out times?', 'Check-in at 2:00 pm and check-out at 11:00 am. Please be on time.'],
+    ['How does the security deposit work?', 'You pay 100 OMR on arrival. We return it within 24 hours after check-out, following a quick inspection of the resort.'],
+    ['What is included in the stay?', 'Everything a hotel provides: bed linen, pillows, towels, shampoo, toilet paper, Wi-Fi and the basics for your stay. You only need to bring your clothes.'],
+    ['Can we cook and barbecue?', 'Yes. There is a full kitchen and a gas BBQ area with utensils included. No need to bring charcoal.'],
+    ['Can we hold parties or events?', 'Yes, with prior approval from Lazurde. Let us know when booking and we will arrange it on WhatsApp.'],
+    ['Is smoking allowed?', 'Yes, but only in the outdoor areas.'],
+    ['Are there animals at the resort?', 'Yes. The mini zoo is home to peacocks, birds, rabbits and goats.'],
+    ['Is there parking?', 'Yes, private parking inside the resort.']
+  ];
+  var FAQ_AR = [
+    ['هل نستأجر المنتجع كاملًا؟', 'نعم. خلال إقامتكم يكون المنتجع لمجموعتكم فقط: لا يُشارك مع أحد ولا تُؤجر غرف منفردة.'],
+    ['كم عدد الضيوف؟', 'من 6 إلى 14 ضيفًا. يُحتسب الأطفال ضمن الضيوف.'],
+    ['كيف تُوزّع غرف النوم؟', '6 ضيوف يستخدمون 3 غرف، وكل ضيفين إضافيين تُفتح لهما غرفة أخرى، حتى 7 غرف. تختارون سرير كينغ أو سريرين منفردين.'],
+    ['متى يُؤكد حجزي؟', 'عند دفع 100٪ من الإجمالي. وحتى ذلك الحين يبقى طلبكم قيد الانتظار.'],
+    ['هل يشمل السعر الضرائب؟', 'نعم. السعر المعروض يشمل ضريبة السياحة (4٪) وضريبة القيمة المضافة (5٪).'],
+    ['ما مواعيد الوصول والمغادرة؟', 'الوصول الساعة 2:00 مساءً والمغادرة الساعة 11:00 صباحًا. نرجو الالتزام بالمواعيد.'],
+    ['كيف يعمل مبلغ التأمين؟', 'تدفعون 100 ر.ع. عند الوصول، ونعيده خلال 24 ساعة بعد المغادرة بعد فحص سريع للمنتجع.'],
+    ['ماذا تشمل الإقامة؟', 'كل ما يوفره الفندق: أغطية الأسرّة والوسائد والمناشف والشامبو وورق التواليت والواي فاي والأساسيات. يكفي أن تحضروا ملابسكم.'],
+    ['هل يمكننا الطبخ والشواء؟', 'نعم. يوجد مطبخ كامل ومنطقة شواء تعمل بالغاز مع الأدوات. لا حاجة لإحضار الفحم.'],
+    ['هل يمكن إقامة الحفلات والمناسبات؟', 'نعم، بموافقة مسبقة من لازورد. أخبرونا عند الحجز وننسق معكم عبر واتساب.'],
+    ['هل التدخين مسموح؟', 'نعم، ولكن في المناطق الخارجية فقط.'],
+    ['هل توجد حيوانات في المنتجع؟', 'نعم. في الحديقة الصغيرة طواويس وطيور وأرانب وماعز.'],
+    ['هل يوجد موقف للسيارات؟', 'نعم، موقف خاص داخل المنتجع.']
+  ];
+
   // ===================== TEXTOS (3 idiomas) =====================
   function arNights(n) { return n === 1 ? 'ليلة واحدة' : (n === 2 ? 'ليلتان' : (n <= 10 ? n + ' ليالٍ' : n + ' ليلة')); }
   function arGuests(n) { return n + (n <= 10 ? ' ضيوف' : ' ضيفًا'); }
@@ -100,7 +148,9 @@
       code: 'Código de reserva', example: ' (ejemplo)',
       rIn: 'Llegada', rOut: 'Salida', rGuests: 'Personas', rRooms: 'Habitaciones', rPurpose: 'Motivo', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' personas'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' de 2 camas)'; }, notGiven: 'No indicado',
-      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', video: 'Video', withSound: 'Toca para ver con sonido', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
+      remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', day: 'Día', night: 'Noche', dayNight: 'Día y noche', atNight: 'De noche', interior: 'Interior', dayNightAria: 'Ver el resort de día o de noche', atDay: 'de día', atNightCap: 'de noche',
+      faq: 'Preguntas frecuentes', faqSub: 'Lo que más nos preguntan antes de reservar.', faqs: FAQ_ES,
+      steps: ['Fechas', 'Personas', 'Camas', 'Tus datos', 'Confirmar'], stepOf: function (i, n) { return 'Paso ' + i + ' de ' + n; }, stepsDone: 'Todo listo: toca «Reservar»', video: 'Video', withSound: 'Toca para ver con sonido', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
       depositRem: function (d) { return 'Depósito de garantía: ' + d + ', se paga al llegar.'; }, backHome: 'Volver al inicio',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' de ' + mo + (booked ? ', ocupado' : ', ' + price + ' OMR por noche') + (isIn ? ', llegada' : '') + (isOut ? ', salida' : ''); }
     },
@@ -165,7 +215,9 @@
       code: 'Booking code', example: ' (example)',
       rIn: 'Check-in', rOut: 'Check-out', rGuests: 'Guests', rRooms: 'Bedrooms', rPurpose: 'Purpose', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
-      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
+      remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', day: 'Day', night: 'Night', dayNight: 'Day & night', atNight: 'At night', interior: 'Indoor', dayNightAria: 'See the resort by day or by night', atDay: 'by day', atNightCap: 'at night',
+      faq: 'Frequently asked questions', faqSub: 'What guests ask us most before booking.', faqs: FAQ_EN,
+      steps: ['Dates', 'Guests', 'Beds', 'Your details', 'Confirm'], stepOf: function (i, n) { return 'Step ' + i + ' of ' + n; }, stepsDone: 'All set: tap “Book”', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
       depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, backHome: 'Back to home',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return mo + ' ' + d + (booked ? ', booked' : ', ' + price + ' OMR per night') + (isIn ? ', check-in' : '') + (isOut ? ', check-out' : ''); }
     },
@@ -230,7 +282,9 @@
       code: 'رمز الحجز', example: ' (مثال)',
       rIn: 'الوصول', rOut: 'المغادرة', rGuests: 'الضيوف', rRooms: 'الغرف', rPurpose: 'السبب', rTotal: 'الإجمالي',
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
-      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
+      remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', day: 'نهار', night: 'ليل', dayNight: 'نهارًا وليلًا', atNight: 'ليلًا', interior: 'داخلي', dayNightAria: 'شاهد المنتجع نهارًا أو ليلًا', atDay: 'نهارًا', atNightCap: 'ليلًا',
+      faq: 'الأسئلة الشائعة', faqSub: 'أكثر ما يسألنا عنه الضيوف قبل الحجز.', faqs: FAQ_AR,
+      steps: ['التواريخ', 'الضيوف', 'الأسرّة', 'بياناتك', 'التأكيد'], stepOf: function (i, n) { return 'الخطوة ' + i + ' من ' + n; }, stepsDone: 'كل شيء جاهز: اضغط «احجز»', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
       depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, backHome: 'العودة إلى الرئيسية',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' ' + mo + (booked ? '، محجوز' : '، ' + price + ' ر.ع. في الليلة') + (isIn ? '، الوصول' : '') + (isOut ? '، المغادرة' : ''); }
     }
@@ -285,24 +339,27 @@
     { img: 'h-7-casa-principal-2', t: { es: 'Casa principal de noche', en: 'Main house at night', ar: 'المبنى الرئيسي ليلًا' } },
     { img: 'h-9-zona-de-parqueadero', t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' } }
   ];
+  // p = fotos de día, n = fotos de noche (si la zona las tiene), interior = zona cubierta (no cambia de noche)
   var ZONES = [
     { video: 'resumen', loop: 'resumen-mudo', poster: 'resumen', t: { es: 'El resort en 13 segundos', en: 'The resort in 13 seconds', ar: 'المنتجع في 13 ثانية' } },
-    { t: { es: 'Piscina', en: 'Swimming pool', ar: 'المسبح' }, p: ['v-22-zona-de-piscina-3', 'v-20-zona-de-piscina-1', 'v-21-zona-de-piscina-2', 'v-23-zona-de-piscina-4', 'v-24-zona-de-piscina-5', 'v-25-zona-de-piscina-6', 'h-2-area-de-piscina', 'h-4-area-de-piscina'] },
-    { t: { es: 'Llegada y casa principal', en: 'Arrival & main house', ar: 'المدخل والمبنى الرئيسي' }, p: ['v-31-entrada-principal', 'h-5-fachada-principal', 'v-33-casa-principal', 'v-32-casa-principal-2', 'h-6-casa-principal', 'h-7-casa-principal-2'] },
-    { t: { es: 'Sala principal', en: 'Main hall', ar: 'الصالة الرئيسية' }, p: ['v-38-sala-principal-1', 'v-39-sala-principal-2', 'v-40-sala-principal-3', 'v-37-interior'] },
-    { t: { es: 'Sala de estar', en: 'Living room', ar: 'غرفة الجلوس' }, p: ['v-41-sala-de-estar-interior', 'v-42-sala-de-estar-interior-2'] },
-    { t: { es: 'Cocina', en: 'Kitchen', ar: 'المطبخ' }, p: ['v-46-cocina-1', 'v-47-cocina-2', 'v-48-cocina-3', 'v-49-cocina-4'] },
-    { t: { es: 'Wood House', en: 'Wood House', ar: 'البيت الخشبي' }, p: ['v-13-wood-house-interior-1', 'v-13-wood-house-interior-2', 'v-11-wood-house-fachada-2', 'v-10-wood-house-fachada-1', 'v-12-wood-house-fachada-3', 'h-8-wood-house'] },
-    { t: { es: 'Espacios abiertos', en: 'Outdoor spaces', ar: 'المساحات الخارجية' }, p: ['v-2-espacios-abiertos-2', 'v-1-espacios-abiertos', 'v-3-espacios-abiertos-3', 'v-4-espacios-abiertos-4', 'v-5-espacios-abiertos-5', 'v-6-espacios-abiertos-6', 'v-7-espacios-abiertos-7', 'v-8-espacios-abiertos-8', 'v-9-espacios-abiertos-9', 'h-1-vista-principal'] },
-    { t: { es: 'Zonas de descanso', en: 'Relaxation areas', ar: 'جلسات الاسترخاء' }, p: ['v-14-zona-de-estar-1', 'v-15-zona-de-estar-2', 'v-35-zona-de-relajacion-o-estar-trasera', 'v-34-zona-de-relajacion-o-estar-parte-frontal', 'v-36-zona-de-relajacion-o-estar-fachada'] },
-    { t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' }, p: ['v-43-zona-de-billar-1', 'v-44-zona-de-billar-2', 'v-45-zona-de-billar-3', 'h-10-zona-de-billar'] },
+    { t: { es: 'Piscina', en: 'Swimming pool', ar: 'المسبح' }, p: ['v-22-zona-de-piscina-3', 'v-23-zona-de-piscina-4', 'v-24-zona-de-piscina-5', 'v-25-zona-de-piscina-6', 'h-2-area-de-piscina', 'h-4-area-de-piscina'], n: ['v-20-zona-de-piscina-1', 'v-21-zona-de-piscina-2'] },
+    { t: { es: 'Llegada y casa principal', en: 'Arrival & main house', ar: 'المدخل والمبنى الرئيسي' }, p: ['v-31-entrada-principal', 'h-5-fachada-principal', 'v-33-casa-principal', 'v-32-casa-principal-2'], n: ['h-6-casa-principal', 'h-7-casa-principal-2'] },
+    { t: { es: 'Sala principal', en: 'Main hall', ar: 'الصالة الرئيسية' }, p: ['v-38-sala-principal-1', 'v-39-sala-principal-2', 'v-40-sala-principal-3', 'v-37-interior'], interior: true },
+    { t: { es: 'Sala de estar', en: 'Living room', ar: 'غرفة الجلوس' }, p: ['v-41-sala-de-estar-interior', 'v-42-sala-de-estar-interior-2'], interior: true },
+    { t: { es: 'Cocina', en: 'Kitchen', ar: 'المطبخ' }, p: ['v-46-cocina-1', 'v-47-cocina-2', 'v-48-cocina-3', 'v-49-cocina-4'], interior: true },
+    { t: { es: 'Wood House', en: 'Wood House', ar: 'البيت الخشبي' }, p: ['v-13-wood-house-interior-1', 'v-13-wood-house-interior-2', 'v-10-wood-house-fachada-1'], n: ['h-8-wood-house', 'v-11-wood-house-fachada-2', 'v-12-wood-house-fachada-3'] },
+    { t: { es: 'Espacios abiertos', en: 'Outdoor spaces', ar: 'المساحات الخارجية' }, p: ['v-2-espacios-abiertos-2', 'v-1-espacios-abiertos', 'v-3-espacios-abiertos-3', 'v-4-espacios-abiertos-4', 'v-5-espacios-abiertos-5', 'v-6-espacios-abiertos-6', 'h-1-vista-principal'], n: ['v-7-espacios-abiertos-7', 'v-8-espacios-abiertos-8', 'v-9-espacios-abiertos-9'] },
+    { t: { es: 'Zonas de descanso', en: 'Relaxation areas', ar: 'جلسات الاسترخاء' }, p: ['v-35-zona-de-relajacion-o-estar-trasera', 'v-34-zona-de-relajacion-o-estar-parte-frontal'], n: ['v-14-zona-de-estar-1', 'v-15-zona-de-estar-2', 'v-36-zona-de-relajacion-o-estar-fachada'] },
+    { t: { es: 'Billar y juegos', en: 'Billiards & games', ar: 'البلياردو والألعاب' }, p: ['v-43-zona-de-billar-1', 'v-44-zona-de-billar-2', 'v-45-zona-de-billar-3', 'h-10-zona-de-billar'], interior: true },
     { t: { es: 'Zona BBQ', en: 'BBQ area', ar: 'منطقة الشواء' }, p: ['v-51-bbq-area-2', 'v-50-bbq-area-1', 'v-52-bbq-area-3', 'h-3-area-de-bbq'] },
-    { t: { es: 'Cancha de fútbol', en: 'Football field', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2', 'v-26-cancha-de-futbol-1'] },
-    { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-18-parque-para-ninos-1', 'v-19-parque-para-ninos-2'] },
+    { t: { es: 'Cancha de fútbol', en: 'Football field', ar: 'ملعب كرة القدم' }, p: ['v-27-cancha-de-futbol-2'], n: ['v-26-cancha-de-futbol-1'] },
+    { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-19-parque-para-ninos-2'], n: ['v-18-parque-para-ninos-1'] },
     { t: { es: 'Mini zoo', en: 'Mini zoo', ar: 'حديقة الحيوانات الصغيرة' }, p: ['v-28-zona-de-animales'] },
-    { t: { es: 'Jardines', en: 'Gardens', ar: 'الحدائق' }, p: ['v-17-jardines-2', 'v-16-jardines-1'] },
-    { t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' }, p: ['v-29-parqueadero-1', 'v-30-parqueadero-2', 'h-9-zona-de-parqueadero'] }
+    { t: { es: 'Jardines', en: 'Gardens', ar: 'الحدائق' }, p: ['v-17-jardines-2'], n: ['v-16-jardines-1'] },
+    { t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' }, p: ['v-29-parqueadero-1', 'v-30-parqueadero-2'], n: ['h-9-zona-de-parqueadero'] }
   ];
+  // Fotos de una zona según el modo elegido (de noche: primero las nocturnas y luego las de día)
+  function zonePhotos(z, night) { return night && z.n ? z.n.concat(z.p) : (z.p || []).concat(z.n || []); }
   function photo(slug, size) { return 'img/fotos/' + slug + '-' + (size || 'l') + '.webp'; }
 
   function svg(d, opts) {
@@ -341,7 +398,7 @@
 
   // ===================== ESTADO =====================
   var state = {
-    screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, showAllFac: false, termsOpen: false,
+    screen: 'lang', lang: 'es', month: 0, gIdx: 0, liked: false, night: false, showAllFac: false, termsOpen: false,
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
     event: null, coupon: null, couponPct: 0, couponTry: '', couponErr: false, bookingCode: null, submitError: null, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
   };
@@ -689,23 +746,46 @@
   // Zonas del resort: una fila de tarjetas; al tocar una se abren todas sus fotos
   // La fila es un círculo: se pinta 3 veces (copia · original · copia) y al terminar de
   // deslizar se salta sin que se note a la misma tarjeta de la tanda del medio.
+  var SUN_ICON = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>';
+  var MOON_ICON = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg>';
+  // Cielo nocturno: estrellas que titilan (posiciones fijas para que no cambien al redibujar) y un cometa
+  var STARS = (function () { var a = [], x = 7; for (var i = 0; i < 34; i++) { x = (x * 48271) % 2147483647; var l = x / 2147483647; x = (x * 48271) % 2147483647; var t = x / 2147483647; x = (x * 48271) % 2147483647; a.push([Math.round(2 + l * 96), Math.round(3 + t * 90), (x / 2147483647).toFixed(2)]); } return a; })();
+  function tplSky() {
+    return '<div class="lz-sky" aria-hidden="true">' + STARS.map(function (st, i) { return '<i style="left:' + st[0] + '%;top:' + st[1] + '%;animation-delay:' + (-st[2] * 4) + 's;animation-duration:' + (2.6 + st[2] * 2.4).toFixed(1) + 's' + (i % 5 === 0 ? ';width:3px;height:3px' : '') + (i % 7 === 0 ? ';background:#FAD26D' : '') + '"></i>'; }).join('') + '<b class="lz-comet"></b><b class="lz-comet lz-comet2"></b></div>';
+  }
+  function dnSwitch(T, cls) {
+    return '<div class="' + cls + '" role="group" aria-label="' + T.dayNightAria + '"><span class="lz-dn-thumb"></span>' +
+      '<button type="button" data-act="dayNight" data-arg="0" aria-pressed="' + !state.night + '">' + SUN_ICON + T.day + '</button>' +
+      '<button type="button" data-act="dayNight" data-arg="1" aria-pressed="' + state.night + '">' + MOON_ICON + T.night + '</button></div>';
+  }
   function tplAreas(c) {
     var T = c.T;
     function card(z, i, copy) {
       var media = z.video
         ? (copy ? '<img class="lz-area-media" src="video/' + z.poster + '.webp" alt="" loading="lazy">'
                 : '<video class="lz-area-media" src="video/' + z.loop + '.mp4" poster="video/' + z.poster + '.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>')
-        : '<img class="lz-area-media" src="' + photo(z.p[0]) + '" alt="" loading="lazy">';
-      var tag = z.video ? '▶ ' + T.video : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>' + T.photosN(z.p.length);
-      return '<button type="button" class="lz-area" data-act="zoneOpen" data-arg="' + i + '" aria-label="' + esc(z.t[c.L]) + '"' + (copy ? ' aria-hidden="true" tabindex="-1" data-copy="1"' : '') + '>' + media +
+        : '<img class="lz-area-media" src="' + photo(z.p[0]) + '" alt="" loading="lazy">' + (z.n ? '<img class="lz-area-media lz-area-n" src="' + photo(z.n[0]) + '" alt="" loading="lazy">' : '');
+      var n = z.video ? 0 : zonePhotos(z).length;
+      var tag = z.video ? '▶ ' + T.video : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>' + T.photosN(n);
+      var badge = z.n ? '<span class="lz-dn-badge">' + MOON_ICON + '<span class="lz-dn-bt">' + (state.night ? T.atNight : T.dayNight) + '</span></span>' : (z.interior ? '<span class="lz-dn-int">' + T.interior + '</span>' : '');
+      return '<button type="button" class="lz-area" data-act="zoneOpen" data-arg="' + i + '" aria-label="' + esc(z.t[c.L]) + '"' + (copy ? ' aria-hidden="true" tabindex="-1" data-copy="1"' : '') + '>' + media + badge +
         '<span class="lz-area-tag">' + tag + '</span>' +
         '<span class="lz-area-cap" dir="' + (c.rtl ? 'rtl' : 'ltr') + '"><span class="lz-area-n">' + (i < 9 ? '0' : '') + (i + 1) + '</span><span class="lz-area-name">' + z.t[c.L] + '</span></span></button>';
     }
     var set = function (copy) { return ZONES.map(function (z, i) { return card(z, i, copy); }).join(''); };
-    return '<div class="gap8"></div><section class="card" style="padding:20px 0 18px"><div style="padding:0 18px"><h2 class="h2">' + T.areasTitle + '</h2><p class="muted" style="font-size:13px;margin-top:4px">' + T.areasSub + '</p></div>' +
+    return '<div class="gap8"></div><section id="lz-areas" class="card lz-dn' + (state.night ? ' night' : '') + '" style="padding:20px 0 18px">' + tplSky() +
+      '<div style="padding:0 18px;position:relative"><h2 class="h2">' + T.areasTitle + '</h2><p class="muted" style="font-size:13px;margin-top:4px">' + T.areasSub + '</p>' + dnSwitch(T, 'lz-dn-sw') + '</div>' +
       '<div class="lz-areas-wrap"><div class="lz-areas" dir="ltr">' + set(true) + set(false) + set(true) + '</div>' +
       '<button type="button" class="lz-areas-arrow lz-prev" data-act="areasStep" data-arg="-1" aria-label="' + T.prevPhoto + '"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>' +
       '<button type="button" class="lz-areas-arrow lz-next" data-act="areasStep" data-arg="1" aria-label="' + T.nextPhoto + '"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div></section>';
+  }
+  // Cambia entre día y noche sin redibujar la página (así la fila de zonas no salta)
+  function applyDayNight() {
+    var T = DICT[state.lang], sec = document.getElementById('lz-areas');
+    if (!sec) return;
+    sec.classList.toggle('night', state.night);
+    sec.querySelectorAll('[data-act=dayNight]').forEach(function (b) { b.setAttribute('aria-pressed', String((b.getAttribute('data-arg') === '1') === state.night)); });
+    sec.querySelectorAll('.lz-dn-bt').forEach(function (b) { b.textContent = state.night ? T.atNight : T.dayNight; });
   }
   function initAreasLoop() {
     var row = document.querySelector('.lz-areas');
@@ -729,7 +809,7 @@
 
   // Visor a pantalla completa (fotos y videos), se desliza con el dedo
   var viewerEl = null;
-  function openViewer(items, start, title) {
+  function openViewer(items, start, title, zone) {
     var T = DICT[state.lang];
     closeViewer();
     lockPage(true);
@@ -742,7 +822,10 @@
           ? '<video src="video/' + it.video + '.mp4" poster="' + (it.poster.indexOf('/') >= 0 ? it.poster : (it.poster.charAt(1) === '-' ? photo(it.poster) : 'video/' + it.poster + '.webp')) + '" controls playsinline preload="metadata"></video>'
           : '<img src="' + photo(it.img) + '" alt="' + esc(it.cap || title) + '" loading="lazy">') + '</div>';
       }).join('') + '</div>' +
-      (items.length > 1 ? '<button type="button" class="lz-v-btn lz-v-prev" data-v="prev" aria-label="' + T.prevPhoto + '">‹</button><button type="button" class="lz-v-btn lz-v-next" data-v="next" aria-label="' + T.nextPhoto + '">›</button>' : '');
+      (items.length > 1 ? '<button type="button" class="lz-v-btn lz-v-prev" data-v="prev" aria-label="' + T.prevPhoto + '">‹</button><button type="button" class="lz-v-btn lz-v-next" data-v="next" aria-label="' + T.nextPhoto + '">›</button>' : '') +
+      (zone && zone.n ? '<div class="lz-dn-vsw' + (state.night ? ' night' : '') + '" role="group" aria-label="' + T.dayNightAria + '"><span class="lz-dn-thumb"></span>' +
+        '<button type="button" data-v="day" aria-pressed="' + !state.night + '">' + SUN_ICON + T.day + '<small>' + zone.p.length + '</small></button>' +
+        '<button type="button" data-v="night" aria-pressed="' + state.night + '">' + MOON_ICON + T.night + '<small>' + zone.n.length + '</small></button></div>' : '');
     document.body.appendChild(viewerEl);
     var track = viewerEl.querySelector('.lz-v-track'), count = viewerEl.querySelector('.lz-v-count');
     function cur() { return Math.round(track.scrollLeft / track.clientWidth); }
@@ -759,6 +842,7 @@
       var b = e.target.closest('[data-v]'); if (!b) return;
       var v = b.getAttribute('data-v');
       if (v === 'close') closeViewer();
+      else if (v === 'day' || v === 'night') { if ((v === 'night') !== state.night) { state.night = v === 'night'; applyDayNight(); actions.zoneOpen(zone.idx); } }
       else track.scrollTo({ left: (cur() + (v === 'next' ? 1 : -1)) * track.clientWidth, behavior: 'smooth' });
     });
   }
@@ -827,6 +911,9 @@
       T.events.slice(0, 8).map(function (e) { return '<span style="display:flex;align-items:center;gap:8px;background:#F5F7FA;border-radius:10px;padding:10px 12px;font-size:14px"><span style="width:6px;height:6px;border-radius:999px;background:#D3AE2A;flex:none"></span>' + e + '</span>'; }).join('') + '</div>' +
       '<div style="display:flex;gap:10px;align-items:flex-start;background:#FFF6DF;border-radius:12px;padding:12px 14px">' + svg(ICON.info, { w: 20, stroke: '#5C4510', style: 'flex:none;margin-top:1px' }) +
       '<span style="font-size:13px;color:#5C4510;line-height:1.5;font-weight:600">' + T.eventsNote + '</span></div></section>';
+    // Preguntas frecuentes
+    h += '<div class="gap8"></div><section id="lz-faq" class="card"><h2 class="h2">' + T.faq + '</h2><p class="muted" style="font-size:13px;margin-top:4px;margin-bottom:8px">' + T.faqSub + '</p>' +
+      T.faqs.map(function (q) { return '<details class="lz-faq"><summary>' + q[0] + '</summary><p>' + q[1] + '</p></details>'; }).join('') + '</section>';
     // Políticas
     h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.policies + '</h2>' +
       '<div style="border:1px solid #F3C9C9;background:#FDF2F2;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#8B1D1D">' + T.cancellation + '</strong><span style="font-size:14px;color:#6E1A1A;line-height:1.6">' + T.tbd + '</span></div>' +
@@ -853,6 +940,21 @@
       'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;font-size:11px">' + svg(d) + label + '</a>';
   }
 
+  // Pasos de la reserva: cuáles ya están listos y en cuál va el cliente
+  function stepsState(c) {
+    var done = [c.hasNights, state.confirmed, state.confirmed, !!state.name.trim() && phoneCheck(state.cc, state.phone).status === 'ok', state.termsOk];
+    var cur = 0; while (cur < done.length && done[cur]) cur++;
+    return { done: done, cur: cur, ids: ['lz-s-dates', 'lz-s-guests', 'lz-s-beds', 'lz-s-details', 'lz-s-terms'] };
+  }
+  function tplSteps(c) {
+    var T = c.T, st = stepsState(c), n = st.done.length, allDone = st.cur >= n;
+    return '<div class="lz-steps-top"><span class="lz-steps-of">' + (allDone ? T.stepsDone : T.stepOf(st.cur + 1, n)) + '</span></div>' +
+      '<ol class="lz-steps">' + T.steps.map(function (lb, i) {
+        var cls = st.done[i] ? 'done' : (i === st.cur ? 'now' : '');
+        return '<li class="' + cls + '"><a href="#' + st.ids[i] + '"><span class="lz-step-dot">' + (st.done[i] ? svg(ICON.check, { w: 13, sw: 3, stroke: '#fff' }) : (i + 1)) + '</span><span class="lz-step-lb">' + lb + '</span></a></li>';
+      }).join('') + '</ol>';
+  }
+  function renderSteps() { var el = document.getElementById('lz-steps'); if (el) el.innerHTML = tplSteps(calc()); }
   function tplBook(c) {
     var T = c.T, h = '';
     var waitingOut = !!(state.checkin && !state.checkout);
@@ -860,12 +962,13 @@
     var box = function (active) { return 'border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;border:' + (active ? '2px solid #0F4C81;background:#F2F7FC' : '1.5px solid #0B2E4F') + ';'; };
     h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;gap:8px;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="goHome" aria-label="' + T.back + '" style="border:0">' + svg(c.rtl ? ICON.backR : ICON.backL, { sw: 2 }) + '</button>' +
-      '<span style="font-size:17px;font-weight:800">' + T.confirmTitle + '</span></header>';
-    h += '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(140px + env(safe-area-inset-bottom))">';
+      '<span style="font-size:17px;font-weight:800">' + T.confirmTitle + '</span></header>' +
+      '<div id="lz-steps" class="fixed-top lz-steps-wrap">' + tplSteps(c) + '</div>';
+    h += '<main style="padding-top:calc(126px + env(safe-area-inset-top));padding-bottom:calc(140px + env(safe-area-inset-bottom))">';
     h += '<div style="background:#fff;padding:14px 18px;display:flex;align-items:center;gap:14px"><span style="width:64px;height:64px;border-radius:14px;background:linear-gradient(160deg,#0B2E4F,#1F6FB2);flex:none;display:flex;align-items:center;justify-content:center"><img src="img/stone.svg" alt="" style="width:30px;height:auto"></span>' +
       '<div style="display:flex;flex-direction:column;gap:2px"><strong style="font-size:17px">' + T.resortName + '</strong><span class="muted" style="font-size:13px">' + T.summarySub + '</span></div></div>';
     // Fechas
-    h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.dates + '</h2>' +
+    h += '<div class="gap8"></div><section id="lz-s-dates" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.dates + '</h2>' +
       '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">' +
       '<div style="' + box(!state.checkin) + '"><span class="muted" style="font-size:12px;font-weight:700">' + T.checkIn + '</span><strong style="font-size:15px">' + c.fmt(state.checkin) + '</strong><span class="muted" style="font-size:12px">' + T.inShort + '</span></div>' +
       '<div style="' + box(waitingOut) + '"><span class="muted" style="font-size:12px;font-weight:700">' + T.checkOut + '</span><strong style="font-size:15px">' + c.fmt(state.checkout) + '</strong><span class="muted" style="font-size:12px">' + T.outShort + '</span></div></div>' +
@@ -874,7 +977,7 @@
       '<button type="button" data-act="clearDates" style="height:44px;padding:0 12px;border:0;background:transparent;color:#0F4C81;font-size:14px;font-weight:700;cursor:pointer;text-decoration:underline">' + T.clearDates + '</button></div>' +
       '<p style="font-size:13px;line-height:1.5;' + (waitingOut ? 'color:#0F4C81;font-weight:700' : 'color:#5A6573') + '">' + (waitingOut ? T.hintOut : T.hintIn) + '</p></section>';
     // Personas
-    h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.guests + '</h2>' +
+    h += '<div class="gap8"></div><section id="lz-s-guests" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.guests + '</h2>' +
       '<div style="border:1px solid #E3E8EE;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:14px">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><div style="display:flex;align-items:center;gap:12px"><span style="width:44px;height:44px;border-radius:12px;background:#EAF1F8;color:#0F4C81;display:flex;align-items:center;justify-content:center;flex:none">' + svg(ICON.people, { w: 24, sw: 1.7 }) + '</span>' +
       '<div style="display:flex;flex-direction:column"><strong style="font-size:15px">' + T.guests + '</strong><span class="muted" style="font-size:12px">' + T.guestsRange + '</span></div></div>' +
@@ -892,7 +995,7 @@
       '</div></section>';
     // Camas
     var kMinus = !on || c.kings <= c.kMin, kPlus = !on || c.kings >= c.kMax;
-    h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.beds + '</h2>' +
+    h += '<div class="gap8"></div><section id="lz-s-beds" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.beds + '</h2>' +
       (on ? '' : '<div style="display:flex;gap:10px;align-items:center;background:#F5F7FA;border-radius:12px;padding:12px;font-size:13px;color:#3D4A58">' + svg(ICON.lock, { w: 18, style: 'flex:none' }) + T.bedsLocked + '</div>') +
       '<div style="border:1px solid #E3E8EE;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:14px;' + (on ? '' : 'opacity:.45') + '"' + (on ? '' : ' aria-disabled="true"') + '>' +
       bedRow(ICON.king, T.kingBed, T.kingBedSub, 'kingMinus', 'kingPlus', T.kingMinusAria, T.kingPlusAria, kMinus, kPlus, c.kings) +
@@ -904,7 +1007,7 @@
     h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.purpose + ' <span class="muted" style="font-size:13px;font-weight:600">' + T.optional + '</span></h2>' +
       '<div style="display:flex;flex-wrap:wrap;gap:8px">' + T.events.map(function (e, i) { return '<button type="button" class="chip" data-act="event" data-arg="' + i + '" aria-pressed="' + (state.event === i) + '">' + e + '</button>'; }).join('') + '</div></section>';
     // Datos
-    h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.details + '</h2>' +
+    h += '<div class="gap8"></div><section id="lz-s-details" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.details + '</h2>' +
       '<label for="lz-name" class="label">' + T.fullName + '</label><input id="lz-name" class="field" type="text" autocomplete="name" data-field="name" value="' + esc(state.name) + '" placeholder="' + esc(T.namePh) + '">' +
       '<label for="lz-phone" class="label">' + T.phone + '</label>' + tplPhone(c) +
       '<label for="lz-email" class="label">' + T.email + '</label><input id="lz-email" class="field" dir="ltr" type="email" autocomplete="email" data-field="email" value="' + esc(state.email) + '" placeholder="name@email.com"></section>';
@@ -922,7 +1025,7 @@
     }
     h += tplCoupon(c) + '</section>' + tplDeposit(c, true);
     // Términos
-    h += '<div class="gap8"></div><section class="card" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
+    h += '<div class="gap8"></div><section id="lz-s-terms" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
       '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label>' +
       '<a href="privacy.html?lang=' + c.L + '" target="_blank" rel="noopener" style="font-size:13px;color:#0F4C81;font-weight:700;text-decoration:underline">' + T.privacyNote + '</a></section></main>';
@@ -1003,9 +1106,12 @@
       openViewer(HERO.map(function (h) { return h.video ? { video: h.video, poster: h.poster, cap: h.t[L] } : { img: h.img, cap: h.t[L] }; }), gi, HERO[gi].t[L]);
     },
     zoneOpen: function (i) {
-      var z = ZONES[+i], L = state.lang;
-      openViewer(z.video ? [{ video: z.video, poster: z.poster }] : z.p.map(function (p) { return { img: p }; }), 0, z.t[L]);
+      var z = ZONES[+i], L = state.lang, T = DICT[L];
+      z.idx = +i;
+      var title = z.t[L] + (z.n ? ' · ' + (state.night ? T.atNightCap : T.atDay) : '');
+      openViewer(z.video ? [{ video: z.video, poster: z.poster }] : zonePhotos(z, state.night).map(function (p) { return { img: p }; }), 0, title, z);
     },
+    dayNight: function (v) { var on = v === '1'; if (on === state.night) return; state.night = on; applyDayNight(); },
     couponApply: function () {
       var code = String(state.couponTry || '').replace(/\s+/g, '').toUpperCase();
       if (!code) return set({ coupon: null, couponErr: false });
@@ -1093,9 +1199,9 @@
       if (clean !== e.target.value) e.target.value = clean;
       state.phone = clean;
       var m = document.getElementById('lz-phone-msg'); if (m) m.innerHTML = phoneMsg(DICT[state.lang]);
-      renderBar(); return;
+      renderBar(); renderSteps(); return;
     }
-    if (f) { state[f] = e.target.value; renderBar(); }
+    if (f) { state[f] = e.target.value; renderBar(); renderSteps(); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.ccOpen) actions.ccClose(); if (e.key === 'Enter' && e.target.id === 'lz-coupon') { e.preventDefault(); actions.couponApply(); } });
   // Mientras el cliente escribe (teclado abierto) la barra de Reservar se oculta para no tapar los datos

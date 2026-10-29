@@ -219,3 +219,69 @@ body.lz-typing #lz-bar{display:none}
 
 /* Banderas */
 .lzflag{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(11,46,79,.12);display:inline-block;vertical-align:middle;flex:none}
+
+/* ===== Conoce el resort: Día / Noche ===== */
+.lz-dn{position:relative;overflow:hidden;transition:background 1.4s ease}
+.lz-dn.night{background:linear-gradient(180deg,#061A30 0%,#0B2E4F 60%,#0B2E4F 100%)}
+.lz-dn.night .h2{color:#fff}
+.lz-dn.night .muted{color:rgba(255,255,255,.72)}
+.lz-dn-sw{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:#EAF1F8;box-shadow:inset 0 0 0 1px #E3E8EE;margin-top:12px;transition:background 1.2s ease,box-shadow 1.2s ease}
+.lz-dn.night .lz-dn-sw{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.lz-dn-sw button,.lz-dn-vsw button{position:relative;z-index:1;border:0;background:none;font:inherit;font-weight:700;font-size:14px;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:7px;color:#5A6573;cursor:pointer;transition:color .5s ease;border-radius:999px}
+.lz-dn-sw button[aria-pressed=true]{color:#0B2E4F}
+.lz-dn.night .lz-dn-sw button{color:rgba(255,255,255,.65)}
+.lz-dn.night .lz-dn-sw button[aria-pressed=true]{color:#0B2E4F}
+.lz-dn-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:#fff;box-shadow:0 4px 12px rgba(11,46,79,.16);transition:transform .55s cubic-bezier(.22,1,.36,1),background .8s ease}
+.lz-dn.night .lz-dn-thumb,.lz-dn-vsw.night .lz-dn-thumb{transform:translateX(100%);background:linear-gradient(135deg,#FAD26D,#D3AE2A)}
+.lz-area .lz-area-n{opacity:0;transition:opacity 1.4s ease}
+.lz-dn.night .lz-area .lz-area-n{opacity:1}
+.lz-dn.night .lz-area{box-shadow:0 14px 30px rgba(0,0,0,.45),0 0 0 1px rgba(250,210,109,.18)}
+.lz-dn-badge,.lz-dn-int{position:absolute;top:12px;inset-inline-start:12px;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:.02em;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .8s,color .8s,opacity .8s}
+.lz-dn-badge{background:rgba(255,255,255,.88);color:#0B2E4F}
+.lz-dn-badge svg{width:13px;height:13px}
+.lz-dn.night .lz-dn-badge{background:rgba(250,210,109,.95);color:#3A2B00}
+.lz-dn-int{background:rgba(0,48,71,.55);color:#fff;opacity:0}
+.lz-dn.night .lz-dn-int{opacity:1}
+/* Cielo: estrellas que titilan y un cometa que cruza de vez en cuando */
+.lz-sky{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
+.lz-dn.night .lz-sky{opacity:1}
+.lz-sky i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;box-shadow:0 0 6px 1px rgba(255,255,255,.55);animation:lzTwinkle 3s ease-in-out infinite}
+@keyframes lzTwinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.25)}}
+.lz-comet{position:absolute;top:14%;left:-12%;width:150px;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85) 70%,#fff);opacity:0;transform:rotate(16deg);animation:lzComet 9s linear infinite;animation-delay:2s}
+.lz-comet::after{content:"";position:absolute;right:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(250,210,109,.8)}
+.lz-comet2{top:40%;width:110px;animation-duration:13s;animation-delay:7.5s;transform:rotate(22deg)}
+@keyframes lzComet{0%,8%{opacity:0;transform:translateX(0) rotate(16deg)}9%{opacity:1}22%{opacity:1}26%{opacity:0;transform:translateX(130vw) rotate(16deg)}100%{opacity:0;transform:translateX(130vw) rotate(16deg)}}
+[dir=rtl] .lz-sky{transform:scaleX(-1)}
+/* Interruptor dentro del visor de fotos */
+.lz-dn-vsw{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 22px);transform:translateX(-50%);display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);z-index:5;direction:ltr}
+.lz-dn-vsw button{color:rgba(255,255,255,.75);padding:10px 18px;font-size:14.5px}
+.lz-dn-vsw button small{font-weight:600;opacity:.7;font-size:12px}
+.lz-dn-vsw button[aria-pressed=true]{color:#0B2E4F}
+.lz-dn-vsw button[aria-pressed=true] small{opacity:.8}
+@media (prefers-reduced-motion:reduce){.lz-sky i{animation:none;opacity:.8}.lz-comet{animation:none;opacity:0}.lz-dn,.lz-area .lz-area-n,.lz-dn-thumb{transition:none}}
+
+/* ===== Preguntas frecuentes ===== */
+.lz-faq{border-top:1px solid #E3E8EE}
+.lz-faq:last-of-type{border-bottom:1px solid #E3E8EE}
+.lz-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px;font-size:15px;font-weight:700;color:#0B2E4F;min-height:44px}
+.lz-faq summary::-webkit-details-marker{display:none}
+.lz-faq summary::after{content:"";flex:none;width:28px;height:28px;border-radius:999px;background:#EAF1F8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F4C81' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .3s ease}
+.lz-faq[open] summary::after{transform:rotate(45deg)}
+.lz-faq p{margin:0;padding:0 2px 14px;font-size:14px;line-height:1.6;color:#3D4A58}
+
+/* ===== Reserva: barra de pasos ===== */
+.lz-steps-wrap{top:calc(60px + env(safe-area-inset-top));height:66px !important;padding:0 10px !important;background:#fff;border-bottom:1px solid #E3E8EE;z-index:19}
+.lz-steps-top{display:flex;justify-content:center;padding-top:7px}
+.lz-steps-of{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0F4C81}
+.lz-steps{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.lz-steps::before{content:"";position:absolute;left:10%;right:10%;top:9px;height:2px;background:#E3E8EE}
+.lz-steps li{position:relative;text-align:center}
+.lz-steps a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#8A94A1;font-size:10.5px;font-weight:600}
+.lz-step-dot{width:20px;height:20px;border-radius:999px;background:#fff;border:2px solid #D5DCE4;color:#8A94A1;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;transition:background .35s,border-color .35s,transform .35s}
+.lz-steps li.done .lz-step-dot{background:#0F4C81;border-color:#0F4C81;color:#fff}
+.lz-steps li.done a{color:#0F4C81}
+.lz-steps li.now .lz-step-dot{border-color:#D3AE2A;background:#FFF6DF;color:#5C4510;transform:scale(1.15);box-shadow:0 0 0 4px rgba(211,174,42,.18)}
+.lz-steps li.now a{color:#0B2E4F;font-weight:800}
+.lz-sec{scroll-margin-top:calc(136px + env(safe-area-inset-top))}
+[dir=rtl] .lz-dn-sw .lz-dn-thumb{left:auto;right:4px}
+[dir=rtl] .lz-dn.night .lz-dn-sw .lz-dn-thumb{transform:translateX(-100%)}
