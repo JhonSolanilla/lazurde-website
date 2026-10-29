@@ -414,6 +414,7 @@
     checkin: null, checkout: null, guests: CONFIG.baseGuests, confirmed: false, kings: CONFIG.maxKing,
     event: null, coupon: null, couponPct: 0, couponTry: '', couponErr: false, bookingCode: null, submitError: null, name: '', phone: '', cc: 'OM', ccOpen: false, email: '', termsOk: false, submitting: false
   };
+  var langBack = null;
   function set(patch) {
     var prevScreen = state.screen;
     for (var k in patch) state[k] = patch[k];
@@ -1166,8 +1167,15 @@
   // ===================== ACCIONES =====================
   var submitTimer = null;
   var actions = {
-    lang: function (code) { var first = !introShown; if (first) holdHero = true; set({ lang: code, screen: 'home' }); if (first) playIntro(); },
-    openLang: function () { set({ screen: 'lang' }); },
+    lang: function (code) {
+      var first = !introShown; if (first) holdHero = true;
+      // Si cambia de idioma a mitad de la página, vuelve a la misma pantalla y a la misma posición
+      var back = langBack; langBack = null;
+      set({ lang: code, screen: back ? back.screen : 'home' });
+      if (back) { var y = back.y, go = function () { window.scrollTo(0, y); }; go(); requestAnimationFrame(go); setTimeout(go, 120); setTimeout(go, 400); }
+      if (first) playIntro();
+    },
+    openLang: function () { langBack = (state.screen !== 'lang' && introShown) ? { screen: state.screen, y: window.pageYOffset || document.documentElement.scrollTop || 0 } : null; set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
     ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
