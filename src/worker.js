@@ -25,6 +25,8 @@ export const CONFIG = {
   weekendDays: [4, 5],     // 4 = jueves, 5 = viernes
   holidays: ['2026-11-25', '2026-11-26'],
   maxNights: 30,
+  maxOpenPerPhone: 2,      // solicitudes sin pagar a la vez con el mismo teléfono
+  holdHours: 24,           // una solicitud de la web sin pagar libera las fechas pasado este tiempo
   monthsAhead: 13
 };
 // Cupones: código → % de descuento sobre el total de la estadía
@@ -32,7 +34,7 @@ const COUPONS = { LAZURDE5: 5, LAZURDE10: 10, LAZURDE15: 15, LAZURDE20: 20 };
 // Motivo de la reserva: 0–4 grupos normales («Ideal para»), 5–10 celebraciones especiales (necesitan autorización), 11 otro.
 // Debe coincidir con DICT.*.events de la web y EVENTS_EN/EVENTS_ES del panel.
 const EVENTS = ['Family', 'Men’s gathering', 'Women’s gathering', 'Couples', 'Team gathering', 'Wedding', 'Engagement / Malka', 'Henna night', 'Birthday party', 'Graduation', 'Baby celebration', 'Other'];
-const STATUSES = ['pending', 'confirmed', 'rejected', 'cancelled'];
+const STATUSES = ['pending', 'confirmed', 'rejected', 'cancelled', 'expired'];
 const HOLDING = ['pending', 'confirmed'];   // estos estados ocupan fechas
 
 // ===================== UTILIDADES =====================
@@ -104,7 +106,8 @@ async function ensureSchema(db) {
     db.prepare(`CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, p256dh TEXT NOT NULL, auth TEXT NOT NULL, lang TEXT, created_at TEXT NOT NULL)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT NOT NULL)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS photos (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL, data TEXT NOT NULL, created_at TEXT NOT NULL)`),
-    db.prepare(`CREATE INDEX IF NOT EXISTS photos_code ON photos (code)`)
+    db.prepare(`CREATE INDEX IF NOT EXISTS photos_code ON photos (code)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS hits (k TEXT PRIMARY KEY, n INTEGER NOT NULL, t INTEGER NOT NULL)`)
   ]);
   // Columnas nuevas (pago, depósito, origen) en bases ya creadas
   const { results: cols } = await db.prepare(`PRAGMA table_info(bookings)`).all();
@@ -113,6 +116,25 @@ async function ensureSchema(db) {
     if (!have.has(name)) await db.prepare(`ALTER TABLE bookings ADD COLUMN ${name} ${def}`).run().catch(e => { if (!/duplicate/i.test(String(e))) throw e; });
   }
   schemaReady = true;
+}
+
+// Las solicitudes de la web que no se pagan en 24 horas pasan a «expired» y las fechas quedan libres.
+// Las reservas creadas a mano desde el panel no caducan.
+async function expireStale(db) {
+  const limit = new Date(Date.now() - CONFIG.holdHours * 3600e3).toISOString(), now = new Date().toISOString();
+  await db.prepare(`UPDATE bookings SET status = 'expired', updated_at = ? WHERE status = 'pending' AND pay_status = 'unpaid' AND source = 'web' AND created_at < ?`).bind(now, limit).run();
+}
+
+// Límite de intentos por dirección (frena el spam). Sin dirección (pruebas locales) no se limita.
+async function tooMany(db, request, name, max, windowSec) {
+  const ip = request.headers.get('cf-connecting-ip');
+  if (!ip) return false;
+  const now = Math.floor(Date.now() / 1000), k = name + ':' + ip;
+  await db.prepare(`INSERT INTO hits (k, n, t) VALUES (?, 1, ?) ON CONFLICT(k) DO UPDATE SET n = CASE WHEN t < ? THEN 1 ELSE n + 1 END, t = CASE WHEN t < ? THEN ? ELSE t END`)
+    .bind(k, now, now - windowSec, now - windowSec, now).run();
+  const row = await db.prepare(`SELECT n FROM hits WHERE k = ?`).bind(k).first();
+  if (Math.random() < 0.02) await db.prepare(`DELETE FROM hits WHERE t < ?`).bind(now - 86400).run().catch(() => {});
+  return row.n > max;
 }
 
 // Noches ocupadas (reservas pendientes/confirmadas + fechas bloqueadas) desde hoy
@@ -199,12 +221,13 @@ const COOKIE = (v, maxAge) => `lz_admin=${v}; Path=/api/admin; HttpOnly; Secure;
 // ===================== API PÚBLICA =====================
 async function apiConfig(env) {
   let unavailable = [];
-  if (env.DB) { await ensureSchema(env.DB); unavailable = await unavailableNights(env.DB); }
+  if (env.DB) { await ensureSchema(env.DB); await expireStale(env.DB); unavailable = await unavailableNights(env.DB); }
   const { weekdayPrice, weekendPrice, holidayPrice, extraRoomPrice, tourismTax, vat, deposit, baseGuests, baseRooms, maxGuests, maxKing, maxTwin, weekendDays, holidays } = CONFIG;
   return json({ ok: true, version: (env.CF_VERSION_METADATA && env.CF_VERSION_METADATA.id) || 'dev', bookingsEnabled: !!env.DB, config: { weekdayPrice, weekendPrice, holidayPrice, extraRoomPrice, tourismTax, vat, deposit, baseGuests, baseRooms, maxGuests, maxKing, maxTwin, weekendDays, holidays }, unavailable });
 }
 
-function apiCoupon(url) {
+async function apiCoupon(url, request, env) {
+  if (env.DB) { await ensureSchema(env.DB); if (await tooMany(env.DB, request, 'coupon', 30, 600)) return bad('too_many_requests', 429); }
   const code = cleanCoupon(url.searchParams.get('code'));
   const pct = COUPONS[code];
   return pct ? json({ ok: true, code, pct }) : json({ ok: false, error: 'invalid_coupon' });
@@ -238,6 +261,12 @@ async function apiCreateBooking(request, env, ctx) {
   const err = validateBooking(b);
   if (err) return bad(err);
   await ensureSchema(env.DB);
+  if (await tooMany(env.DB, request, 'book', 6, 3600)) return bad('too_many_requests', 429);
+  await expireStale(env.DB);
+  // Límite de solicitudes sin pagar por teléfono a la vez
+  const phoneClean = String(b.phone).replace(/[\s-]/g, '');
+  const open = await env.DB.prepare(`SELECT COUNT(*) AS n FROM bookings WHERE phone = ? AND status = 'pending' AND pay_status = 'unpaid'`).bind(phoneClean).first();
+  if (open.n >= CONFIG.maxOpenPerPhone) return bad('too_many_pending', 429);
   const coupon = cleanCoupon(b.coupon);
   if (coupon && !COUPONS[coupon]) return bad('invalid_coupon');
   const q = quote({ checkin: b.checkin, checkout: b.checkout, guests: Number(b.guests), coupon });
@@ -283,6 +312,7 @@ async function apiAdmin(request, env, url) {
   if (!(await isAdmin(request, env))) return bad('unauthorized', 401);
   if (!env.DB) return bad('db_not_configured', 503);
   await ensureSchema(env.DB);
+  await expireStale(env.DB);
 
   if (path === '/me') return json({ ok: true });
 
@@ -488,7 +518,7 @@ export default {
     if (url.pathname.startsWith('/api/')) {
       try {
         if (url.pathname === '/api/config' && request.method === 'GET') return await apiConfig(env);
-        if (url.pathname === '/api/coupon' && request.method === 'GET') return apiCoupon(url);
+        if (url.pathname === '/api/coupon' && request.method === 'GET') return await apiCoupon(url, request, env);
         if (url.pathname === '/api/bookings' && request.method === 'POST') return await apiCreateBooking(request, env, ctx);
         if (url.pathname.startsWith('/api/admin')) return await apiAdmin(request, env, url);
         return bad('not_found', 404);

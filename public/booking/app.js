@@ -44,7 +44,7 @@
     ['¿Se alquila todo el resort?', 'Sí. Durante tu estadía el resort es solo para tu grupo: no se comparte con nadie ni se alquilan habitaciones sueltas.'],
     ['¿Cuántas personas pueden quedarse?', 'De 6 a 14 personas. Los niños cuentan como personas.'],
     ['¿Cómo se asignan las habitaciones?', '6 personas usan 3 habitaciones y cada 2 personas más se abre otra, hasta 7 habitaciones. Tú eliges cama king o dos camas individuales.'],
-    ['¿Cuándo queda confirmada mi reserva?', 'Cuando pagas el 100 % del total. Hasta entonces tu solicitud queda pendiente.'],
+    ['¿Cuándo queda confirmada mi reserva?', 'Cuando pagas el 100 % del total. Mientras tanto tu solicitud queda pendiente y las fechas se mantienen apartadas por 24 horas; si no recibimos el pago en ese tiempo, se liberan.'],
     ['¿El precio incluye impuestos?', 'Sí. El precio que ves ya incluye el impuesto de turismo (4 %) y el IVA (5 %).'],
     ['¿A qué hora es la llegada y la salida?', 'Llegada a las 2:00 pm y salida a las 11:00 am. Te pedimos puntualidad.'],
     ['¿Cómo funciona el depósito de garantía?', 'Pagas 100 OMR al llegar. Te lo devolvemos dentro de las 24 horas después de la salida, tras una revisión rápida del resort.'],
@@ -54,13 +54,13 @@
     ['¿Podemos hacer fiestas o eventos?', 'Sí, con aprobación previa de Lazurde. Avísanos al reservar y lo coordinamos por WhatsApp.'],
     ['¿Se permite fumar?', 'Sí, pero solo en las zonas exteriores.'],
     ['¿Hay animales en el resort?', 'Sí. En el mini zoo viven pavos reales, aves, conejos y cabras.'],
-    ['¿Hay parqueadero?', 'Sí, privado y dentro del resort.']
+    ['¿Hay estacionamiento?', 'Sí, privado y dentro del resort.']
   ];
   var FAQ_EN = [
     ['Do we get the whole resort?', 'Yes. During your stay the resort is only for your group: it is never shared and we do not rent single rooms.'],
     ['How many guests can stay?', 'From 6 to 14 guests. Children count as guests.'],
     ['How are the bedrooms assigned?', '6 guests use 3 bedrooms and every 2 more guests open another one, up to 7 bedrooms. You choose a king bed or two twin beds.'],
-    ['When is my booking confirmed?', 'When you pay 100% of the total. Until then your request stays pending.'],
+    ['When is my booking confirmed?', 'When you pay 100% of the total. Meanwhile your request stays pending and the dates are held for 24 hours; if we do not receive the payment in that time, they are released.'],
     ['Does the price include taxes?', 'Yes. The price you see already includes the tourism tax (4%) and VAT (5%).'],
     ['What are the check-in and check-out times?', 'Check-in at 2:00 pm and check-out at 11:00 am. Please be on time.'],
     ['How does the security deposit work?', 'You pay 100 OMR on arrival. We return it within 24 hours after check-out, following a quick inspection of the resort.'],
@@ -76,7 +76,7 @@
     ['هل نستأجر المنتجع كاملًا؟', 'نعم. خلال إقامتكم يكون المنتجع لمجموعتكم فقط: لا يُشارك مع أحد ولا تُؤجر غرف منفردة.'],
     ['كم عدد الضيوف؟', 'من 6 إلى 14 ضيفًا. يُحتسب الأطفال ضمن الضيوف.'],
     ['كيف تُوزّع غرف النوم؟', '6 ضيوف يستخدمون 3 غرف، وكل ضيفين إضافيين تُفتح لهما غرفة أخرى، حتى 7 غرف. تختارون سرير كينغ أو سريرين منفردين.'],
-    ['متى يُؤكد حجزي؟', 'عند دفع 100٪ من الإجمالي. وحتى ذلك الحين يبقى طلبكم قيد الانتظار.'],
+    ['متى يُؤكد حجزي؟', 'عند دفع 100٪ من الإجمالي. وفي الأثناء يبقى طلبكم قيد الانتظار وتُحجز التواريخ لمدة 24 ساعة؛ وإذا لم يصلنا الدفع خلال هذه المدة تُفرَج التواريخ.'],
     ['هل يشمل السعر الضرائب؟', 'نعم. السعر المعروض يشمل ضريبة السياحة (4٪) وضريبة القيمة المضافة (5٪).'],
     ['ما مواعيد الوصول والمغادرة؟', 'الوصول الساعة 2:00 مساءً والمغادرة الساعة 11:00 صباحًا. نرجو الالتزام بالمواعيد.'],
     ['كيف يعمل مبلغ التأمين؟', 'تدفعون 100 ر.ع. عند الوصول، ونعيده خلال 24 ساعة بعد المغادرة بعد فحص سريع للمنتجع.'],
@@ -103,18 +103,18 @@
       gal: ['Video · Vista general', 'Piscina', 'Habitación con cama king', 'Habitación con 2 camas', 'Zona de parrilla'],
       of: function (i, n) { return i + ' de ' + n; },
       resortName: 'Lazurde Resort', badge: 'Resort privado', location: '[Ubicación], Omán',
-      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', 'Parqueadero'],
+      specs: ['7 habitaciones', '14 camas', '10 baños', 'Piscina', 'Estacionamiento'],
       license: 'Licencia de turismo N.º [pendiente]', whatsapp: 'WhatsApp', call: 'Llamar',
       availability: 'Disponibilidad', availSub: 'Precio por noche para 6 personas, impuestos incluidos.',
       prevMonth: 'Mes anterior', nextMonth: 'Mes siguiente',
-      lgWeekday: 'Entre semana', lgWeekend: 'Jue y vie', lgHoliday: 'Feriado', lgBooked: 'Ocupado',
+      lgWeekday: 'Otras noches', lgWeekend: 'Jue y vie', lgHoliday: 'Feriado', lgBooked: 'Ocupado',
       toChoose: 'Para elegir tus fechas toca «Reservar».',
       booked: 'Ocupado', cin: 'Llega', cout: 'Sale', outOnly: 'Solo salida',
       times: 'Horarios', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: '2:00 pm', checkOutTime: '11:00 am', inShort: '2:00 pm', outShort: '11:00 am',
       rooms: 'Habitaciones', kingRooms: '3 habitaciones · 1 cama king', kingRoomsSub: 'Cama matrimonial grande', twinRooms: '4 habitaciones · 2 camas individuales', twinRoomsSub: 'Dos camas separadas',
       extraRoom: 'Habitación extra', perNightShort: ' / noche',
       facilities: 'Instalaciones',
-      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Parqueadero', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Mini zoo: pavos reales, aves, conejos y cabras', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
+      fac: ['Piscina', 'Cancha de fútbol', 'Zona de billar', 'Estacionamiento', 'Zona de parrilla (BBQ)', 'Área para niños', 'Parque de juegos', 'Mini zoo: pavos reales, aves, conejos y cabras', 'Wood House (zona de relajación)', 'Fuentes', 'Zonas de descanso', 'Jardines'],
       showAll: function (n) { return 'Ver todas (' + n + ')'; }, showLess: 'Ver menos',
       where: 'Dónde estarás', whereNote: 'La ubicación exacta se envía cuando se confirma la reserva.',
       deposit: 'Depósito de garantía', depositAmount: 'Monto del depósito', notInTotal: 'No está incluido en el total de la reserva.', depositNote: 'Se paga al llegar y se devuelve dentro de las 24 horas posteriores a la salida, después de revisar el resort.',
@@ -151,7 +151,7 @@
       coupon: 'Cupón de descuento', couponPh: 'Escribe tu código', couponApply: 'Aplicar', couponBad: 'Este cupón no es válido.', couponRemove: 'Quitar', couponOk: function (p) { return '−' + p + '% aplicado'; }, discountLine: function (c, p) { return 'Descuento ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Descuento (' + p + '%)'; }, missing: 'Falta: ', mDates: 'fechas', mGuests: 'confirmar personas', mName: 'nombre', mPhone: 'teléfono válido', ccTitle: 'Indicativo del país', ccSearch: 'Busca país o indicativo', ccClose: 'Cerrar', ccNone: 'Sin resultados', phoneOk: 'Número válido', phoneShort: function (n) { return n === 1 ? 'Falta 1 dígito' : 'Faltan ' + n + ' dígitos'; }, phoneBad: function (c) { return 'Este número no es válido en ' + c; }, phoneDigits: function (l) { return l + ' dígitos'; }, mTerms: 'aceptar los términos',
       barSub: function (n, r) { return n + (n === 1 ? ' noche' : ' noches') + ' · ' + r + ' habitaciones'; }, pickDates: 'Elige tus fechas',
       sending: 'Enviando…',
-      sentTitle: '¡Solicitud recibida!', sentText: 'Tus fechas quedaron apartadas. Revisaremos tu solicitud y te confirmaremos por WhatsApp muy pronto.', sentTextWa: 'Envíanos el mensaje de WhatsApp que se abrió para completar tu solicitud. Te confirmaremos muy pronto.', waSend: 'Escribirnos por WhatsApp', errTaken: 'Lo sentimos, esas fechas se acaban de reservar. Por favor elige otras.', errGeneric: 'No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo.',
+      sentTitle: '¡Solicitud recibida!', sentText: 'Tus fechas quedaron apartadas por 24 horas. Revisaremos tu solicitud y te confirmaremos por WhatsApp muy pronto.', sentTextWa: 'Envíanos el mensaje de WhatsApp que se abrió para completar tu solicitud. Te confirmaremos muy pronto.', waSend: 'Escribirnos por WhatsApp', errTaken: 'Lo sentimos, esas fechas se acaban de reservar. Por favor elige otras.', errGeneric: 'No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo.', errBusy: 'Ya tienes solicitudes pendientes de pago o hiciste demasiados intentos. Escríbenos por WhatsApp y te ayudamos.',
       code: 'Código de reserva', example: ' (ejemplo)',
       rIn: 'Llegada', rOut: 'Salida', rGuests: 'Personas', rRooms: 'Habitaciones', rPurpose: 'Motivo', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' personas'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' de 2 camas)'; }, notGiven: 'No indicado',
@@ -174,7 +174,7 @@
       license: 'Tourism license No. [pending]', whatsapp: 'WhatsApp', call: 'Call',
       availability: 'Availability', availSub: 'Nightly price for 6 guests, taxes included.',
       prevMonth: 'Previous month', nextMonth: 'Next month',
-      lgWeekday: 'Weekday', lgWeekend: 'Thu & Fri', lgHoliday: 'Public holiday', lgBooked: 'Booked',
+      lgWeekday: 'Other nights', lgWeekend: 'Thu & Fri', lgHoliday: 'Public holiday', lgBooked: 'Booked',
       toChoose: 'To choose your dates, tap “Book now”.',
       booked: 'Booked', cin: 'In', cout: 'Out', outOnly: 'Check-out only',
       times: 'Check-in & check-out', checkIn: 'Check-in', checkOut: 'Check-out', checkInTime: '2:00 pm', checkOutTime: '11:00 am', inShort: '2:00 pm', outShort: '11:00 am',
@@ -218,7 +218,7 @@
       coupon: 'Discount code', couponPh: 'Enter your code', couponApply: 'Apply', couponBad: 'This code is not valid.', couponRemove: 'Remove', couponOk: function (p) { return p + '% off applied'; }, discountLine: function (c, p) { return 'Discount ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'Discount (' + p + '%)'; }, missing: 'Missing: ', mDates: 'dates', mGuests: 'confirm guests', mName: 'name', mPhone: 'valid phone', ccTitle: 'Country code', ccSearch: 'Search country or code', ccClose: 'Close', ccNone: 'No results', phoneOk: 'Valid number', phoneShort: function (n) { return n === 1 ? '1 more digit needed' : n + ' more digits needed'; }, phoneBad: function (c) { return 'This number is not valid in ' + c; }, phoneDigits: function (l) { return l + ' digits'; }, mTerms: 'accept the terms',
       barSub: function (n, r) { return n + (n === 1 ? ' night' : ' nights') + ' · ' + r + ' bedrooms'; }, pickDates: 'Choose your dates',
       sending: 'Sending…',
-      sentTitle: 'Request received!', sentText: 'Your dates are on hold. We’ll review your request and confirm by WhatsApp very soon.', sentTextWa: 'Please send us the WhatsApp message that just opened to complete your request. We’ll confirm very soon.', waSend: 'Message us on WhatsApp', errTaken: 'Sorry, those dates were just booked. Please choose other dates.', errGeneric: 'We couldn’t send your request. Please check your connection and try again.',
+      sentTitle: 'Request received!', sentText: 'Your dates are on hold for 24 hours. We’ll review your request and confirm by WhatsApp very soon.', sentTextWa: 'Please send us the WhatsApp message that just opened to complete your request. We’ll confirm very soon.', waSend: 'Message us on WhatsApp', errTaken: 'Sorry, those dates were just booked. Please choose other dates.', errGeneric: 'We couldn’t send your request. Please check your connection and try again.', errBusy: 'You already have requests waiting for payment, or you tried too many times. Message us on WhatsApp and we’ll help.',
       code: 'Booking code', example: ' (example)',
       rIn: 'Check-in', rOut: 'Check-out', rGuests: 'Guests', rRooms: 'Bedrooms', rPurpose: 'Purpose', rTotal: 'Total',
       guestsTxt: function (n) { return n + ' guests'; }, roomsTxt: function (r, k, t) { return r + ' (' + k + ' king · ' + t + ' twin)'; }, notGiven: 'Not specified',
@@ -241,7 +241,7 @@
       license: 'رقم الترخيص السياحي [قيد الإضافة]', whatsapp: 'واتساب', call: 'اتصال',
       availability: 'التوفر', availSub: 'سعر الليلة لـ 6 ضيوف شامل الضرائب.',
       prevMonth: 'الشهر السابق', nextMonth: 'الشهر التالي',
-      lgWeekday: 'أيام الأسبوع', lgWeekend: 'الخميس والجمعة', lgHoliday: 'عطلة رسمية', lgBooked: 'محجوز',
+      lgWeekday: 'باقي الليالي', lgWeekend: 'الخميس والجمعة', lgHoliday: 'عطلة رسمية', lgBooked: 'محجوز',
       toChoose: 'لاختيار التواريخ اضغط «احجز الآن».',
       booked: 'محجوز', cin: 'وصول', cout: 'مغادرة', outOnly: 'مغادرة فقط',
       times: 'مواعيد الوصول والمغادرة', checkIn: 'الوصول', checkOut: 'المغادرة', checkInTime: '2:00 مساءً', checkOutTime: '11:00 صباحًا', inShort: '2:00 م', outShort: '11:00 ص',
@@ -285,7 +285,7 @@
       coupon: 'كود الخصم', couponPh: 'أدخل الكود', couponApply: 'تطبيق', couponBad: 'هذا الكود غير صحيح.', couponRemove: 'إزالة', couponOk: function (p) { return 'تم تطبيق خصم ' + p + '%'; }, discountLine: function (c, p) { return 'خصم ' + c + ' (' + p + '%)'; }, rDiscount: function (c, p) { return 'خصم (' + p + '%)'; }, missing: 'ينقص: ', mDates: 'التواريخ', mGuests: 'تأكيد عدد الضيوف', mName: 'الاسم', mPhone: 'رقم هاتف صحيح', ccTitle: 'رمز الدولة', ccSearch: 'ابحث عن الدولة أو الرمز', ccClose: 'إغلاق', ccNone: 'لا توجد نتائج', phoneOk: 'رقم صحيح', phoneShort: function (n) { return n === 1 ? 'ينقص رقم واحد' : (n === 2 ? 'ينقص رقمان' : 'ينقص ' + n + ' أرقام'); }, phoneBad: function (c) { return 'هذا الرقم غير صحيح في ' + c; }, phoneDigits: function (l) { return l + ' أرقام'; }, mTerms: 'الموافقة على الشروط',
       barSub: function (n, r) { return arNights(n) + ' · ' + r + ' غرف'; }, pickDates: 'اختر التواريخ',
       sending: 'جارٍ الإرسال…',
-      sentTitle: 'تم استلام طلبك!', sentText: 'تم حجز التواريخ مبدئيًا. سنراجع طلبك ونؤكده لك عبر واتساب قريبًا جدًا.', sentTextWa: 'يرجى إرسال رسالة واتساب التي فُتحت لإكمال طلبك، وسنؤكد لك قريبًا جدًا.', waSend: 'راسلنا عبر واتساب', errTaken: 'عذرًا، تم حجز هذه التواريخ للتو. يرجى اختيار تواريخ أخرى.', errGeneric: 'تعذّر إرسال طلبك. تحقّق من الاتصال وحاول مرة أخرى.',
+      sentTitle: 'تم استلام طلبك!', sentText: 'تم حجز التواريخ مبدئيًا لمدة 24 ساعة. سنراجع طلبك ونؤكده لك عبر واتساب قريبًا جدًا.', sentTextWa: 'يرجى إرسال رسالة واتساب التي فُتحت لإكمال طلبك، وسنؤكد لك قريبًا جدًا.', waSend: 'راسلنا عبر واتساب', errTaken: 'عذرًا، تم حجز هذه التواريخ للتو. يرجى اختيار تواريخ أخرى.', errGeneric: 'تعذّر إرسال طلبك. تحقّق من الاتصال وحاول مرة أخرى.', errBusy: 'لديك طلبات بانتظار الدفع أو أجريت محاولات كثيرة. راسلنا عبر واتساب وسنساعدك.',
       code: 'رمز الحجز', example: ' (مثال)',
       rIn: 'الوصول', rOut: 'المغادرة', rGuests: 'الضيوف', rRooms: 'الغرف', rPurpose: 'السبب', rTotal: 'الإجمالي',
       guestsTxt: arGuests, roomsTxt: function (r, k, t) { return r + ' (' + k + ' كينغ · ' + t + ' بسريرين)'; }, notGiven: 'غير محدد',
@@ -344,7 +344,7 @@
     { img: 'h-5-fachada-principal', t: { es: 'Entrada principal', en: 'Main entrance', ar: 'المدخل الرئيسي' } },
     { img: 'h-4-area-de-piscina', t: { es: 'Zona de descanso', en: 'Lounge area', ar: 'منطقة الجلوس' } },
     { img: 'h-7-casa-principal-2', t: { es: 'Casa principal de noche', en: 'Main house at night', ar: 'المبنى الرئيسي ليلًا' } },
-    { img: 'h-9-zona-de-parqueadero', t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' } }
+    { img: 'h-9-zona-de-parqueadero', t: { es: 'Estacionamiento', en: 'Parking', ar: 'موقف السيارات' } }
   ];
   // p = fotos de día, n = fotos de noche (si la zona las tiene), interior = zona cubierta (no cambia de noche)
   var ZONES = [
@@ -363,7 +363,7 @@
     { t: { es: 'Parque para niños', en: 'Kids playground', ar: 'ملعب الأطفال' }, p: ['v-19-parque-para-ninos-2'], n: ['v-18-parque-para-ninos-1'] },
     { t: { es: 'Mini zoo', en: 'Mini zoo', ar: 'حديقة الحيوانات الصغيرة' }, p: ['v-28-zona-de-animales'] },
     { t: { es: 'Jardines', en: 'Gardens', ar: 'الحدائق' }, p: ['v-17-jardines-2'], n: ['v-16-jardines-1'] },
-    { t: { es: 'Parqueadero', en: 'Parking', ar: 'موقف السيارات' }, p: ['v-29-parqueadero-1', 'v-30-parqueadero-2'], n: ['h-9-zona-de-parqueadero'] }
+    { t: { es: 'Estacionamiento', en: 'Parking', ar: 'موقف السيارات' }, p: ['v-29-parqueadero-1', 'v-30-parqueadero-2'], n: ['h-9-zona-de-parqueadero'] }
   ];
   // Fotos de una zona según el modo elegido (de noche: primero las nocturnas y luego las de día)
   function zonePhotos(z, night) { return night && z.n ? z.n.concat(z.p) : (z.p || []).concat(z.n || []); }
@@ -1100,7 +1100,7 @@
   }
   function tplBar(c) {
     var T = c.T, ok = c.canSubmit || state.submitting;
-    return (state.submitError ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : T.errGeneric) + '</p>' : '') +
+    return (state.submitError ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : state.submitError === 'busy' ? T.errBusy : T.errGeneric) + '</p>' : '') +
       (c.missing.length ? '<p style="font-size:12px;color:#8B1D1D;text-align:center;margin-bottom:6px">' + T.missing + c.missing.join(T.sep) + '</p>' : (!API.enabled && CONFIG.whatsapp ? '<p style="font-size:12px;color:#14532D;text-align:center;margin-bottom:6px">' + T.waOpen + '</p>' : '')) +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column"><strong style="font-size:20px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong>' +
       '<span class="muted" style="font-size:11px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) : T.pickDates) + '</span></div>' +
@@ -1118,7 +1118,7 @@
       row(T.rGuests, state.confirmed ? T.guestsTxt(state.guests) : '—') + row(T.rRooms, state.confirmed ? T.roomsTxt(c.rooms, c.kings, c.twins) : '—') + '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #E3E8EE;padding-top:12px;margin-top:4px"><strong style="font-size:16px">' + T.rTotal + '</strong><strong style="font-size:26px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong></div>' +
       '<span class="muted" style="display:block;font-size:12px;text-align:end;margin-bottom:14px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) + ' · ' + T.taxesIncl : T.pickDates) + '</span>' +
-      (state.submitError ? '<p style="font-size:12.5px;color:#8B1D1D;margin-bottom:8px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : T.errGeneric) + '</p>' : '') +
+      (state.submitError ? '<p style="font-size:12.5px;color:#8B1D1D;margin-bottom:8px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : state.submitError === 'busy' ? T.errBusy : T.errGeneric) + '</p>' : '') +
       (c.missing.length ? '<p style="font-size:12.5px;color:#8B1D1D;margin-bottom:10px;line-height:1.5">' + T.missing + c.missing.join(T.sep) + '</p>' : '') +
       '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="width:100%;height:54px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;font-weight:800;' +
       (ok ? 'background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
@@ -1257,7 +1257,7 @@
       }).then(function (r) { return r.json().then(function (d) { return { status: r.status, d: d }; }); })
         .then(function (res) {
           if (res.d.ok) { loadConfig(); finish({ submitting: false, screen: 'done', bookingCode: res.d.code }); }
-          else { if (res.status === 409) loadConfig(); finish({ submitting: false, submitError: res.status === 409 ? 'taken' : 'generic' }); }
+          else { if (res.status === 409) loadConfig(); finish({ submitting: false, submitError: res.status === 409 ? 'taken' : res.status === 429 ? 'busy' : 'generic' }); }
         })
         .catch(function () { finish({ submitting: false, submitError: 'generic' }); });
     },

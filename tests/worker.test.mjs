@@ -1,5 +1,6 @@
 import { DatabaseSync } from 'node:sqlite';
-import worker, { quote } from '../src/worker.js';
+import worker, { quote, CONFIG } from '../src/worker.js';
+const OPEN_LIMIT = CONFIG.maxOpenPerPhone; CONFIG.maxOpenPerPhone = 999;   // las pruebas usan el mismo teléfono muchas veces
 // D1 simulado sobre SQLite
 function D1(db) {
   const stmt = (sql, args = []) => ({
@@ -153,4 +154,30 @@ const r3 = await worker.fetch(new Request('https://x/api/bookings', { method: 'P
   const c2 = lg.headers.get('set-cookie').split(';')[0];
   const lst = await (await w2.fetch(new Request('https://x/api/admin/bookings', { headers: { cookie: c2 } }), env2)).json();
   ok(lst.bookings[0].pay_status === 'unpaid' && lst.bookings[0].deposit_status === 'pending' && lst.bookings[0].source === 'web', 'base vieja actualizada con columnas nuevas');
+}
+
+// Caducidad de 24 h y límites anti-spam
+{
+  CONFIG.maxOpenPerPhone = OPEN_LIMIT;
+  const phone = '+96899990000', mk = (d1, d2) => ({ ...base, phone, checkin: d1, checkout: d2 });
+  let a = await call('POST', '/api/bookings', mk('2027-06-01', '2027-06-03')); ok(a.status === 200, 'solicitud 1 del teléfono');
+  const b2 = await call('POST', '/api/bookings', mk('2027-06-10', '2027-06-12')); ok(b2.status === 200, 'solicitud 2 del teléfono');
+  const c3 = await call('POST', '/api/bookings', mk('2027-06-20', '2027-06-22')); ok(c3.status === 429 && c3.body.error === 'too_many_pending', 'la 3.ª solicitud sin pagar del mismo teléfono se rechaza');
+  // caduca a las 24 h: se envejece a mano la primera y debe liberar las fechas
+  env.DB.prepare(`UPDATE bookings SET created_at = ? WHERE code = ?`).bind(new Date(Date.now() - 25 * 3600e3).toISOString(), a.body.code).run();
+  let cfg = await call('GET', '/api/config'); ok(!cfg.body.unavailable.includes('2027-06-01') && cfg.body.unavailable.includes('2027-06-10'), 'a las 25 h la solicitud sin pagar libera sus fechas');
+  const c4 = await call('POST', '/api/bookings', mk('2027-06-01', '2027-06-03')); ok(c4.status === 200, 'las fechas liberadas se pueden volver a reservar');
+  const lg2 = await call('POST', '/api/admin/login', { password: 'secreto-prueba' }); const H2 = { cookie: lg2.cookie.split(';')[0], 'x-lz': '1' };
+  const lst = await call('GET', '/api/admin/bookings', null, H2); ok(lst.body.bookings.find(x => x.code === a.body.code).status === 'expired', 'en el panel queda como «expired»');
+  // una reserva ya pagada o creada a mano NO caduca
+  const pm = await call('POST', '/api/admin/bookings', { checkin: '2027-07-01', checkout: '2027-07-03', guests: 6, name: 'Manual', phone: '+96891112222' }, H2);
+  env.DB.prepare(`UPDATE bookings SET created_at = ? WHERE code = ?`).bind(new Date(Date.now() - 48 * 3600e3).toISOString(), pm.body.booking.code).run();
+  await call('GET', '/api/config'); cfg = await call('GET', '/api/config'); ok(cfg.body.unavailable.includes('2027-07-01'), 'la reserva creada desde el panel no caduca');
+  // límite por dirección
+  const ipH = { 'cf-connecting-ip': '1.2.3.4' }; let last;
+  for (let i = 0; i < 31; i++) last = await call('GET', '/api/coupon?code=ZZZ' + i, null, ipH);
+  ok(last.status === 429, 'más de 30 pruebas de cupón por dirección → 429');
+  CONFIG.maxOpenPerPhone = 999;
+  let n429 = 0; for (let i = 0; i < 8; i++) { const rr = await call('POST', '/api/bookings', { ...base, phone: '+9689777000' + i, checkin: '2027-08-' + String(1 + i * 3).padStart(2, '0'), checkout: '2027-08-' + String(2 + i * 3).padStart(2, '0') }, ipH); if (rr.status === 429) n429++; }
+  ok(n429 === 2, 'más de 6 solicitudes por hora desde la misma dirección → 429 (' + n429 + ' bloqueadas)');
 }

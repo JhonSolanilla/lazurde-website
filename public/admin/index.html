@@ -131,7 +131,7 @@ h1,h2,h3,p{margin:0}
 .dt b{font-size:23px;font-weight:800;margin:3px 0 2px}
 .dt.pending{background:var(--gold-bg);color:var(--gold-ink)}
 .dt.confirmed{background:linear-gradient(160deg,#14607f,#003047);color:#fff}
-.dt.rejected,.dt.cancelled{background:var(--grey-bg);color:var(--grey)}
+.dt.rejected,.dt.cancelled,.dt.expired{background:var(--grey-bg);color:var(--grey)}
 .bk .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .bk .nm{font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bk .sb{font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -140,7 +140,7 @@ h1,h2,h3,p{margin:0}
 .chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:800;white-space:nowrap}
 .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 .c-pending{background:var(--gold-bg);color:var(--gold-ink)}.c-confirmed{background:var(--ok-bg);color:var(--ok)}
-.c-rejected{background:var(--bad-bg);color:var(--bad)}.c-cancelled{background:var(--grey-bg);color:var(--grey)}
+.c-rejected{background:var(--bad-bg);color:var(--bad)}.c-cancelled,.c-expired{background:var(--grey-bg);color:var(--grey)}
 .empty{background:var(--card);border-radius:var(--r);padding:30px 20px;text-align:center;color:var(--muted);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:10px;font-weight:600}
 .empty .ic{width:34px;height:34px;color:#B6C0CC}
 .alert{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,#FFF6DF,#FDEFC6);border:1px solid #F1DC9A;border-radius:var(--r);padding:14px;color:var(--gold-ink);font-weight:700;font-size:14.5px}
@@ -451,7 +451,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       tapReview: 'Toca para revisar', stPending: 'Por responder', stArrivals: 'Llegadas · 7 días', stIncome: 'Ingresos del mes', stOcc: 'Ocupación del mes', confirmedOnly: 'Solo confirmadas', nightsOf: function (a, b) { return a + ' de ' + b + ' noches'; },
       needYou: 'Esperan tu respuesta', upcoming: 'Próximas llegadas', seeAll: 'Ver todas', allClear: 'Todo al día. No hay solicitudes pendientes.', noUpcoming: 'No hay llegadas confirmadas próximas.',
       pendingAlert: function (n) { return n === 1 ? 'Tienes 1 solicitud nueva por responder' : 'Tienes ' + n + ' solicitudes por responder'; },
-      st: { pending: 'Pendiente', confirmed: 'Confirmada', rejected: 'Rechazada', cancelled: 'Cancelada' },
+      st: { pending: 'Pendiente', confirmed: 'Confirmada', rejected: 'Rechazada', cancelled: 'Cancelada', expired: 'Expirada' },
       filters: { unpaid: 'Sin pagar', pending: 'Pendientes', confirmed: 'Confirmadas', cancelled: 'Canceladas', rejected: 'Rechazadas', all: 'Todas' },
       search: 'Buscar nombre, código o teléfono', noResults: 'No hay reservas aquí.', past: 'Pasadas',
       nights: function (n) { return n === 1 ? '1 noche' : n + ' noches'; }, guests: function (n) { return n + ' personas'; }, guestsS: function (n) { return n + ' pers.'; },
@@ -486,7 +486,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       pcSteps: ['Abre lazurdeom.com/admin en Chrome o Edge.', 'Haz clic en el ícono de instalar en la barra de direcciones (o menú ⋯ → Instalar).', 'Queda en el escritorio y en la barra de tareas.'],
       sLang: 'Idioma del panel', sAccount: 'Sesión', sAccountTxt: 'La sesión dura 30 días en este dispositivo.', logout: 'Cerrar sesión',
       todo: 'Por hacer', tCollect: function (n) { return 'Cobrar depósito a ' + n; }, tCollectSub: function (m) { return 'Llega hoy o está en el resort · ' + m; }, tReturn: function (n) { return 'Devolver depósito a ' + n; }, tReturnSub: function (d) { return 'Salió el ' + d + ' · devolver dentro de 24 h'; }, tLate: function (d) { return 'Vencido · salió el ' + d; },
-      tUnpaid: function (n) { return n === 1 ? '1 reserva sin pagar' : n + ' reservas sin pagar'; }, tUnpaidSub: 'Están apartando fechas. Confírmalas cuando paguen o recházalas.',
+      tUnpaid: function (n) { return n === 1 ? '1 reserva sin pagar' : n + ' reservas sin pagar'; }, tUnpaidSub: 'Están apartando fechas. Confírmalas cuando paguen o recházalas. Las de la web se liberan solas a las 24 h.',
       paidOnly: 'Solo lo pagado', pay: { unpaid: 'Sin pagar', paid: 'Pagada', refunded: 'Reembolsada' }, methods: { card: 'Tarjeta', transfer: 'Transferencia', cash: 'Efectivo', other: 'Otro' },
       specialPrice: 'Precio especial', paidInfo: function (d, m, r) { return 'Pagada el ' + d + ' · ' + m + (r ? ' · Ref. ' + r : ''); }, refundInfo: function (a, d) { return 'Reembolsado ' + a + ' el ' + d; },
       unpaidWarn: 'El cliente aún no ha pagado. La reserva se confirma cuando pague el 100%.', regPay: 'Registrar pago', regPayConfirm: 'Registrar pago y confirmar', payConfirmShort: 'Pagó · Confirmar', fullOnly: 'Se paga siempre el 100% de la reserva.',
@@ -515,7 +515,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       tapReview: 'Tap to review', stPending: 'To answer', stArrivals: 'Arrivals · 7 days', stIncome: 'Income this month', stOcc: 'Occupancy this month', confirmedOnly: 'Confirmed only', nightsOf: function (a, b) { return a + ' of ' + b + ' nights'; },
       needYou: 'Waiting for your answer', upcoming: 'Upcoming arrivals', seeAll: 'See all', allClear: 'All caught up. No pending requests.', noUpcoming: 'No upcoming confirmed arrivals.',
       pendingAlert: function (n) { return n === 1 ? 'You have 1 new request to answer' : 'You have ' + n + ' requests to answer'; },
-      st: { pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled' },
+      st: { pending: 'Pending', confirmed: 'Confirmed', rejected: 'Rejected', cancelled: 'Cancelled', expired: 'Expired' },
       filters: { unpaid: 'Unpaid', pending: 'Pending', confirmed: 'Confirmed', cancelled: 'Cancelled', rejected: 'Rejected', all: 'All' },
       search: 'Search name, code or phone', noResults: 'No bookings here.', past: 'Past',
       nights: function (n) { return n === 1 ? '1 night' : n + ' nights'; }, guests: function (n) { return n + ' guests'; }, guestsS: function (n) { return n + ' guests'; },
@@ -550,7 +550,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       pcSteps: ['Open lazurdeom.com/admin in Chrome or Edge.', 'Click the install icon in the address bar (or menu ⋯ → Install).', 'It stays on the desktop and taskbar.'],
       sLang: 'Panel language', sAccount: 'Session', sAccountTxt: 'Sessions last 30 days on this device.', logout: 'Log out',
       todo: 'To do', tCollect: function (n) { return 'Collect deposit from ' + n; }, tCollectSub: function (m) { return 'Arriving today or staying now · ' + m; }, tReturn: function (n) { return 'Return deposit to ' + n; }, tReturnSub: function (d) { return 'Checked out ' + d + ' · return within 24 h'; }, tLate: function (d) { return 'Overdue · checked out ' + d; },
-      tUnpaid: function (n) { return n === 1 ? '1 unpaid booking' : n + ' unpaid bookings'; }, tUnpaidSub: 'They are holding dates. Confirm them once paid, or reject them.',
+      tUnpaid: function (n) { return n === 1 ? '1 unpaid booking' : n + ' unpaid bookings'; }, tUnpaidSub: 'They are holding dates. Confirm them once paid, or reject them. Website requests are released automatically after 24 h.',
       paidOnly: 'Paid only', pay: { unpaid: 'Unpaid', paid: 'Paid', refunded: 'Refunded' }, methods: { card: 'Card', transfer: 'Transfer', cash: 'Cash', other: 'Other' },
       specialPrice: 'Special price', paidInfo: function (d, m, r) { return 'Paid on ' + d + ' · ' + m + (r ? ' · Ref. ' + r : ''); }, refundInfo: function (a, d) { return 'Refunded ' + a + ' on ' + d; },
       unpaidWarn: 'The guest has not paid yet. The booking is confirmed once 100% is paid.', regPay: 'Record payment', regPayConfirm: 'Record payment and confirm', payConfirmShort: 'Paid · Confirm', fullOnly: 'Bookings are always paid in full (100%).',
@@ -764,10 +764,11 @@ textarea:focus{border-color:var(--blue);background:#fff}
 
   function bookingsView() {
     var x = t(), td = today(), q = S.q.trim().toLowerCase();
-    var counts = { pending: 0, confirmed: 0, cancelled: 0, rejected: 0, all: S.all.length };
+    var counts = { pending: 0, confirmed: 0, cancelled: 0, rejected: 0, expired: 0, all: S.all.length };
     S.all.forEach(function (b) { counts[b.status]++; });
     var list = S.all.filter(function (b) {
       if (S.filter === 'unpaid') { if (!(isActive(b) && payOf(b) === 'unpaid' && b.checkout > td)) return false; }
+      else if (S.filter === 'cancelled') { if (b.status !== 'cancelled' && b.status !== 'expired') return false; }
       else if (S.filter !== 'all' && b.status !== S.filter) return false;
       if (!q) return true;
       return (b.name + ' ' + b.code + ' ' + b.phone + ' ' + (b.email || '')).toLowerCase().indexOf(q) !== -1;
