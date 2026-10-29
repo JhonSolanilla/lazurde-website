@@ -1175,13 +1175,15 @@
         // Sin animación: se redibuja y se coloca en el mismo punto antes de que se pinte nada
         var root = document.documentElement, y = back.y;
         root.style.scrollBehavior = 'auto';
+        app.style.minHeight = back.h + 'px';   // la página no se encoge mientras cargan las fotos, así el punto no se pierde
         state.lang = code; state.screen = back.screen; render();
         window.scrollTo({ top: y, left: 0, behavior: 'instant' });
         requestAnimationFrame(function () { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); root.style.scrollBehavior = ''; });
+        setTimeout(function () { app.style.minHeight = ''; }, 2500);
       } else set({ lang: code, screen: 'home' });
       if (first) playIntro();
     },
-    openLang: function () { langBack = (state.screen !== 'lang' && introShown) ? { screen: state.screen, y: window.pageYOffset || document.documentElement.scrollTop || 0 } : null; set({ screen: 'lang' }); },
+    openLang: function () { langBack = (state.screen !== 'lang' && introShown) ? { screen: state.screen, y: window.pageYOffset || document.documentElement.scrollTop || 0, h: document.documentElement.scrollHeight } : null; set({ screen: 'lang' }); },
     goBook: function () { set({ screen: 'book' }); },
     goHome: function () { set({ screen: 'home' }); },
     ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
