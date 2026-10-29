@@ -151,7 +151,7 @@
       remember: 'Recuerda', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Conoce el resort', areasSub: 'Desliza y toca una zona para ver todas sus fotos.', day: 'Día', night: 'Noche', dayNight: 'Día y noche', atNight: 'De noche', interior: 'Interior', dayNightAria: 'Ver el resort de día o de noche', atDay: 'de día', atNightCap: 'de noche',
       faq: 'Preguntas frecuentes', faqSub: 'Lo que más nos preguntan antes de reservar.', faqs: FAQ_ES,
       steps: ['Fechas', 'Personas', 'Camas', 'Tus datos', 'Confirmar'], stepOf: function (i, n) { return 'Paso ' + i + ' de ' + n; }, stepsDone: 'Todo listo: toca «Reservar»', video: 'Video', withSound: 'Toca para ver con sonido', photosN: function (n) { return n === 1 ? '1 foto' : n + ' fotos'; }, areas: ['Piscina', 'Zona de parrilla (BBQ)', 'Wood House', 'Mini zoo', 'Cancha de fútbol', 'Zona de billar', 'Área para niños', 'Jardines y fuentes'],
-      depositRem: function (d) { return 'Depósito de garantía: ' + d + ', se paga al llegar.'; }, backHome: 'Volver al inicio',
+      depositRem: function (d) { return 'Depósito de garantía: ' + d + ', se paga al llegar.'; }, allPhotos: function (n) { return 'Ver las ' + n + ' fotos'; }, taxesIncl: 'impuestos incluidos', faqShort: 'Preguntas', langName: 'Español', summaryTitle: 'Tu reserva', backHome: 'Volver al inicio',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' de ' + mo + (booked ? ', ocupado' : ', ' + price + ' OMR por noche') + (isIn ? ', llegada' : '') + (isOut ? ', salida' : ''); }
     },
     en: {
@@ -218,7 +218,7 @@
       remember: 'Please note', remIn: 'Check-in: 2:00 pm', remOut: 'Check-out: 11:00 am', areasTitle: 'Explore the resort', areasSub: 'Swipe and tap an area to see all its photos.', day: 'Day', night: 'Night', dayNight: 'Day & night', atNight: 'At night', interior: 'Indoor', dayNightAria: 'See the resort by day or by night', atDay: 'by day', atNightCap: 'at night',
       faq: 'Frequently asked questions', faqSub: 'What guests ask us most before booking.', faqs: FAQ_EN,
       steps: ['Dates', 'Guests', 'Beds', 'Your details', 'Confirm'], stepOf: function (i, n) { return 'Step ' + i + ' of ' + n; }, stepsDone: 'All set: tap “Book”', video: 'Video', withSound: 'Tap to watch with sound', photosN: function (n) { return n === 1 ? '1 photo' : n + ' photos'; }, areas: ['Swimming pool', 'BBQ area', 'Wood House', 'Mini zoo', 'Football field', 'Billiards area', 'Kids area', 'Gardens & fountains'],
-      depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, backHome: 'Back to home',
+      depositRem: function (d) { return 'Security deposit: ' + d + ', paid on arrival.'; }, allPhotos: function (n) { return 'Show all ' + n + ' photos'; }, taxesIncl: 'taxes included', faqShort: 'FAQ', langName: 'English', summaryTitle: 'Your booking', backHome: 'Back to home',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return mo + ' ' + d + (booked ? ', booked' : ', ' + price + ' OMR per night') + (isIn ? ', check-in' : '') + (isOut ? ', check-out' : ''); }
     },
     ar: {
@@ -285,7 +285,7 @@
       remember: 'تذكير', remIn: 'الوصول: 2:00 م', remOut: 'المغادرة: 11:00 ص', areasTitle: 'تعرّف على المنتجع', areasSub: 'اسحب واضغط على أي منطقة لمشاهدة جميع صورها.', day: 'نهار', night: 'ليل', dayNight: 'نهارًا وليلًا', atNight: 'ليلًا', interior: 'داخلي', dayNightAria: 'شاهد المنتجع نهارًا أو ليلًا', atDay: 'نهارًا', atNightCap: 'ليلًا',
       faq: 'الأسئلة الشائعة', faqSub: 'أكثر ما يسألنا عنه الضيوف قبل الحجز.', faqs: FAQ_AR,
       steps: ['التواريخ', 'الضيوف', 'الأسرّة', 'بياناتك', 'التأكيد'], stepOf: function (i, n) { return 'الخطوة ' + i + ' من ' + n; }, stepsDone: 'كل شيء جاهز: اضغط «احجز»', video: 'فيديو', withSound: 'اضغط للمشاهدة مع الصوت', photosN: function (n) { return n === 1 ? 'صورة واحدة' : n + ' صور'; }, areas: ['المسبح', 'منطقة الشواء', 'البيت الخشبي', 'حديقة الحيوانات الصغيرة', 'ملعب كرة القدم', 'منطقة البلياردو', 'منطقة الأطفال', 'الحدائق والنوافير'],
-      depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, backHome: 'العودة إلى الرئيسية',
+      depositRem: function (d) { return 'مبلغ التأمين: ' + d + '، يُدفع عند الوصول.'; }, allPhotos: function (n) { return 'عرض الصور (' + n + ')'; }, taxesIncl: 'شامل الضرائب', faqShort: 'الأسئلة', langName: 'العربية', summaryTitle: 'حجزك', backHome: 'العودة إلى الرئيسية',
       ariaCell: function (d, mo, booked, price, isIn, isOut) { return d + ' ' + mo + (booked ? '، محجوز' : '، ' + price + ' ر.ع. في الليلة') + (isIn ? '، الوصول' : '') + (isOut ? '، المغادرة' : ''); }
     }
   };
@@ -360,6 +360,9 @@
   ];
   // Fotos de una zona según el modo elegido (de noche: primero las nocturnas y luego las de día)
   function zonePhotos(z, night) { return night && z.n ? z.n.concat(z.p) : (z.p || []).concat(z.n || []); }
+  // En computador (pantalla ancha) la página usa su propio diseño a dos columnas
+  var DESK = window.matchMedia('(min-width: 1024px)');
+  function isDesk() { return DESK.matches; }
   function photo(slug, size) { return 'img/fotos/' + slug + '-' + (size || 'l') + '.webp'; }
 
   function svg(d, opts) {
@@ -743,6 +746,43 @@
       '<button type="button" class="icon-btn" data-act="share" aria-label="' + T.share + '" style="border:0">' + svg(ICON.share, { w: 20 }) + '</button></div></div>';
   }
 
+  // Computador: mosaico de fotos (1 grande con el video + 4), cada una abre el visor
+  function tplDeskGallery(c) {
+    var T = c.T, h = HERO[0], img = photo(h.poster), thumbs = HERO.slice(1, 5);
+    return '<div id="lz-top" class="lz-dhero">' +
+      '<button type="button" class="lz-dhero-v" data-act="heroAt" data-arg="0" aria-label="' + esc(h.t[c.L]) + '"><video src="video/' + h.loop + '.mp4" poster="' + img + '"' + (holdHero ? '' : ' autoplay') + ' muted loop playsinline preload="auto" aria-hidden="true"></video></button>' +
+      '<div class="lz-dhero-shade" aria-hidden="true"></div>' +
+      '<div class="lz-dhero-txt"><span class="lz-dhero-k">' + T.badge + ' · Oman</span><h1>' + T.resortName + '</h1><p>' + T.specs.slice(0, 3).join(' · ') + '</p>' +
+      '<button type="button" class="lz-dhero-play" data-act="heroAt" data-arg="0"><span class="lz-dhero-pi"></span>' + T.withSound + '</button></div>' +
+      '<div class="lz-dhero-th">' + thumbs.map(function (t, i) { return '<button type="button" data-act="heroAt" data-arg="' + (i + 1) + '" aria-label="' + esc(t.t[c.L]) + '"><img src="' + photo(t.img, 'm') + '" alt="" loading="lazy"></button>'; }).join('') +
+      '<button type="button" class="lz-dhero-all" data-act="heroAt" data-arg="1">' + svg('M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', { w: 16, sw: 2 }) + T.allPhotos(HERO.length) + '</button></div></div>';
+  }
+  // Computador: tarjeta de reserva fija a la derecha
+  function tplDeskSide(c) {
+    var T = c.T;
+    return '<aside class="lz-side"><div class="lz-side-card">' +
+      '<span class="muted" style="font-size:13px">' + T.from + '</span>' +
+      '<div style="display:flex;align-items:baseline;gap:6px;margin-top:2px"><strong style="font-size:30px;font-weight:800">' + c.whole(incl(CONFIG.weekdayPrice)) + '</strong><span class="muted" style="font-size:15px;font-weight:600">' + T.perNight + '</span></div>' +
+      '<span class="muted" style="font-size:13px">' + T.baseInfo + ' · ' + T.taxesIncl + '</span>' +
+      '<div class="lz-side-times"><div><span>' + T.checkIn + '</span><strong>' + T.checkInTime + '</strong></div><div><span>' + T.checkOut + '</span><strong>' + T.checkOutTime + '</strong></div></div>' +
+      '<button type="button" class="btn-primary" data-act="goBook" style="width:100%;height:54px;font-size:17px">' + T.bookNow + '</button>' +
+      '<p class="muted" style="font-size:12.5px;line-height:1.5;text-align:center;margin-top:10px">' + T.depositRem(c.whole(CONFIG.deposit)) + '</p>' +
+      '<div style="display:flex;gap:8px;margin-top:14px">' +
+      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', svg(ICON.chat, { w: 18 }) + T.whatsapp) +
+      contactBtn(CONFIG.phone ? 'tel:' + CONFIG.phone : '', 'background:#EAF1F8;color:#0F4C81', svg(ICON.phone, { w: 18 }) + T.call) + '</div></div></aside>';
+  }
+  // Computador: barra de arriba con menú
+  function tplDeskHeader(c, book) {
+    var T = c.T;
+    return '<header class="fixed-top lz-dhead"><div class="lz-dhead-in">' +
+      (book ? '<button type="button" class="icon-btn" data-act="goHome" aria-label="' + T.back + '" style="border:0">' + svg(c.rtl ? ICON.backR : ICON.backL, { sw: 2 }) + '</button>' : '') +
+      '<img src="img/wordmark.svg" alt="Lazurde" style="height:28px;width:auto">' +
+      (book ? '<span class="lz-dhead-t">' + T.confirmTitle + '</span>' :
+      '<nav class="lz-dnav" aria-label="' + T.navAria + '"><a href="#lz-areas">' + T.areasTitle + '</a><a href="#lz-cal">' + T.availability + '</a><a href="#lz-rooms">' + T.rooms + '</a><a href="#lz-faq">' + T.faqShort + '</a><a href="' + (CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '#lz-faq') + '" target="_blank" rel="noopener">' + T.navContact + '</a></nav>') +
+      '<div class="lz-dhead-r"><button type="button" class="lz-dlang" data-act="openLang">' + svg(ICON.globe, { w: 18, sw: 1.7 }) + T.langName + '</button>' +
+      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</a>' : '') +
+      (book ? '' : '<button type="button" class="btn-primary" data-act="goBook" style="height:44px;padding:0 22px;font-size:15px">' + T.bookNow + '</button>') + '</div></div></header>';
+  }
   // Zonas del resort: una fila de tarjetas; al tocar una se abren todas sus fotos
   // La fila es un círculo: se pinta 3 veces (copia · original · copia) y al terminar de
   // deslizar se salta sin que se note a la misma tarjeta de la tanda del medio.
@@ -861,16 +901,16 @@
     var T = c.T;
     var fac = T.fac.map(function (lb, i) { return { label: lb, d: FAC_ICONS[i] }; });
     var facShown = state.showAllFac ? fac : fac.slice(0, 5);
-    var h = '';
+    var h = '', desk = isDesk();
     // Barra superior
-    h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;justify-content:space-between;padding:0 10px">' +
+    if (desk) h += tplDeskHeader(c, false); else h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;justify-content:space-between;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="openLang" aria-label="' + T.changeLang + '">' + svg(ICON.globe, { sw: 1.7 }) + '</button>' +
       '<img src="img/wordmark.svg" alt="Lazurde" style="height:26px;width:auto">' +
       (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</a>'
         : '<button type="button" class="icon-btn" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</button>') + '</header>';
-    h += '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(190px + env(safe-area-inset-bottom))">';
+    h += desk ? '<main class="lz-dmain">' : '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(190px + env(safe-area-inset-bottom))">';
     // Galería
-    h += tplGallery(c);
+    h += desk ? tplDeskGallery(c) + '<div class="lz-dgrid"><div class="lz-dcol">' : tplGallery(c);
     // Título
     h += '<div style="background:#fff;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px">' +
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><h1 style="font-size:24px;font-weight:800;line-height:1.25">' + T.resortName + '</h1>' +
@@ -893,7 +933,7 @@
       '<div style="display:flex;align-items:center;gap:14px"><span style="width:44px;height:44px;border-radius:12px;background:#EAF1F8;color:#0F4C81;display:flex;align-items:center;justify-content:center">' + svg(ICON.clockIn) + '</span><div style="display:flex;flex-direction:column"><strong style="font-size:15px">' + T.checkIn + '</strong><span class="muted" style="font-size:14px">' + T.checkInTime + '</span></div></div>' +
       '<div style="display:flex;align-items:center;gap:14px"><span style="width:44px;height:44px;border-radius:12px;background:#EAF1F8;color:#0F4C81;display:flex;align-items:center;justify-content:center">' + svg(ICON.clockOut) + '</span><div style="display:flex;flex-direction:column"><strong style="font-size:15px">' + T.checkOut + '</strong><span class="muted" style="font-size:14px">' + T.checkOutTime + '</span></div></div></section>';
     // Habitaciones
-    h += '<div class="gap8"></div><section class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.rooms + '</h2>' +
+    h += '<div class="gap8"></div><section id="lz-rooms" class="card" style="display:flex;flex-direction:column;gap:12px"><h2 class="h2">' + T.rooms + '</h2>' +
       roomCard(ICON.king, T.kingRooms, T.kingRoomsSub) + roomCard(ICON.twin, T.twinRooms, T.twinRoomsSub) +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFF6DF;border-radius:12px;padding:12px 14px"><span style="font-size:14px;font-weight:600;color:#5C4510">' + T.extraRoom + '</span><strong style="font-size:15px;color:#5C4510;white-space:nowrap">' + c.whole(incl(CONFIG.extraRoomPrice)) + T.perNightShort + '</strong></div></section>';
     // Instalaciones
@@ -920,7 +960,9 @@
       '<div style="border:1px solid #EFDFA6;background:#FFFBEA;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#6B4F00">' + T.dateChange + '</strong><span style="font-size:14px;color:#5C4510;line-height:1.6">' + T.tbd + '</span></div>' +
       '<div style="border:1px solid #C9DBF2;background:#F0F6FD;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><strong style="font-size:15px;color:#0F4C81">' + T.refundTitle + '</strong><span style="font-size:14px;color:#123E66;line-height:1.6">' + T.tbd + '</span></div>' +
       '<h3 style="margin-top:8px;font-size:16px;font-weight:800">' + T.terms + '</h3>' + tplTerms(T) + '</section>';
+    if (desk) h += '</div>' + tplDeskSide(c) + '</div>';
     h += '<div class="muted" style="padding:22px 18px;text-align:center;font-size:12px;display:flex;flex-direction:column;gap:8px;align-items:center"><span>' + T.footer + '</span><a href="privacy.html?lang=' + c.L + '" style="color:#0F4C81;font-weight:700">' + T.privacy + '</a></div></main>';
+    if (desk) return h;
     // Barra de reservar + navegación
     h += '<div class="fixed-bottom" style="padding:0 12px calc(14px + env(safe-area-inset-bottom))">' +
       '<div style="background:#fff;border:1px solid #E3E8EE;border-radius:18px;padding:10px;padding-inline-start:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(11,46,79,.14);margin-bottom:10px">' +
@@ -960,11 +1002,12 @@
     var waitingOut = !!(state.checkin && !state.checkout);
     var on = state.confirmed;
     var box = function (active) { return 'border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;border:' + (active ? '2px solid #0F4C81;background:#F2F7FC' : '1.5px solid #0B2E4F') + ';'; };
-    h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;gap:8px;padding:0 10px">' +
+    var desk = isDesk();
+    h += (desk ? tplDeskHeader(c, true) : '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;gap:8px;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="goHome" aria-label="' + T.back + '" style="border:0">' + svg(c.rtl ? ICON.backR : ICON.backL, { sw: 2 }) + '</button>' +
-      '<span style="font-size:17px;font-weight:800">' + T.confirmTitle + '</span></header>' +
+      '<span style="font-size:17px;font-weight:800">' + T.confirmTitle + '</span></header>') +
       '<div id="lz-steps" class="fixed-top lz-steps-wrap">' + tplSteps(c) + '</div>';
-    h += '<main style="padding-top:calc(126px + env(safe-area-inset-top));padding-bottom:calc(140px + env(safe-area-inset-bottom))">';
+    h += desk ? '<main class="lz-dmain lz-dbook"><div class="lz-dgrid"><div class="lz-dcol">' : '<main style="padding-top:calc(126px + env(safe-area-inset-top));padding-bottom:calc(140px + env(safe-area-inset-bottom))">';
     h += '<div style="background:#fff;padding:14px 18px;display:flex;align-items:center;gap:14px"><span style="width:64px;height:64px;border-radius:14px;background:linear-gradient(160deg,#0B2E4F,#1F6FB2);flex:none;display:flex;align-items:center;justify-content:center"><img src="img/stone.svg" alt="" style="width:30px;height:auto"></span>' +
       '<div style="display:flex;flex-direction:column;gap:2px"><strong style="font-size:17px">' + T.resortName + '</strong><span class="muted" style="font-size:13px">' + T.summarySub + '</span></div></div>';
     // Fechas
@@ -1028,8 +1071,9 @@
     h += '<div class="gap8"></div><section id="lz-s-terms" class="card lz-sec" style="padding:18px;display:flex;flex-direction:column;gap:12px"><h2 style="font-size:18px;font-weight:800">' + T.terms + '</h2>' + tplTerms(T) +
       '<label for="lz-terms" style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0"><input id="lz-terms" type="checkbox" data-act="termsOk"' + (state.termsOk ? ' checked' : '') + ' style="width:24px;height:24px;margin:0;flex:none;accent-color:#0F4C81">' +
       '<span style="font-size:14px;line-height:1.5">' + T.accept + '</span></label>' +
-      '<a href="privacy.html?lang=' + c.L + '" target="_blank" rel="noopener" style="font-size:13px;color:#0F4C81;font-weight:700;text-decoration:underline">' + T.privacyNote + '</a></section></main>';
-    h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px calc(18px + env(safe-area-inset-bottom))">' + tplBar(c) + '</div>';
+      '<a href="privacy.html?lang=' + c.L + '" target="_blank" rel="noopener" style="font-size:13px;color:#0F4C81;font-weight:700;text-decoration:underline">' + T.privacyNote + '</a></section>' +
+      (desk ? '</div><aside class="lz-side"><div id="lz-bar" class="lz-side-card">' + tplSideBar(c) + '</div></aside></div>' : '') + '</main>';
+    if (!desk) h += '<div id="lz-bar" class="fixed-bottom" style="background:#fff;border-top:1px solid #E3E8EE;padding:10px 16px calc(18px + env(safe-area-inset-bottom))">' + tplBar(c) + '</div>';
     if (state.ccOpen) h += tplCcSheet(T);
     return h;
   }
@@ -1051,6 +1095,22 @@
       (state.submitting ? STONE_SVG.replace('<svg ', '<svg class="lz-stone" role="img" aria-label="' + T.sending + '" style="width:30px;height:40px" ') : '<span>' + T.bookNow + '</span>') + '</button></div>';
   }
 
+  // Computador: resumen de la reserva a la derecha, con el total y el botón
+  function tplSideBar(c) {
+    var T = c.T, ok = c.canSubmit || state.submitting;
+    var row = function (a, b) { return '<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px solid #EEF2F6"><span class="muted">' + a + '</span><strong style="text-align:end">' + b + '</strong></div>'; };
+    return '<strong style="font-size:17px">' + T.summaryTitle + '</strong>' +
+      '<div style="margin-top:10px">' + row(T.rIn, c.fmt(state.checkin) + (state.checkin ? ' · ' + T.inShort : '')) + row(T.rOut, c.fmt(state.checkout) + (state.checkout ? ' · ' + T.outShort : '')) +
+      row(T.rGuests, state.confirmed ? T.guestsTxt(state.guests) : '—') + row(T.rRooms, state.confirmed ? T.roomsTxt(c.rooms, c.kings, c.twins) : '—') + '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #E3E8EE;padding-top:12px;margin-top:4px"><strong style="font-size:16px">' + T.rTotal + '</strong><strong style="font-size:26px;white-space:nowrap">' + (c.hasNights ? c.money(c.total) : cur('—', T)) + '</strong></div>' +
+      '<span class="muted" style="display:block;font-size:12px;text-align:end;margin-bottom:14px">' + (c.hasNights ? T.barSub(c.nights, c.rooms) + ' · ' + T.taxesIncl : T.pickDates) + '</span>' +
+      (state.submitError ? '<p style="font-size:12.5px;color:#8B1D1D;margin-bottom:8px;font-weight:700">' + (state.submitError === 'taken' ? T.errTaken : T.errGeneric) + '</p>' : '') +
+      (c.missing.length ? '<p style="font-size:12.5px;color:#8B1D1D;margin-bottom:10px;line-height:1.5">' + T.missing + c.missing.join(T.sep) + '</p>' : '') +
+      '<button type="button" data-act="submit"' + (c.canSubmit ? '' : ' disabled') + ' style="width:100%;height:54px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;font-weight:800;' +
+      (ok ? 'background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);color:#fff;cursor:pointer' : 'background:#E3E8EE;color:#4F5B69;cursor:not-allowed') + '">' +
+      (state.submitting ? STONE_SVG.replace('<svg ', '<svg class="lz-stone" role="img" aria-label="' + T.sending + '" style="width:30px;height:40px" ') : '<span>' + T.bookNow + '</span>') + '</button>' +
+      '<p class="muted" style="font-size:12px;line-height:1.5;margin-top:12px">' + T.depositRem(c.whole(CONFIG.deposit)) + '</p>';
+  }
   function tplDone(c) {
     var T = c.T;
     var rows = [[T.rIn, c.fmt(state.checkin)], [T.rOut, c.fmt(state.checkout)], [T.rGuests, T.guestsTxt(state.guests)], [T.rRooms, T.roomsTxt(c.rooms, c.kings, c.twins)],
@@ -1087,7 +1147,7 @@
   }
   function renderBar() {
     var bar = document.getElementById('lz-bar');
-    if (bar) bar.innerHTML = tplBar(calc());
+    if (bar) bar.innerHTML = isDesk() ? tplSideBar(calc()) : tplBar(calc());
   }
 
   // ===================== ACCIONES =====================
@@ -1100,6 +1160,7 @@
     ccOpen: function () { lockPage(true); set({ ccOpen: true }); setTimeout(function () { var q = document.getElementById('lz-ccq'); if (q) q.focus({ preventScroll: true }); }, 60); },
     ccClose: function () { set({ ccOpen: false }); lockPage(false); },
     ccPick: function (iso) { set({ cc: iso, ccOpen: false }); lockPage(false); var i = document.getElementById('lz-phone'); if (i) { i.focus({ preventScroll: true }); setTimeout(function () { i.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 150); } },
+    heroAt: function (i) { state.gIdx = Number(i) || 0; actions.heroOpen(); },
     heroOpen: function () {
       var n = HERO.length, gi = ((state.gIdx % n) + n) % n, L = state.lang;
       galLast = Date.now() + 600000;
@@ -1295,6 +1356,7 @@
   opening.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endOpening(); } });
   opTimer = setTimeout(endOpening, 3900);
   set({ screen: 'lang' });
+  if (DESK.addEventListener) DESK.addEventListener('change', function () { if (state.screen !== 'lang') render(); });
   loadConfig();
   // Keep availability fresh: re-check every 30 s while the page is visible, and when the guest returns to it
   setInterval(function () { if (!document.hidden && !state.submitting && (state.screen === 'home' || state.screen === 'book')) loadConfig(true); }, 30000);
