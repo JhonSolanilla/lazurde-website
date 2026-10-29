@@ -366,7 +366,7 @@ body.lz-typing #lz-bar{display:none}
   .lz-area:hover .lz-area-media{transform:scale(1.04)}
   .lz-areas-arrow{display:flex}
   /* Calendario de inicio más aireado */
-  #lz-cal .cal{max-width:560px}
+  #lz-cal .cal{max-width:none}
   .cell{height:56px}
   /* Preguntas frecuentes a dos columnas */
   #lz-faq{display:grid !important;grid-template-columns:1fr 1fr;column-gap:32px}
