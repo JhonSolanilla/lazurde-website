@@ -336,7 +336,7 @@ body.lz-typing #lz-bar{display:none}
   .lz-dcol>div[style*="background:#fff"]:first-child h1{font-size:24px !important}
   /* Pantalla de idiomas y entrada a pantalla completa */
   .lz-lang-box{max-width:440px}
-  .lz-lang-wm{width:900px;bottom:-380px}
+  .lz-lang-wm{display:none}
   .lz-splash-word{width:340px}
   .lz-opening svg{width:200px}
   .lz-op-word{width:300px}
