@@ -751,7 +751,7 @@
   // Cielo nocturno: estrellas que titilan (posiciones fijas para que no cambien al redibujar) y un cometa
   var STARS = (function () { var a = [], x = 7; for (var i = 0; i < 34; i++) { x = (x * 48271) % 2147483647; var l = x / 2147483647; x = (x * 48271) % 2147483647; var t = x / 2147483647; x = (x * 48271) % 2147483647; a.push([Math.round(2 + l * 96), Math.round(3 + t * 90), (x / 2147483647).toFixed(2)]); } return a; })();
   function tplSky() {
-    return '<div class="lz-sky" aria-hidden="true">' + STARS.map(function (st, i) { return '<i style="left:' + st[0] + '%;top:' + st[1] + '%;animation-delay:' + (-st[2] * 4) + 's;animation-duration:' + (2.6 + st[2] * 2.4).toFixed(1) + 's' + (i % 5 === 0 ? ';width:3px;height:3px' : '') + (i % 7 === 0 ? ';background:#FAD26D' : '') + '"></i>'; }).join('') + '<b class="lz-comet"></b><b class="lz-comet lz-comet2"></b></div>';
+    return '<div class="lz-sky" aria-hidden="true">' + STARS.map(function (st, i) { return '<i style="left:' + st[0] + '%;top:' + st[1] + '%;animation-delay:' + (-st[2] * 4) + 's;animation-duration:' + (2.6 + st[2] * 2.4).toFixed(1) + 's' + (i % 5 === 0 ? ';width:3px;height:3px' : '') + (i % 7 === 0 ? ';background:#FAD26D' : '') + '"></i>'; }).join('') + '</div>';
   }
   function dnSwitch(T, cls) {
     return '<div class="' + cls + '" role="group" aria-label="' + T.dayNightAria + '"><span class="lz-dn-thumb"></span>' +
@@ -1240,21 +1240,36 @@
   var splash = document.getElementById('splash');
   var splashSvg = splash.querySelector('svg');
   var introShown = false, introTimers = [];
+  var splashWord = splash.querySelector('.lz-splash-word');
   function endIntro() {
     introTimers.forEach(clearTimeout);
-    // El video de arriba arranca desde el segundo 0 justo cuando la piedra hace el acercamiento
+    if (splash.classList.contains('fly')) return;
+    // El video de arriba arranca desde el segundo 0 justo cuando el logo sube
     holdHero = false;
     var hv = document.querySelector('#lz-top video');
     if (hv) { try { hv.currentTime = 0; } catch (e) {} var pp = hv.play(); if (pp && pp.catch) pp.catch(function () {}); }
-    splash.classList.add('hide');
-    setTimeout(function () { splash.style.display = 'none'; }, 750);
+    // El logo grande viaja y se encoge hasta quedar exactamente sobre el logo del encabezado
+    splash.classList.add('fly');
+    var target = document.querySelector('header img[alt="Lazurde"]');
+    if (target && splashWord) {
+      // Mientras el logo vuela, el del encabezado se esconde para que no se vean dos
+      target.style.opacity = '0';
+      setTimeout(function () { var t = document.querySelector('header img[alt="Lazurde"]'); if (t) t.style.opacity = ''; }, 860);
+      void splashWord.offsetWidth;
+      var from = splashWord.getBoundingClientRect(), to = target.getBoundingClientRect();
+      if (from.width && to.width) {
+        var dx = (to.left + to.width / 2) - (from.left + from.width / 2), dy = (to.top + to.height / 2) - (from.top + from.height / 2);
+        splashWord.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(' + (to.width / from.width).toFixed(4) + ')';
+      }
+    }
+    setTimeout(function () { splash.classList.add('hide'); splash.style.display = 'none'; }, 900);
   }
   function playIntro() {
     introShown = true;
-    splash.classList.remove('hide', 'light');
+    splash.classList.remove('hide', 'light', 'fly');
     splash.style.display = 'flex';
-    stoneLoop(splashSvg, false, 1);
-    introTimers.push(setTimeout(endIntro, 2500));
+    if (splashWord) { splashWord.style.transform = ''; splashWord.classList.remove('in'); void splashWord.offsetWidth; splashWord.classList.add('in'); }
+    introTimers.push(setTimeout(endIntro, 1900));
   }
   splash.addEventListener('click', endIntro);
   splash.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); endIntro(); } });

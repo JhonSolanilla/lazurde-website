@@ -34,7 +34,13 @@ h1,h2,h3,p{margin:0}
 section,[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top))}
 
 /* Pantalla de carga */
-.splash{position:fixed;inset:0;transition:opacity .7s ease;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer}
+.splash{position:fixed;inset:0;transition:opacity .7s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:100;cursor:pointer}
+.lz-splash-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#104862 0%,#003047 100%);transition:opacity .8s ease}
+.splash.fly .lz-splash-bg{opacity:0}
+.splash svg{display:none !important}
+.lz-splash-word{position:relative;width:min(250px,64vw);height:auto;opacity:0;transform:scale(.72);transform-origin:center;filter:drop-shadow(0 0 22px rgba(250,210,109,.35));transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.lz-splash-word.in{opacity:1;transform:none}
+.splash.fly .lz-splash-word{filter:none;transition:transform .85s cubic-bezier(.22,1,.36,1)}
 .splash.hide{opacity:0;pointer-events:none}
 .splash svg{transition:transform .7s ease}
 .splash.hide svg{transform:scale(1.12)}
@@ -201,7 +207,7 @@ body.lz-typing #lz-bar{display:none}
 @keyframes lzOpGlow{to{opacity:1}}
 .lz-op-word{position:relative;width:236px;height:auto;opacity:0;animation:lzOpWord .8s 1.7s cubic-bezier(.22,1,.36,1) forwards}
 @keyframes lzOpWord{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.lz-op-glow,.lz-op-word{animation:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.lz-op-glow,.lz-op-word{animation:none;opacity:1}.lz-splash-word,.splash.fly .lz-splash-word,.lz-splash-bg{transition:none}}
 
 /* Flechas de "Conoce el resort" (para computador) */
 .lz-areas-wrap{position:relative}
@@ -247,10 +253,6 @@ body.lz-typing #lz-bar{display:none}
 .lz-dn.night .lz-sky{opacity:1}
 .lz-sky i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;box-shadow:0 0 6px 1px rgba(255,255,255,.55);animation:lzTwinkle 3s ease-in-out infinite}
 @keyframes lzTwinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.25)}}
-.lz-comet{position:absolute;top:14%;left:-12%;width:150px;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85) 70%,#fff);opacity:0;transform:rotate(16deg);animation:lzComet 9s linear infinite;animation-delay:2s}
-.lz-comet::after{content:"";position:absolute;right:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(250,210,109,.8)}
-.lz-comet2{top:40%;width:110px;animation-duration:13s;animation-delay:7.5s;transform:rotate(22deg)}
-@keyframes lzComet{0%,8%{opacity:0;transform:translateX(0) rotate(16deg)}9%{opacity:1}22%{opacity:1}26%{opacity:0;transform:translateX(130vw) rotate(16deg)}100%{opacity:0;transform:translateX(130vw) rotate(16deg)}}
 [dir=rtl] .lz-sky{transform:scaleX(-1)}
 /* Interruptor dentro del visor de fotos */
 .lz-dn-vsw{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 22px);transform:translateX(-50%);display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);z-index:5;direction:ltr}
@@ -258,7 +260,7 @@ body.lz-typing #lz-bar{display:none}
 .lz-dn-vsw button small{font-weight:600;opacity:.7;font-size:12px}
 .lz-dn-vsw button[aria-pressed=true]{color:#0B2E4F}
 .lz-dn-vsw button[aria-pressed=true] small{opacity:.8}
-@media (prefers-reduced-motion:reduce){.lz-sky i{animation:none;opacity:.8}.lz-comet{animation:none;opacity:0}.lz-dn,.lz-area .lz-area-n,.lz-dn-thumb{transition:none}}
+@media (prefers-reduced-motion:reduce){.lz-sky i{animation:none;opacity:.8}.lz-dn,.lz-area .lz-area-n,.lz-dn-thumb{transition:none}}
 
 /* ===== Preguntas frecuentes ===== */
 .lz-faq{border-top:1px solid #E3E8EE}
