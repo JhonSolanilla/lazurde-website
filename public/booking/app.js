@@ -369,6 +369,8 @@
   function isDesk() { return DESK.matches; }
   function photo(slug, size) { return 'img/fotos/' + slug + '-' + (size || 'l') + '.webp'; }
 
+  // Logo oficial de WhatsApp en un solo color (toma el color del texto del botón)
+  function waIcon(w) { return '<svg width="' + (w || 20) + '" height="' + (w || 20) + '" viewBox="0 0 175.216 175.552" fill="currentColor" aria-hidden="true" style="flex:none"><path fill-rule="evenodd" d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/><path d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/></svg>'; }
   function svg(d, opts) {
     opts = opts || {};
     var w = opts.w || 22, h = opts.h || w, vb = opts.vb || '0 0 24 24';
@@ -772,7 +774,7 @@
       '<button type="button" class="btn-primary" data-act="goBook" style="width:100%;height:54px;font-size:17px">' + T.bookNow + '</button>' +
       '<p class="muted" style="font-size:12.5px;line-height:1.5;text-align:center;margin-top:10px">' + T.depositRem(c.whole(CONFIG.deposit)) + '</p>' +
       '<div style="display:flex;gap:8px;margin-top:14px">' +
-      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', svg(ICON.chat, { w: 18 }) + T.whatsapp) +
+      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', waIcon(19) + T.whatsapp) +
       contactBtn(CONFIG.phone ? 'tel:' + CONFIG.phone : '', 'background:#EAF1F8;color:#0F4C81', svg(ICON.phone, { w: 18 }) + T.call) + '</div></div></aside>';
   }
   // Computador: barra de arriba con menú
@@ -784,7 +786,7 @@
       (book ? '<span class="lz-dhead-t">' + T.confirmTitle + '</span>' :
       '<nav class="lz-dnav" aria-label="' + T.navAria + '"><a href="#lz-areas">' + T.areasTitle + '</a><a href="#lz-cal">' + T.availability + '</a><a href="#lz-rooms">' + T.rooms + '</a><a href="#lz-faq">' + T.faqShort + '</a><a href="' + (CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '#lz-faq') + '" target="_blank" rel="noopener">' + T.navContact + '</a></nav>') +
       '<div class="lz-dhead-r"><button type="button" class="lz-dlang" data-act="openLang">' + svg(ICON.globe, { w: 18, sw: 1.7 }) + T.langName + '</button>' +
-      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</a>' : '') +
+      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '" style="color:#25D366">' + waIcon(21) + '</a>' : '') +
       (book ? '' : '<button type="button" class="btn-primary" data-act="goBook" style="height:44px;padding:0 22px;font-size:15px">' + T.bookNow + '</button>') + '</div></div></header>';
   }
   // Zonas del resort: una fila de tarjetas; al tocar una se abren todas sus fotos
@@ -910,8 +912,8 @@
     if (desk) h += tplDeskHeader(c, false); else h += '<header class="fixed-top" style="height:60px;background:#fff;border-bottom:1px solid #E3E8EE;display:flex;align-items:center;justify-content:space-between;padding:0 10px">' +
       '<button type="button" class="icon-btn" data-act="openLang" aria-label="' + T.changeLang + '">' + svg(ICON.globe, { sw: 1.7 }) + '</button>' +
       '<img src="img/wordmark.svg" alt="Lazurde" style="height:26px;width:auto">' +
-      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</a>'
-        : '<button type="button" class="icon-btn" aria-label="' + T.waAria + '">' + svg(ICON.chatDots, { sw: 1.7 }) + '</button>') + '</header>';
+      (CONFIG.whatsapp ? '<a class="icon-btn" href="https://wa.me/' + CONFIG.whatsapp + '" target="_blank" rel="noopener" aria-label="' + T.waAria + '" style="color:#25D366">' + waIcon(21) + '</a>'
+        : '<button type="button" class="icon-btn" aria-label="' + T.waAria + '" style="color:#25D366">' + waIcon(21) + '</button>') + '</header>';
     h += desk ? '<main class="lz-dmain">' : '<main style="padding-top:calc(60px + env(safe-area-inset-top));padding-bottom:calc(190px + env(safe-area-inset-bottom))">';
     // Galería
     h += desk ? tplDeskGallery(c) + '<div class="lz-dgrid"><div class="lz-dcol">' : tplGallery(c);
@@ -924,7 +926,7 @@
       '<span style="font-size:12px;color:#5A6573">' + T.license + '</span></div>';
     // Contacto
     h += '<div id="lz-contact" style="background:#fff;padding:0 18px 18px;display:flex;gap:10px">' +
-      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', svg(ICON.chat, { w: 20 }) + T.whatsapp) +
+      contactBtn(CONFIG.whatsapp ? 'https://wa.me/' + CONFIG.whatsapp : '', 'background:#E7F5EC;color:#14532D', waIcon(20) + T.whatsapp) +
       contactBtn(CONFIG.phone ? 'tel:' + CONFIG.phone : '', 'background:#EAF1F8;color:#0F4C81', svg(ICON.phone, { w: 20 }) + T.call) + '</div>';
     // Zonas del resort
     h += tplAreas(c);
@@ -1135,7 +1137,7 @@
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockIn, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remIn + '</strong></span>' +
       '<span style="display:flex;align-items:center;gap:10px">' + svg(ICON.clockOut, { w: 20, stroke: '#5C4510' }) + '<strong>' + T.remOut + '</strong></span>' +
       '<div style="margin-top:4px;background:#fff;border:1.5px solid #D3AE2A;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px">' + svg(ICON.info, { w: 22, stroke: '#5C4510', style: 'flex:none' }) + '<strong style="font-size:17px;color:#0B2E4F;line-height:1.35">' + T.depositRem(c.whole(CONFIG.deposit)) + '</strong></div></div>' +
-      (state.bookingCode && CONFIG.whatsapp ? '<a class="lz-up" href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c)) + '" target="_blank" rel="noopener" style="width:100%;height:52px;border-radius:14px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;text-decoration:none">' + svg(ICON.chat, { w: 20, stroke: '#fff' }) + T.waSend + '</a>' : '') +
+      (state.bookingCode && CONFIG.whatsapp ? '<a class="lz-up" href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(bookingMessage(c)) + '" target="_blank" rel="noopener" style="width:100%;height:52px;border-radius:14px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:800;text-decoration:none">' + waIcon(20) + T.waSend + '</a>' : '') +
       '<button type="button" class="btn-primary" data-act="restart" style="width:100%">' + T.backHome + '</button></main>';
   }
 
