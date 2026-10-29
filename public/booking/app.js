@@ -28,8 +28,8 @@
     // Noches ocupadas: EJEMPLO para la vista previa. Luego vendrán de la base de datos.
     booked: [],   // fechas ocupadas (por ahora a mano; luego vendrán de la base de datos)
     // Contacto del resort. Si whatsapp queda vacío, el botón Reservar funciona como demostración.
-    whatsapp: '',        // solo números con indicativo, ej. '96891234567'
-    phone: '',           // ej. '+96891234567'
+    whatsapp: '96895889552',   // WhatsApp de Lazurde (solo números con indicativo)
+    phone: '+96895889552',     // teléfono para el botón Llamar
     email: 'info@lazurdeom.com',
     monthsAhead: 12
   };
