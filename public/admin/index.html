@@ -62,7 +62,7 @@ h1,h2,h3,p{margin:0}
 .shell{min-height:100vh;min-height:100dvh}
 .side{display:none}
 .view{padding-bottom:calc(var(--tabbar) + var(--sab) + 24px)}
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;height:calc(var(--tabbar) + var(--sab));padding-bottom:var(--sab);display:grid;grid-template-columns:repeat(4,1fr);
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;height:calc(var(--tabbar) + var(--sab));padding-bottom:var(--sab);display:grid;grid-template-columns:repeat(5,1fr);
   background:rgba(255,255,255,.92);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-top:1px solid var(--line)}
 .tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:#8A95A3;position:relative}
 .tabbar button[aria-current=page]{color:var(--deep)}
@@ -413,6 +413,10 @@ textarea:focus{border-color:var(--blue);background:#fff}
 .selbar .r2{display:flex;gap:8px}
 .selbar .go2{height:44px;padding:0 14px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;font-weight:800;flex:1}
 @media (min-width:1000px){.fab{display:none}}
+.tabbar .tb-new{color:var(--deep)}
+.tabbar .tb-new i{width:44px;height:44px;margin-top:-14px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#FAD26D,#D3AE2A);color:#002233;box-shadow:0 6px 16px rgba(176,140,30,.45);border:3px solid #fff}
+.tabbar .tb-new i .ic{width:22px;height:22px;stroke-width:2.6}
+.tabbar .tb-new:active i{transform:scale(.94)}
 .occ{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:14px}
 .occ .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .occ .lft{display:flex;align-items:center;gap:12px;min-width:0}
@@ -505,7 +509,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       totalL: 'Total a cobrar', totalHint: 'Déjalo vacío para cobrar el total de arriba. Escríbelo solo si acordaron otro precio con el cliente.', paidQ: 'El cliente ya pagó el 100%',
       willConfirm: 'Se creará confirmada y pagada.', willPending: 'Se creará pendiente y aparta las fechas hasta que pague.', create: 'Crear reserva', needName: 'Escribe el nombre del cliente.', badPhone: 'Teléfono no válido. Ej.: +968 9123 4567',
       createdPaid: 'Reserva creada y confirmada', createdUnpaid: 'Reserva creada: pendiente de pago', manual: 'Creada en el panel',
-      newBooking: function (n) { return 'Nueva reserva de ' + n; }, syncTitle: 'Hora de Omán · datos en vivo', syncing: 'Sincronizando…', synced: function (s) { return s < 5 ? 'En vivo · actualizado ahora' : 'En vivo · hace ' + s + ' s'; }, open: 'Ver'
+      newBooking: function (n) { return 'Nueva reserva de ' + n; }, newShort: 'Nueva', syncTitle: 'Hora de Omán · datos en vivo', syncing: 'Sincronizando…', synced: function (s) { return s < 5 ? 'En vivo · actualizado ahora' : 'En vivo · hace ' + s + ' s'; }, open: 'Ver'
     },
     en: {
       lang: 'en', other: 'Español', tagline: 'Bookings panel', password: 'Password', signIn: 'Sign in', wrong: 'Wrong password.', notConfigured: 'The admin password has not been set up in Cloudflare yet.', show: 'Show password',
@@ -569,7 +573,7 @@ textarea:focus{border-color:var(--blue);background:#fff}
       totalL: 'Total to charge', totalHint: 'Leave empty to charge the total above. Fill it in only if a different price was agreed with the guest.', paidQ: 'The guest has already paid 100%',
       willConfirm: 'It will be created as confirmed and paid.', willPending: 'It will be created as pending and holds the dates until paid.', create: 'Create booking', needName: 'Please write the guest name.', badPhone: 'Invalid phone. E.g. +968 9123 4567',
       createdPaid: 'Booking created and confirmed', createdUnpaid: 'Booking created: waiting for payment', manual: 'Created in the panel',
-      newBooking: function (n) { return 'New booking from ' + n; }, syncTitle: 'Oman time · live data', syncing: 'Syncing…', synced: function (s) { return s < 5 ? 'Live · updated just now' : 'Live · ' + s + ' s ago'; }, open: 'Open'
+      newBooking: function (n) { return 'New booking from ' + n; }, newShort: 'New', syncTitle: 'Oman time · live data', syncing: 'Syncing…', synced: function (s) { return s < 5 ? 'Live · updated just now' : 'Live · ' + s + ' s ago'; }, open: 'Open'
     }
   };
 
@@ -704,8 +708,9 @@ textarea:focus{border-color:var(--blue);background:#fff}
     var body = S.view === 'home' ? homeView() : S.view === 'bookings' ? bookingsView() : S.view === 'calendar' ? calendarView() : settingsView();
     app.innerHTML = '<div class="shell"><aside class="side"><div class="brand"><img src="/booking/img/stone.svg" alt=""><div><b>LAZURDE</b><span>' + x.tagline + '</span></div></div><div class="sclock' + (isLive() ? '' : ' off') + '" data-clockwrap><b data-clock>' + clockText(true) + '</b><span><i class="lv"></i><em data-synced style="font-style:normal">' + syncText() + '</em></span></div><nav>' + navs.map(navBtn).join('') + '</nav><button class="newb" data-act="newb">' + I('plus') + x.newB + '</button><div class="foot">lazurdeom.com</div></aside>' +
       '<main class="view">' + body + '</main></div>' +
-      '<nav class="tabbar">' + navs.map(navBtn).join('') + '</nav>' + (S.view === 'calendar' && S.sel.length ? selBar() : '') +
-      (S.view !== 'settings' && !(S.view === 'calendar' && S.sel.length) ? '<button class="fab" data-act="newb">' + I('plus') + x.newB + '</button>' : '');
+      // «Nueva reserva» va en el centro de la barra de abajo: nunca tapa información
+      '<nav class="tabbar">' + navs.slice(0, 2).map(navBtn).join('') + '<button class="tb-new" data-act="newb" aria-label="' + x.newB + '"><i>' + I('plus') + '</i><span>' + x.newShort + '</span></button>' + navs.slice(2).map(navBtn).join('') + '</nav>' +
+      (S.view === 'calendar' && S.sel.length ? selBar() : '');
   }
 
   function loginView() {
