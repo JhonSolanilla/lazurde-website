@@ -11,7 +11,7 @@ self.addEventListener('push', function (e) {
       tag: d.tag || 'lazurde',
       renotify: true,
       requireInteraction: true,
-      icon: '/admin/img/icon-192.png',
+      icon: '/admin/img/icon-192-v2.png',
       badge: '/admin/img/badge-96.png',
       vibrate: [200, 100, 200],
       data: { url: d.url || '/admin/' }
